@@ -1,0 +1,22 @@
+Members: 22002643 Vedat Eren Arıcan
+		 22002733 Borga Haktan Bilen
+		 22003211 Berkan Şahin
+		 22003912 Alp Ertan
+		 22003021 Berk Çakar
+
+Our proposal: 1) queue
+			  2) unit testing (TA controlled dash)
+			  3) version control
+			  4) style checker (linter)
+			  5) user notes
+
+					Project Name: LabConnect (project Labenport)
+
+					Description: 
+
+					LabConnect facilitiates communication between students, TAs, tutors, and instructors. Our original project idea is a web application (can be ported to Android possibly) that aims to assist CS introductory courses in terms of organization and communication. Proposed ideas for features include priority queuing for TA zoom rooms. For example, those who have completed their labs can be tested using pre-defined unit tests and ordered from most complete to least, in order to decrease waiting times for students who are done with their labs. TA's can also use the system to see previous versions of each student's code in a more practical way, similar to real version control managers in spirit. The style guidelines put forth by the instructors can be enforced automatically by parsing the student's sent code files. Much of the repetitive work that course staff can be reduced by automated actions. The whole application can be improved further by adding helpful touches such as personal notes for student's and so on. The course staff will have a system that is modular enough to fit into distinct situations.
+
+
+Preferences (in priority order): 1. 	4 --> Application for sharing items.
+								 2. 	8 --> Coding practice system.
+								 3. 	2 --> Organizer for travelers.
