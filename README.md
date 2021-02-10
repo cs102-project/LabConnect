@@ -26,6 +26,6 @@ Project Name: **LabConnect** ~~(Project Labenport)~~
 ## To do list
 
  - [x] Reorganize project document
- - [ ] Send project submission
+ - [x] Send project submission
  - [ ] Etc...
 
