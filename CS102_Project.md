@@ -1,4 +1,5 @@
 # Bilkent University CS 102 Project
+### Spring 2020-2021 Semester
 ### Group Members
 - 22002643 - **Vedat Eren Arıcan**
 - 22002733 - **Borga Haktan Bilen**
