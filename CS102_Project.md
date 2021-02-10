@@ -19,9 +19,9 @@ Some features:
 
 ## Secondary preferences 
 *Listed in order of preference, to be picked if the original proposal is refused*
-1. 	*Option 4* --> Application for sharing items.
-2. 	*Option 8* --> Coding practice system.
-3. 	*Option 2* --> Organizer for travelers.
+1. 	*Option 4* → Application for sharing items.
+2. 	*Option 8* → Coding practice system.
+3. 	*Option 2* → Organizer for travelers.
 
 ## Rough draft of the project submission
 
