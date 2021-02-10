@@ -14,9 +14,9 @@
 
 Project Name: **LabConnect** ~~(Project Labenport)~~
 
-### Some features:
+### List of features:
 
-- Tutor-check queuing for lab sessions
+- Organize queuing for TA checks during lab sessions
 - Unit testing (TA-controlled way to determine state of student's code)
 - Version control for TA's to observe changes more easily
 - Admin (instructor) defined style checker (linter to enforce CS 101/102 guidelines)
