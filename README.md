@@ -25,7 +25,8 @@ Project Name: **LabConnect** ~~(Project Labenport)~~
 
 ## To do list
 
- - [x] Reorganize project document
- - [x] Send project submission
+ - [x] Reorganize project document (9/02/2021)
+ - [x] Send project submission (10/02/2021)
+ - [x] Proposal accepted (15/02/2021)
  - [ ] Etc...
 
