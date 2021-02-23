@@ -31,7 +31,7 @@
 
 % Referencing
 \usepackage[backend=bibtex, style=numeric-comp, sorting=none]{biblatex}
-\addbibresource{bibliography.bib}
+\addbibresource{requirements-report.bib}
 
 \begin{document}
     
@@ -42,8 +42,7 @@
         \begin{tabular}{ | >{\raggedleft\arraybackslash}m{3cm} l >{\raggedleft\arraybackslash}m{3cm} m{3cm} | }
             \hline
             \Huge CS 102 & \textit{Spring 2020/21} & \multirow{2}{*}{\makecell{Project\\Group}} & \multirow{2}{*}{\textbf{\Huge G2C}} \\
-            Instructor: & \textbf{Aynur Dayanık} & & \\
-            Assistant: & \textbf{Haya Shamim Khan Khattak} & & \\
+            \makecell[r]{Instructor:\\Assistant:} & \makecell[l]{\textbf{Aynur Dayanık}\\\textbf{Haya Shamim Khan Khattak}} & & \\
             \hline
         \end{tabular}
     \end{table}
@@ -96,13 +95,13 @@
     % Document begins here...
     
     \section{Introduction}
-        \noindent LabConnect facilitates communication between students, TA's, tutors,
-        and instructors. In the
-    background, it is mainly a web application (can be ported to Android
-    possibly) that aims to assist CS introductory courses in terms of
-    organization and communication. Proposed ideas for features include
-    priority queuing for TA zoom rooms. For example, those who have
-    completed their labs can be tested using pre-defined (by TA or
+    
+    LabConnect facilitates communication between students, TA's, tutors,
+    and instructors. In the background, it is mainly a web application 
+    (can be ported to Android possibly) that aims to assist CS introductory 
+    courses in terms of organization and communication. Proposed ideas for 
+    features include priority queuing for TA zoom rooms. For example, those 
+    who have completed their labs can be tested using pre-defined (by TA or
     instructor) unit tests and ordered from most complete to least, in order
     to decrease waiting times for students who are done with their labs, and
     to optimize the process in general. TA's can also use the system to see
@@ -114,7 +113,6 @@
     allowing TA's to allocate time for more hands-on help towards students.
     The student experience can be improved further by adding helpful
     features such as personal notes for students and so on.
-
     
     \section{Details}
     
@@ -123,8 +121,9 @@
     are stored and tested.
     
     \subsection{LabConnect - Instructor Side}
-
+    
     \subsubsection{Prior to the lab}
+    
     \begin{itemize}
         \item The instructor decides upon the name and the language of the assignment
         \item The instructor uploads the instructions either as a document, or as a Markdown
@@ -143,14 +142,16 @@
     \end{itemize}
     
     \subsubsection{During the Lab}
+    
     \begin{itemize}
         \item The instructor will have better control over how code of the students' are tested.
         The instructor will be able to add more unit tests as the lab progresses. 
         The students' unit tests can be updated within the lab period so any mistakes made
         on the tests itself can be corrected this way.
     \end{itemize}
-
+    
     \subsubsection{After the Lab}
+    
     \begin{itemize}
         \item The common errors that are made by the student such as missing documentation 
         of the written code, conventions that aren't followed (naming conventions, styling 
@@ -168,19 +169,27 @@
     \end{itemize}
     
     \subsection{LabConnect - Student Side}
-
+    
     \subsubsection{Prior to the Lab}
+    
     % TODO
+    
     \subsubsection{During the Lab}
+    
     % TODO
+    
     \subsubsection{After the Lab}
+    
     % TODO
     
     \subsection{LabConnect - Grader/Assistant Side}
-
+    
     \subsubsection{Prior to the Lab}
+    
     % TODO
+    
     \subsubsection{During the Lab}
+    
     \begin{itemize}
         \item As stated, the program will be able to detect common errors made in student code. 
         Also, the unit tests can be arranged in a way they that they test specific skills that are
@@ -200,17 +209,21 @@
     \subsection{LabConnect - Server Side}
 
     \subsubsection{Prior to the Lab}
+    
     % TODO
+    
     \subsubsection{During the Lab}
+    
     % TODO
+    
     \subsubsection{After the Lab}
+    
     % TODO
     
     \section{Summary \& Conclusions}
+    
     % TODO
     
     \printbibliography
     
-    
-        
 \end{document}
