@@ -12,7 +12,7 @@
 
 ## Project Details
 
-Project Name: **LabConnect** ~~(Project Labenport)~~
+Project Name: **LabConnect** 
 
 ### List of features:
 
@@ -28,5 +28,7 @@ Project Name: **LabConnect** ~~(Project Labenport)~~
  - [x] Reorganize project document (9/02/2021)
  - [x] Send project submission (10/02/2021)
  - [x] Proposal accepted (15/02/2021)
+ - [ ] Write requirements report
  - [ ] Etc...
+ 
 
