@@ -1,0 +1,159 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Document quality things
+\usepackage[utf8]{inputenc}
+\usepackage{microtype, xcolor}
+\usepackage{url, hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=red, urlcolor=blue}
+
+% Setting margins
+\usepackage[a4paper, left=2cm, right=2cm, top=1.75cm, bottom=1.75cm, includefoot]{geometry}
+
+% Table helper packages
+\usepackage{multirow, multicol}
+\usepackage{makecell}
+\usepackage{array}
+%\usepackage{tabularx} % Not needed currently, but has a few nice options
+%\usepackage{wrapfig} % Floating figures/tables
+
+% Prevents spamming tedious newlines everywhere, also disables auto indentation, etc.
+\usepackage[skip=0.75\baselineskip plus 2pt]{parskip}
+
+% Self-explanatory
+\usepackage{titlesec}
+\titleformat{\section}[block]{\normalfont\scshape\Large}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large}{\thesubsection}{1em}{}
+
+% Referencing
+\usepackage[backend=bibtex, style=numeric-comp, sorting=none]{biblatex}
+\addbibresource{bibliography.bib}
+
+\begin{document}
+    
+    % Header Table
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{3}
+        \centering
+        \begin{tabular}{ | >{\raggedleft\arraybackslash}m{3cm} l >{\raggedleft\arraybackslash}m{3cm} m{3cm} | }
+            \hline
+            \Huge CS 102 & \textit{Spring 2020/21} & \multirow{2}{*}{\makecell{Project\\Group}} & \multirow{2}{*}{\textbf{\Huge G2C}} \\
+            Assistant: & \textbf{Haya Shamim Khan Khattak} & & \\
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    % Grading Table
+    \begin{table}[h!]
+            \renewcommand{\arraystretch}{1.4}
+            \centering
+            \footnotesize
+            \begin{tabular}{ l p{1.5cm} | p{1.5cm} | }
+                \hline
+                \multicolumn{1}{|c|}{\textbf{Criteria}} & \multicolumn{1}{c|}{\textbf{TA/Grader}} & \multicolumn{1}{c|}{\textbf{Instructor}} \\ \hline
+                \multicolumn{1}{|p{10.5cm}|}{Presentation} &  & Aynur Dayanık \\[10ex] \hline
+                \multicolumn{1}{r|}{\textbf{Overall}} &  &  \\
+                \cline{2-3}
+            \end{tabular}
+    \end{table}
+    
+    % Project Information Header
+    {\centering\Huge \bfseries \raisebox{0.5ex}{\texttildelow} LabConnect \raisebox{0.5ex}{\texttildelow} \par}
+    
+    {\centering\large Group Name \par}
+    
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.4}
+        \centering
+        \small
+        \begin{tabular}{ r l }
+            \textbf{Borga Haktan Bilen} & 22002733 \\
+            \textbf{Vedat Eren Arıcan} & 22002643 \\
+            \textbf{Berkan Şahin} & 22003211 \\
+            \textbf{Berk Çakar} & 22003021 \\
+            \textbf{Alp Ertan} & 22003912 \\
+        \end{tabular}
+    \end{table}
+    
+    % Document Type Header Table
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.5}
+        \centering
+        \begin{tabular}{ |>{\centering\arraybackslash}m{15.15cm}| }
+            \hline
+            \Large \textbf{Report Type} \\
+            \small (report subtype/version) \\
+            \small \textbf{\today} \\
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    % Document begins here...
+    
+    \section{Introduction}
+    
+    View this template in "Print Layout" form. To use it, begin by editing 
+    the preceding section to include information related to your project \& 
+    the report you are writing (for help, press F1 when the text cursor is 
+    in a field.) 
+    
+    Using Styles
+    
+    As far as possible, do not change any of the formatting, but rather use the 
+    existing styles. For example, place the cursor in the text "Using Styles" 
+    above. Notice the Style is "Paragraph". Try changing it to "Heading 2", then to 
+    "Heading 1". Note the numbering of subsequent sections is changed automatically.
+    
+    \section{Details}
+    
+    The real work goes here! Replace section titles with something relevant to your report.
+    
+    \subsection{Subsections}
+    
+    \subsection{Using References}
+    
+    Don’t forget to acknowledge any sources that you make use of. Claiming other 
+    people's work \& ideas as your own is considered cheating and carries severe 
+    penalties. Make it very clear what is your work and what help, words, ideas, etc., 
+    you have taken from elsewhere. Be sure to put quotation marks around any sections 
+    of text you copy from elsewhere and add a reference to the original source 
+    (see \cite{plagiarism} for general information and \cite{note1} and \cite{note2} for examples of in-formation 
+    required for book, journal and web-based sources). 
+    
+    You can insert references in the text by selecting “Insert|Reference-Footnotes... Endnotes.” 
+    This template uses sequential numbers for references, the most common format used for 
+    technical articles. The template includes a macro, "Create\_Reference" which should insert 
+    a link in-to the text and a corresponding entry into the References section at the end of 
+    the document, which you can then edit. You can invoke the macro by pressing Control-R 
+    (but you may need to "Tools|Unprotect Document" and/or Enable-Macros first!) 
+    Note: newer versions of Word may now include this reference style-check the help.
+    
+    \subsection{And Outlines?}
+    
+    Once you understand the basics, you may want to switch to "Outline" view to sort out your ideas 
+    before returning to the "Page Layout" view to write the actual content. If you learn to use styles, 
+    outlines and endnotes properly, then Word sorts out the numbering, formatting, etc. for you. 
+    Try inserting and deleting some of the references from the text and notice again how the other 
+    numbers change automatically. Having the machine do the layout and such numbering automatically, 
+    enables you to concentrate on what is really important, the content. 
+    Neat and very professional looking, eh?
+    
+    
+    \section{Summary \& Conclusions}
+    
+    And finally... Don’t forget that Word can help to check your spelling (and grammar!)
+    
+    Maintaining lists of research references that can be reused when writing journal articles 
+    can be a real pain, especially when citation styles vary so much from journal to journal. 
+    When you have time, I suggest you look at reference managers 
+    (e.g., JabRef for BibTeX, or websites such as CiteSeer), as well as other document creation 
+    options (e.g., LyX, \LaTeX and OpenOffice.)
+    
+    Good Luck.
+    
+    
+    
+    \printbibliography
+    
+    
+        
+\end{document}
