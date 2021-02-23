@@ -2,6 +2,8 @@
 
 ### Spring 2020-2021 Semester
 
+## Group Name: G2C
+
 ### Group Members
 
 - 22002643 - **Vedat Eren Arıcan**
