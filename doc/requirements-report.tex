@@ -138,7 +138,13 @@
         \item The instructor can assign students to assistants either at random or by hand.
           They can also choose to not assign assistants at all, in which case the students
           will be assigned to the assistants at the time of the lab, based upon the length
-          of the queue.        
+          of the queue.
+        \item The instructor can either define PAIN-style (Proficient, Acceptable, Incomplete, Nothing)
+          tiers for grading or can define certain criteria for assistants to enter a numeric value. If they
+          decide to use tiers, they can define certain tiers (such as Proficient and Acceptable) as ``complete'',
+          in which case the submission of a student receiving said grades will automatically be classified as complete.
+          If they decide to use numeric grades, they can put a certain threshold that needs to be exceeeded for a
+          submission to be classified as complete.
     \end{itemize}
     
     \subsubsection{During the Lab}
@@ -191,6 +197,21 @@
     \subsubsection{During the Lab}
     
     \begin{itemize}
+        \item At the start of the lab, the assistants will enter their meeting links to the system.
+        This will allow for the links to be distributed to the students when it is their turn.
+        \item After the assistant enters their meeting link, they will be directed to the code review interface
+        This interface will contain information about the student, as well as the source code submitted by the student
+        and a field to write feedback about the submission.
+        \item The assistant/grader can browse the code submitted by the student from their computer without wasting bandwidth
+        and time with screen sharing. They can also write feedback referencing specific lines in the code to make their
+        feedback clearer.
+        \item After evaluating the code, the assistants can either give the assignment a score or pick
+          from the tiers determined by the instructor. If the determined grade or tier is within the satisfactory
+          threshold, the student's assignment is marked as complete. Otherwise, the assignment is returned to the
+          student with the feedback written by the TA.
+        \item Once the assistant finishes evaluating a submission, they need to manually confirm that they are
+          ready for the link to be revealed to the next student in queue. This allows the assistants to take short
+          breaks if necessary.
         \item As stated, the program will be able to detect common errors made in student code. 
         Also, the unit tests can be arranged in a way they that they test specific skills that are
         required. During the lab, these properties of the program will increase the efficiency of the
