@@ -1,7 +1,4 @@
-% The order to compile is:
-% pdflatex -> bibtex -> pdflatex
-% Doing this process with your current working directory
-% pointing to where all the tex/bib/etc. files are may help.
+% Use either your LaTeX editor or latexmk to compile.
 
 \documentclass[a4paper, 12pt]{article}
 
@@ -31,7 +28,7 @@
 
 % Referencing
 \usepackage[backend=bibtex, style=numeric-comp, sorting=none]{biblatex}
-\addbibresource{report-template.bib}
+\addbibresource{bibliography.bib}
 
 \begin{document}
     
