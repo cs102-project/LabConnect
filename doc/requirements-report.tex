@@ -61,7 +61,7 @@
     % Project Information Header
     {\centering\Huge \bfseries \raisebox{0.5ex}{\texttildelow} LabConnect \raisebox{0.5ex}{\texttildelow} \par}
 
-    {\centering\large Group Name \par}
+    %{\centering\large Group Name \par}
 
     \begin{table}[h!]
         \renewcommand{\arraystretch}{1.4}
@@ -83,7 +83,7 @@
         \begin{tabular}{ |>{\centering\arraybackslash}m{15.15cm}| }
             \hline
             \Large \textbf{Requirements Report} \\
-            \small (Draft Version (pre-review)) \\
+            \small (version 2) \\
             \small \textbf{\today} \\
             \hline
         \end{tabular}
@@ -112,7 +112,7 @@
     The student experience can be improved further by adding helpful
     features such as personal notes for students and so on.
 
-    \subsection{Literature Review}
+    \subsection{Related Work}
 
     As a part of their curriculum most of the big engineering instutions and universities have a laboratory session, that is mandatory
     for student to attend them. Each lab session, every student has to submit approximately 9 to 12 assignments. Additionally, every student takes lab tests (up to three lab test).
@@ -165,6 +165,9 @@
         \item The instructor writes the unit tests as input-output pairs and groups them if
           they wish. Some groups of unit tests can be hidden, in which case they won't be
           shown to the students prior to submission.
+        \item The instructor provides a tester class that tests the code provided by the student
+        by calling the methods. This class is the one that will be run by the server. This allows students
+        to be more flexible in their own main class.
         \item The instructor can determine a time constraint for unit tests. If the execution
           of the code takes longer than the determined time, it will fail said test.
         \item The instructor determines a time frame for submissions. They can determine a
@@ -222,7 +225,7 @@
       \item When the student's submission passes all unit tests, they are placed into the code review queue.
       \item When the student is put to the queue, they can see how many students are in front of them. Their place in the queue is
       stored in the server side, so in case of a momentary disconeection, they don't lose their place.
-      \item Once the student reaches to the very front of the queue, they have 30 seconds to click an ``I\'m ready''
+      \item Once the student reaches to the very front of the queue, they have 30 seconds to click an ``I am ready''
       button to receive the meeting link for their TA. Otherwise, it is assumed that the student is not ready and they
       are placed at the end of the queue.
     \end{itemize}
@@ -246,7 +249,7 @@
 
     \begin{itemize}
         \item At the start of the lab, the assistants will enter their meeting links to the system.
-        This will allow for the links to be distributed to the students when it is their turn.
+        This will allow for the links to be di.stributed to the students when it is their turn.
         \item After the assistant enters their meeting link, they will be directed to the code review interface
         This interface will contain information about the student, as well as the source code submitted by the student
         and a field to write feedback about the submission.
@@ -302,7 +305,7 @@
       interpreter for the language if it is an interpreted one.
       \item If there's an error during the compilation or interpretation/execution stages, the submission is automatically failed and
       the error message is shown to the student.
-      \item Using I/O redirection, the input part of the unit tests are fed to the standard input of the program and the output is captured.
+      \item Using I/O redirection, the input part of the unit tests are fed to the standard input of the tester program and the output is captured.
       This allows for easy multilanguage support and doesn't require students to deal with file I/O while writing the program.
       \item If the output of the program doesn't match the expected results, the submission is automatically failed and the input, expected
       output and actual output for the specific unit test is shown to the student.
