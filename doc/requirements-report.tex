@@ -159,9 +159,9 @@
     \subsubsection{Task Definition Stage}
 
     \begin{itemize}
-        \item The instructor decides upon the name and the language of the assignment
+        \item The instructor decides upon the name and the language of the assignment.
         \item The instructor uploads the instructions either as a document, or as a Markdown
-          or a plaintext file, in which case it will be rendered and displayed on the website
+          or a plaintext file, in which case it will be rendered and displayed on the website.
         \item The instructor writes the unit tests as input-output pairs and groups them if
           they wish. Some groups of unit tests can be hidden, in which case they won't be
           shown to the students prior to submission.
@@ -170,12 +170,7 @@
         \item The instructor determines a time frame for submissions. They can determine a
           seperate deadline for re-submissions if they wish.
         \item The instructor can assign students to assistants either at random or by hand.
-          They can also choose to not assign assistants at all, in which case the students
-          will be assigned to the assistants at the time of the lab, based upon the length
-          of the queue.
-        \item The instructor can either define PAIN-style (Proficient, Acceptable, Incomplete, Nothing)
-          tiers for grading or can define certain criteria for assistants to enter a numeric value. If they
-          decide to use tiers, they can define certain tiers (such as Proficient and Acceptable) as ``complete'',
+          Thrcide to use tiers, they can define certain tiers (such as Proficient and Acceptable) as ``complete'',
           in which case the submission of a student receiving said grades will automatically be classified as complete.
           If they decide to use numeric grades, they can put a certain threshold that needs to be exceeeded for a
           submission to be classified as complete.
@@ -237,7 +232,7 @@
 
     \begin{itemize}
       \item If the student's submission is marked as incomplete either by their TA or automatically by the system, they are directed
-      to the revision stage
+      to the revision stage.
       \item In this stage, the student either receives written feedback by their TA or they receive a message generated server-side explaining
       what went wrong during the tests. In case of a runtime exception/compiler error, the backtrace is also provided and the lines causing the
       problem are highlighted. Code can also be highlighted manually by the TA, as described in the Code Review Process section of the TA interface.
@@ -284,8 +279,7 @@
 
     \subsection{LabConnect - Server Side}
 
-    \subsubsection{Task Definition Stage}
-
+    \subsubsection{Task Definiton Stage}
     \begin{itemize}
       \item The distrubition of students to the TAs, that should be uploaded by instructor (probably once at the
       beginning of the semester), will be stored in the database.
@@ -328,18 +322,17 @@
     \subsubsection{Statistics Generation}
 
     \begin{itemize}
-      \item After the lab is finished, the data driven from the unit tests, the error detection algorithm, etc. will be used
+      \item After the lab is finished, the data acquired from the unit tests, the error detection algorithm, etc. will be used
       to create statistics about the students' performace. The server will be used to maintain this data for further use.
     \end{itemize}
 
     \section{Summary \& Conclusions}
 
-    \begin{itemize}
-      \item The main purpose of LabConnect is to provide students and instructors a place where everyone will find easier time
-      collobrationg with each other properly. Especially in online education, instructors can find hard time monitoring student
-      performance on labs. With LabConnect, instructors can shape their classes according to the reponse taken from the labs.
-    \end{itemize}
+    The main purpose of LabConnect is to provide students and instructors a place where everyone will find easier time
+    collobrationg with each other properly. Especially in online education, instructors can find hard time monitoring student
+    performance on labs. With LabConnect, instructors can shape their classes according to the reponse taken from the labs.
+
+    \pagebreak
 
     \printbibliography
-
 \end{document}
