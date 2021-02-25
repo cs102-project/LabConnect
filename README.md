@@ -30,8 +30,6 @@ Project Name: **LabConnect**
  - [x] Reorganize project document (9/02/2021)
  - [x] Send project submission (10/02/2021)
  - [x] Proposal accepted (15/02/2021)
- - [x] Write requirements report
- - [x] Show the requirements report to TA
- - [ ] Etc...
+ - [x] Write / Show the requirements report (25/02/2021)
  
 
