@@ -273,29 +273,29 @@
     \subsubsection{Task Revision Process}
 
     \begin{itemize}
-      \item As stated, the program will be able to detect common errors made in student code.
-      Also, the unit tests can be arranged in a way they that they test specific skills that are
+      \item As stated, the program will be able to detect common errors made in the student's code.
+      Also, the unit tests can be arranged in a way such that they test specific skills that are
       required. During the lab, these properties of the program will increase the efficiency of the
       graders.
-      \item The Grader can create pre-messages for the students if there is a highly repeated
+      \item The Grader can create announcements for the students if there is a highly repeated
       mistake. This way, they won't need to repeat the same small correction for each student,
-      and this way they will find easier time to correct other unique mistakes that the students
+      and they will find it easier to correct other unique mistakes that the students
       have made. The graders will find greater motivation on teaching the students proper techniques
-      if they are freed from the repetitiveness of same mistakes. Of course the student can demand
-      further help for their "repeated" mistake.
+      if they are freed from the repetitiveness of correcting the same mistakes. Of course, the student can demand
+      further help for their "repeated" mistakes.
     \end{itemize}
 
     \subsection{LabConnect - Server Side}
 
     \subsubsection{Task Definiton Stage}
     \begin{itemize}
-      \item The distrubition of students to the TAs, that should be uploaded by instructor (probably once at the
+      \item The distribution of students to the TAs, that should be uploaded by instructor (probably once at the
       beginning of the semester), will be stored in the database.
-      \item For each TA a unique identification number will be generated and the students who are allocated to a
+      \item For each TA, a unique identification number will be generated and the students who are allocated to a
       TA will get the identification number of that TA.
-      \item For each lab every student will have their own git repository (created by system) for the storage of the
+      \item For each lab, every student will have their own git repository (created by the system) for the storage of the
       code.
-      \item The test cases (inputs \& outputs), that is uploaded by instructor, will be stored in the database.
+      \item The test cases (inputs \& outputs), that are uploaded by instructor, will be stored in the database.
     \end{itemize}
 
     \subsubsection{Post-Submission Stage}
@@ -303,15 +303,15 @@
     \begin{itemize}
       \item Each submission will be stored in a version control system. This allows LabConnect to provide easy access to
       submission history for TAs and instructors.
-      \item If the current submisson doesn't differ from the last submission, it will be automatically rejected.
+      \item If the current submission doesn't differ from the last submission, it will be automatically rejected.
       \item When a student makes a submission, the server-side program will compile the source code in the submission
       files if the language picked by the instructor is a compiled language.
-      \item Then the server-side program runs the resulting binary if the language is a complied language or runs the
+      \item Then the server-side program runs either the resulting binary if the language is a compiled language, or the
       interpreter for the language if it is an interpreted one.
       \item If there's an error during the compilation or interpretation/execution stages, the submission is automatically failed and
       the error message is shown to the student.
       \item Using I/O redirection, the input part of the unit tests are fed to the standard input of the tester program and the output is captured.
-      This allows for easy multilanguage support and doesn't require students to deal with file I/O while writing the program.
+      This allows for easy multi-language support and doesn't require students to deal with file I/O while writing the program.
       \item If the output of the program doesn't match the expected results, the submission is automatically failed and the input, expected
       output and actual output for the specific unit test is shown to the student.
       \item The submission is run separately for each unit test. These runs are timed and the results for each unit test is stored in a database.
@@ -321,7 +321,7 @@
     \subsubsection{Queue Management}
     \begin{itemize}
       \item Once a submission passes all the automated tests, the student who made the submission will be added to the queue for their TA.
-      \item The students that didn't receive any manual code review are prioritized over those that received one. This allows for each student to
+      \item The students that didn't receive any manual code review are prioritized over those that received one. This allows each student to
       get their code reviewed at least once during the labs.
       \item If the TA's were not assigned to students by the instructor, the server will pick a TA on the spot based on the queue length. This
       behavior will help make the workloads of the TA's more balanced.
@@ -336,9 +336,9 @@
 
     \section{Summary \& Conclusions}
 
-    The main purpose of LabConnect is to provide students and instructors a place where everyone will find easier time
-    collobrationg with each other properly. Especially in online education, instructors can find hard time monitoring student
-    performance on labs. With LabConnect, instructors can shape their classes according to the reponse taken from the labs.
+    The main purpose of LabConnect is to provide students and instructors a place where everyone will have an easier time
+    collaborating with each other properly. Especially in online education, instructors can have a hard time monitoring students'
+    performance on labs. With LabConnect, instructors can shape, and take control of, their classes according to the response given to the lab sessions.
 
     \pagebreak
 
