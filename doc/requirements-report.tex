@@ -128,7 +128,7 @@
     after the class. The students have an easier time studying weak areas if they are informed about their
     performance properly. The autonomous natured variant of instructor feedback frees everyone from manual assessment,
     which is a time consuming and unproductive task \cite{RestrepoCalle2018-2}.
-    
+
     If there are many more students than there are teachers, this can hinder the process of manual assessment of the student's code.
     Although this problem can be solved by increasing the amount of teachers, this solution can harm the university economically.
     The idea of automated assesment comes into play with its ability to solve this problem without increased costs.
@@ -149,6 +149,7 @@
     And finally, it was seen that the approach used for automation of assignments in education is used in DevOps fields in a similar way \cite{Faber2020}.
 
     \section{Details}
+    % Please try to focus more on the features instead of how features will progress.
 
     LabConnect is designed to contain three user interfaces for instructors, students,
     and assistants/graders. It will also contain a server side program where the submissions
@@ -212,40 +213,36 @@
     \end{itemize}
 
     \subsection{LabConnect - Student Side}
+    % Good sub parts (outline) for parts of the app, However please avoid listing thoughts, instead try to write down the features
 
     \subsubsection{Code Submission Process}
 
     \begin{itemize}
-      \item The students will upload, one by one, the individual files specified by the instructor during the task specification
-      stage. That way, they won't have to reupload the whole assignment if only one specific file is problematic.
-      \item Once the student submits their assignment, the automated tests and checks are run on the server side.
-      \item If the submission fails any test, it is marked as incomplete and the student is redirected to the revision stage.
-      \item Otherwise the student is placed into the code review queue.
+      \item The students' files can be individually uploaded as specified by the instructor during the task specification stage.
+      As such, they won't have to reupload their whole assignment each time a certain file needs to be modified.
+      \item Automated tests and checks are run on the server side each time the student submits their assignment.
+      \item Submissions that fail any test are marked as incomplete and the student is redirected to the revision stage.
+      Otherwise, the student is placed into the code review queue.
     \end{itemize}
 
     \subsubsection{Code Review Queue}
 
     \begin{itemize}
-
-      \item When the student's submission passes all (or possibly most) unit tests, they are placed into the code review queue.
-      \item Once the student is queued, they can see how many students are waiting in front of them. Their place in the queue is
-      stored on the server side, so in the event of a momentary disconnection, they won't lose their place.
-      \item Once the student reaches the very top of the queue, they have 30 seconds to click an ``I am ready''
-      button to receive the meeting link for their TA. Failure to do so will result in the assumption that the student is not ready, and they
-      are placed at the end of the current queue.
+      \item The prerequisite of the code review queue is to pass all (or possibly most) unit tests.
+      \item Students waiting in line are shown how many students are waiting in front of them. Student places in the queue are
+      stored on the server side, so in the event of a momentary disconnection, places in the queue are preserved.
+      \item Students at the top of the queue are sent a prompt to confirm that they are ready to be graded by the TA, after which they will be sent a meeting link. 
+      In the event that they fail to confirm in a certain amount of time, they will lose their place in the queue and will be sent to the end of the current queue.
     \end{itemize}
 
     \subsubsection{Code Revision Process}
 
-
     \begin{itemize}
-      \item If the student's submission is marked as incomplete either by their TA or automatically by the system, they are directed
-      to the revision stage.
-      \item In this stage, the student either receives written feedback from their TA or they receive a message generated server-side explaining
+      \item Students whose submission is marked as incomplete either by the TA or the system will be redirected to the revision stage.
+      \item The student can either receive written feedback from their TA or a message generated server-side explaining roughly
       what went wrong during the tests. In case of a runtime exception/compiler error, the stack trace is also provided and the lines causing the
       problem are highlighted. Code can also be highlighted manually by the TA, as described in the Code Review Process section of the TA interface.
-      \item Once the student is confident that they have fixed the problem, they can re-submit their code as described in the Code Submission Process
-      section of the Student interface.
+      \item Students are able to resubmit their files once they are confident that they have solved the issues in the given feedback.
     \end{itemize}
 
     \subsection{LabConnect - Grader/Assistant Side}
@@ -253,11 +250,10 @@
     \subsubsection{Code Review Process}
 
     \begin{itemize}
-        \item At the start of the lab, the assistants will enter their meeting links to the system.
-        This will allow for the links to be distributed to the students when it is their turn.
-        \item After the assistant enters their meeting link, they will be directed to the code review interface
-        This interface will contain information about the student, as well as the source code submitted by the student
-        and a field to write feedback about the submission.
+        \item At the start of the lab session, the assistants enter their meeting links to the system.
+        This allows for the links to be distributed to the students when it is their turn.
+        \item The assistant will be directed to the code review interface which contains information about the student, 
+        as well as the source code submitted by the student and a field to write feedback about the submission.
         \item The assistant/grader can choose to browse the code submitted by the student from their computer without wasting bandwidth
         and time with screen sharing. They can also write feedback referencing specific lines in the code to make their
         feedback clearer.
@@ -265,22 +261,21 @@
           from the tiers determined by the instructor. If the determined grade or tier is within the satisfactory
           threshold, the student's assignment is marked as complete. Otherwise, the assignment is returned to the
           student with the feedback written by the TA.
-        \item Once the assistant finishes evaluating a submission, they need to manually confirm that they are
-          ready for the link to be revealed to the next student in queue. This allows the assistants to take short
-          breaks if necessary.
+        \item The assistant can manually confirm that they are ready for the link to be revealed to the next student in queue. 
+        Hence, allowing the assistants to take short breaks if necessary.
     \end{itemize}
 
     \subsubsection{Task Revision Process}
 
     \begin{itemize}
-      \item As stated, the program will be able to detect common errors made in the student's code.
-      Also, the unit tests can be arranged in a way such that they test specific skills that are
-      required. During the lab, these properties of the program will increase the efficiency of the
-      graders.
+      \item The program is able to detect common errors made in the student's code.
+      Furthermore, the unit tests can be arranged in a way such that they test specific skills that are
+      required. These enhancements to the revision process are aimed to increase the efficiency of the
+      graders during live lab sessions.
       \item The Grader can create announcements for the students if there is a highly repeated
       mistake. This way, they won't need to repeat the same small correction for each student,
       and they will find it easier to correct other unique mistakes that the students
-      have made. The graders will find greater motivation on teaching the students proper techniques
+      have made. The graders may find greater motivation on teaching the students proper techniques
       if they are freed from the repetitiveness of correcting the same mistakes. Of course, the student can demand
       further help for their "repeated" mistakes.
     \end{itemize}
@@ -289,8 +284,8 @@
 
     \subsubsection{Task Definition Stage}
     \begin{itemize}
-      \item The distribution of students to the TAs, that should be uploaded by instructor (probably once at the
-      beginning of the semester), will be stored in the database.
+      \item The distribution of students to the TAs, whose registration should be done by instructor (probably once at the
+      beginning of the semester), are stored in the database.
       \item For each TA, a unique identification number will be generated and the students who are allocated to a
       TA will get the identification number of that TA.
       \item For each lab, every student will have their own git repository (created by the system) for the storage of the
@@ -307,7 +302,7 @@
       \item When a student makes a submission, the server-side program will compile the source code in the submission
       files if the language picked by the instructor is a compiled language.
       \item Then the server-side program runs either the resulting binary if the language is a compiled language, or the
-      interpreter for the language if it is an interpreted one.
+      interpreter for the language if it is an interpreted one
       \item If there's an error during the compilation or interpretation/execution stages, the submission is automatically failed and
       the error message is shown to the student.
       \item Using I/O redirection, the input part of the unit tests are fed to the standard input of the tester program and the output is captured.
@@ -339,6 +334,11 @@
     The main purpose of LabConnect is to provide students and instructors a place where everyone will have an easier time
     collaborating with each other properly. Especially in online education, instructors can have a hard time monitoring students'
     performance on labs. With LabConnect, instructors can shape, and take control of, their classes according to the response given to the lab sessions.
+    
+    There are some types of software that are similar to what LabConnect aims to achieve, however, they are not directly developed to supply instructors/TAs/students
+    with quality of life enhancements in terms of CS courses and their lab sessions/assignments. 
+
+    % Any alternatives? Any apps that do the same thing or similar thing? What are the upsides or downsides?
 
     \pagebreak
 
