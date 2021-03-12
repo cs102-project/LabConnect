@@ -95,17 +95,17 @@
 
     LabConnect facilitates communication between students, TA's, tutors,
     and instructors. In the background, it is mainly a web application
-    (can be ported to Android possibly) that aims to assist CS introductory
-    courses in terms of organization and communication. Proposed ideas for
-    features include priority queuing for TA zoom rooms. For example, those
-    who have completed their labs can be tested using pre-defined (by TA or
-    instructor) unit tests, if students pass the tests successfully then they will be
-    ordered by the number of visits to TA in the same session, in order to decrease
-    waiting times for the students who are waiting from the beginning, and
-    to optimize the process in general. TA's can also use the system to see
-    previous versions of each student's code in a more practical way,
-    similar to real version control managers in spirit. The style guidelines
-    put forth by the instructors can be enforced automatically by parsing
+    (If sensible/necessary, it may possibly be ported to Android) that aims 
+    to assist CS introductory courses in terms of organization and communication. 
+    Proposed ideas for features include priority queuing for TA zoom rooms among many other 
+    enhancements to TA/instructor productivity. For example, those who have completed their labs 
+    can be tested using pre-defined (by TA or instructor) unit tests, if students pass the 
+    tests successfully then they will be ordered by the number of visits to TA 
+    in the same session, in order to decrease waiting times for the students 
+    who are waiting from the beginning, and to optimize the process in general. 
+    TA's can also use the system to see previous versions of each student's code 
+    in a more practical way, similar to real version control managers in spirit. 
+    The style guidelines put forth by the instructors can be enforced automatically by parsing
     the student's sent code files. Much of the repetitive work that course
     staff need to do can be reduced substantially by automated actions,
     allowing TA's to allocate time for more hands-on help towards students.
@@ -114,28 +114,31 @@
 
     \subsection{Related Work}
 
-    As a part of their curriculum most of the big engineering instutions and universities have hands-on laboratory sessions, that are mandatory
-    for students to attend them. Each lab session, every student has to submit approximately 9 to 12 assignments. Additionally, every student takes lab tests (up to three lab tests).
-    Cumulatively the amounts of submissions are approximately 10000 per semester. Even if there were 20 evaluators, each evaluator would need to take care of almost 500 assignments.
-    Without the help of automation, evaluators spend most of their time grading and testing work rather than creating more useful assignments for students \cite{Mandal2007}.
+    As a part of their curriculum, most of the big engineering institutions and universities have hands-on laboratory sessions, that are mandatory
+    for students to attend them. At some particularly crowded institutions; for each lab session, every student has to submit approximately 9 to 12 assignments. 
+    Additionally, students and the teaching staff alike may also need to deal with lab tests, perhaps even multiple of them. 
+    Cumulatively, the amount of submissions can reach approximately 10000 per semester. 
+    Even if there were 20 evaluators, each evaluator would need to take care of almost 500 assignments.
+    Without the help of automation, evaluators spend most of their time grading and testing work, rather than creating more useful assignments for students 
+    or simply spending more time assisting them \cite{Mandal2007}.
 
     Some of the positive sides of the automated grading are syntactic correctness, maintainability and efficiency.
-    Moreover, automated grading systems weighs down the lack of objectivity in the conventional grading and these systems
+    Moreover, automated grading systems weigh down the lack of objectivity in conventional grading and these systems
     can track all of the building process. In the contemporary context, these kinds of automated grading systems are commonly used by
     some commercial competitive programming and recruitment sites (for instance, HackerRank, TopCoder and HackerEarth) \cite{RestrepoCalle2018}.
 
-    At the same time, the quantity of the feedback given by teachers is directly proportional to the effectiveness of the student's work that is done
+    At the same time, the quantity of the feedback given by the teaching staff is directly impactful to the effectiveness of the student's work that is done
     after the class. The students have an easier time studying weak areas if they are informed about their
-    performance properly. The autonomous natured variant of instructor feedback frees everyone from manual assessment,
+    performance properly. The autonomous nature of instructor feedback frees everyone from manual assessment,
     which is a time consuming and unproductive task \cite{RestrepoCalle2018-2}.
 
     If there are many more students than there are teachers, this can hinder the process of manual assessment of the student's code.
     Although this problem can be solved by increasing the amount of teachers, this solution can harm the university economically.
-    The idea of automated assesment comes into play with its ability to solve this problem without increased costs.
-    There is much evidence that shows that student code is evaluated more properly using automatic assesment rather than using pen\&paper testing.
-    Evidence also shows that automated assesment reduces the rate of dropout in programming majors \cite{Gordillo2019}.
+    The idea of automated assessment comes into play with its ability to solve this problem without increased costs.
+    There is much evidence to assert that student code is evaluated more properly using automatic assessment rather than using pen\&paper testing.
+    Research also interestingly shows that automated assessment reduces the rate of dropout in programming majors \cite{Gordillo2019}.
 
-    The effectiveness of different testing procedures are as follows:
+    According to one source, the effectiveness of different testing procedures are as follows:
     Unit testing is able to catch 50\% of the errors.
     Integration testing is able to catch 40\% of the errors.
     Regression testing is able to catch 30\% of the errrors \cite{Fenton2018}.
@@ -143,42 +146,41 @@
     The evaluation system decreases the work load of the evaluation process since it makes the evalution process easier.
     Just as the system has automatic testing, it also comes with automatic grading. Additionally, it manages students by aiding
     grouping and scheduling issues, helping with the students checking in to lab sessions, the deadlines and overall project grades.
-    As the system is ideally available all the time, the students will be able to get feedback instantly on the correctness of
-    their solutions. This way, students keep working on their work at their own pace \cite{Nogueira2011}.
+    As the system is ideally available at all times, the students will be able to get feedback instantly on the correctness of
+    their solutions. This way, students are able to keep working on their work at their own pace \cite{Nogueira2011}.
 
     And finally, it was seen that the approach used for automation of assignments in education is used in DevOps fields in a similar way \cite{Faber2020}.
 
     \section{Details}
-    % Please try to focus more on the features instead of how features will progress.
 
     LabConnect is designed to contain three user interfaces for instructors, students,
-    and assistants/graders. It will also contain a server side program where the submissions
-    are stored and tested.
+    and assistants/graders. It will also contain a server-side program where the submissions
+    are stored and tested. This section will provide details on proposed features of the software at the time of this writing.
 
     \subsection{LabConnect - Instructor Side}
 
     \subsubsection{Task Definition Stage}
 
     \begin{itemize}
-        \item The instructor decides upon the name and the language of the assignment.
-        \item The instructor uploads the instructions either as a document, or as a Markdown
-          or a plaintext file, in which case it will be rendered and displayed on the website.
-        \item The instructor writes the unit tests as input-output pairs and groups them if
+        \item The instructor is able to input the name and the programming language of the assignment.
+        \item The instructor can upload the instructions either as a document, or as a Markdown
+          or a plaintext file, after which, it will be rendered and displayed on the website.
+        \item The instructor can configure the unit tests as input-output pairs and group them if
           they wish. Some groups of unit tests can be hidden, in which case they won't be
           shown to the students prior to submission.
-        \item The instructor provides a tester class that tests the code provided by the student
+        \item The instructor can provide a tester class that tests the code provided by the student
         by calling the methods. This class is the one that will be run by the server. This allows students
         to be more flexible in their own main class.
         \item The instructor can determine a time constraint for unit tests. If the execution
           of the code takes longer than the determined time, it will fail said test.
-        \item The instructor determines a time frame for submissions. They can determine a
-          seperate deadline for re-submissions if they wish.
+        \item The instructor can determine a time frame for submissions. They can determine a
+          seperate deadline for re-submissions, if they wish.
         \item The instructor can assign students to assistants either at random or by hand.
           They can also choose to not assign assistants at all, in which case the students
-          will be assigned to the assistants at the time of the lab, based upon the length
+          will be assigned to the assistants during the lab session, based on the length
           of the queue.
         \item The instructor can either define PAIN-style (Proficient, Acceptable, Incomplete, Nothing)
-          tiers for grading or can define certain criteria for assistants to enter a numeric value. If they
+          tiers for grading or can define certain criteria for which assistants can enter a numeric value. If they
           decide to use tiers, they can define certain tiers (such as Proficient and Acceptable) as ``complete'',
           in which case the submission of a student receiving said grades will automatically be classified as complete.
           If they decide to use numeric grades, they can define a certain threshold that needs to be exceeeded for a
@@ -188,32 +190,31 @@
     \subsubsection{Task Update Stage}
 
     \begin{itemize}
-        \item The instructor will have better control over how students' codes are tested.
-        The instructor will also be able to add more unit tests as the lab progresses.
-        The students' unit tests can be updated within the lab period so any mistakes made
+        \item The instructor should ideally have better control over how students' codes are tested.
+        The instructor is also able to add more unit tests as the lab progresses.
+        The students' unit tests can be updated within the lab period, so any mistakes made
         on the tests themselves can be corrected this way.
     \end{itemize}
 
     \subsubsection{After the Lab}
 
     \begin{itemize}
-        \item The common errors that are made by students such as missing documentation (see JavaDoc)
+        \item The common errors that are made by students such as missing documentation (i.e. JavaDoc)
         of the written code, and predefined conventions that aren't followed (naming conventions, styling
         guidelines, etc.), will be detected by LabConnect. This data will be shared with the student
         and their instructor. The instructor can later on determine to act up on the most
         important mistakes that are made by the students.
-        \item With the unit tests, instructors will be able to see which test cases of the program
-        the students mostly failed at. These unit tests can again reveal the common weaknesses
+        \item Instructors are able to see which unit test cases of the program
+        the students mostly fail at. These unit tests can again reveal the common weaknesses
         of programmers.
-        \item The instructor will be able to assess their students properly by considering their
-        performance in the lab. LabConnect will provide detailed performance of the student,
-        based on the mistakes they made, and overall unit test scores. This information can help
-        the instructor achieve a better grasp of their students since the data is properly organised
+        \item The instructor is able to assess their students properly by considering their
+        performance in the lab, for which, LabConnect will supply additional analytics. 
+        As in, LabConnect will provide detailed performance of the student, based on the mistakes they made, and overall unit test scores. 
+        This information can help the instructor achieve a better grasp of their students since the data is properly organised
         and accessible.
     \end{itemize}
 
     \subsection{LabConnect - Student Side}
-    % Good sub parts (outline) for parts of the app, However please avoid listing thoughts, instead try to write down the features
 
     \subsubsection{Code Submission Process}
 
@@ -286,9 +287,9 @@
     \begin{itemize}
       \item The distribution of students to the TAs, whose registration should be done by instructor (probably once at the
       beginning of the semester), are stored in the database.
-      \item For each TA, a unique identification number will be generated and the students who are allocated to a
+      \item For each TA, a unique identification number is generated and the students who are allocated to a
       TA will get the identification number of that TA.
-      \item For each lab, every student will have their own git repository (created by the system) for the storage of the
+      \item For each lab, every student will have their own git repository (created automatically by the system) for the storage of the
       code on the server-side.
       \item The test cases (inputs \& outputs), that are uploaded by instructor, will be stored in the database.
     \end{itemize}
@@ -296,27 +297,27 @@
     \subsubsection{Post-Submission Stage}
 
     \begin{itemize}
-      \item Each submission will be stored in a version control system. This allows LabConnect to provide easy access to
+      \item Each submission is stored in a version control system. This allows LabConnect to provide easy access to
       submission history for TAs and instructors.
-      \item If the current submission doesn't differ from the last submission, it will be automatically rejected.
-      \item When a student makes a submission, the server-side program will compile the source code in the submission
-      files if the language picked by the instructor is a compiled language.
+      \item If the current submission doesn't differ from the last submission, it is automatically rejected.
+      \item When a student makes a submission, the server-side program then compiles the source code in the submission
+      files, if the language picked by the instructor is a compiled language.
       \item Then the server-side program runs either the resulting binary if the language is a compiled language, or the
-      interpreter for the language if it is an interpreted one
+      interpreter for the language if it is an interpreted one.
       \item If there's an error during the compilation or interpretation/execution stages, the submission is automatically failed and
       the error message is shown to the student.
-      \item Using I/O redirection, the input part of the unit tests are fed to the standard input of the tester program and the output is captured.
+      \item Using I/O redirection, the input parts of the unit tests are fed to the standard input of the tester program and the output is captured.
       This allows for easy multi-language support and doesn't require students to deal with file I/O while writing the program.
       \item If the output of the program doesn't match the expected results, the submission is automatically failed and the input, expected
       output and actual output for the specific unit test is shown to the student.
       \item The submission is run separately for each unit test. These runs are timed and the results for each unit test is stored in a database.
-      If the instructor specified a time limit for tests, the test in question will automatically fail once the time limit is reached.
+      If the instructor has specified a time limit for tests, the test in question will automatically fail once the time limit is reached.
     \end{itemize}
 
     \subsubsection{Queue Management}
     \begin{itemize}
-      \item Once a submission passes all the automated tests, the student who made the submission will be added to the queue for their TA.
-      \item The students that didn't receive any manual code review are prioritized over those that received one. This allows each student to
+      \item Once a submission passes all the automated tests, the student who made the submission is added to the queue for their TA.
+      \item The students that haven't yet received any manual code review are prioritized over those that have received one. This allows each student to
       get their code reviewed at least once during the labs.
       \item If the TA's were not assigned to students by the instructor, the server will pick a TA on the spot based on the queue length. This
       behavior will help make the workloads of the TA's more balanced.
@@ -326,19 +327,31 @@
 
     \begin{itemize}
       \item After the lab is finished, the data acquired from the unit tests, the error detection algorithm, etc. is used
-      to create statistics about the students' performace. The server can maintain this data for further use.
+      to create statistics about the students' performance. The server can maintain this data for further use.
     \end{itemize}
 
     \section{Summary \& Conclusions}
 
     The main purpose of LabConnect is to provide students and instructors a place where everyone will have an easier time
     collaborating with each other properly. Especially in online education, instructors can have a hard time monitoring students'
-    performance on labs. With LabConnect, instructors can shape, and take control of, their classes according to the response given to the lab sessions.
+    performance on labs. With LabConnect, instructors can shape and take control of their classes according to the response given to the lab sessions.
     
     There are some types of software (for instance, Mooshak, Ejudge) that are similar to what LabConnect aims to achieve, however, they are not directly 
     developed to supply instructors/TAs/students with quality of life enhancements in terms of CS courses and their lab sessions/assignments. 
-
-    % Any alternatives? Any apps that do the same thing or similar thing? What are the upsides or downsides?
+    These kinds of software usually exist for the sake of judging programming contests automatically, which is a vital task for contests
+    with high participation, similar to the vitality of automating CS course evaluations with a high participant count. 
+    Other related systems include: Code Wars, Hackerrank, Leetcode, and so on.
+    These systems also are not intended to be used for interactive education, but rather for self-education.
+    However, the popularity and success of these self-education systems nonetheless suggests a viability for the type of 
+    automation that LabConnect is attempting to undertake.
+    
+    A CS course that successfully integrates LabConnect to their education process may enjoy the benefit of automation over
+    numerous aspects of the course that are often inefficiently evaluated by the teaching staff manually. Students may also have an easier time
+    as features such as the queue system are designed to improve their communication process with the teaching staff. 
+    The downside of this integration may be that the flexibility of an entirely manual evaluation process will inevitably be higher compared to
+    the flexibility offered by LabConnect. This downside, however, is not as problematic as it may seem. The teaching staff may choose to
+    include only certain parts of the LabConnect system, continuing to perform the remaining parts manually as per usual.
+    The development of LabConnect aims to provide such modularity to balance the compromise of flexibility as much as possible.
 
     \pagebreak
 
