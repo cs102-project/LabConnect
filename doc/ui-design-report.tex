@@ -1,0 +1,146 @@
+% Use either your LaTeX editor or latexmk to compile.
+
+\documentclass[a4paper, 12pt]{article}
+
+% Document quality things
+\usepackage[utf8]{inputenc}
+\usepackage{microtype, xcolor}
+\usepackage{url, hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=black, urlcolor=blue}
+
+% Image-related packages
+\usepackage{graphicx}
+\graphicspath{ {./ui-design-mockups/} }
+
+% Setting margins
+\usepackage[a4paper, left=2cm, right=2cm, top=1.75cm, bottom=1.75cm, includefoot]{geometry}
+
+% Table helper packages
+\usepackage{multirow, multicol}
+\usepackage{makecell}
+\usepackage{array}
+%\usepackage{tabularx} % Not needed currently, but has a few nice options
+\usepackage{wrapfig} % Floating figures/tables
+
+% Prevents spamming tedious newlines everywhere, also disables auto indentation, etc.
+\usepackage[skip=0.75\baselineskip plus 2pt]{parskip}
+
+% Self-explanatory
+\usepackage{titlesec}
+\titleformat{\section}[block]{\normalfont\scshape\Large}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large}{\thesubsection}{1em}{}
+
+% Referencing
+\usepackage[backend=bibtex, style=numeric-comp, sorting=none]{biblatex}
+\addbibresource{bibliography.bib}
+
+\begin{document}
+    
+    % Header Table
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{3}
+        \centering
+        \begin{tabular}{ | >{\raggedleft\arraybackslash}m{3cm} l >{\raggedleft\arraybackslash}m{3cm} m{3cm} | }
+            \hline
+            \Huge CS 102 & \textit{Spring 2020/21} & \multirow{2}{*}{\makecell{Project\\Group}} & \multirow{2}{*}{\textbf{\Huge G2C}} \\
+            \makecell[r]{Instructor:\\Assistant:} & \makecell[l]{\textbf{Aynur Dayanık}\\\textbf{Haya Shamim Khan Khattak}} & & \\
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    % Grading Table
+    \begin{table}[h!]
+            \renewcommand{\arraystretch}{1.4}
+            \centering
+            \footnotesize
+            \begin{tabular}{ l p{1.5cm} | p{1.5cm} | }
+                \hline
+                \multicolumn{1}{|c|}{\textbf{Criteria}} & \multicolumn{1}{c|}{\textbf{TA/Grader}} & \multicolumn{1}{c|}{\textbf{Instructor}} \\ \hline
+                \multicolumn{1}{|p{10.5cm}|}{Presentation} &  &  \\[10ex] \hline
+                \multicolumn{1}{r|}{\textbf{Overall}} &  &  \\
+                \cline{2-3}
+            \end{tabular}
+    \end{table}
+    
+    % Project Information Header
+    {\centering\Huge \bfseries \raisebox{0.5ex}{\texttildelow} LabConnect \raisebox{0.5ex}{\texttildelow} \par}
+    
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.4}
+        \centering
+        \small
+        \begin{tabular}{ r l }
+            \textbf{Borga Haktan Bilen} & 22002733 \\
+            \textbf{Vedat Eren Arıcan} & 22002643 \\
+            \textbf{Berkan Şahin} & 22003211 \\
+            \textbf{Berk Çakar} & 22003021 \\
+            \textbf{Alp Ertan} & 22003912 \\
+        \end{tabular}
+    \end{table}
+    
+    % Document Type Header Table
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.5}
+        \centering
+        \begin{tabular}{ |>{\centering\arraybackslash}m{15.15cm}| }
+            \hline
+            \Large \textbf{UI Design Report} \\
+            \small (version 0.1) \\
+            \small \textbf{\today} \\
+            \hline
+        \end{tabular}
+    \end{table}
+    
+    % Document begins here...
+    
+    \section{Introduction to LabConnect}
+    
+    LabConnect is a developing project that aims to make education more productive for students,
+    and more efficient for teaching staff, among other benefits. The feature list compiled for the
+    sake of this goal includes items such as:
+    \begin{itemize}
+        \item Queueing system for live sessions to optimize wait times and student-TA communication
+        \item Dashboard designed with a pragmatist mindset, to lessen confusion as much as viable
+        \item Instructor panel where new assignments can be added with great flexibility
+        \item Analysis view for students and teaching staff alike, to monitor course progress
+        \item Announcements board where the teaching staff can reach out to students with ease
+        \item Simple one-to-one messaging capability for the sake of light written communication
+        \item Note-taking panel for students to take concise notes regarding individual assignments
+        \item Detailed view of submission versions where students and the teaching staff can observe
+            automated testing results
+    \end{itemize}
+    
+    Though the above is not an exhaustive list of features, it does nonetheless capture the gist of the features
+    this project proposes in order to undertake its goal of optimizing the assignment portion of
+    a computer science course. For a more extensive summary of this project, refer to the requirements report published earlier.
+    
+    \section{Regarding the UI Design Report}
+    
+    The document herein contains details and illustrations from 12 application views in total, but certain disclaimers have to be made
+    regarding the accuracy of these illustrations.
+    LabConnect is planned to be a web application, built with established modern web design paradigms in mind. However, web pages,
+    particularly those that strive to be designed responsively for the sake of usability on a distinct range of devices, are
+    not easy to make \emph{static} prototype designs of. Along with this factor, another aspect affecting the UI design process is the fact
+    that as LabConnect is an application with a large volume of interaction between people, which may take place at severely
+    differing times, an unavoidable need to display certain elements only in very specific instances appears. In other words, the project
+    at hand is of such nature that it cannot be \emph{accurately} put on display before an actual development of the interface, via
+    the use of dynamic web technologies such as CSS and JavaScript, is in process. 
+
+    As a side note, the development of the interface also depends directly on the implementation of the feature set,
+    as the need for elements on the page will originate from the structures designed on the server application side of the project, which
+    are highly liable to change as the back-end code undergoes development. An example of this phenomenon is the analysis view presented to the users,
+    which is dependent highly on core features being implemented first, because only then can the data to be put on display be ascertained,
+    and the interface thereof finalized.
+    
+    The UI design of LabConnect was completed with the above considerations in mind, which is to mean that the design was developed
+    for the sake of having a guide to refer to when the necessity arises, rather than being developed for the impractical sake of being an accurate
+    finalized version of the interface.     
+    
+    
+    
+    
+    \printbibliography
+    
+    
+        
+\end{document}
