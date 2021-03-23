@@ -10,7 +10,9 @@
 
 % Image-related packages
 \usepackage{graphicx}
+\usepackage{float}
 \graphicspath{ {./ui-design-mockups/} }
+\usepackage[font=small,skip=5pt]{caption}
 
 % Setting margins
 \usepackage[a4paper, left=2cm, right=2cm, top=1.75cm, bottom=1.75cm, includefoot]{geometry}
@@ -85,7 +87,7 @@
         \begin{tabular}{ |>{\centering\arraybackslash}m{15.15cm}| }
             \hline
             \Large \textbf{UI Design Report} \\
-            \small (version 0.1) \\
+            \small (version 1.0) \\
             \small \textbf{\today} \\
             \hline
         \end{tabular}
@@ -116,7 +118,7 @@
     
     \section{Disclaimer Regarding the UI Design Report}
     
-    The document herein contains details and illustrations from 12 application views in total, but certain disclaimers have to be made
+    The document herein contains details and illustrations from 13 application views in total, but certain disclaimers have to be made
     regarding the accuracy of these illustrations.
     LabConnect is planned to be a web application, built with established modern web design paradigms in mind. However, web pages,
     particularly those that strive to be designed responsively for the sake of usability on a distinct range of devices, are
@@ -136,26 +138,129 @@
     for the sake of having a guide to refer to when the necessity arises, rather than being developed for the impractical sake of being an accurate
     finalized version of the interface. We believe that this approach will prove to be more advantageous in the long term.
     
+    \pagebreak
+    
     \section{Map of the Application's Views}
     
     
-    % TODO
     
+    
+    % TODO Add a "sitemap" of pages here, as seen on the document on a.dayanik's website.
+    
+    
+    
+    
+    \pagebreak
     
     \section{User Interface Designs of Application Views}
     
     \subsection{User-agnostic Views}
     
     This subsection illustrates the pages of LabConnect that are intended to remain mostly unchanged regardless of the user's account level in the system
-    (i.e., student, TA, instructor).
+    (i.e., student, TA, instructor). Having certain user-agnostic views may help to make the interface easier to maintain, similar to how
+    reusing existing code is often advised.
+    
+    \subsubsection{Login}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{login}
+        \caption{Complete view of the login UI}
+        \label{fig:login_full}
+    \end{figure}
+    
+    The view seen above in Figure \ref{fig:login_full} is the page every guest user will see upon visiting the website.
+    On the left, a concise preview as to what the project is about, and is capable of, is provided.
+    The features are also listed in order to give the user the ability to understand the inner workings of the
+    system better, in case it may offer them a better experience utilizing the system later on.
+    On the right, a similarly concise login panel is provided, with all of the common and basic features
+    such as password recovery and a `Remember me" option. 
+    
+    It is noteworthy that the guest user is not given a choice to register a new account.
+    The reason is that, for the time being, the user database is planned to be modified by the administrators of the system directly.
+    The users are intended to login once they have been shared the credentials created for them.
+    
+    \pagebreak
     
     \subsubsection{Dashboard}
+    % Beware:
+    % This "Dashboard" section is pretty troublesome with its layout.
+    % It seems as if changing a word in here might have the potential of breaking things.
+    % If you don't absolutely have to, refrain from modifying anything within
+    % this section.
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{main_dashboard}
+        \caption{Complete view of the dashboard UI}
+        \label{fig:dashboard_full}
+    \end{figure}
+    
+    The view above in Figure \ref{fig:dashboard_full} is the page every logged in user will see as their `homepage".
+    The goal is to provide the user with a simple and tidy overview of things requiring their attention.
+    The main two panels, unique to the page, are located in the center column: A list of all assignments and a small
+    status panel at the top of the screen. The assignment list panel is the main navigation method into each individual
+    assignment. Certain details of each assignment are provided on this page, however, the user needs to click on an
+    assignment in order to visit a page with more details and features. To make it clear that the assignment items are
+    to be clicked on, an entrance symbol is provided on the rightmost side of the item.
+    The rest of the elements visible on this page are recurrent throughout most, if not all, of the other pages.
+    As such, their significance and properties will be elaborated on in the following paragraph.
+    
+    \begin{wrapfigure}[15]{r}{0.34\textwidth}
+        \centering
+        \vspace{-15pt}
+        \includegraphics[width=0.34\textwidth]{navbar_short}
+        \caption{Navigation bar, shortened for illustration purposes}
+        \label{fig:navbar_short}
+    \end{wrapfigure}
+    
+    The navigation bar (Figure \ref{fig:navbar_short}) is the tool to be used to navigate
+    anywhere on the application, as well as to show the user their current location. The bar shows brief information regarding
+    their assigned TA and instructor, continued by a list of navigation options. Located at the very bottom of the list is two
+    options for logging out and reaching the settings, the latter of which is not defined clearly as of yet. As such, the settings
+    page is planned to be used should the need arise during the development process. The part on the bar highlighted in red is 
+    a reserved space to display the queue list of a live session in cases where the user is traversing pages other than the assignment page
+    where the main queue list is located. By displaying a persistent queue list this way, the user experience is made more flexible as
+    the user does not necessarily have to constrain themselves to staying on the assignment page. Also, though the space in the figure
+    is quite short, this is only for the purpose of illustration, and the true version of the persistent queue box is much more spacious.
+    
+    \begin{wrapfigure}{l}{0.46\textwidth}
+        \centering
+        \vspace{-15pt}
+        \includegraphics[width=0.46\textwidth]{messages_panel}
+        \caption{Messages mini-panel}
+        \label{fig:messages_panel}
+    \end{wrapfigure}
+    
+    The messages panel (Figure \ref{fig:messages_panel}) serves the purpose of showing the user a brief outline of their unread messages
+    without having to visit the full messages page. The user can click on any of the messages shown, or the right-pointing arrows on the top right,
+    in order to visit their full messages page, where they can read and respond to messages.
+    The calendar panel (located under the messages panel, see Figure \ref{fig:dashboard_full}) was not added in detailed manner
+    to the design prototypes for the sake of simplicity.
+    However, very plainly, its purpose is to show the user their assignment due dates visually by marking the days with due dates. 
+    It does not have any advanced capabilities at all, and is not exactly intended to be interacted with.
+    
+    \pagebreak
+    % After this point, you don't need to be worried about breaking the "Dashboard" section.
     
     \subsubsection{Messages}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{messages}
+        \caption{Complete view of the messages UI}
+        \label{fig:messages_full}
+    \end{figure}
+    
+    
+    
+    
+    % TODO Write some details for the messages page.
+    
+    
+    
+    
+    \pagebreak
     
     
     \subsection{Student-specific Views}
@@ -164,23 +269,113 @@
     
     \subsubsection{Assignment Details}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{student_assignment_details}
+        \caption{Complete view of the assignment details UI from a student's perspective}
+        \label{fig:student_assignment_details_full}
+    \end{figure}
+
+    
+    
+    
+    % TODO Write some details for the assignment details page (student perspective)
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Assignment Submission}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{student_assignment_submission}
+        \caption{Complete view of the assignment submission UI from a student's perspective}
+        \label{fig:student_assignment_submission_full}
+    \end{figure}
+
+    
+    
+    
+    
+    
+    % TODO Write some details for the assignment submission "popup" (student perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Analysis}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{student_analysis}
+        \caption{Complete view of the analysis UI from a student's perspective}
+        \label{fig:student_analysis_full}
+    \end{figure}
+    
+    
+    
+    
+    
+    % TODO Write some details for the analysis page (student perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Announcements}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{student_announcements}
+        \caption{Complete view of the announcements UI from a student's perspective}
+        \label{fig:student_announcements_full}
+    \end{figure}
+    
+    
+    
+    
+    
+    % TODO Write some details for the announcements page (student perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Notes}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{student_notes}
+        \caption{Complete view of the notes UI from a student's perspective}
+        \label{fig:student_notes_full}
+    \end{figure}
+    
+    
+    
+    
+    
+    
+    % TODO Write some details for the "my notes" page (student perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     
     \subsection{TA-specific Views}
@@ -189,11 +384,50 @@
     
     \subsubsection{Assignment Submission}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{ta_assignment_submission}
+        \caption{Complete view of the assignment submission UI from a TA's perspective}
+        \label{fig:student_assignment_submission_full}
+    \end{figure}
+    
+    
+    
+    
+    
+    
+    
+    % TODO Write some details for the assignment submission "popup" (TA perspective)
+    
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Ongoing Live Session}
+     
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{ta_live_session}
+        \caption{Complete view of the live session UI from a TA's perspective}
+        \label{fig:ta_live_session_full}
+    \end{figure}
     
-    % TODO
+
+    
+    
+    
+    % TODO Write some details for the live session page (TA perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     
     \subsection{Instructor-specific Views}
@@ -201,17 +435,74 @@
     This subsection illustrates the pages involved in the user experience of an instructor account.
     
     \subsubsection{Announcements}
+     
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{instructor_announcements}
+        \caption{Complete view of the announcements UI from an instructor's perspective}
+        \label{fig:instructor_announcements_full}
+    \end{figure}
     
-    % TODO
+
+    
+    
+    
+    
+    
+    % TODO Write some details for the announcements page (instructor perspective)
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Instructor Panel}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{instructor_admin_panel}
+        \caption{Complete view of the instructor panel UI from an instructor's perspective}
+        \label{fig:instructor_admin_panel_full}
+    \end{figure}
+    
+    
+    
+    
+    
+    
+    % TODO Write some details for the instructor panel (instructor perspective)
+    
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \subsubsection{Analysis}
     
-    % TODO
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{instructor_analysis}
+        \caption{Complete view of the analysis UI from an instructor's perspective}
+        \label{fig:instructor_analysis_full}
+    \end{figure}
     
+    
+    
+    
+    
+    
+    % TODO Write some details for the analysis page (instructor perspective)
+    
+    
+    
+    
+    
+    
+    \pagebreak
     
     \section{Final Remarks}
     
