@@ -272,18 +272,30 @@
         \caption{Complete view of the assignment details UI from a student's perspective}
         \label{fig:student_assignment_details_full}
     \end{figure}
-    
-    
-    
-    % TODO Write some details for the assignment details page (student perspective)
-    
-    
-    
-    
+
+    Once a student clicks on an assignment on the dashboard, the assignment details UI (Figure \ref{fig:student_assignment_details_full})
+    is loaded. This interface contains three main sections, which are (from top to bottom):
+
+    \begin{itemize}
+      \item The ``Submissions'' section, where a student can check the status of their previous submissions and add new ones if necessary.
+            The submissions are sorted based on the upload date. The student can view the upload date and grade for each submission,
+            along with the submission's filename and a summary of the unit test results below that. Students can access detailed
+            information about a submission by clicking the details button for that submission, which directs them to the
+            assignment submission UI (see section \ref{student_submission}). To the left of the submission name is a circle colored either red or
+            green, indicating the eligibility of the given submission for TA review. Buttons for adding a new submission, entering the
+            review queue and viewing the assignment instructions are placed above this list.
+      \item The ``Queue'' section, where the student can view the queue for their assigned TA if a live session is taking place. This section
+            contains a scrollable list of students in the queue. The student can view the names of the people waiting in line, along with their
+            place in the queue, their previous review count for this lab session and time elapsed since the given person joined the queue to get an idea
+            of the waiting times.
+      \item The ``Notes'' section, where the student can take personal notes about the given assignment. These notes can be accessed
+            after the labs by clicking ``My Notes'' in the side bar. This functionality can be used as a journal of sorts, which can
+            help the student keep track of subjects that they need to practice more.
+    \end{itemize}
     
     \pagebreak
     
-    \subsubsection{Assignment Submission}
+    \subsubsection{Assignment Submission} \label{student_submission}
     
     \begin{figure}[H]
         \centering
