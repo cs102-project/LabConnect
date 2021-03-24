@@ -378,7 +378,8 @@
         \caption{Complete view of the assignment submission UI from a TA's perspective}~\label{fig:ta_assignment_submission_full}
     \end{figure}
     
-    Whenever the user (in this case, teacher assistant) clicks on the specific assignment page, the assigned students and their submissions will be displayed and if the user clicks on any assignment,
+    Whenever the user (in this case, teacher assistant) clicks on the specific assignment page, the assigned students and their submissions will be displayed 
+    (the live session page [See ~\ref{ta_live_session}]) and if the user clicks on any assignment,
     an assignment submission details page will pop up (Figure~\ref{fig:ta_assignment_submission_full}). Whenever the user clicks on any document on this screen, the user will see the code itself with
     solarized (a popular workspace theme) inspired syntax highlighting along with the results and details of the unit test. Next to that screen, there is a feedback display where the user can see the old 
     (or current) feedback and edit the feedback. On the rightmost panel, details (such as creation date, last modification date, size) about the whole folder 
@@ -386,24 +387,20 @@
     Finally, at the end of the rightmost panel the grading screen can be seen, where the user can enter the grade of this assignment. 
     
     
-    
     \pagebreak
     
-    \subsubsection{Ongoing Live Session}
+    \subsubsection{Ongoing Live Session}~\label{ta_live_session}
      
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{ta_live_session}
         \caption{Complete view of the live session UI from a TA's perspective}~\label{fig:ta_live_session_full}
     \end{figure}
-    
 
-    
-    
-    
-    % TODO Write some details for the live session page (TA perspective)
-    
-    
+    On the live session page (Figure \ref{fig:ta_live_session_full}), the teacher assistant can see the current status of the queue in the live session. At the top of the center column there are two buttons,
+    the proceed queue button will remove, then push a notification to the student who is at the top of the queue, notifying that the TA is waiting them for a feedback session. The second button at the top, 
+    see lab document button, will display the lab prompt document. On the center column, the TA can see every assigned student who has submitted the work and is waiting in the queue. Finally, whenever TA clicks the see 
+    student details button, the assignment submission page will open (Figure \ref{fig:ta_assignment_submission_full}).
     
     
     
@@ -438,16 +435,10 @@
         \caption{Complete view of the instructor panel UI from an instructor's perspective}~\label{fig:instructor_admin_panel_full}
     \end{figure}
     
-    
-    
-    
-    
-    
-    % TODO Write some details for the instructor panel (instructor perspective)
-    
-    
-    
-    
+    In the instructor panel (Figure \ref{fig:instructor_admin_panel_full}), instructor can upload various assignments. In the center item instructor can edit the assignments name, description,
+    assignment prompt (details) document, test classes (which will be used in unit tests) and other various assignment options. On the last section of center item, instructor can specify the course section
+    (which is going to receive the assignment), can determine the assignment deadline, late submission date and the live session. Finally, instructor can also set the assignment type and the unit tests 
+    that are going to be applied.
     
     
     
