@@ -247,9 +247,9 @@
         \label{fig:messages_full}
     \end{figure}
     
-    Students, instructors and teacher assistants can send each other messages from the messages tab (Figure~\ref{fig:messages_full}). By the overall design messages tab is fairly easy to use and
-    self-explanatory. On the right hand side there is a contacts view which the registered contacts, contacts's online status and a small poriton of the last message is displayed.
-    The conversation screen is displayed in the center item. Moreover, messages are displayed with the timestamp of the sending time and respondent's profile picture. 
+    Students, instructors and teacher assistants can send each other messages from the messages page (Figure~\ref{fig:messages_full}). The overall design of the messages page is fairly easy to use and
+    self-explanatory. On the right hand side, there is a contacts view where the registered contacts, contact's online status and a small portion of the last message is displayed.
+    The conversation panel is displayed on the center column. Moreover, messages are displayed alongside the time stamp of the sending time and respondent's profile picture. 
     
     
     \pagebreak
@@ -297,11 +297,11 @@
         \caption{Complete view of the assignment submission UI from a student's perspective}~\label{fig:student_assignment_submission_full}
     \end{figure}
 
-    On this screen (Figure~\ref{fig:student_assignment_submission_full}), students can browse the files they have uploaded to the system as in a file explorer.
-    After selecting the reladted file at the top of the window, three different sections parts will appear below: the preview of the code contained in the file itself, 
+    On this page (Figure~\ref{fig:student_assignment_submission_full}), students can browse the files they have uploaded to the system as in a file explorer.
+    After selecting the related file at the top of the window, three different sections will appear below; the preview of the code contained in the file itself, 
     the outputs of the unit tests, and the TA's feedback to the file. Thanks to the code preview, students will be able to jump directly from the feedback 
-    to the part or line the TA refers to. In the area where the output of the unit tests is available, students will be able to see which part of the code does not 
-    work as desired and start to work on it immediately. Since TA feedback is clearly indicated on the same screen, students will be able to access the feedback they 
+    to the lines the TA refers to. In the section where the output of the unit tests is available, students will be able to see the part of the code not 
+    working as desired, after which they can start to work on it immediately. Since TA feedback is clearly indicated on the same screen, students will be able to access the feedback they 
     receive for each file in a systematic and organized way.
 
     \pagebreak
@@ -314,11 +314,11 @@
         \caption{Complete view of the analysis UI from a student's perspective}~\label{fig:student_analysis_full}
     \end{figure}
     
-    In the analysis tab (Figure~\ref{fig:student_analysis_full}). Students can see their individual performance mainly about the lab, assignments and homework.
-    The performance criteria that is displayed is overview of last assignments as graph (in the graph the averages that are lower than the 
+    In the analysis page (Figure~\ref{fig:student_analysis_full}). Students can see their individual performance mainly on the assignments.
+    The performance criteria that is displayed is an overview of recent assignments as a graph (in the graph, the averages that are lower than the 
     pre-determined target will be indicated by another color), their documentation (Javadocs), compatibility with conventions and the style 
-    (compatibility with course or other specific guidelines) as triangle chart and finally average success at unit testing (how often they 
-    get stuck with standart and edge case testing [by percantage]).
+    (compatibility with course or other specific guidelines) as a triangle chart and finally average success at unit testing (how often they 
+    get stuck with standard and edge case testing [by percentage]).
 
     
     \pagebreak
@@ -331,9 +331,10 @@
         \caption{Complete view of the announcements UI from a student's perspective}~\label{fig:student_announcements_full}
     \end{figure}
     
-    In the announcements tab (Figure~\ref{fig:student_announcements_full}) students can see the course related announcements which is posted by instructor. This tab is working simultanously
-    with the bell icon at the top of the screen. Whenever a new announcement is made the bell icon will change in order to indicate the arrival of the 
-    new announcement. When students click on the individual announcement the details of the announcement will be displayed as plain text.
+    In the announcements page (Figure~\ref{fig:student_announcements_full}) students can see the course related announcements posted by the instructor. 
+    This page works in coordination with the bell icon at the top right of the center column. 
+    Whenever a new announcement is made, the bell icon will change in order to notify the addition of the 
+    new announcement. When students click on an individual announcement, the details of the announcement will be displayed as plain text.
     
     
     \pagebreak
@@ -346,15 +347,15 @@
         \caption{Complete view of the notes UI from a student's perspective}~\label{fig:student_notes_full}
     \end{figure}
 
-    During code review taken by the TA, or a group work that is being held in the lab itself,
-    the student would like a place for taking individual notes. These notes can be about their
-    mistakes on the lab that is pointed out by the TA, or it can be about the project that the 
+    During a code review by the TA, or a group work assignment that is being held in the lab session itself,
+    the student might need a place for taking individual notes. These notes can be related to their
+    mistakes on the lab as pointed out by the TA, or it can be about the assignment that the 
     students are doing in groups. LabConnect supplies students with a proper place where students
     can take notes in an organised manner and they have the chance to save them and take a look
     at them afterwards if needed. This enables them to have a proper way of organising their ideas
-    and they prevent them from missing out the things the Ta mentioned or suggested about. In the
-    program, the notes are organised in a way that they are distributed and saved based on the 
-    assignment or the project itself. This way, their notes are well organised into subcategories
+    and preventing them from missing out on the things the TA mentioned or suggested. On the
+    page, the notes are organised in a way such that they are distributed and saved based on individual 
+    assignments. This way, their notes are well organised into subcategories
     based on the subject. As seen in figure~\ref{fig:student_notes_full}, this interface contains
     two sections. The top section contains a list of assignments. The grade received for each
     assignment and the deadline of said assignment are visible for each list item. This allows the
@@ -377,12 +378,12 @@
         \caption{Complete view of the assignment submission UI from a TA's perspective}~\label{fig:ta_assignment_submission_full}
     \end{figure}
     
-    Whenever user (in this case teacher assistants) clicks on the specific assignment page, the assigned students and their submissions will be displayed and if user click on any assignment
-    an assignment submission details page will popup (Figure~\ref{fig:ta_assignment_submission_full}). Whenever user clicks on any document on this screen, user will see the code itself with
-    solarized inspired syntax highlighting along with the results and details of the unit test. Next to that screen there is a feedback display that user can see the old 
-    (or current) feedback and edit the feedback. On the farmost panel, details about (such as creation date, last modification date, size) the whole folder 
-    (or archive file) can be seen. At the bottom of the informations part, the general status (which is grade, feedback and unit test status) about the assignment can be seen. 
-    Finally, at the end of the farmost right panel the grading screen can be seen, which user can enter the grade of this assignment. 
+    Whenever the user (in this case, teacher assistant) clicks on the specific assignment page, the assigned students and their submissions will be displayed and if the user clicks on any assignment,
+    an assignment submission details page will pop up (Figure~\ref{fig:ta_assignment_submission_full}). Whenever the user clicks on any document on this screen, the user will see the code itself with
+    solarized (a popular workspace theme) inspired syntax highlighting along with the results and details of the unit test. Next to that screen, there is a feedback display where the user can see the old 
+    (or current) feedback and edit the feedback. On the rightmost panel, details (such as creation date, last modification date, size) about the whole folder 
+    (or archive file) can be seen. At the bottom of the information part, the general status (that is; grade, feedback and unit test status) about the assignment can be seen. 
+    Finally, at the end of the rightmost panel the grading screen can be seen, where the user can enter the grade of this assignment. 
     
     
     
@@ -422,8 +423,8 @@
         \caption{Complete view of the announcements UI from an instructor's perspective}~\label{fig:instructor_announcements_full}
     \end{figure}
         
-    In the announcement page (Figure~\ref{fig:instructor_announcements_full}), instructor can compose an announcement in the black message box. After composing instructor will click to send
-    in order to select the sections which will receive the announcement. Also, similar to student view of announcements page, instructor can see old announcements on the center item.
+    On the announcement page (Figure~\ref{fig:instructor_announcements_full}), the instructor can compose an announcement in the black message box. After composing, the instructor will click on send
+    in order to select the sections which will receive the announcement. Also, similar to the student view of the announcements page, the instructor can see old announcements on the center column.
     
     
     
@@ -460,11 +461,11 @@
         \caption{Complete view of the analysis UI from an instructor's perspective}~\label{fig:instructor_analysis_full}
     \end{figure}
 
-    In the analysis tab (Figure~\ref{fig:instructor_analysis_full}) instructors can view the performance average of all sections. The performance criterias are similar with the ones that displayed in the student view.
-    On the left corner of the center item, the average grades (average of all sections) of assignments are displayed as graph. In the graph the averages that are lower than the 
-    pre-determined target will be indicated by another color. On the right corner the average skills of students which is based on documentation (Javadocs), compatibility with 
-    conventions and the style (compatibility with course or other specific guidelines) as a triangle chart. Finally, on the left end corner of the center item, the average 
-    success at unit tests of every section is displayed solely. 
+    On the analysis page (Figure~\ref{fig:instructor_analysis_full}) instructors can view the average performance of all sections. The performance criteria are similar to the ones displayed in the student view.
+    On the top left corner of the center column, the average grades (of all sections) of assignments are displayed as a graph. In the graph, the averages that are lower than the 
+    pre-determined target will be indicated by another color. On the right, the average skills of students which is based on documentation (Javadocs), compatibility with 
+    conventions and the style (compatibility with course or other specific guidelines) is visualized as a triangle chart. Finally, on the bottom left corner of the center column, the average 
+    success at unit tests of every section is displayed individually. 
     
     
     \pagebreak
@@ -489,8 +490,6 @@
     Alas, we have determined it most sensible to put our efforts into developing a dark-mode interface, though we may choose to add the option of switching
     to a light-mode theme in the later stages of the project's development.
 
-    % Not sure if a bibliography will be necessary for this report.
-    % Remove later if there's no need.
-    \pagebreak
 
 \end{document}
+
