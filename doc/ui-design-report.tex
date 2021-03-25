@@ -142,7 +142,23 @@
     
     \section{Map of the Application's Views}
     
-    
+    \subsection{Figure Outline}
+    \begin{itemize}
+        \item Login Screen [\ref{fig:login_full}]
+        \item Dashboard [\ref{fig:dashboard_full}]
+        \item Messages Page [\ref{fig:messages_full}]
+        \item Assignments Deatils (Student View) [\ref{fig:student_assignment_details_full}]
+        \item Assignment Submission (Student View) [\ref{fig:student_assignment_submission_full}]
+        \item Analysis (Student View) [\ref{fig:student_analysis_full}]
+        \item Announcements (Student View) [\ref{fig:student_announcements_full}]
+        \item Personal Notes (Student View) [\ref{fig:student_notes_full}]
+        \item Assignment Submission (TA View) [\ref{fig:ta_assignment_submission_full}]
+        \item Live Session (TA View) [\ref{fig:ta_live_session_full}]
+        \item Announcements (Instructor View) [\ref{fig:instructor_announcements_full}]
+        \item Instructor Panel [\ref{fig:instructor_admin_panel_full}]
+        \item Analysis (Instructor View) [\ref{fig:instructor_analysis_full}]
+    \end{itemize}
+    \subsection{Sitemap}
     
     
     % TODO Add a "sitemap" of pages here, as seen on the document on a.dayanik's website.
@@ -165,11 +181,10 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{login}
-        \caption{Complete view of the login UI}
-        \label{fig:login_full}
+        \caption{Complete view of the login UI}~\label{fig:login_full}
     \end{figure}
     
-    The view seen above in Figure \ref{fig:login_full} is the page every guest user will see upon visiting the website.
+    The view seen above in Figure~\ref{fig:login_full} is the page every guest user will see upon visiting the website.
     On the left, a concise preview as to what the project is about, and is capable of, is provided.
     The features are also listed in order to give the user the ability to understand the inner workings of the
     system better, in case it may offer them a better experience utilizing the system later on.
@@ -192,11 +207,10 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{main_dashboard}
-        \caption{Complete view of the dashboard UI}
-        \label{fig:dashboard_full}
+        \caption{Complete view of the dashboard UI}~\label{fig:dashboard_full}
     \end{figure}
     
-    The view above in Figure \ref{fig:dashboard_full} is the page every logged in user will see as their ``homepage''.
+    The view above in Figure~\ref{fig:dashboard_full} is the page every logged in user will see as their ``homepage''.
     The goal is to provide the user with a simple and tidy overview of things requiring their attention.
     The main two panels, unique to the page, are located in the center column: A list of all assignments and a small
     status panel at the top of the screen. The assignment list panel is the main navigation method into each individual
@@ -210,11 +224,10 @@
         \centering
         \vspace{-15pt}
         \includegraphics[width=0.34\textwidth]{navbar_short}
-        \caption{Navigation bar, shortened for illustration purposes}
-        \label{fig:navbar_short}
+        \caption{Navigation bar, shortened for illustration purposes}~\label{fig:navbar_short}
     \end{wrapfigure}
     
-    The navigation bar (Figure \ref{fig:navbar_short}) is the tool to be used to navigate
+    The navigation bar (Figure~\ref{fig:navbar_short}) is the tool to be used to navigate
     anywhere on the application, as well as to show the user their current location. The bar shows brief information regarding
     their assigned TA and instructor, continued by a list of navigation options. Located at the very bottom of the list is two
     options for logging out and reaching the settings, the latter of which is not defined clearly as of yet. As such, the settings
@@ -224,25 +237,23 @@
     the user does not necessarily have to constrain themselves to staying on the assignment page. Also, though the space in the figure
     is quite short, this is only for the purpose of illustration, and the true version of the persistent queue box is much more spacious.
     
-    \begin{wrapfigure}{l}{0.46\textwidth}
+    \begin{wrapfigure}[15]{l}{0.46\textwidth}
         \centering
         \vspace{-15pt}
         \includegraphics[width=0.46\textwidth]{messages_panel}
-        \caption{Messages mini-panel}
-        \label{fig:messages_panel}
+        \caption{Messages mini-panel}~\label{fig:messages_panel}
     \end{wrapfigure}
     
-    The messages panel (Figure \ref{fig:messages_panel}) serves the purpose of showing the user a brief outline of their unread messages
+    The messages panel (Figure~\ref{fig:messages_panel}) serves the purpose of showing the user a brief outline of their unread messages
     without having to visit the full messages page. The user can click on any of the messages shown, or the right-pointing arrows on the top right,
     in order to visit their full messages page, where they can read and respond to messages.
-    The calendar panel (located under the messages panel, see Figure \ref{fig:dashboard_full}) was not added in detailed manner
+    The calendar panel (located under the messages panel, see Figure~\ref{fig:dashboard_full}) was not added in detailed manner
     to the design prototypes for the sake of simplicity.
     However, very plainly, its purpose is to show the user their assignment due dates visually by marking the days with due dates. 
     It does not have any advanced capabilities at all, and is not exactly intended to be interacted with.
     
     \pagebreak
     % After this point, you don't need to be worried about breaking the "Dashboard" section.
-    
     \subsubsection{Messages}
     
     \begin{figure}[H]
@@ -252,9 +263,9 @@
         \label{fig:messages_full}
     \end{figure}
     
-    Students, instructors and teacher assistants can send each other messages from the messages tab (Figure \ref{fig:messages_full}). By the overall design messages tab is fairly easy to use and
-    self-explanatory. On the right hand side there is a contacts view which the registered contacts, contacts's online status and a small poriton of the last message is displayed.
-    The conversation screen is displayed in the center item. Moreover, messages are displayed with the timestamp of the sending time and respondent's profile picture. 
+    Students, instructors and teacher assistants can send each other messages from the messages page (Figure~\ref{fig:messages_full}). The overall design of the messages page is fairly easy to use and
+    self-explanatory. On the right hand side, there is a contacts view where the registered contacts, contact's online status and a small portion of the last message is displayed.
+    The conversation panel is displayed on the center column. Moreover, messages are displayed alongside the time stamp of the sending time and respondent's profile picture. 
     
     
     \pagebreak
@@ -269,11 +280,10 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{student_assignment_details}
-        \caption{Complete view of the assignment details UI from a student's perspective}
-        \label{fig:student_assignment_details_full}
+        \caption{Complete view of the assignment details UI from a student's perspective}~\label{fig:student_assignment_details_full}
     \end{figure}
 
-    Once a student clicks on an assignment on the dashboard, the assignment details UI (Figure \ref{fig:student_assignment_details_full})
+    Once a student clicks on an assignment on the dashboard, the assignment details UI (Figure~\ref{fig:student_assignment_details_full})
     is loaded. This interface contains three main sections, which are (from top to bottom):
 
     \begin{itemize}
@@ -281,7 +291,7 @@
             The submissions are sorted based on the upload date. The student can view the upload date and grade for each submission,
             along with the submission's filename and a summary of the unit test results below that. Students can access detailed
             information about a submission by clicking the details button for that submission, which directs them to the
-            assignment submission UI (see section \ref{student_submission}). To the left of the submission name is a circle colored either red or
+            assignment submission UI (see Section~\ref{student_submission}). To the left of the submission name is a circle colored either red or
             green, indicating the eligibility of the given submission for TA review. Buttons for adding a new submission, entering the
             review queue and viewing the assignment instructions are placed above this list.
       \item The ``Queue'' section, where the student can view the queue for their assigned TA if a live session is taking place. This section
@@ -295,20 +305,19 @@
     
     \pagebreak
     
-    \subsubsection{Assignment Submission} \label{student_submission}
+    \subsubsection{Assignment Submission}~\label{student_submission}
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{student_assignment_submission}
-        \caption{Complete view of the assignment submission UI from a student's perspective}
-        \label{fig:student_assignment_submission_full}
+        \caption{Complete view of the assignment submission UI from a student's perspective}~\label{fig:student_assignment_submission_full}
     \end{figure}
 
-    On this screen (Figure \ref{fig:student_assignment_submission_full}), students can browse the files they have uploaded to the system as in a file explorer. 
-    After selecting the reladted file at the top of the window, three different sections parts will appear below: the preview of the code contained in the file itself, 
+    On this page (Figure~\ref{fig:student_assignment_submission_full}), students can browse the files they have uploaded to the system as in a file explorer.
+    After selecting the related file at the top of the window, three different sections will appear below; the preview of the code contained in the file itself, 
     the outputs of the unit tests, and the TA's feedback to the file. Thanks to the code preview, students will be able to jump directly from the feedback 
-    to the part or line the TA refers to. In the area where the output of the unit tests is available, students will be able to see which part of the code does not 
-    work as desired and start to work on it immediately. Since TA feedback is clearly indicated on the same screen, students will be able to access the feedback they 
+    to the lines the TA refers to. In the section where the output of the unit tests is available, students will be able to see the part of the code not 
+    working as desired, after which they can start to work on it immediately. Since TA feedback is clearly indicated on the same screen, students will be able to access the feedback they 
     receive for each file in a systematic and organized way.
 
     \pagebreak
@@ -318,15 +327,14 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{student_analysis}
-        \caption{Complete view of the analysis UI from a student's perspective}
-        \label{fig:student_analysis_full}
+        \caption{Complete view of the analysis UI from a student's perspective}~\label{fig:student_analysis_full}
     \end{figure}
     
-    In the analysis tab (Figure \ref{fig:student_analysis_full}). Students can see their individual performance mainly about the lab. assignments and homework.
-    The performance criteria that is displayed is overview of last assignments as graph (in the graph the averages that are lower than the 
+    In the analysis page (Figure~\ref{fig:student_analysis_full}). Students can see their individual performance mainly on the assignments.
+    The performance criteria that is displayed is an overview of recent assignments as a graph (in the graph, the averages that are lower than the 
     pre-determined target will be indicated by another color), their documentation (Javadocs), compatibility with conventions and the style 
-    (compatibility with course or other specific guidelines) as triangle chart and finally average success at unit testing (how often they 
-    get stuck with standart and edge case testing [by percantage]).
+    (compatibility with course or other specific guidelines) as a triangle chart and finally average success at unit testing (how often they 
+    get stuck with standard and edge case testing [by percentage]).
 
     
     \pagebreak
@@ -336,13 +344,13 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{student_announcements}
-        \caption{Complete view of the announcements UI from a student's perspective}
-        \label{fig:student_announcements_full}
+        \caption{Complete view of the announcements UI from a student's perspective}~\label{fig:student_announcements_full}
     \end{figure}
     
-    In the announcements tab (Figure \ref{fig:student_announcements_full}) students can see the course related announcements which is posted by instructor. This tab is working simultanously
-    with the bell icon at the top of the screen. Whenever a new announcement is made the bell icon will change in order to indicate the arrival of the 
-    new announcement. When students click on the individual announcement the details of the announcement will be displayed as plain text.
+    In the announcements page (Figure~\ref{fig:student_announcements_full}) students can see the course related announcements posted by the instructor. 
+    This page works in coordination with the bell icon at the top right of the center column. 
+    Whenever a new announcement is made, the bell icon will change in order to notify the addition of the 
+    new announcement. When students click on an individual announcement, the details of the announcement will be displayed as plain text.
     
     
     \pagebreak
@@ -352,30 +360,25 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{student_notes}
-        \caption{Complete view of the notes UI from a student's perspective}
-        \label{fig:student_notes_full}
+        \caption{Complete view of the notes UI from a student's perspective}~\label{fig:student_notes_full}
     \end{figure}
-    
-    
-    
-    
-    
-    
-    During code review taken by the TA, or a group work that is being held in the lab itself,
-    the student would like a place for taking individual notes. These notes can be about their
-    mistakes on the lab that is pointed out by the TA, or it can be about the project that the 
+
+    During a code review by the TA, or a group work assignment that is being held in the lab session itself,
+    the student might need a place for taking individual notes. These notes can be related to their
+    mistakes on the lab as pointed out by the TA, or it can be about the assignment that the 
     students are doing in groups. LabConnect supplies students with a proper place where students
     can take notes in an organised manner and they have the chance to save them and take a look
     at them afterwards if needed. This enables them to have a proper way of organising their ideas
-    and they prevent them from missing out the things the Ta mentioned or suggested about. In the
-    program, the notes are organised in a way that they are distributed and saved based on the 
-    assignment or the project itself. This way, their notes are well organised into subcategories
-    based on the subject.
-    
-    
-    
-    
-    
+    and preventing them from missing out on the things the TA mentioned or suggested. On the
+    page, the notes are organised in a way such that they are distributed and saved based on individual 
+    assignments. This way, their notes are well organised into subcategories
+    based on the subject. As seen in figure~\ref{fig:student_notes_full}, this interface contains
+    two sections. The top section contains a list of assignments. The grade received for each
+    assignment and the deadline of said assignment are visible for each list item. This allows the
+    student to check the notes for assignments that received a grade of 80/100, for example. Once
+    the student clicks on the ``View'' button for the desired assignment, the notes for that assignment
+    are loaded to the bottom part of the screen.
+
     \pagebreak
     
     
@@ -388,53 +391,32 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{ta_assignment_submission}
-        \caption{Complete view of the assignment submission UI from a TA's perspective}
-        \label{fig:ta_assignment_submission_full}
+        \caption{Complete view of the assignment submission UI from a TA's perspective}~\label{fig:ta_assignment_submission_full}
     \end{figure}
     
-    
-    
-    
-    
-    
-    
-    % TODO Write some details for the assignment submission "popup" (TA perspective)
-    After the student has submitted their files to LabConnect, these files are available
-    for the TAs by this tab. On top, the submitted files are seen and TA can choose between
-    these files to browse through the source code itself on the left side of the panel, they
-    can investigate on the results of the unit tests on the middle right of the screen, and
-    they can comment on the individual works on the very right part of the page. This panel has
-    everything the TA needs to look at and comment on the work done by the student. On the left,
-    the TA is supplied with some information where they can do a quick check on the work. 
-    For example, they can see the submission time of the file immidiately without leaving the
-    scene, they can see whether all unit tests are passed for this work, or they can see whether
-    this project is graded or not. If they haven't give any grades for the work (which is displayed
-    on the right), they can immidately do this on the part bottom right. This interface saves 
-    time for the TA since everything is integrated with each other so everything can be handled in
-    the same page.
-    
-    
-    
+    Whenever the user (in this case, teacher assistant) clicks on the specific assignment page, the assigned students and their submissions will be displayed 
+    (the live session page [See ~\ref{ta_live_session}]) and if the user clicks on any assignment,
+    an assignment submission details page will pop up (Figure~\ref{fig:ta_assignment_submission_full}). Whenever the user clicks on any document on this screen, the user will see the code itself with
+    solarized (a popular workspace theme) inspired syntax highlighting along with the results and details of the unit test. Next to that screen, there is a feedback display where the user can see the old 
+    (or current) feedback and edit the feedback. On the rightmost panel, details (such as creation date, last modification date, size) about the whole folder 
+    (or archive file) can be seen. At the bottom of the information part, the general status (that is; grade, feedback and unit test status) about the assignment can be seen. 
+    Finally, at the end of the rightmost panel the grading screen can be seen, where the user can enter the grade of this assignment. 
     
     
     \pagebreak
     
-    \subsubsection{Ongoing Live Session}
+    \subsubsection{Ongoing Live Session}~\label{ta_live_session}
      
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{ta_live_session}
-        \caption{Complete view of the live session UI from a TA's perspective}
-        \label{fig:ta_live_session_full}
+        \caption{Complete view of the live session UI from a TA's perspective}~\label{fig:ta_live_session_full}
     \end{figure}
-    
 
-    
-    
-    
-    % TODO Write some details for the live session page (TA perspective)
-    
-    
+    On the live session page (Figure \ref{fig:ta_live_session_full}), the teacher assistant can see the current status of the queue in the live session. At the top of the center column there are two buttons,
+    the proceed queue button will remove, then push a notification to the student who is at the top of the queue, notifying that the TA is waiting them for a feedback session. The second button at the top, 
+    see lab document button, will display the lab prompt document. On the center column, the TA can see every assigned student who has submitted the work and is waiting in the queue. Finally, whenever TA clicks the see 
+    student details button, the assignment submission page will open (Figure \ref{fig:ta_assignment_submission_full}).
     
     
     
@@ -451,22 +433,11 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{instructor_announcements}
-        \caption{Complete view of the announcements UI from an instructor's perspective}
-        \label{fig:instructor_announcements_full}
+        \caption{Complete view of the announcements UI from an instructor's perspective}~\label{fig:instructor_announcements_full}
     \end{figure}
-    
-
-    
-    
-    
-    
-    
-    % TODO Write some details for the announcements page (instructor perspective)
-    The announcments page provides the instructor with a basic outline of the previous
-    announcements and it enables the instructor to add a new announcement immidately on top.   
-    They can easily type in the assignment and submit.
-    
-    
+        
+    On the announcement page (Figure~\ref{fig:instructor_announcements_full}), the instructor can compose an announcement in the black message box. After composing, the instructor will click on send
+    in order to select the sections which will receive the announcement. Also, similar to the student view of the announcements page, the instructor can see old announcements on the center column.
     
     
     
@@ -477,25 +448,13 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{instructor_admin_panel}
-        \caption{Complete view of the instructor panel UI from an instructor's perspective}
-        \label{fig:instructor_admin_panel_full}
+        \caption{Complete view of the instructor panel UI from an instructor's perspective}~\label{fig:instructor_admin_panel_full}
     \end{figure}
     
-    
-    
-    
-    
-    
-    % TODO Write some details for the instructor panel (instructor perspective)
-    The instructor panel is where the instructor uploads the assignment itself and the unit tests
-    that they want to apply for those. After uploading the files, they can further configure the
-    settings for that particular submission. For example, they can edit the deadline of the project
-    by selecting the assignment deadline button and typing in the deadline on the panel that opens 
-    on click. After the configurations are made for the submission, they can decide to submit this
-    for their students clicking add assignment button.
-    
-    
-    
+    In the instructor panel (Figure \ref{fig:instructor_admin_panel_full}), instructor can upload various assignments. In the center item instructor can edit the assignments name, description,
+    assignment prompt (details) document, test classes (which will be used in unit tests) and other various assignment options. On the last section of center item, instructor can specify the course section
+    (which is going to receive the assignment), can determine the assignment deadline, late submission date and the live session. Finally, instructor can also set the assignment type and the unit tests 
+    that are going to be applied.
     
     
     
@@ -506,15 +465,14 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{instructor_analysis}
-        \caption{Complete view of the analysis UI from an instructor's perspective}
-        \label{fig:instructor_analysis_full}
+        \caption{Complete view of the analysis UI from an instructor's perspective}~\label{fig:instructor_analysis_full}
     \end{figure}
 
-    In the analysis tab (Figure \ref{fig:instructor_analysis_full}) instructors can view the performance average of all sections. The performance criterias are similar with the ones that displayed in the student view.
-    On the left corner of the center item, the average grades (average of all sections) of assignments are displayed as graph. In the graph the averages that are lower than the 
-    pre-determined target will be indicated by another color. On the right corner the average skills of students which is based on documentation (Javadocs), compatibility with 
-    conventions and the style (compatibility with course or other specific guidelines) as a triangle chart. Finally, on the left end corner of the center item, the average 
-    success at unit tests of every section is displayed solely. 
+    On the analysis page (Figure~\ref{fig:instructor_analysis_full}) instructors can view the average performance of all sections. The performance criteria are similar to the ones displayed in the student view.
+    On the top left corner of the center column, the average grades (of all sections) of assignments are displayed as a graph. In the graph, the averages that are lower than the 
+    pre-determined target will be indicated by another color. On the right, the average skills of students which is based on documentation (Javadocs), compatibility with 
+    conventions and the style (compatibility with course or other specific guidelines) is visualized as a triangle chart. Finally, on the bottom left corner of the center column, the average 
+    success at unit tests of every section is displayed individually. 
     
     
     \pagebreak
@@ -539,9 +497,6 @@
     Alas, we have determined it most sensible to put our efforts into developing a dark-mode interface, though we may choose to add the option of switching
     to a light-mode theme in the later stages of the project's development.
 
-    % Not sure if a bibliography will be necessary for this report.
-    % Remove later if there's no need.
-    \pagebreak
-    \printbibliography
 
 \end{document}
+
