@@ -19,5 +19,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: detailed-design-report.pdf
+          path: doc/detailed-design-report.pdf
           
