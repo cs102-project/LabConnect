@@ -1,5 +1,8 @@
 name: Build LaTeX document
-on: [push]
+on: 
+  push:
+    paths:
+    - "doc/**"
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -10,5 +13,11 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: |
-            ui-design-report.tex
+            detailed-design-report.tex
           working_directory: doc/
+      - name : Upload PDF Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: detailed-design-report.pdf
+          
