@@ -11,7 +11,7 @@
 % Image-related packages
 \usepackage{graphicx}
 \usepackage{float}
-\graphicspath{ {./detailed-design-diagram/} }
+\graphicspath{ {./detailed-design-diagrams/} }
 \usepackage[font=small,skip=5pt]{caption}
 
 % Setting margins
@@ -97,92 +97,117 @@
     
     \section{Introduction}
     
-    % TODO need to clean up the introduction, it's only a copy-paste for now...
-    
     LabConnect facilitates communication between students, TA's, tutors,
-    and instructors. In the background, it is mainly a web application
-    (If sensible/necessary, it may possibly be ported to Android) that aims 
-    to assist CS introductory courses in terms of organization and communication. 
+    and instructors. In the background, it is a web application
+    that aims to assist CS introductory courses in organization and communication. 
     Proposed ideas for features include priority queuing for TA zoom rooms among many other 
     enhancements to TA/instructor productivity. For example, those who have completed their labs 
-    can be tested using pre-defined (by TA or instructor) unit tests, if students pass the 
-    tests successfully then they will be ordered by the number of visits to TA 
-    in the same session, in order to decrease waiting times for the students 
-    who are waiting from the beginning, and to optimize the process in general. 
-    TA's can also use the system to see previous versions of each student's code 
-    in a more practical way, similar to real version control managers in spirit. 
-    The style guidelines put forth by the instructors can be enforced automatically by parsing
-    the student's sent code files. Much of the repetitive work that course
-    staff need to do can be reduced substantially by automated actions,
-    allowing TA's to allocate time for more hands-on help towards students.
-    The student experience can be improved further by adding helpful
-    features such as personal notes for students and so on.
-
-
-    
-    LabConnect is a developing project that aims to make education more productive for students,
-    and more efficient for teaching staff, among other benefits. The feature list compiled for the
-    sake of this goal includes items such as:
-    \begin{itemize}
-        \item Queueing system for live sessions to optimize wait times and student-TA communication.
-        \item Dashboard designed with a pragmatist mindset, to lessen confusion as much as viable.
-        \item Instructor panel where new assignments can be added with great flexibility.
-        \item Analysis view for students and teaching staff alike, to monitor course progress.
-        \item Announcements board where the teaching staff can reach out to students with ease.
-        \item Simple one-to-one messaging capability for the sake of light written communication.
-        \item Note-taking panel for students to take concise notes regarding individual assignments.
-        \item Detailed view of submission versions where students and the teaching staff can observe
-            automated testing results.
-    \end{itemize}
-
-    \pagebreak
+    can be tested using pre-defined (by TA or instructor) unit tests,  
+    and then placed into a queue to optimize the TA-student meeting arrangement process in general. 
+    Much of the repetitive work that course staff need to do can be reduced substantially by automated actions,
+    allowing TA's and tutors to allocate more time for more hands-on help towards students.
+    In summary, LabConnect is a developing project that aims to make education more productive for students,
+    and more efficient for teaching staff, above all.
     
     \section{System Overview}
     
     \subsection{Organisation \& Architecture}
     
+    Shown below is the diagram of the organization of LabConnect's architecture.
+    Users of varying roles interact with the interface displayed using the ReactJS library, which also makes
+    HTTP requests to the REST API powered by the Spring framework, over the internet.
+    The Spring framework acts mostly as the controller segment of the project, delivering data
+    that is obtained through model classes and their communication with the databases.
+    
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{tech-diagram}
-        \caption{Overlook of LabConnect's Organisation}~\label{fig:organisation-diagram}
+        \includegraphics[width=\textwidth]{organization}
+        \caption{Overview of LabConnect's Organisation}~\label{fig:organisation-diagram}
     \end{figure}
+    
+    \pagebreak
     
     \subsection{Technologies}
     
-    % TODO this subsection is almost ready on the github issue
-
+    \subsubsection{Back-end}
+    
+    \begin{itemize}
+        \item \textbf{Spring} - Framework to be used to power the REST API at the /api/ data endpoint.
+              All necessary data will be exposed at the API endpoint, but only with proper authentication.
+              Requests are only authorized accordingly with the user's account permission level.
+              The \textit{Spring Security} and \textit{Spring MVC} frameworks may also be taken advantage of.
+        \item \textbf{MongoDB} - To be used as persistent storage; account data, assignment data, etc.
+        \item \textbf{Redis} - To be used as short-term storage; user session, authentication, etc.
+    \end{itemize}
+    
+    \subsubsection{Front-end}
+    
+    \begin{itemize}
+        \item \textbf{SASS} - Useful preprocessor to write CSS more productively.
+        \item \textbf{ReactJS} - Will be used to construct a single-page-app user interface,
+              which will serve components according to the API call responses.
+    \end{itemize}
+    
+    \subsubsection{Build \& Utility Tools}
+    
+    \begin{itemize}
+        \item \textbf{Spring Boot} - May be used to simplify the development of Spring components.
+        \item \textbf{Maven} - Build automation tool, good for any medium to large scale project.
+        \item \textbf{Docker} - Facilitates the deployment of the project, and it may
+              also be viable to use \textit{docker-compose} to deploy separate containers
+              for databases and other components simultaneously.
+    \end{itemize}
+    
+    \subsubsection{Domain \& Host}
+    
+    \begin{itemize}
+        \item \textbf{Domain} - \textit{labconnect.me} is the proposed domain for the website.
+        \item \textbf{Hosting} - The project will most likely be run on either a container deployment service,
+              or a VPS service.
+    \end{itemize}
+    
     \pagebreak
 
     \section{Core Design Details}
     
-    Classes are designed with the consideration of keeping them cohesive, every class only handles one concept. 
+    Most of the data, being of persistent nature, is stored in a database. But the model classes
+    perform the necessary queries and subsequent actions to the data as necessary,
+    essentially grouping database queries logically.
+    In the class diagram below, the classes highlighted in red detail the assignment, blue detail the user account types,
+    green detail submission-related data specific to an assignment, and yellow provide features
+    for managing the live sessions.
 
-
-    \subsection{Class Diagram}
-    
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{ClassUML}
-        \caption{UML Class Diagram for LabConnect}~\label{fig:class-diagram}
+        \includegraphics[width=\textwidth]{class-diagram}
+        %\caption{UML Class Diagram for LabConnect}~\label{fig:class-diagram}
     \end{figure}
 
-   %\subsection{Sequence Diagram}
-    
-   \pagebreak
     
     \section{Task Assignment}
     
-    \underline{Model Implementation Assignment:}
-    \newline\newline Borga Haktan Bilen: Assignment, User, LiveSessionManager
-    \newline Vedat Eren Arıcan: Assginment, Instructor, Meetable 
-    \newline Berkan Şahin: Assignment, Tutor, UnitTest
-    \newline Berk Çakar: Assignment, TeachingAssistant, Attempt
-    \newline Alp Ertan: Assignment, Student, Submission, HomeworkAssignment, LabAssignment 
-    \newline\newline For the other parts of the implementation, we agreed on sharing those parts pairwise equally 
-    because of the project's size. We made this decision because one of the primary goal of our group is
-    learning new concepts and gaining experiences. Thus, it will not be even for other members of the group
-    who did not work on the part which involves new technologies.
+    The planned division of work for the model classes is as follows;
     
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.4}
+        \centering
+        \begin{tabular}{ p{0.25\textwidth} | p{0.6\textwidth} }
+            Borga Haktan Bilen & Assignment, User, LiveSessionManager \\ \hline
+            Vedat Eren Arıcan & Assignment, Instructor, Meetable \\ \hline
+            Berkan Şahin & Assignment, Tutor, UnitTest \\ \hline
+            Berk Çakar & Assignment, TeachingAssistant, Attempt \\ \hline
+            Alp Ertan & Assignment, Student, Submission, HomeworkAssignment, LabAssignment \\
+        \end{tabular}
+    \end{table}
     
-        
+    The division above is liable to change as necessary during the implementation stage.
+    As for the remaining work, we have decided to not limit anyone to work on a particular technology
+    involved in the project. This project is, above all, intended for us to learn new technologies
+    and gain experience for both teamwork and medium/large scale development. In which case, it works
+    against this goal to have clean-cut distinctions in task assignment. 
+    Theoretically, having all group members to strive to experience a variety of technologies should also ensure an even
+    partition of work. Lastly, note that the project proposed thus far is of scale large enough to accommodate 
+    members working on a specific component without clashing.
+    
 \end{document}
+
