@@ -5,53 +5,67 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Forbiden statement checker.
+ * Checks the file for forbidden statements that are determined by the course
+ * guidelines
  * <p>
- * Checks the file for forbidden statements that are
- * determined by the course guidelines
+ * Every element of forbidden statement Array List should be written in fully
+ * expected form. For instance: {@code "break;", "System.exit(0);"}
  * 
  * @author Borga Haktan Bilen
  * @version 21/04/2021
  */
 public class ForbiddenStatementCheck extends StyleChecker {
 
-    ArrayList<String> errorLines;
     ArrayList<String> forbiddenStatements;
 
     /**
-     * Initializes the error line array and passes the forbidden 
-     * statements
+     * Initializes the error line array and passes the forbidden statements
+     * 
      * @param forbiddenStatements ArrayList containing forbidden statements
      */
-    public ForbiddenStatementCheck( ArrayList<String> forbiddenStatements ) {
+    public ForbiddenStatementCheck(ArrayList<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
-        errorLines = new ArrayList<>();
     }
 
     /**
-     * Checkes the file for forbidden statements. Returns the violated
-     * lines.
+     * Default constructor. Initializes nothing
+     */
+    public ForbiddenStatementCheck() {}
+
+    /**
+     * Checkes the file for forbidden statements. Returns the violated lines.
+     * 
      * @param fileInput Line by line file which is going to be checked
-     * @return The ArrayList of lines that are containing the violated
-     * lines
+     * @return The ArrayList of lines that are containing the violated lines
      */
     @Override
-    protected ArrayList<String> checkFile( ArrayList<String> fileInput ) {
+    protected ArrayList<String> checkFile(ArrayList<String> fileInput) {
+        ArrayList<String> errorList;
         Pattern temp;
         Matcher matc;
 
-        for ( String str : fileInput ) {
-            
-            for ( String forbidden : forbiddenStatements ) {
-                temp = Pattern.compile( forbidden );
-                matc = temp.matcher( str );
+        errorList = new ArrayList<>();
+        for (String str : fileInput) {
 
-                if ( matc.find() ) {
-                    errorLines.add( str );
+            for (String forbidden : forbiddenStatements) {
+                temp = Pattern.compile(Pattern.quote(forbidden));
+                matc = temp.matcher(str);
+
+                if (matc.find()) {
+                    errorList.add(str);
                 }
             }
         }
 
-        return errorLines;
+        return errorList;
+    }
+
+    /**
+     * Sets the forbidden statement array list
+     * 
+     * @param forbiddenStatements The Array List containing forbidden statements
+     */
+    public void setForbiddenStatements(ArrayList<String> forbiddenStatements) {
+        this.forbiddenStatements = forbiddenStatements;
     }
 }
