@@ -20,9 +20,6 @@ import me.labconnect.webapp.unittest.TestResult;
  */
 public abstract class StyleChecker implements Tester {
 
-   List<Path> codeFiles;
-   ArrayList<String> offendingLines;
-
    /**
     * Check the given source file for a particular convention
     *
@@ -40,6 +37,9 @@ public abstract class StyleChecker implements Tester {
     */
    @Override
    public TestResult runTest(Path submission) throws IOException {
+      List<Path> codeFiles;
+      ArrayList<String> offendingLines;
+
       codeFiles = Files.walk(submission).filter(p -> p.endsWith(".java")).collect(Collectors.toList());
       offendingLines = new ArrayList<>();
 
