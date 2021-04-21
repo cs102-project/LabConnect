@@ -1,49 +1,52 @@
 package me.labconnect.webapp.stylechecker;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import me.labconnect.webapp.models.Tester;
+import me.labconnect.webapp.unittest.TestResult;
 
+/**
+ * A style check performed for all source files in the submission
+ * 
+ * @author Berk Çakar
+ * @author Berkan Şahin
+ * @version 21.04.2021
+ */
 public abstract class StyleChecker implements Tester {
-    private Path submission;
-    private ArrayList<String> fileLines;
-    private ArrayList<String> errorList;
 
-    /**
-    * Default constructor that initializes style checker.
-    * @param submission is the lab submisson file.
+   /**
+    * Check the given source file for a particular convention
+    * 
+    * @param codeFile The source code file
+    * @return An arraylist containing the lines that violate the convention
+    * @throws IOException If reading the file fails
     */
-    StyleChecker( Path submission ) {
-        this.submission = submission;
-        Scanner submissionScanner;
+   protected abstract ArrayList<String> checkFile(Path codeFile) throws IOException;
 
-        try {
-            submissionScanner = new Scanner(submission).useDelimiter("\\Z");
-            while ( submissionScanner.hasNext() ) {
-            fileLines.add( submissionScanner.next() );
-        }
-        } catch ( FileNotFoundException e ) {
-            System.out.println( submission.getFileName() + " not found." );
-        } catch( IOException e ) {
-            System.out.println( "Error reading " + submission.getFileName() );
-        } finally {
-        }
-    }
+   /**
+    * Perform a style check on all source code files on the given path
+    * 
+    * @param submission The submission path
+    * @return A TestResult instance
+    * @throws IOException if processing any of the files fails
+    */
+   @Override
+   public TestResult runTest(Path submission) throws IOException {
+      List<Path> codeFiles;
+      ArrayList<String> offendingLines;
 
-    public ArrayList<String> getFileLines() {
-        return fileLines;
-    }
+      codeFiles = Files.walk(submission).filter(p -> p.endsWith(".java")).collect(Collectors.toList());
+      offendingLines = new ArrayList<>();
 
-    private boolean hasNoErrors() {
-        if( errorList.isEmpty() ) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+      for (Path codeFile : codeFiles) {
+         offendingLines.addAll(checkFile(codeFile));
+      }
+
+      return new TestResult(this, submission, offendingLines);
+   }
 }
