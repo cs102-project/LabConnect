@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import me.labconnect.webapp.models.Tester;
+import me.labconnect.webapp.stylechecker.StyleChecker;
 
 /**
  * A model of a test result.
@@ -51,18 +52,20 @@ public class TestResult {
     /**
      * Creates a TestResult instance for a style check
      * 
-     * TODO change type to StyleChecker once it implements Tester
      * 
      * @param styleCheck The style check the constructor is called from
      * @param submission The submission used in the style check
-     * @param output     The style checker output
-     * @param state      The test state
+     * @param offendingLines     The lines that fail the style check
      */
-    public TestResult(Tester styleCheck, Path submission, ArrayList<String> output, TestState state) {
+    public TestResult(StyleChecker styleCheck, Path submission, ArrayList<String> offendingLines) {
         this.test = styleCheck;
         this.submission = submission;
-        this.testOutput = output;
-        this.state = state;
+        this.testOutput = offendingLines;
+        if (offendingLines.isEmpty()) {
+            state = TestState.SUCCESS;
+        } else {
+            state = TestState.DESIGN_ERROR;
+        }
     }
 
     /**
