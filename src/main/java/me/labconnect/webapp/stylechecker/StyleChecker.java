@@ -52,7 +52,7 @@ public abstract class StyleChecker implements Tester {
          currentFileLines = new ArrayList<>();
 
          while (scan.hasNextLine()) {
-            currentFileLines.add(scan.next());
+            currentFileLines.add(scan.nextLine());
          }
 
          currentOffendingLines = new ArrayList<>(checkFile(currentFileLines));
