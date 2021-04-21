@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * Checks the file for forbidden statements that are determined by the course
- * guidelines
+ * guidelines.
  * <p>
  * Every element of forbidden statement Array List should be written in fully
  * expected form. For instance: {@code "break;", "System.exit(0);"}
@@ -29,6 +29,7 @@ public class ForbiddenStatementCheck extends StyleChecker {
 
     /**
      * Default constructor. Initializes nothing
+     * @apiNote Added in case of ommiting constructor injection
      */
     public ForbiddenStatementCheck() {}
 

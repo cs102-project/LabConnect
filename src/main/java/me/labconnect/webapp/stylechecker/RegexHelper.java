@@ -2,8 +2,24 @@ package me.labconnect.webapp.stylechecker;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class serves static helper methods for regular
+ * expression checks.
+ * 
+ * @author Berk Çakar
+ * @author Berkan Şahin
+ * @author Borga Haktan Bilen
+ */
 public class RegexHelper {
 
+    /**
+     * Checks the method header if it complies to Java 
+     * conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean methodRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -30,6 +46,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks the constructor if it complies to Java 
+     * conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean constructorRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -46,6 +70,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks the method calling statement if it complies to
+     * Java conventions or not .
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean methodCallRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -62,6 +94,13 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the method is named conventionally or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean methodLowerCaseRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -78,6 +117,13 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the class is named conventionally or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean classRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -94,6 +140,13 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the constant is named conventionally or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean constantRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -110,6 +163,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code if} statement is constructed according to
+     * conventions or not. 
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean ifRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -126,6 +187,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code else if} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean elseifRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -142,6 +211,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code else} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean elseRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -158,6 +235,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code switch} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean switchRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -174,6 +259,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code for} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean forRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -190,6 +283,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code while} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean whileRegexMatcher( String str ) {
         String regex;
         Pattern pattern;
@@ -206,6 +307,14 @@ public class RegexHelper {
         }
     }
 
+    /**
+     * Checks if the {@code do} statement is constructed
+     * according to conventions or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
     public static boolean doRegexMatcher( String str ) {
         String regex;
         Pattern pattern;

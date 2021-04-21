@@ -3,8 +3,6 @@ package me.labconnect.webapp.unittest;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import me.labconnect.webapp.unittest.TestResult;
-
 /**
  * Tester interface for classes that are testing
  * distinct elements of an submission
