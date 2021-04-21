@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * @author Borga Haktan Bilen
  * @version 21/04/2021
  */
-public class ForbiddenStatementCheck extends StyleChecker {
+public class ForbiddenStatementChecker extends StyleChecker {
 
     ArrayList<String> forbiddenStatements;
 
@@ -23,7 +23,7 @@ public class ForbiddenStatementCheck extends StyleChecker {
      * 
      * @param forbiddenStatements ArrayList containing forbidden statements
      */
-    public ForbiddenStatementCheck(ArrayList<String> forbiddenStatements) {
+    public ForbiddenStatementChecker(ArrayList<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
     }
 
@@ -31,7 +31,7 @@ public class ForbiddenStatementCheck extends StyleChecker {
      * Default constructor. Initializes nothing
      * @apiNote Added in case of ommiting constructor injection
      */
-    public ForbiddenStatementCheck() {}
+    public ForbiddenStatementChecker() {}
 
     /**
      * Checkes the file for forbidden statements. Returns the violated lines.
