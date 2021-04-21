@@ -1,56 +1,49 @@
 package me.labconnect.webapp.stylechecker;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
-public class StyleChecker {
-   private static final Pattern METHOD_DECLARATION_PATTERN = Pattern.compile( "[\\w *]+[\\w<>\\[\\]]+\\s(\\w+) *\\([^)]*\\) *(\\{?|[^;])" );
-   private static final Pattern CLASS_DECLARATION_PATTERN  = Pattern.compile( "[\\w\\s+]+class\\s+(\\w+)" );
+import me.labconnect.webapp.models.Tester;
 
-   private int fileHeaderLength;
-   private int errorCount;
+public abstract class StyleChecker implements Tester {
+    private Path submission;
+    private ArrayList<String> fileLines;
+    private ArrayList<String> errorList;
 
-   private Path submission;
-   private String fileLines;
-
-   private String[] fileHeader;
-   private String[] fileContents;
-   private String[] fileLinesArray;
-
-   /**
+    /**
     * Default constructor that initializes style checker.
-    * @param fileName is the name of the file.
+    * @param submission is the lab submisson file.
     */
-   StyleChecker( Path submission ) {
-      Scanner submissionScanner;
-      this.submission = submission;
+    StyleChecker( Path submission ) {
+        this.submission = submission;
+        Scanner submissionScanner;
 
-      // Reads into the class variable the entirety of the file contents so we don't have to do it again.
-      try {
+        try {
+            submissionScanner = new Scanner(submission).useDelimiter("\\Z");
+            while ( submissionScanner.hasNext() ) {
+            fileLines.add( submissionScanner.next() );
+        }
+        } catch ( FileNotFoundException e ) {
+            System.out.println( submission.getFileName() + " not found." );
+        } catch( IOException e ) {
+            System.out.println( "Error reading " + submission.getFileName() );
+        } finally {
+        }
+    }
 
-         submissionScanner = new Scanner(submission).useDelimiter("\\Z");
+    public ArrayList<String> getFileLines() {
+        return fileLines;
+    }
 
-         // Search for file's javaDoc comment (header).
-         fileLines = submissionScanner.next();
-         fileLinesArray = fileLines.split( "\\Q/*\\E|\\Q*/\\E" );
-
-         // Assign the file header.
-         this.fileHeader = fileLinesArray[ 1 ].split( "\\n" );
-         // Set javaDoc comment's length.
-         this.fileHeaderLength = this.fileHeader.length + 2;
-
-         // Rest of the fileLinesArray will be the code itself, so set it accordingly.
-         this.fileContents = fileLinesArray[ 2 ].split( "\\n" );
-
-         submissionScanner.close();
-
-      } catch ( ArrayIndexOutOfBoundsException e ) {
-         System.out.println( submission.getFileName() + " does not have a proper header." );
-      } catch ( IOException e ) {
-         System.out.println( submission.getFileName() + " not found." );
-      } finally {
-      }
-   }
+    private boolean hasNoErrors() {
+        if( errorList.isEmpty() ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
