@@ -122,13 +122,16 @@ public class UnitTest {
 
         // Wait until the compiler exits then check its return code
         try {
-            if (compilerProcess.waitFor() != 0) {
+            compilerProcess.waitFor();
+
+            Files.deleteIfExists(source.resolve(testerClass));
+
+            if (compilerProcess.exitValue() != 0) {
                 throw new CompilationException(compilerOutput);
             }
         } catch (InterruptedException e) {
-            throw new CompilationException(compilerOutput); // TODO handle it in a better way?
-        } finally {
             Files.deleteIfExists(source.resolve(testerClass));
+            throw new CompilationException(compilerOutput); 
         }
 
         return bytecodeDirectory;
