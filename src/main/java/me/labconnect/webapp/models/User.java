@@ -8,14 +8,27 @@ import org.springframework.data.annotation.Id;
  * @author Borga Haktan Bilen
  * @version 18/04/2021 
  */
-public class User {
+public abstract class User {
     
-    // Variable
+    // Properties
     @Id
     private Long uuid;     // Maybe mongo equivalent of sequance generator needed?
     private long id;
     private String name;
-    private String departmant;
+    private String department;
+
+    // Constructor
+    /**
+     * Initializes the shared properties
+     * @param name The name of the user
+     * @param instutionId The unique instutionId of User
+     * @param department The department of the User
+     */
+    public User( String name, long instutionId, String department ) {
+        this.name = name;
+        id = instutionId;
+        this.department = department;
+    }
 
     // Methods
     public long getId() {
@@ -26,12 +39,13 @@ public class User {
         return name;
     }
 
-    public String getDepartmant() {
-        return departmant;
+    public String getDepartment() {
+        return department;
     }
 
     /* Need an online status checking method.
      * TO-DO after the implementation of LiveSessionManager
-     * class.
+     * class. Additionally, for online status subclasses of this
+     * class might need a small modification also
     */
 }
