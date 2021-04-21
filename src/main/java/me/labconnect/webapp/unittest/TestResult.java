@@ -5,24 +5,26 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import me.labconnect.webapp.models.Tester;
+
 /**
- * A model of a unit test result.
+ * A model of a test result.
  * 
- * Includes unit test output as well as execution time, any compiler errors etc.
+ * Includes unit test output as well as the submission, test state etc.
  * 
- * @see UnitTest
+ * @see me.labconnect.webapp.models.Tester
  * @author Berkan Şahin
- * @version 18.04.2021
+ * @version 21.04.2021
  */
 public class TestResult {
 
-    private UnitTest unitTest;
+    private Tester test;
     private TestState state;
     private ArrayList<String> testOutput;
     private Path submission;
 
     /**
-     * Create a TestResult instance
+     * Create a TestResult instance for a unit test
      * 
      * @apiNote If an error occured during the compilation phase, use
      *          {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
@@ -34,7 +36,7 @@ public class TestResult {
      * @throws IOException If an I/O error occurs while reading the output
      */
     public TestResult(UnitTest unitTest, Path submisson, Path output, TestState state) throws IOException {
-        this.unitTest = unitTest;
+        this.test = unitTest;
         this.submission = submisson;
         this.state = state;
 
@@ -47,6 +49,23 @@ public class TestResult {
     }
 
     /**
+     * Creates a TestResult instance for a style check
+     * 
+     * TODO change type to StyleChecker once it implements Tester
+     * 
+     * @param styleCheck The style check the constructor is called from
+     * @param submission The submission used in the style check
+     * @param output     The style checker output
+     * @param state      The test state
+     */
+    public TestResult(Tester styleCheck, Path submission, ArrayList<String> output, TestState state) {
+        this.test = styleCheck;
+        this.submission = submission;
+        this.testOutput = output;
+        this.state = state;
+    }
+
+    /**
      * Create a TestResult instance in case of a compiler error
      * 
      * @param unitTest   The unit test the error occured in
@@ -54,7 +73,7 @@ public class TestResult {
      * @param exception  The CompilationException instance
      */
     public TestResult(UnitTest unitTest, Path submission, CompilationException exception) {
-        this.unitTest = unitTest;
+        this.test = unitTest;
         this.submission = submission;
         state = TestState.COMPILER_ERROR;
 
@@ -91,6 +110,7 @@ public class TestResult {
 
     /**
      * Return the path of the submission
+     * 
      * @return the path of the submitted source code
      */
     public Path getSubmission() {
@@ -98,10 +118,11 @@ public class TestResult {
     }
 
     /**
-     * Return the unit test this object is the result of
-     * @return the unit test for this result
+     * Return the test this object is the result of
+     * 
+     * @return the test for this result
      */
-    public UnitTest getTest() {
-        return unitTest;
+    public Tester getTest() {
+        return test;
     }
 }
