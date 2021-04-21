@@ -13,16 +13,19 @@ import me.labconnect.webapp.unittest.TestResult;
 
 /**
  * A style check performed for all source files in the submission
- * 
+ *
  * @author Berk Çakar
  * @author Berkan Şahin
  * @version 21.04.2021
  */
 public abstract class StyleChecker implements Tester {
 
+   List<Path> codeFiles;
+   ArrayList<String> offendingLines;
+
    /**
     * Check the given source file for a particular convention
-    * 
+    *
     * @param codeFile The contents of the current source code file
     * @return An arraylist containing the lines that violate the convention
     */
@@ -30,19 +33,16 @@ public abstract class StyleChecker implements Tester {
 
    /**
     * Perform a style check on all source code files on the given path
-    * 
+    *
     * @param submission The submission path
     * @return A TestResult instance
     * @throws IOException if processing any of the files fails
     */
    @Override
    public TestResult runTest(Path submission) throws IOException {
-      List<Path> codeFiles;
-      ArrayList<String> offendingLines;
-      
       codeFiles = Files.walk(submission).filter(p -> p.endsWith(".java")).collect(Collectors.toList());
       offendingLines = new ArrayList<>();
-      
+
       for (Path codeFile : codeFiles) {
          ArrayList<String> currentFileLines;
          ArrayList<String> currentOffendingLines;
