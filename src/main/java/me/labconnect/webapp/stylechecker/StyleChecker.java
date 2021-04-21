@@ -1,7 +1,7 @@
 package me.labconnect.webapp.stylechecker;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -12,7 +12,7 @@ public class StyleChecker {
    private int fileHeaderLength;
    private int errorCount;
 
-   private String fileName;
+   private Path submission;
    private String fileLines;
 
    private String[] fileHeader;
@@ -23,13 +23,17 @@ public class StyleChecker {
     * Default constructor that initializes style checker.
     * @param fileName is the name of the file.
     */
-   StyleChecker( String fileName ) {
-      this.fileName = fileName;
+   StyleChecker( Path submission ) {
+      Scanner submissionScanner;
+      this.submission = submission;
 
       // Reads into the class variable the entirety of the file contents so we don't have to do it again.
       try {
+
+         submissionScanner = new Scanner(submission).useDelimiter("\\Z");
+
          // Search for file's javaDoc comment (header).
-         fileLines = new Scanner( new File( fileName ) ).useDelimiter( "\\Z" ).next();
+         fileLines = submissionScanner.next();
          fileLinesArray = fileLines.split( "\\Q/*\\E|\\Q*/\\E" );
 
          // Assign the file header.
@@ -40,10 +44,13 @@ public class StyleChecker {
          // Rest of the fileLinesArray will be the code itself, so set it accordingly.
          this.fileContents = fileLinesArray[ 2 ].split( "\\n" );
 
+         submissionScanner.close();
+
       } catch ( ArrayIndexOutOfBoundsException e ) {
-         System.out.println( this.fileName + " does not have a proper header." );
-      } catch ( FileNotFoundException e ) {
-         System.out.println( this.fileName + " not found." );
+         System.out.println( submission.getFileName() + " does not have a proper header." );
+      } catch ( IOException e ) {
+         System.out.println( submission.getFileName() + " not found." );
+      } finally {
       }
    }
 }
