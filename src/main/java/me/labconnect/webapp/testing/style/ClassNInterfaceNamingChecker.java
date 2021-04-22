@@ -36,7 +36,7 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
                 name = nameExtractor( currentLine );
                 matc = temp.matcher( name );
 
-                if ( !matc.find() ) {
+                if ( !matc.find() || name.contains( " " ) ) {
                     errorList.add( currentLine );
                 }
             }
@@ -74,7 +74,6 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         else {
             endIndex = line.indexOf( "{" ) - 1;
         }
-
 
         name = line.substring( startingPos, endIndex );
         return name;
