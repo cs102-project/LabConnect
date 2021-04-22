@@ -115,6 +115,76 @@ public class Attempt {
         return results;
     }
 
-    // TODO the rest
+    /**
+     * Returns the test results
+     * @return the test results
+     */
+    public ArrayList<TestResult> getTestResults() {
+        return testResults;
+    }
+
+    /**
+     * Return the result for the specified test case
+     * @param test The unit or style test
+     * @return The test result if it is found, otherwise {@code null}
+     * @apiNote this could be done via DB queries once integration is complete
+     */
+    public TestResult getResultFor(Tester test) {
+        for (TestResult result : testResults) {
+            if (result.getTest().equals(test)) {
+                return result;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Set the grade for this attempt
+     * @param grade The grade
+     */
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    // TODO assign grade based on test results
+
+    /**
+     * Returns the grade for this attempt
+     * @return The grade for this attempt
+     */
+    public int getGrade() {
+        return grade;
+    }
+
+    /**
+     * Check if the current attempt passed all tests
+     * @return {@code true} if all tests were successful, otherwise {@code false}
+     */
+    public boolean passedAllTests() {
+        for (TestResult result : testResults) {
+            if (!result.isSuccessful()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Give feedback for this attempt
+     * @param feedback The feedback as a list of lines
+     */
+    public void giveFeedback(ArrayList<String> feedback) {
+        this.feedback = feedback;
+    }
+
+    /**
+     * Returns the feedback for this attempt
+     * @return the feedback for this attempt
+     */
+    public ArrayList<String> getFeedback() {
+        return feedback;
+    }
 
 }
