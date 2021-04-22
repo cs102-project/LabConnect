@@ -71,4 +71,9 @@ public class ForbiddenStatementChecker extends StyleChecker {
     public void setForbiddenStatements(ArrayList<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
     }
+
+    @Override
+    public String getName() {
+        return "Forbidden statement checker";
+    }
 }

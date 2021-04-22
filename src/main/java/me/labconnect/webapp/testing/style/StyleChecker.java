@@ -57,7 +57,7 @@ public abstract class StyleChecker implements Tester {
 
          currentOffendingLines = new ArrayList<>(checkFile(currentFileLines));
          if (!currentOffendingLines.isEmpty()) {
-            offendingLines.add("In file " + codeFile.toString() + ":");
+            offendingLines.add("In file " + submission.relativize(codeFile) + ":");
             offendingLines.addAll(currentOffendingLines);
          }
          scan.close();

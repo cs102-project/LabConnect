@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.springframework.data.annotation.Id;
 
-
 /**
  * A model of a single unit test, with one tester class and a correct output
  * 
@@ -26,6 +25,7 @@ public class UnitTest implements Tester {
     @Id
     public String id;
 
+    private String name;
     ArrayList<String> correctOutput;
     Path testerClass;
     Long timeLimitInMS;
@@ -36,6 +36,7 @@ public class UnitTest implements Tester {
      * Creates a new unit test from the given tester and generates the correct
      * output from the example implementation
      * 
+     * @param name                 The name of this test
      * @param testerClass          The tester class, which is a singular java file
      *                             with a main method
      * @param exampleImpl          The example implementation supplied by the
@@ -46,9 +47,11 @@ public class UnitTest implements Tester {
      *                             the implementation or tester files
      * @throws BadExampleException If the example implementation fails the unit test
      */
-    public UnitTest(Path testerClass, Path exampleImpl, long timeLimitMiliseconds)
+    public UnitTest(String name, Path testerClass, Path exampleImpl, long timeLimitMiliseconds)
             throws IOException, BadExampleException {
         TestResult firstResult;
+
+        this.name = name;
         this.testerClass = testerClass;
         this.timeLimitInMS = timeLimitMiliseconds;
 
@@ -64,12 +67,13 @@ public class UnitTest implements Tester {
      * Creates a new unit test from the given tester and generates the correct
      * output from the example implementation
      * 
+     * @param name        the name of this test
      * @param testerClass The tester class, which is a singular java file with a
      *                    main method
      * @param exampleImpl The example implementation supplied by the instructor
      */
-    public UnitTest(Path testerClass, Path exampleImpl) throws IOException, BadExampleException {
-        this(testerClass, exampleImpl, 0);
+    public UnitTest(String name, Path testerClass, Path exampleImpl) throws IOException, BadExampleException {
+        this(name, testerClass, exampleImpl, 0);
     }
 
     // Methods
@@ -92,7 +96,7 @@ public class UnitTest implements Tester {
         ProcessBuilder compilerBuilder;
         Process compilerProcess;
 
-        if (!Files.isDirectory(source)) {
+        if (!Files.isDirectory(source) || !source.isAbsolute()) {
             throw new IOException();
         }
 
@@ -132,7 +136,7 @@ public class UnitTest implements Tester {
             }
         } catch (InterruptedException e) {
             Files.deleteIfExists(source.resolve(testerClass));
-            throw new CompilationException(compilerOutput); 
+            throw new CompilationException(compilerOutput);
         }
 
         return bytecodeDirectory;
@@ -145,6 +149,7 @@ public class UnitTest implements Tester {
      * @return A TestResult instance
      * @throws IOException If an I/O error occurs while processing the submission
      */
+    @Override
     public TestResult runTest(Path submission) throws IOException {
         Path bytecodeDir;
         Path programOutput;
@@ -231,6 +236,15 @@ public class UnitTest implements Tester {
 
         return new TestResult(this, submission, programOutput, endState);
 
+    }
+
+    /**
+     * Returns the name of the test
+     * @return the name of the test
+     */
+    @Override
+    public String getName() {
+        return name;
     }
 
 }
