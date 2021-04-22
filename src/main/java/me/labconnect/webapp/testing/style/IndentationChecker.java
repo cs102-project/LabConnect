@@ -47,4 +47,9 @@ public class IndentationChecker extends StyleChecker {
 
         return errorList;
     }
+
+    @Override
+    public String getName() {
+        return "Indentation checker";
+    }
 }

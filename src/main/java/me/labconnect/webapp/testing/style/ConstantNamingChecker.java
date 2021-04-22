@@ -66,4 +66,9 @@ public class ConstantNamingChecker extends StyleChecker {
             return true;
         }
     }
+
+    @Override
+    public String getName() {
+        return "Constant naming checker";
+    }
 }
