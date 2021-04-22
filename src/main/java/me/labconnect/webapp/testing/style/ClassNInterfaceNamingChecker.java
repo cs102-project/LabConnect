@@ -26,7 +26,8 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         Pattern temp;
         Matcher matc;
 
-        regex = "\b[A-Z][a-z0-9A-Z]*";
+        // Checks for correct conventional naming
+        regex = "^[A-Z][a-zA-Z0-9].*";
         temp = Pattern.compile( regex );
         for ( int index = 0; index < codeFile.size(); index++ ) {
             String currentLine = codeFile.get( index );
