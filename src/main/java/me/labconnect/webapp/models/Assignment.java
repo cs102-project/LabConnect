@@ -7,7 +7,7 @@ import java.io.File;
 
 import org.springframework.data.annotation.Id;
 
-import me.labconnect.webapp.unittest.UnitTest;
+import me.labconnect.webapp.testing.UnitTest;
 
 /**
  * A generic assignment model class

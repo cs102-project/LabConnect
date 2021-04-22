@@ -1,4 +1,4 @@
-package me.labconnect.webapp.unittest;
+package me.labconnect.webapp.testing;
 
 /**
  * An exception thrown when the example implementation supplied by the

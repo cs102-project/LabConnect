@@ -1,15 +1,14 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.testing;
 
 import java.io.IOException;
 import java.nio.file.Path;
-
-import me.labconnect.webapp.unittest.TestResult;
 
 /**
  * Tester interface for classes that are testing
  * distinct elements of an submission
  * @author Borga Haktan Bilen
  * @version 21/04/2021
+ * @throws IOException If an I/O error occurs while processing the submission
  */
 public interface Tester {
     /**

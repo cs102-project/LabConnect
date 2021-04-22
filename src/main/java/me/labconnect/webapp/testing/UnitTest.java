@@ -1,4 +1,4 @@
-package me.labconnect.webapp.unittest;
+package me.labconnect.webapp.testing;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.springframework.data.annotation.Id;
 
-import me.labconnect.webapp.models.Tester;
 
 /**
  * A model of a single unit test, with one tester class and a correct output

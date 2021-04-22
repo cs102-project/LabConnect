@@ -1,4 +1,4 @@
-package me.labconnect.webapp.unittest;
+package me.labconnect.webapp.testing;
 
 import java.io.IOException;
 import java.nio.file.Path;

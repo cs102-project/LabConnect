@@ -1,19 +1,18 @@
-package me.labconnect.webapp.unittest;
+package me.labconnect.webapp.testing;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import me.labconnect.webapp.models.Tester;
-import me.labconnect.webapp.stylechecker.StyleChecker;
+import me.labconnect.webapp.testing.style.StyleChecker;
 
 /**
  * A model of a test result.
  * 
  * Includes unit test output as well as the submission, test state etc.
  * 
- * @see me.labconnect.webapp.models.Tester
+ * @see Tester
  * @author Berkan Şahin
  * @version 21.04.2021
  */

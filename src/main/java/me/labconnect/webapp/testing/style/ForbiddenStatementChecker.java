@@ -1,4 +1,4 @@
-package me.labconnect.webapp.stylechecker;
+package me.labconnect.webapp.testing.style;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
