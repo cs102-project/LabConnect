@@ -19,12 +19,12 @@ public class TeachingAssistant extends User implements Meetable {
      * Initializes the necessary properties except meeting link.
      * 
      * @param name Name of the TA.
-     * @param instutionId Unique instution id of the TA.
+     * @param institutionId Unique institution id of the TA.
      * @param department TA's department
      */
-    public TeachingAssistant ( String name, long instutionId, 
+    public TeachingAssistant ( String name, long institutionId, 
                                 String department, ArrayList<Student> assignedStudents ) {
-        super(name, instutionId, department);
+        super(name, institutionId, department);
         students = assignedStudents;
     }
 
@@ -32,14 +32,14 @@ public class TeachingAssistant extends User implements Meetable {
      * Initializes all properties of Tutor object.
      * 
      * @param name Name of the TA.
-     * @param instutionId Unique instution id of the TA.
+     * @param institutionId Unique institution id of the TA.
      * @param department TA's department.
      * @param meetingLink The {@code URL} of the online meeting. 
      */
-    public TeachingAssistant ( String name, long instutionId, 
+    public TeachingAssistant ( String name, long institutionId, 
                                 String department, String meetingLink,
                                 ArrayList<Student> assignedStudents ) {
-        super(name, instutionId, department);
+        super(name, institutionId, department);
         this.meetingLink = meetingLink;
         students = assignedStudents;
     }

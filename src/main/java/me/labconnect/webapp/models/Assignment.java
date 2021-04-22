@@ -3,7 +3,8 @@ package me.labconnect.webapp.models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.data.annotation.Id;
 
@@ -23,12 +24,12 @@ public class Assignment {
 
     // Variables
     @Id
-    public Long id; // handled by the Mongo backend, do not modify by hand!
+    public String id; // handled by the Mongo backend, do not modify by hand!
 
     private boolean isCompleted;
     private boolean isVisible;
     private int[] sections;
-    private File instructions;
+    private Path instructions;
     private String title;
     private Date dueDate;
     private ArrayList<Tester> tests;
@@ -47,7 +48,7 @@ public class Assignment {
     public Assignment ( String title, Date dueDate, boolean visible, 
                         String absolutePath, ArrayList<Tester> tests,
                         int[] sections ) {
-        instructions = new File( absolutePath );
+        instructions = Paths.get(absolutePath);
         this.tests = tests;
         this.title = title;
         this.dueDate = dueDate;         // Getting the date as int pairs might be a good idea. However, we need a Calendar implementation. 
@@ -113,7 +114,7 @@ public class Assignment {
      * Gets the instructions file in File type
      * @return The assignment prompt file
      */
-    public File getInstructions() {
+    public Path getInstructions() {
         return instructions;
     }
     
@@ -121,7 +122,7 @@ public class Assignment {
      * Sets the assignment instructions file
      * @param instructions The instructions file
      */
-    public void setInstructions( File instructions ) {
+    public void setInstructions( Path instructions ) {
         this.instructions = instructions;
     }
     
@@ -194,14 +195,4 @@ public class Assignment {
         this.tests = tests;
     }
     
-    /**
-     * Deletes the current assignment by clearing the tests,
-     * nullifying the id, deleting the instruction file
-     */
-    public void delete() {
-        // TODO delete everything from the DB side?
-        //id = null;      Resetting the ID is a recipe for disaster when a DB is involved
-        tests.clear();
-        instructions.delete();
-    }
 }

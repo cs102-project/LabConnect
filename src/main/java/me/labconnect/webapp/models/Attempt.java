@@ -32,8 +32,7 @@ public class Attempt {
     private ArrayList<TestResult> testResults;
     private ArrayList<String> feedback;
     private Path submissionDir;
-    private Assignment assignment;
-    private Student submitter;
+    private Submission submission;
     private int grade;
 
     // Constructors
@@ -43,11 +42,10 @@ public class Attempt {
      * 
      * @param submissionArchive A .zip archive containing the source code root
      *                          (src/)
-     * @param submitter         The student submitting this attempt
-     * @param assignment        The assignment that is attempted
+     * @param submission        The submission this attempt belongs to
      * @throws IOException If processing the archive fails
      */
-    public Attempt(Path submissionArchive, Student submitter, Assignment assignment) throws IOException {
+    public Attempt(Path submissionArchive, Submission submission) throws IOException {
         Path submissionParent;
         ArrayList<String> extractorArgs;
         ProcessBuilder extractorBuilder;
@@ -57,12 +55,10 @@ public class Attempt {
             throw new IOException("Invalid archive");
         }
 
-        this.submitter = submitter;
-        this.assignment = assignment;
+        this.submission = submission;
 
-        // Create submission dir (TODO create non-temp dir from unique IDs of models)
-        submissionParent = Files
-                .createDirectories(Paths.get(SUBMISSION_ROOT, assignment.getTitle(), submitter.getName()));
+        // Create submission dir 
+        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT, submission.ID));
 
         submissionDir = Files.createTempDirectory(submissionParent, "attempt");
 
@@ -71,7 +67,7 @@ public class Attempt {
         extractorArgs.add("unzip");
 
         // Rest of the args are derived from unzip manpage
-        extractorArgs.add("-o"); // Overwrite existing files
+        extractorArgs.add("-oqq"); // Overwrite existing files and suppress output
 
         extractorArgs.add(submissionArchive.toString());
 
@@ -108,7 +104,7 @@ public class Attempt {
 
         results = new ArrayList<>();
 
-        for (Tester test : assignment.getTests()) {
+        for (Tester test : submission.getAssignment().getTests()) {
             results.add(test.runTest(submissionDir));
         }
 
@@ -117,6 +113,7 @@ public class Attempt {
 
     /**
      * Returns the test results
+     * 
      * @return the test results
      */
     public ArrayList<TestResult> getTestResults() {
@@ -125,6 +122,7 @@ public class Attempt {
 
     /**
      * Return the result for the specified test case
+     * 
      * @param test The unit or style test
      * @return The test result if it is found, otherwise {@code null}
      * @apiNote this could be done via DB queries once integration is complete
@@ -141,16 +139,17 @@ public class Attempt {
 
     /**
      * Set the grade for this attempt
+     * 
      * @param grade The grade
      */
     public void setGrade(int grade) {
         this.grade = grade;
     }
 
-    // TODO assign grade based on test results
 
     /**
      * Returns the grade for this attempt
+     * 
      * @return The grade for this attempt
      */
     public int getGrade() {
@@ -159,6 +158,7 @@ public class Attempt {
 
     /**
      * Check if the current attempt passed all tests
+     * 
      * @return {@code true} if all tests were successful, otherwise {@code false}
      */
     public boolean passedAllTests() {
@@ -173,6 +173,7 @@ public class Attempt {
 
     /**
      * Give feedback for this attempt
+     * 
      * @param feedback The feedback as a list of lines
      */
     public void giveFeedback(ArrayList<String> feedback) {
@@ -181,6 +182,7 @@ public class Attempt {
 
     /**
      * Returns the feedback for this attempt
+     * 
      * @return the feedback for this attempt
      */
     public ArrayList<String> getFeedback() {
