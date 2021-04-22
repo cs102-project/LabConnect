@@ -101,10 +101,18 @@ public class Attempt {
      * Run all the tests for the assignment this attempt belongs to
      * 
      * @return The list of results
+     * @throws IOException If processing the submission directory fails
      */
-    private ArrayList<TestResult> runTests() {
-        // TODO
-        return null;
+    private ArrayList<TestResult> runTests() throws IOException {
+        ArrayList<TestResult> results;
+
+        results = new ArrayList<>();
+
+        for (Tester test : assignment.getTests()) {
+            results.add(test.runTest(submissionDir));
+        }
+
+        return results;
     }
 
     // TODO the rest
