@@ -2,6 +2,13 @@ package me.labconnect.webapp.stylechecker;
 
 import java.util.ArrayList;
 
+/**
+ * This class is to check whether different kinds of loops in a file
+ * have the required brackets or not.
+ * @author PLEASE_INSERT_NAME
+ * @author Alp Ertan
+ * @version 22.04.2021
+ */
 public class LoopCurlyBracketsChecker extends StyleChecker {
 
     @Override

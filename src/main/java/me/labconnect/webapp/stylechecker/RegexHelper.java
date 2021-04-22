@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
  * @author Berk Çakar
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
+ * @author Alp Ertan 
+ * @version 22.04.2021
  */
 public class RegexHelper {
 

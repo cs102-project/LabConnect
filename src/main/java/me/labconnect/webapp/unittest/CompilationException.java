@@ -11,7 +11,8 @@ import java.util.Scanner;
  * This exception contains a copy of the compiler output, which should
  * be provided as a {@link Path} object during instantiation.
  * @author Berkan Şahin
- * @version 18.04.2021
+ * @author Alp Ertan
+ * @version 22.04.2021
  */
 public class CompilationException extends Exception {
     private static final long serialVersionUID = 1L;
@@ -31,10 +32,11 @@ public class CompilationException extends Exception {
         scan.close();
     }
 
+    /**
+     * Returns the compiler's output as an arraylist
+     * @return the compiler's output
+     */
     public ArrayList<String> getCompilerOutput() {
         return compilerOutput;
     }
-
-    
-    
 }
