@@ -58,10 +58,10 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         startingPos = 0;
         endIndex = 0;
         if ( line.contains( "class" ) ) {
-            startingPos = line.indexOf( "class" ) + 5;
+            startingPos = line.indexOf( "class" ) + 6;
         }
         else if ( line.contains( "interface" ) ) {
-            startingPos = line.indexOf( "interface" ) + 9;
+            startingPos = line.indexOf( "interface" ) + 10;
         }
 
         if ( line.contains( "extends" ) ) {
@@ -70,6 +70,10 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         else if ( line.contains( "interface" ) ) {
             endIndex = line.indexOf( "interface" );
         }
+        else {
+            endIndex = line.indexOf( "{" ) - 1;
+        }
+
 
         name = line.substring( startingPos, endIndex );
         return name;
