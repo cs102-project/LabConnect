@@ -7,13 +7,13 @@ import java.io.File;
 
 import org.springframework.data.annotation.Id;
 
-import me.labconnect.webapp.testing.UnitTest;
+import me.labconnect.webapp.testing.Tester;
 
 /**
  * A generic assignment model class
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
- * @version 18.04.2021
+ * @version 22.04.2021
  */
 public class Assignment {
 
@@ -31,7 +31,7 @@ public class Assignment {
     private File instructions;
     private String title;
     private Date dueDate;
-    private ArrayList<UnitTest> unitTests;
+    private ArrayList<Tester> tests;
 
     // Constructor
     /**
@@ -41,14 +41,14 @@ public class Assignment {
      * @param dueDate Due date of the assignment in Date type
      * @param visible Visibility of the assginment
      * @param absolutePath Absolute path of the instruction prompt
-     * @param unitTests Determined unit tests
+     * @param tests Determined unit or style tests
      * @param sections Sections that are going to recieve the assignement
      */
     public Assignment ( String title, Date dueDate, boolean visible, 
-                        String absolutePath, ArrayList<UnitTest> unitTests,
+                        String absolutePath, ArrayList<Tester> tests,
                         int[] sections ) {
         instructions = new File( absolutePath );
-        this.unitTests = unitTests;
+        this.tests = tests;
         this.title = title;
         this.dueDate = dueDate;         // Getting the date as int pairs might be a good idea. However, we need a Calendar implementation. 
         this.sections = sections;
@@ -179,28 +179,29 @@ public class Assignment {
     }
     
     /**
-     * Gets the ArrayList of UnitTest objects
-     * @return The ArrayList of UnitTest objects
+     * Gets the ArrayList of Tester objects
+     * @return The ArrayList of Tester objects
      */
-    public ArrayList<UnitTest> getUnitTests() {
-        return unitTests;
+    public ArrayList<Tester> getTests() {
+        return tests;
     }
     
     /**
-     * Sets the ArrayList of UnitTest objects
-     * @param unitTests the ArrayList of UnitTest objects
+     * Sets the ArrayList of Tester objects
+     * @param tests the ArrayList of Tester objects
      */
-    public void setUnitTests( ArrayList<UnitTest> unitTests ) {
-        this.unitTests = unitTests;
+    public void setUnitTests( ArrayList<Tester> tests ) {
+        this.tests = tests;
     }
     
     /**
-     * Deletes the current assignment by clearing the UnitTests,
+     * Deletes the current assignment by clearing the tests,
      * nullifying the id, deleting the instruction file
      */
     public void delete() {
-        id = null;      // Can be a good idea to handle this in the db side first
-        unitTests.clear();
+        // TODO delete everything from the DB side?
+        //id = null;      Resetting the ID is a recipe for disaster when a DB is involved
+        tests.clear();
         instructions.delete();
     }
 }
