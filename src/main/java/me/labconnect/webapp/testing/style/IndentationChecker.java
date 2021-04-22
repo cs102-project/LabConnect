@@ -20,7 +20,7 @@ public class IndentationChecker extends StyleChecker {
     }
 
     @Override
-    protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
+    protected ArrayList<String> checkFile( ArrayList<String> codeFile ) {
         ArrayList<String> errorList = new ArrayList<>();
         int properIndent = 0;
 

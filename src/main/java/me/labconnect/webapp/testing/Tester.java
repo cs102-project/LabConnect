@@ -14,7 +14,7 @@ public interface Tester {
     /**
      * Runs distinct test for testing discrete elements
      * of an submission
-     * @param submission The *absolute* path of the submission directory (usually src/)
+     * @param submission The <b>absolute</b> path of the submission directory (usually src/)
      * @return TestResult object
      */
     TestResult runTest( Path submission ) throws IOException;
