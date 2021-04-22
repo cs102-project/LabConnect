@@ -16,24 +16,24 @@ public class Tutor extends User implements Meetable {
      * Initializes the necessary properties except meeting link.
      * 
      * @param name Name of the tutor.
-     * @param instutionId Unique instution id of the tutor.
+     * @param institutionId Unique institution id of the tutor.
      * @param department Tutor's department
      */
-    public Tutor ( String name, long instutionId, String department ) {
-        super(name, instutionId, department);
+    public Tutor ( String name, long institutionId, String department ) {
+        super(name, institutionId, department);
     }
 
     /**
      * Initializes all properties of Tutor object.
      * 
      * @param name Name of the tutor.
-     * @param instutionId Unique instution id of the tutor.
+     * @param institutionId Unique institution id of the tutor.
      * @param department Tutor's department.
      * @param meetingLink The {@code URL} of the online meeting. 
      */
-    public Tutor ( String name, long instutionId, 
+    public Tutor ( String name, long institutionId, 
                     String department, String meetingLink ) {
-        super(name, instutionId, department);
+        super(name, institutionId, department);
         this.meetingLink = meetingLink;
     }
     

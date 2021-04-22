@@ -17,5 +17,11 @@ public interface Tester {
      * @param submission The <b>absolute</b> path of the submission directory (usually src/)
      * @return TestResult object
      */
-    TestResult runTest( Path submission ) throws IOException;
+    public TestResult runTest( Path submission ) throws IOException;
+
+    /**
+     * Returns the name of the test
+     * @return the name of the test
+     */
+    public String getName();
 }

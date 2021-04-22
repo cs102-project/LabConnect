@@ -31,7 +31,7 @@ public interface UserRepository extends MongoRepository<User, Long> {
     public List<User> findByDepartment( String department );
 
     /**
-     * Finds a user by his/her unique instution ID number.
+     * Finds a user by his/her unique institution ID number.
      * @param institutionId The ID number of the wanted user.
      * @return The user object which has the required ID number.
      */

@@ -35,4 +35,9 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
 
         return errorList;
     }
+
+    @Override
+    public String getName() {
+        return "Curly Bracket checker";
+    }
 }

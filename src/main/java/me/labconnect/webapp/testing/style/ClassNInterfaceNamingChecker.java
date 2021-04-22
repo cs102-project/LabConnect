@@ -26,7 +26,8 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         Pattern temp;
         Matcher matc;
 
-        regex = "\b[A-Z][a-z0-9A-Z]*";
+        // Checks for correct conventional naming
+        regex = "^[A-Z][a-zA-Z0-9].*";
         temp = Pattern.compile( regex );
         for ( int index = 0; index < codeFile.size(); index++ ) {
             String currentLine = codeFile.get( index );
@@ -35,7 +36,7 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
                 name = nameExtractor( currentLine );
                 matc = temp.matcher( name );
 
-                if ( !matc.find() ) {
+                if ( !matc.find() || name.contains( " " ) ) {
                     errorList.add( currentLine );
                 }
             }
@@ -74,8 +75,12 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
             endIndex = line.indexOf( "{" ) - 1;
         }
 
-
         name = line.substring( startingPos, endIndex );
         return name;
     } 
+
+    @Override
+    public String getName() {
+        return "Class and Interface naming checker";
+    }
 }
