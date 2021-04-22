@@ -65,10 +65,10 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         }
 
         if ( line.contains( "extends" ) ) {
-            endIndex = line.indexOf( "extends" );
+            endIndex = line.indexOf( "extends" ) - 1;
         }
-        else if ( line.contains( "interface" ) ) {
-            endIndex = line.indexOf( "interface" );
+        else if ( line.contains( "implements" ) ) {
+            endIndex = line.indexOf( "implements" ) - 1;
         }
         else {
             endIndex = line.indexOf( "{" ) - 1;
