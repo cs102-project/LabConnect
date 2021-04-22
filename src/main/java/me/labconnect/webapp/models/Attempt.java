@@ -67,7 +67,7 @@ public class Attempt {
         extractorArgs.add("unzip");
 
         // Rest of the args are derived from unzip manpage
-        extractorArgs.add("-o"); // Overwrite existing files
+        extractorArgs.add("-oqq"); // Overwrite existing files and suppress output
 
         extractorArgs.add(submissionArchive.toString());
 
@@ -146,7 +146,6 @@ public class Attempt {
         this.grade = grade;
     }
 
-    // TODO assign grade based on test results
 
     /**
      * Returns the grade for this attempt
