@@ -141,6 +141,29 @@ public class RegexHelper {
             return false;
         }
     }
+    
+    /**
+     * Checks if the interface is named conventionally or not.
+     * 
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to
+     * the Java conventions, {@code false} otherwise.
+     */
+    public static boolean interfaceRegexMatcher( String str ) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "(public?|private?)(\\s+)(interface{1})\\s+(\\w+|\\d*)";
+        pattern = Pattern.compile( regex );
+        patternMatcher = pattern.matcher( str );
+
+        if( patternMatcher.find() ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /**
      * Checks if the constant is named conventionally or not.
