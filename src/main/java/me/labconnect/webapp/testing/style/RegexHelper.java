@@ -5,19 +5,19 @@ import java.util.regex.Pattern;
 /**
  * This class serves static helper methods for regular
  * expression checks.
- * 
+ *
  * @author Berk Çakar
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
- * @author Alp Ertan 
+ * @author Alp Ertan
  * @version 22.04.2021
  */
 public class RegexHelper {
 
     /**
-     * Checks the method header if it complies to Java 
+     * Checks the method header if it complies to Java
      * conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -49,9 +49,9 @@ public class RegexHelper {
     }
 
     /**
-     * Checks the constructor if it complies to Java 
+     * Checks the constructor if it complies to Java
      * conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -75,7 +75,7 @@ public class RegexHelper {
     /**
      * Checks the method calling statement if it complies to
      * Java conventions or not .
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -98,7 +98,7 @@ public class RegexHelper {
 
     /**
      * Checks if the method is named conventionally or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -121,7 +121,7 @@ public class RegexHelper {
 
     /**
      * Checks if the class is named conventionally or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -143,31 +143,8 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the inteface is named conventionally or not.
-     * 
-     * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to
-     * the Java conventions, {@code false} otherwise.
-     */
-    public static boolean interfaceRegexMatcher( String str ) {
-        String regex;
-        Pattern pattern;
-        Matcher patternMatcher;
-        regex = "(public?|private?)(\\s+)(interface{1})\\s+(\\w+|\\d*)";
-        pattern = Pattern.compile( regex );
-        patternMatcher = pattern.matcher( str );
-
-        if( patternMatcher.find() ){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
      * Checks if the constant is named conventionally or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -190,8 +167,8 @@ public class RegexHelper {
 
     /**
      * Checks if the {@code if} statement is constructed according to
-     * conventions or not. 
-     * 
+     * conventions or not.
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -215,7 +192,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code else if} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -239,7 +216,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code else} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -263,7 +240,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code switch} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -287,7 +264,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code for} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -311,7 +288,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code while} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
@@ -335,7 +312,7 @@ public class RegexHelper {
     /**
      * Checks if the {@code do} statement is constructed
      * according to conventions or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to
      * the Java conventions, {@code false} otherwise.
