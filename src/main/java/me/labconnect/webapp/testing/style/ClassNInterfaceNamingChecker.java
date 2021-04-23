@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * Checks if the name of the class obeys the conventions
- * 
+ *
  * @author Borga Haktan Bilen
  * @author Alp Ertan
  * @version 22.04.2021
@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 public class ClassNInterfaceNamingChecker extends StyleChecker {
 
     /**
-     * Checks the file for conventiınal class or interface naming
-     * 
+     * Checks the file for conventional class or interface naming
+     *
      * @param codeFile The file. List of every line.
      * @return The lines that are voiding the convention
      */
@@ -47,8 +47,8 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
     }
 
     /**
-     * Exctracts the name of the class/interface for checking
-     * 
+     * Extracts the name of the class/interface for checking
+     *
      * @param line The line containing the class/interface name
      * @return The name of the class/interface
      */
@@ -79,7 +79,7 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
 
     /**
      * Gets the name of the checker
-     * 
+     *
      * @return Name of the style checker
      */
     @Override
