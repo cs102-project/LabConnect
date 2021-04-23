@@ -5,7 +5,6 @@ package me.labconnect.webapp.testing;
  * instructor fails the unit test.
  * 
  * @author Alp Ertan
- * @author Berkan Şahin
  * @version 21.04.2021
  */
 public class BadExampleException extends Exception {

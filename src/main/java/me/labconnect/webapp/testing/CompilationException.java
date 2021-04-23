@@ -11,7 +11,6 @@ import java.util.Scanner;
  * This exception contains a copy of the compiler output, which should be
  * provided as a {@link Path} object during instantiation.
  * 
- * @author Berkan Şahin
  * @author Alp Ertan
  * @version 22.04.2021
  */
