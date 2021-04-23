@@ -57,6 +57,11 @@ public class ConstantNamingChecker extends StyleChecker {
         }
     }
 
+    /**
+     * Gets the name of the checker
+     * 
+     * @return Name of the style checker
+     */
     @Override
     public String getName() {
         return "Constant naming checker";

@@ -77,6 +77,11 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         return name;
     }
 
+    /**
+     * Gets the name of the checker
+     * 
+     * @return Name of the style checker
+     */
     @Override
     public String getName() {
         return "Class and Interface naming checker";

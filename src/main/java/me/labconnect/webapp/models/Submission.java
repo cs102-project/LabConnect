@@ -19,7 +19,7 @@ public class Submission {
     private ArrayList<Attempt> attempts;
 
     // Constructors
-
+    
     /**
      * Create a new submission
      * @param submitter The student the submission belongs to

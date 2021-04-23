@@ -35,6 +35,7 @@ public class ForbiddenStatementChecker extends StyleChecker {
      * @apiNote Added in case of ommiting constructor injection
      */
     public ForbiddenStatementChecker() {
+        forbiddenStatements = new ArrayList<>();
     }
 
     /**
@@ -73,7 +74,12 @@ public class ForbiddenStatementChecker extends StyleChecker {
     public void setForbiddenStatements(ArrayList<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
     }
-
+    
+    /**
+     * Gets the name of the checker
+     * 
+     * @return Name of the style checker
+     */
     @Override
     public String getName() {
         return "Forbidden statement checker";
