@@ -1,10 +1,18 @@
 version: "3.8"
 services:
     webapp:
+        depends_on: 
+            - mongo-db
+            - redis
         build: .
         ports:
             - "8080:8080"
+        volumes: 
+            - labconnect-submissions:/var/labconnect/submissions
+            - labconnect-assignments:/var/labconnect/assignments
     mongo-db:
         image: mongo
+        volumes:
+            - labconnect-mongo:/data/db
     redis:
         image: redis
