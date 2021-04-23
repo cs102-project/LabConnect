@@ -7,7 +7,12 @@ services:
         build: .
         ports:
             - "8080:8080"
+        volumes: 
+            - labconnect-submissions:/var/labconnect/submissions
+            - labconnect-assignments:/var/labconnect/assignments
     mongo-db:
         image: mongo
+        volumes:
+            - labconnect-mongo:/data/db
     redis:
         image: redis
