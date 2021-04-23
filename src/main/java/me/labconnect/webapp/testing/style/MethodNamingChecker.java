@@ -91,4 +91,9 @@ public class MethodNamingChecker extends StyleChecker {
         }
         return true;
     }
+
+    @Override
+    public String getName() {
+        return "Method naming checker";
+    }
 }
