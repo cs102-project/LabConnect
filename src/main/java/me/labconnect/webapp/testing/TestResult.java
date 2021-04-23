@@ -52,9 +52,9 @@ public class TestResult {
      * Creates a TestResult instance for a style check
      * 
      * 
-     * @param styleCheck The style check the constructor is called from
-     * @param submission The submission used in the style check
-     * @param offendingLines     The lines that fail the style check
+     * @param styleCheck     The style check the constructor is called from
+     * @param submission     The submission used in the style check
+     * @param offendingLines The lines that fail the style check
      */
     public TestResult(StyleChecker styleCheck, Path submission, ArrayList<String> offendingLines) {
         this.test = styleCheck;

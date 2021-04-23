@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
  * Checks the file for forbidden statements that are determined by the course
  * guidelines.
  * <p>
- * Every element of forbidden statement list should be written in fully
- * expected form. For instance: {@code "break;", "System.exit(0);"}. This
- * is recommended in order to prevent false flags
+ * Every element of forbidden statement list should be written in fully expected
+ * form. For instance: {@code "break;", "System.exit(0);"}. This is recommended
+ * in order to prevent false flags
  * 
  * @author Borga Haktan Bilen
- * @version 21/04/2021
+ * @version 21.04.2021
  */
 public class ForbiddenStatementChecker extends StyleChecker {
 
@@ -24,7 +24,7 @@ public class ForbiddenStatementChecker extends StyleChecker {
      * 
      * @param forbiddenStatements ArrayList containing forbidden statements
      */
-    public ForbiddenStatementChecker( ArrayList<String> forbiddenStatements ) {
+    public ForbiddenStatementChecker(ArrayList<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
     }
 
@@ -33,7 +33,8 @@ public class ForbiddenStatementChecker extends StyleChecker {
      * 
      * @apiNote Added in case of ommiting constructor injection
      */
-    public ForbiddenStatementChecker() {}
+    public ForbiddenStatementChecker() {
+    }
 
     /**
      * Checkes the file for forbidden statements. Returns the violated lines.
@@ -42,20 +43,20 @@ public class ForbiddenStatementChecker extends StyleChecker {
      * @return The ArrayList of lines that are containing the violated lines
      */
     @Override
-    protected ArrayList<String> checkFile( ArrayList<String> fileInput ) {
+    protected ArrayList<String> checkFile(ArrayList<String> fileInput) {
         ArrayList<String> errorList;
         Pattern temp;
         Matcher matc;
 
         errorList = new ArrayList<>();
-        for ( String str : fileInput ) {
+        for (String str : fileInput) {
 
-            for ( String forbidden : forbiddenStatements ) {
-                temp = Pattern.compile( Pattern.quote( forbidden ) );
-                matc = temp.matcher( str );
+            for (String forbidden : forbiddenStatements) {
+                temp = Pattern.compile(Pattern.quote(forbidden));
+                matc = temp.matcher(str);
 
-                if ( matc.find() ) {
-                    errorList.add( str );
+                if (matc.find()) {
+                    errorList.add(str);
                 }
             }
         }

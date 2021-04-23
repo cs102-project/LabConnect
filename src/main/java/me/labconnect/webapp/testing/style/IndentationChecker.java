@@ -2,6 +2,13 @@ package me.labconnect.webapp.testing.style;
 
 import java.util.ArrayList;
 
+/**
+ * Check if the source code is indented correctly
+ * 
+ * @author Berk Çakar
+ * @author Vedat Eren Arıcan
+ * @version 23.04.2021
+ */
 public class IndentationChecker extends StyleChecker {
 
     private int countLeadingSpaces( String line ) {

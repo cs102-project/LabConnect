@@ -16,6 +16,7 @@ public class BadExampleException extends Exception {
 
     /**
      * Create a new BadExampleException instance
+     * 
      * @param result The result of the failed test
      */
     public BadExampleException(TestResult result) {
