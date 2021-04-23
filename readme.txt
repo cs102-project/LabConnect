@@ -28,10 +28,16 @@ The student experience can be improved further by adding helpful
 features such as personal notes for students and so on.
 
 Current Status:
-TODO
+Testing logic (Unit test and style checker) was implemented, as well as the general 
+I/O infrastructure for files needing persistent storage. Assignment, submission, 
+and user type model classes were also implemented.
 
 Further Development:
-TODO
+The only "business logic" needing implementation is the Live Session logic. 
+Once unit classes are complete, Repository classes for DB queries must be written 
+(most of the heavy lifting is already done by Spring Data) and a REST API should be 
+provided for manipulating the model classes. After this, frontend code will be written based 
+on the UI report and the REST API provided by the backend.
 
 Contributions:
 Berkan Şahin -> Model Classes (Unit & Style Testing Logic) + Docker Composition
