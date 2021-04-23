@@ -13,6 +13,7 @@ import me.labconnect.webapp.testing.style.StyleChecker;
  * Includes unit test output as well as the submission, test state etc.
  * 
  * @see Tester
+ * @author Vedat Eren Arıcan
  * @author Berkan Şahin
  * @version 21.04.2021
  */

@@ -4,6 +4,7 @@ package me.labconnect.webapp.testing;
  * An exception thrown when the example implementation supplied by the
  * instructor fails the unit test.
  * 
+ * @author Alp Ertan
  * @author Berkan Şahin
  * @version 21.04.2021
  */
