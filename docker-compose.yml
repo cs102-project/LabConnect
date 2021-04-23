@@ -1,6 +1,9 @@
 version: "3.8"
 services:
     webapp:
+        depends_on: 
+            - mongo-db
+            - redis
         build: .
         ports:
             - "8080:8080"
