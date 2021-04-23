@@ -2,6 +2,10 @@ package me.labconnect.webapp.testing.style;
 
 import java.util.ArrayList;
 
+/**
+ * @author Berk Çakar
+ * @version 22/04/2021
+ */
 public class MethodNamingChecker extends StyleChecker {
 
     String[] identifiers = {"void","int","Integer","double","Double","float","Float","long","Long","short","Short","boolean","Boolean","char","Character","byte","Byte"};
@@ -90,5 +94,10 @@ public class MethodNamingChecker extends StyleChecker {
             }
         }
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return "Method Naming Checker";
     }
 }
