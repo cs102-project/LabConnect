@@ -34,4 +34,8 @@ Further Development:
 TODO
 
 Contributions:
-TODO
+Berkan Şahin -> Model Classes (Unit & Style Testing Logic) + Docker Composition
+Berk Çakar -> Style Checker (Regex Logic and Checker Classes)
+Borga Haktan Bilen -> Model Classes + Style Checker Classes
+Alp Ertan ->
+Vedat Eren Arıcan ->
