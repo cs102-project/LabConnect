@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author Berk Çakar
+ * @author Vedat Eren Arıcan
  * @version 22/04/2021
  */
 public class MethodNamingChecker extends StyleChecker {

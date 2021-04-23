@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  * in order to prevent false flags
  * 
  * @author Borga Haktan Bilen
+ * @author Vedat Eren Arıcan
  * @version 21.04.2021
  */
 public class ForbiddenStatementChecker extends StyleChecker {

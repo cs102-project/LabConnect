@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
  * @author Alp Ertan
+ * @author Vedat Eren Arıcan
  * @version 22.04.2021
  */
 public class RegexHelper {

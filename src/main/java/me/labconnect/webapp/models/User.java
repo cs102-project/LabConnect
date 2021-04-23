@@ -33,14 +33,29 @@ public abstract class User {
     }
 
     // Methods
+    /**
+     * Gets the user id
+     * 
+     * @return The user id as long type
+     */
     public long getUserId() {
         return userID;
     }
 
+    /**
+     * Gets the name of the user
+     * 
+     * @return Name of the user
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the department of the user.
+     * 
+     * @return Department of the user.
+     */
     public String getDepartment() {
         return department;
     }
