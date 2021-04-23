@@ -24,7 +24,7 @@ import me.labconnect.webapp.testing.Tester;
 public class Attempt {
 
     // Constants
-    private final String SUBMISSION_ROOT = "/submissions";
+    private final String SUBMISSION_ROOT = "/var/labconnect/submissions";
 
     // Variables
     @Id
