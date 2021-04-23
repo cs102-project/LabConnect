@@ -11,7 +11,7 @@ import me.labconnect.webapp.testing.Tester;
  * Class representing homework assignments
  * 
  * @author Borga Haktan Bilen
- * @version 23/04/2021
+ * @version 23.04.2021
  * @see Assignment
  */
 public class HomeworkAssignment extends Assignment {

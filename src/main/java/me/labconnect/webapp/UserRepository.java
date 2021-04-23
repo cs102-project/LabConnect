@@ -10,7 +10,7 @@ import me.labconnect.webapp.models.User;
 /**
  * User repository interface
  * @author Borga Haktan Bilen
- * @version 22/04/2021
+ * @version 22.04.2021
  */
 @Repository
 public interface UserRepository extends MongoRepository<User, Long> {
