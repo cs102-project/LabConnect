@@ -17,6 +17,7 @@ import me.labconnect.webapp.testing.Tester;
  * the tests
  * 
  * @author Berkan Şahin
+ * @author Vedat Eren Arican
  * @version 23.04.2021
  */
 public class Attempt {
@@ -125,13 +126,9 @@ public class Attempt {
      * @return The test result if it is found, otherwise {@code null}
      */
     public TestResult getResultFor(Tester test) {
-        for (TestResult result : testResults) {
-            if (result.getTest().equals(test)) {
-                return result;
-            }
-        }
-
-        return null;
+        
+        return testResults.stream().filter(result -> result.getTest().equals(test)).findAny().orElseGet(() -> null);
+        
     }
 
     /**
@@ -158,13 +155,9 @@ public class Attempt {
      * @return {@code true} if all tests were successful, otherwise {@code false}
      */
     public boolean passedAllTests() {
-        for (TestResult result : testResults) {
-            if (!result.isSuccessful()) {
-                return false;
-            }
-        }
-
-        return true;
+        
+        return testResults.stream().map(result -> !result.isSuccessful()).anyMatch(success -> success);
+        
     }
 
     /**

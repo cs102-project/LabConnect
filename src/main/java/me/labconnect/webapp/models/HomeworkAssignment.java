@@ -52,8 +52,7 @@ public class HomeworkAssignment extends Assignment {
      */
     public HomeworkAssignment( String title, Date dueDate, boolean isVisible, Path instructionFile, 
                                 ArrayList<Tester> tests, int[] sections ) throws IOException {
-        super(title, dueDate, isVisible, instructionFile, tests, sections);
-        groupMembers = new ArrayList<>();
+        this(new ArrayList<>(), title, dueDate, isVisible, instructionFile, tests, sections);
     }
 
     // Methods

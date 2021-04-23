@@ -21,7 +21,7 @@ public class Tutor extends User implements Meetable {
      * @param department    Tutor's department
      */
     public Tutor(String name, long institutionId, String department) {
-        super(name, institutionId, department);
+        this(name, institutionId, department, null);
     }
 
     /**

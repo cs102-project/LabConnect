@@ -39,13 +39,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        }
-
-        else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -63,11 +57,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -86,11 +76,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -108,11 +94,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -130,11 +112,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -152,11 +130,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -174,11 +148,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -197,11 +167,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -219,12 +185,8 @@ public class RegexHelper {
         regex = "(else if)\\s*(\\()";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
-
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return patternMatcher.find();
     }
 
     /**
@@ -243,11 +205,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -266,11 +224,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -289,11 +243,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -312,11 +262,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 
     /**
@@ -335,10 +281,6 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        if (patternMatcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return patternMatcher.find();
     }
 }

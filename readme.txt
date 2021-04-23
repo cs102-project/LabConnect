@@ -44,4 +44,4 @@ Berkan Şahin -> Model Classes (Unit & Style Testing Logic) + Docker Composition
 Berk Çakar -> Style Checker (Regex Logic and Checker Classes)
 Borga Haktan Bilen -> Model Classes + Style Checker Classes
 Alp Ertan -> Unit Test related classes (Exceptions) + Style Checker Classes
-Vedat Eren Arıcan -> TestResult + Sytle Checker (Regex Logic)
+Vedat Eren Arıcan -> TestResult + Style Checker (Regex Logic) + Code clean-up/refactoring

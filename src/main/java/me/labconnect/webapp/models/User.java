@@ -28,7 +28,7 @@ public abstract class User {
      */
     public User(String name, long institutionId, String department) {
         this.name = name;
-        userID = institutionId;
+        this.userID = institutionId;
         this.department = department;
     }
 

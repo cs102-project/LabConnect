@@ -9,5 +9,10 @@ package me.labconnect.webapp.testing;
  * @version 21.04.2021
  */
 public enum TestState {
-    COMPILER_ERROR, TIMEOUT, SUCCESS, OUTPUT_MISMATCH, RUNTIME_ERROR, DESIGN_ERROR
+    COMPILER_ERROR, 
+    TIMEOUT, 
+    SUCCESS, 
+    OUTPUT_MISMATCH, 
+    RUNTIME_ERROR, 
+    DESIGN_ERROR
 }

@@ -229,10 +229,7 @@ public class UnitTest implements Tester {
             currentOutputScanner = new Scanner(programOutput);
 
             for (String correctLine : correctOutput) {
-                if (!currentOutputScanner.hasNextLine()) {
-                    endState = TestState.OUTPUT_MISMATCH;
-                    break;
-                } else if (!correctLine.equals(currentOutputScanner.nextLine())) {
+                if (!currentOutputScanner.hasNextLine() || !correctLine.equals(currentOutputScanner.nextLine())) {
                     endState = TestState.OUTPUT_MISMATCH;
                     break;
                 }

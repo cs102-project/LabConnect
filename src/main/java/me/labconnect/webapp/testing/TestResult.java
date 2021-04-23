@@ -43,9 +43,10 @@ public class TestResult {
 
         Scanner scan = new Scanner(output);
 
-        while (scan.hasNextLine())
+        while (scan.hasNextLine()) {
             testOutput.add(scan.nextLine());
-
+        }
+        
         scan.close();
     }
 
@@ -61,11 +62,9 @@ public class TestResult {
         this.test = styleCheck;
         this.submission = submission;
         this.testOutput = offendingLines;
-        if (offendingLines.isEmpty()) {
-            state = TestState.SUCCESS;
-        } else {
-            state = TestState.DESIGN_ERROR;
-        }
+        
+        state = offendingLines.isEmpty() ? TestState.SUCCESS : TestState.DESIGN_ERROR;
+        
     }
 
     /**

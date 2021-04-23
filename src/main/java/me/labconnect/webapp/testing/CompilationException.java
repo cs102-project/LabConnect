@@ -27,9 +27,10 @@ public class CompilationException extends Exception {
      */
     public CompilationException(Path output) throws IOException {
         Scanner scan = new Scanner(output);
-        while (scan.hasNextLine())
+        while (scan.hasNextLine()) {
             compilerOutput.add(scan.nextLine());
-
+        }
+        
         scan.close();
     }
 
