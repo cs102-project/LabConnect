@@ -1,18 +1,17 @@
 package me.labconnect.webapp.models;
 
 /**
- * Meetable interface.
- * <p>
- * User types who can be meetable in an
- * online setting.
+ * A user that has a personal meeting room accessible by visiting an external
+ * website (e.g. Zoom)
+ * 
  * @author Borga Haktan Bilen
- * @version 22/04/2021
+ * @version 22.04.2021
  */
 public interface Meetable {
     /**
-     * Gets the meeting link of Tutor or Teaching Assitant.
+     * Gets the meeting link for this user.
      * 
-     * @return The meeting link in String.
+     * @return The meeting link as a String.
      */
-    String getMeetingLink();
+    public String getMeetingLink();
 }

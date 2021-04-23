@@ -3,7 +3,7 @@ package me.labconnect.webapp.models;
 import org.springframework.data.annotation.Id;
 
 /**
- * User superclass for general properties and methods
+ * A generic User of LabConnect
  * 
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
@@ -45,9 +45,5 @@ public abstract class User {
         return department;
     }
 
-    /*
-     * Need an online status checking method. TO-DO after the implementation of
-     * LiveSessionManager class. Additionally, for online status subclasses of this
-     * class might need a small modification also
-     */
+    // TODO Live session methods
 }

@@ -23,7 +23,7 @@ public class Assignment {
 
     // Constants
     final int MAX_GRADE = 100;
-    final int MAX_ATTEMPTS = 5; // Should we really hard-code these? -Berkan
+    final int MAX_ATTEMPTS = 5; 
     final String ASSIGNMENT_ROOT = "/var/labconnect/assignments";
 
     // Variables
@@ -116,7 +116,7 @@ public class Assignment {
     }
 
     /**
-     * Sets the array of section numbers (in int) that are assigned to the
+     * Sets the array of section numbers (as integers) that are assigned to the
      * assignment
      * 
      * @param sections {@code int} array of assigned sections' number
@@ -164,10 +164,6 @@ public class Assignment {
         this.title = title;
     }
 
-    // Might be a solution for default setter method for title
-    // public void setTitle() {
-    // title = instructions.getName();
-    // }
 
     /**
      * Gets the due date

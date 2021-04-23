@@ -16,10 +16,8 @@ import me.labconnect.webapp.testing.Tester;
  * Model of a singular attempt, containing the submission path and results of
  * the tests
  * 
- * @implNote This implementation requires that the submissions are stored
- *           permanently in the server
  * @author Berkan Şahin
- * @version 22.04.2021
+ * @version 23.04.2021
  */
 public class Attempt {
 
@@ -57,7 +55,7 @@ public class Attempt {
 
         this.submission = submission;
 
-        // Create submission dir 
+        // Create submission dir
         submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT, submission.ID));
 
         submissionDir = Files.createTempDirectory(submissionParent, "attempt");
@@ -125,7 +123,6 @@ public class Attempt {
      * 
      * @param test The unit or style test
      * @return The test result if it is found, otherwise {@code null}
-     * @apiNote this could be done via DB queries once integration is complete
      */
     public TestResult getResultFor(Tester test) {
         for (TestResult result : testResults) {
@@ -145,7 +142,6 @@ public class Attempt {
     public void setGrade(int grade) {
         this.grade = grade;
     }
-
 
     /**
      * Returns the grade for this attempt

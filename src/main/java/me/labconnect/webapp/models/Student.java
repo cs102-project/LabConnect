@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class represents the Students.
+ * A class representing a student, i.e., a User that submits solutions to
+ * assignments and waits in queues
  * 
  * @author Borga Haktan Bilen
- * @version 22/04/2021
+ * @author Berkan Şahin
+ * @version 23.04.2021
  */
 public class Student extends User {
 
@@ -16,12 +18,14 @@ public class Student extends User {
     HashMap<Assignment, Submission> submissions;
 
     // Constructor
+
     /**
-     * Initializes the necessary properties.
+     * Create a new Student with pre-determined assignments.
      * 
      * @param name          Name of the student.
      * @param institutionId Unique institution id of the student.
      * @param department    Student's department.
+     * @param assignments   Assignments this student is responsible for
      */
     public Student(String name, long institutionId, String department, ArrayList<Assignment> assignments) {
         this(name, institutionId, department);
@@ -95,6 +99,7 @@ public class Student extends User {
 
     /**
      * Return a mapping of submissions to assignments
+     * 
      * @return a mapping of submissions to assignments
      */
     public HashMap<Assignment, Submission> getSubmissions() {
@@ -103,6 +108,7 @@ public class Student extends User {
 
     /**
      * Return a submission for a specific assignment
+     * 
      * @param assignment The assignment the submission belongs to
      * @return The submission if it's found, otherwise {@code null}
      */
