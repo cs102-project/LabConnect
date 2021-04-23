@@ -57,7 +57,7 @@ public class Assignment {
             int[] sections) throws IOException {
 
         assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "assignment-");
-        instructions = Files.copy(instructionFile, assignmentDir);
+        instructions = Files.copy(instructionFile, assignmentDir.resolve(instructionFile.getFileName()));
 
         this.tests = tests;
         this.title = title;
@@ -143,7 +143,7 @@ public class Assignment {
      *           therefore it is safe to delete the file afterwards
      */
     public void setInstructions(Path instructions) throws IOException {
-        this.instructions = Files.copy(instructions, assignmentDir);
+        this.instructions = Files.copy(instructions, assignmentDir.resolve(instructions.getFileName()));
     }
 
     /**

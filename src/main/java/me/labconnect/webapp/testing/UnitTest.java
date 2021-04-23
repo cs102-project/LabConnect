@@ -57,7 +57,7 @@ public class UnitTest implements Tester {
         TestResult firstResult;
 
         this.name = name;
-        this.testerClass = Files.copy(testerClass, assignment.getAssignmentDir());
+        this.testerClass = Files.copy(testerClass, assignment.getAssignmentDir().resolve(testerClass.getFileName()));
         this.timeLimitInMS = timeLimitMiliseconds;
 
         firstResult = runTest(exampleImpl);
