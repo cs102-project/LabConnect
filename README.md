@@ -14,7 +14,10 @@
 
 ## Project Details
 
-Project Name: **LabConnect** 
+Project Name: **LabConnect**
+
+![version](https://img.shields.io/badge/version-0.0.1-yellow?style=flat-square) ![license](https://img.shields.io/github/license/cs102-project/LabConnect?style=flat-square)
+![issues](https://img.shields.io/github/issues/cs102-project/LabConnect?style=flat-square)
 
 ### List of features:
 
