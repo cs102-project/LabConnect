@@ -35,5 +35,5 @@ public interface UserRepository extends MongoRepository<User, Long> {
      * @param institutionId The ID number of the wanted user.
      * @return The user object which has the required ID number.
      */
-    public User findByInstitutionId( long institutionId );
+    public User findByInstitutionID( long institutionId );
 }

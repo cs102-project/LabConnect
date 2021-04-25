@@ -14,7 +14,7 @@ public abstract class User {
     // Properties
     @Id
     private String objectID;
-    private long userID;
+    private long institutionID;
     private String name;
     private String department;
 
@@ -28,7 +28,7 @@ public abstract class User {
      */
     public User(String name, long institutionId, String department) {
         this.name = name;
-        this.userID = institutionId;
+        this.institutionID = institutionId;
         this.department = department;
     }
 
@@ -39,7 +39,7 @@ public abstract class User {
      * @return The user id as long type
      */
     public long getUserId() {
-        return userID;
+        return institutionID;
     }
 
     /**
