@@ -88,7 +88,7 @@ public class Student extends User {
      *         {@code false}
      */
     public boolean addSubmission(Assignment assignment, Submission submission) {
-        if (assignments.indexOf(assignment) == -1) {
+        if (!assignments.contains(assignment)) {
             return false;
         } else {
             submissions.put(assignment, submission);

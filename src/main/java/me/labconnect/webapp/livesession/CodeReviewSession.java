@@ -14,7 +14,7 @@ import me.labconnect.webapp.models.TeachingAssistant;
  * @author Berkan Şahin
  * @version 25.04.2021
  */
-public class TASessionManager extends LiveSessionManager {
+public class CodeReviewSession extends LiveSession {
 
     private TeachingAssistant sessionTA;
 
@@ -25,7 +25,7 @@ public class TASessionManager extends LiveSessionManager {
      * @param sessionLab The assignment for this session
      * @param sessionTA  The TA hosting this session
      */
-    public TASessionManager(String sessionID, Assignment sessionLab, TeachingAssistant sessionTA) {
+    public CodeReviewSession(String sessionID, Assignment sessionLab, TeachingAssistant sessionTA) {
         super(sessionID, sessionLab);
         this.sessionTA = sessionTA;
     }
@@ -43,21 +43,24 @@ public class TASessionManager extends LiveSessionManager {
     }
 
     /**
-     * Attempt to add a new student to the queue
+     * Add a new student to the queue if their last attempt was successful
      * 
-     * @param newStudent The student to add
-     * 
-     * @return {@code true} if the student has a submission for the assignment and
-     *         belongs in this session, otherwise {@code false}
+     * @return {@code true} if the student is added to the queue, otherwise {@code false}
      */
     @Override
     public boolean addStudent(Student newStudent) {
-        if (newStudent.getSubmissionFor(getSessionAssignment()) == null
-                || sessionTA.getStudents().indexOf(newStudent) == -1) {
-            return false;
-        } else {
+        if (newStudent.getSubmissionFor(sessionLab).getFinalAttempt().passedAllTests()) {
             return super.addStudent(newStudent);
+        } else {
+            return false;
         }
     }
 
+    /**
+     * Return the teaching assistant hosting this session
+     * @return the teaching assistant hosting this session
+     */
+    public TeachingAssistant getSessionTA() {
+        return sessionTA;
+    }
 }

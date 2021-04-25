@@ -11,7 +11,7 @@ import me.labconnect.webapp.models.Submission;
  * Compare two students based on their attempt count for a specific assignment
  * 
  * @see Attempt
- * @see LiveSessionManager
+ * @see LiveSession
  * @author Berkan Şahin
  * @version 25.04.2021
  */

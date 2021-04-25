@@ -78,6 +78,17 @@ public class Submission {
     }
 
     /**
+     * Get the final attempt for this submission
+     * @return the final attempt for this submission if it exists
+     */
+    public Attempt getFinalAttempt() {
+        if (attempts.size() > 0) {
+            return attempts.get(attempts.size() - 1);
+        } else {
+            return null;
+        }
+    }
+    /**
      * Returns the amount of attempts for this submission
      * @return the amount of attempts for this submission
      */

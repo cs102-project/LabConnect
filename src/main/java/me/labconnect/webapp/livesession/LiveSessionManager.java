@@ -1,82 +1,108 @@
 package me.labconnect.webapp.livesession;
 
-import java.util.Queue;
+import java.util.HashMap;
+import java.util.List;
 
-import me.labconnect.webapp.models.Assignment;
+import me.labconnect.webapp.models.LabAssignment;
+import me.labconnect.webapp.models.Meetable;
 import me.labconnect.webapp.models.Student;
+import me.labconnect.webapp.models.TeachingAssistant;
+import me.labconnect.webapp.models.Tutor;
 
 /**
- * A Live Session Manager is to control the meetings held during the lab hours.
+ * Manages all live sessions (review and tutoring) related to a particular
+ * {@link me.labconnect.webapp.models.LabAssignment}
  * 
- * @author Alp Ertan
  * @author Berkan Şahin
  * @version 25.04.2021
  */
-public abstract class LiveSessionManager {
+public class LiveSessionManager {
 
-    // Properties
-    protected String sessionID;
-    protected Assignment sessionLab;
-    protected Queue<Student> studentQueue;
+    // Variables
+    private LabAssignment sessionLab;
+    private String sessionID;
+    private HashMap<TeachingAssistant, CodeReviewSession> reviewSessions;
+    private List<TeachingAssistant> sessionTAs;
+    private TutoringSession tutoringSession;
 
-    // Constructors
+    // Constructor
 
     /**
-     * Creates a new Live Session Manager with a determined assignment
+     * Create a new Live Session Manager for a lab assignment
      * 
-     * @param sessionID  The ID of the session
-     * @param sessionLab The assignment of the lab
+     * @param sessionLab    The lab assignment this session is for
+     * @param sessionID     The session ID
+     * @param sessionTAs    The TAs participating in this session
+     * @param sessionTutors The tutors participating in this session
      */
-    public LiveSessionManager(String sessionID, Assignment sessionLab) {
-        this.sessionID = sessionID;
+    public LiveSessionManager(LabAssignment sessionLab, String sessionID, List<TeachingAssistant> sessionTAs,
+            List<Tutor> sessionTutors) {
         this.sessionLab = sessionLab;
-        this.studentQueue = initQueue();
+        this.sessionID = sessionID;
+        this.sessionTAs = sessionTAs;
+
+        // TODO (somehow) generate unique IDs for sessions
+        reviewSessions = new HashMap<>();
+        for (TeachingAssistant sessionTA : sessionTAs) {
+            reviewSessions.put(sessionTA, new CodeReviewSession(this.sessionID, this.sessionLab, sessionTA));
+        }
+
+        tutoringSession = new TutoringSession(sessionID, sessionLab, sessionTutors);
     }
 
     // Methods
 
     /**
-     * Initialize the internal student queue
+     * Add a student to their corresponding CodeReviewSession if they have one
      * 
-     * @return the newly created student queue
+     * @param student The student to add
+     * @return {@code true} if the student has a submission for the assignment and
+     *         is assigned to a TA with a review session
      */
-    protected abstract Queue<Student> initQueue();
+    public boolean addStudentForReview(Student student) {
+        for (TeachingAssistant ta : sessionTAs) {
+            if (ta.getStudents().contains(student) && student.getSubmissionFor(sessionLab) != null) {
+                return reviewSessions.get(ta).addStudent(student);
+            }
+        }
 
-    /**
-     * Adds a new student to the live session queue
-     * 
-     * @param newStudent The student being added to the session queue
-     * @return {@code true} if the student can attend this session
-     * 
-     * @implNote The default implementation always returns {@code true}
-     */
-    public boolean addStudent(Student newStudent) {
-        studentQueue.add(newStudent);
-        return true;
+        return false;
     }
 
     /**
-     * Returns the next student in the queue
+     * Add a student to the TutoringSession for this lab
      * 
-     * @return next student in queue
+     * @param student the student to add
      */
-    public Student getNextStudent() {
-        return studentQueue.poll();
+    public void addStudentForTutoring(Student student) {
+        tutoringSession.addStudent(student);
     }
 
     /**
-     * Clears all students from the queue
+     * Get a live session hosted by a particular meetable user, if it exists
+     * 
+     * @param host The user that hosts the session
+     * @return The session hosted by the specified user if it exists, otherwise
+     *         {@code null}
+     */
+    public LiveSession getLiveSessionFor(Meetable host) {
+        if (host instanceof TeachingAssistant) {
+            return reviewSessions.get(host);
+        } else if (host instanceof Tutor && tutoringSession.getTutors().contains(host)) {
+            return tutoringSession;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * End all the live sessions managed by this session
      */
     public void endSession() {
-        studentQueue.clear();
-    }
+        for (CodeReviewSession reviewSession :reviewSessions.values()) {
+            reviewSession.endSession();
+        }
 
-    /**
-     * Returns the assignment for this live session
-     * @return the assignment for this live session
-     */
-    public Assignment getSessionAssignment() {
-        return sessionLab;
+        tutoringSession.endSession();
     }
-
 }
