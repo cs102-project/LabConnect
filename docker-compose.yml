@@ -16,3 +16,8 @@ services:
             - labconnect-mongo:/data/db
     redis:
         image: redis
+
+volumes: 
+    - labconnect-submissions
+    - labconnect-assignments
+    - labconnect-mongo
