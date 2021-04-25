@@ -57,10 +57,10 @@ public class LiveSession {
     }
 
     /**
-     * Ends the current live session
+     * Clears all students from the queue 
      */
     public void endSession() {
-        
+        studentQueue.clear();
     }
 
 
