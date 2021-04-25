@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
  * An aggregation of attempts for a certain assignment
  * 
  * @author Berkan Şahin
- * @version 22.04.2021
+ * @version 25.04.2021
  */
 public class Submission {
     
@@ -75,5 +75,13 @@ public class Submission {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Returns the amount of attempts for this submission
+     * @return the amount of attempts for this submission
+     */
+    public int getAttemptCount() {
+        return attempts.size();
     }
 }

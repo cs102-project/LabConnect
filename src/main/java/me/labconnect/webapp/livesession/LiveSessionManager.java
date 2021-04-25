@@ -1,12 +1,19 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.livesession;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+import me.labconnect.webapp.models.Assignment;
+import me.labconnect.webapp.models.Student;
+import me.labconnect.webapp.models.TeachingAssistant;
 
 /**
  * A Live Session Manager is to control the meeting held by
  * teaching assistans and students during the lab hours.
  * 
  * @author Alp Ertan
+ * @author Berkan Şahin
  * @version 25.04.2021
  */
 public class LiveSessionManager {
@@ -15,7 +22,7 @@ public class LiveSessionManager {
     private String sessionID;
     private Assignment sessionLab;
     private TeachingAssistant[] sessionTAs;
-    private ArrayList<Student> studentQueue;
+    private Queue<Student> studentQueue;
 
     // Constructors
 
@@ -32,7 +39,7 @@ public class LiveSessionManager {
         this.sessionID = sessionID;
         this.sessionLab = sessionLab;
         this.sessionTAs = sessionTAs;
-        studentQueue = new ArrayList<Student>();
+        studentQueue = new PriorityQueue<>(new AttemptAmountComparator(this.sessionLab));
     }
 
     // Methods
@@ -50,10 +57,8 @@ public class LiveSessionManager {
      * 
      * @return next student in queue
      */
-    public Student nextStudent() {
-        Student nextStudent = studentQueue.get(0);
-        studentQueue.remove(0);
-        return nextStudent;
+    public Student getNextStudent() {
+        return studentQueue.poll();
     }
 
     /**
