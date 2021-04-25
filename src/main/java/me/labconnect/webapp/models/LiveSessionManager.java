@@ -9,11 +9,11 @@ import java.util.ArrayList;
  * @author Alp Ertan
  * @version 25.04.2021
  */
-public class LiveSession {
+public class LiveSessionManager {
 
     // Properties
     private String sessionID;
-    private LabAssignment sessionLab;
+    private Assignment sessionLab;
     private TeachingAssistant[] sessionTAs;
     private ArrayList<Student> studentQueue;
 
@@ -27,7 +27,7 @@ public class LiveSession {
      * @param sessionLab The assignment of the lab
      * @param sessionTAs TAs participating in the lab
      */
-    public LiveSession(String sessionID, LabAssignment sessionLab,
+    public LiveSessionManager(String sessionID, Assignment sessionLab,
                 TeachingAssistant[] sessionTAs) {
         this.sessionID = sessionID;
         this.sessionLab = sessionLab;
