@@ -1,0 +1,105 @@
+/* External fonts */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,700;1,700&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://necolas.github.io/normalize.css/latest/normalize.css');
+
+@font-face{
+    font-family: "Cascadia Mono";
+    src : url("CascadiaMono.woff2");
+}
+
+body{
+    background: url(texture.jpg);
+    font-family: "Cascadia Mono", Courier, monospace;
+    color: #ebdbb2;
+    overflow-wrap: break-word;
+    font-size: 12pt;
+    margin: 0.4em;
+    width: 80%;
+    margin: auto;
+}
+h1{
+    text-align: center;
+    font-size: 24pt;
+}
+h2, h3{
+    margin-left: 0.1em;
+}
+p, li{
+    margin-left: 0.5em;
+}
+/*h6{
+    text-align: center;
+}*/
+figure img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+figcaption{
+    text-align: center;
+    font-style: italic;
+}
+code{
+    background-color: #282828;
+    font-family: "IBM Plex Mono", monospace;
+}
+.bottom{
+    text-align: center;
+}
+.bottom a{
+    color: #83a598;
+}
+.bottom a:hover{
+    color: #fb4934;
+}
+.bottom a:active{
+    color: #fb4934;
+}
+a:visited{
+    color: #cc241d;
+}
+
+a {
+    color: #b8bb26;
+    font-weight: bold;
+
+}
+
+a:hover{
+    color: #fb4934;
+}
+
+a:active{
+    color: #fb4934;
+}
+@media (max-width: 700px){
+    #shout{
+        font-size: 1em;
+    }
+    body{
+        width: auto;
+    }
+}
+.sourceCode{
+    display: inline-block;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+div.sourceCode{
+    max-width: 100%;
+}
+code.sourceCode{
+    border-left-width: 0px;
+    padding: 1em;
+}
+
+h3#shout{
+    font-family: "Cascadia Mono","IBM Plex Mono", monospace;
+    margin-left: unset;
+}
+h1.based{
+    text-decoration: underline;
+    font-weight: bold;
+    color: #d3869b;
+}
