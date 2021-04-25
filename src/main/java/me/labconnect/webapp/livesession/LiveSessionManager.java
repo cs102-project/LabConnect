@@ -1,55 +1,58 @@
 package me.labconnect.webapp.livesession;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 import me.labconnect.webapp.models.Assignment;
 import me.labconnect.webapp.models.Student;
-import me.labconnect.webapp.models.TeachingAssistant;
 
 /**
- * A Live Session Manager is to control the meeting held by
- * teaching assistans and students during the lab hours.
+ * A Live Session Manager is to control the meetings held during the lab hours.
  * 
  * @author Alp Ertan
  * @author Berkan Şahin
  * @version 25.04.2021
  */
-public class LiveSessionManager {
+public abstract class LiveSessionManager {
 
     // Properties
-    private String sessionID;
-    private Assignment sessionLab;
-    private TeachingAssistant[] sessionTAs;
-    private Queue<Student> studentQueue;
+    protected String sessionID;
+    protected Assignment sessionLab;
+    protected Queue<Student> studentQueue;
 
     // Constructors
 
     /**
-     * Creates a new Live Session Manager with a determined 
-     * assignment and TAs
+     * Creates a new Live Session Manager with a determined assignment
      * 
      * @param sessionID  The ID of the session
      * @param sessionLab The assignment of the lab
-     * @param sessionTAs TAs participating in the lab
      */
-    public LiveSessionManager(String sessionID, Assignment sessionLab,
-                TeachingAssistant[] sessionTAs) {
+    public LiveSessionManager(String sessionID, Assignment sessionLab) {
         this.sessionID = sessionID;
         this.sessionLab = sessionLab;
-        this.sessionTAs = sessionTAs;
-        studentQueue = new PriorityQueue<>(new AttemptAmountComparator(this.sessionLab));
+        this.studentQueue = initQueue();
     }
 
     // Methods
+
+    /**
+     * Initialize the internal student queue
+     * 
+     * @return the newly created student queue
+     */
+    protected abstract Queue<Student> initQueue();
+
     /**
      * Adds a new student to the live session queue
      * 
      * @param newStudent The student being added to the session queue
+     * @return {@code true} if the student can attend this session
+     * 
+     * @implNote The default implementation always returns {@code true}
      */
-    public void addStudent(Student newStudent) {
+    public boolean addStudent(Student newStudent) {
         studentQueue.add(newStudent);
+        return true;
     }
 
     /**
@@ -62,12 +65,18 @@ public class LiveSessionManager {
     }
 
     /**
-     * Clears all students from the queue 
+     * Clears all students from the queue
      */
     public void endSession() {
         studentQueue.clear();
     }
 
-
+    /**
+     * Returns the assignment for this live session
+     * @return the assignment for this live session
+     */
+    public Assignment getSessionAssignment() {
+        return sessionLab;
+    }
 
 }
