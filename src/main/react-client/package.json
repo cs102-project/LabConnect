@@ -1,5 +1,5 @@
 {
-  "name": "labconnect",
+  "name": "react-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,14 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "eslint": "^7.25.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.23.2",
-    "prettier": "^2.2.1"
   }
 }
