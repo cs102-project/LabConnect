@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 
+import me.labconnect.webapp.livesession.LiveSessionManager;
 import me.labconnect.webapp.testing.Tester;
 
 /**
@@ -15,6 +16,9 @@ import me.labconnect.webapp.testing.Tester;
  * @version 25.04.2021
  */
 public class LabAssignment extends Assignment {
+
+    // Variables
+    boolean isLive;
 
     // Constructor
     /**
@@ -35,6 +39,41 @@ public class LabAssignment extends Assignment {
         super(title, dueDate, visible, instructionFile, tests, sections);
     }
 
+    /**
+     * Start a live session manager for this assignment
+     * 
+     * @return The newly started live session manager
+     */
+    public LiveSessionManager startLiveSession() {
+        ArrayList<TeachingAssistant> sessionTAs;
+        ArrayList<Tutor> sessionTutors;
 
+        // TODO Query for section TAs and (maybe) available tutors
+        sessionTAs = new ArrayList<>();
+        sessionTutors = new ArrayList<>();
+
+        // TODO generate an ID for the live session
+        return new LiveSessionManager(this, "FIXME", sessionTAs, sessionTutors);
+
+    }
+
+    /**
+     * Set whether or not this lab has an active live session
+     * 
+     * @param live The new live value
+     */
+    public void setLive(boolean live) {
+        isLive = live;
+    }
+
+    /**
+     * Return whether this lab has an active live session or not
+     * 
+     * @return {@code true} if there is an active live session for this lab,
+     *         otherwise {@code false}
+     */
+    public boolean isLive() {
+        return isLive;
+    }
 
 }

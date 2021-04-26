@@ -29,7 +29,6 @@ public class TutoringSession extends LiveSession {
     public TutoringSession(String sessionID, Assignment sessionLab, List<Tutor> sessionTutors) {
         super(sessionID, sessionLab);
         this.sessionTutors = sessionTutors;
-        // TODO Auto-generated constructor stub
     }
 
     /**

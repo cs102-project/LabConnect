@@ -48,6 +48,7 @@ public class LiveSessionManager {
         }
 
         tutoringSession = new TutoringSession(sessionID, sessionLab, sessionTutors);
+        sessionLab.setLive(true);
     }
 
     // Methods
@@ -104,5 +105,6 @@ public class LiveSessionManager {
         }
 
         tutoringSession.endSession();
+        sessionLab.setLive(false);
     }
 }

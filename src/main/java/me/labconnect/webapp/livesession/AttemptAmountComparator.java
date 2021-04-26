@@ -45,11 +45,7 @@ public class AttemptAmountComparator implements Comparator<Student> {
         firstSubmission = o1.getSubmissionFor(assignment);
         secondSubmission = o2.getSubmissionFor(assignment);
 
-        if (firstSubmission == null || secondSubmission == null) {
-            return 0; // TODO handle possible null ptr better
-        } else {
-            return firstSubmission.getAttemptCount() - secondSubmission.getAttemptCount();
-        }
+        return firstSubmission.getAttemptCount() - secondSubmission.getAttemptCount();
     }
 
 }
