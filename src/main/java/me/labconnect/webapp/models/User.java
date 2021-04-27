@@ -17,6 +17,7 @@ public abstract class User {
     private long institutionID;
     private String name;
     private String department;
+    private boolean isOnline;
 
     // Constructor
     /**
@@ -60,5 +61,39 @@ public abstract class User {
         return department;
     }
 
-    // TODO Live session methods
+    /**
+     * Check if the given user is this user
+     * 
+     * @param other The object to check for equality
+     * @return {@code true} if the institution IDs are equal, otherwise
+     *         {@code false}
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof User) {
+            User tmp;
+            tmp = (User) other;
+            return institutionID == tmp.institutionID;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the online status of the user
+     * 
+     * @param isOnline The new online status of the user
+     */
+    public void setOnline(boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
+    /**
+     * Returns the online status of the user
+     * 
+     * @return the online status of the user
+     */
+    public boolean isOnline() {
+        return isOnline;
+    }
 }
