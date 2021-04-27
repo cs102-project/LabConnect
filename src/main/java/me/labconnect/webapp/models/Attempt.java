@@ -7,8 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.springframework.data.annotation.Id;
-
 import me.labconnect.webapp.testing.TestResult;
 import me.labconnect.webapp.testing.Tester;
 
@@ -26,7 +24,6 @@ public class Attempt {
     private final String SUBMISSION_ROOT = "/var/labconnect/submissions";
 
     // Variables
-    @Id
     public String attemptID;
     private ArrayList<TestResult> testResults;
     private ArrayList<String> feedback;

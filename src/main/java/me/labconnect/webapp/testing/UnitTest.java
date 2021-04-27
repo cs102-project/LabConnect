@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import org.springframework.data.annotation.Id;
 
 import me.labconnect.webapp.models.Assignment;
 
@@ -24,9 +23,6 @@ import me.labconnect.webapp.models.Assignment;
 public class UnitTest implements Tester {
 
     // Variables
-    @Id
-    public String id;
-
     private String name;
     ArrayList<String> correctOutput;
     Path testerClass;

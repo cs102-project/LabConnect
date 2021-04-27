@@ -2,7 +2,6 @@ package me.labconnect.webapp.models;
 
 import java.util.ArrayList;
 
-import org.springframework.data.annotation.Id;
 
 /**
  * An aggregation of attempts for a certain assignment
@@ -13,7 +12,6 @@ import org.springframework.data.annotation.Id;
 public class Submission {
     
     // Variables
-    @Id private String objectID;
     private Student submitter;
     private Assignment assignment;
     private ArrayList<Attempt> attempts;
