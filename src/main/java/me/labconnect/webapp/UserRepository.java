@@ -13,7 +13,7 @@ import me.labconnect.webapp.models.User;
  * @version 22.04.2021
  */
 @Repository
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, String> {
     /**
      * Finds a user or users by name.
      * @param name The name of the user(s).
