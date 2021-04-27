@@ -7,13 +7,15 @@ import java.util.ArrayList;
  * students and manage a meeting queue
  * 
  * @author Borga Haktan Bilen
- * @version 22.04.2021
+ * @author Berkan Şahin
+ * @version 27.04.2021
  */
 public class TeachingAssistant extends User implements Meetable {
 
     // Properties
     private String meetingLink;
     private ArrayList<Student> students;
+    private int section;
 
     // Constructors
     /**
@@ -24,9 +26,10 @@ public class TeachingAssistant extends User implements Meetable {
      * @param department       TA's department
      * @param assignedStudents The students this TA is assigned to
      */
-    public TeachingAssistant(String name, long institutionId, String department, ArrayList<Student> assignedStudents) {
+    public TeachingAssistant(String name, long institutionId, String department, ArrayList<Student> assignedStudents, int section) {
         super(name, institutionId, department);
         students = assignedStudents;
+        this.section = section;
     }
 
     /**
@@ -37,6 +40,7 @@ public class TeachingAssistant extends User implements Meetable {
      * @param department       TA's department.
      * @param meetingLink      The URL of the online meeting hosted by the TA
      * @param assignedStudents The students this TA is assigned to
+     * @param section          The section this TA is assgined to
      */
     public TeachingAssistant(String name, long institutionId, String department, String meetingLink,
             ArrayList<Student> assignedStudents) {
@@ -92,5 +96,13 @@ public class TeachingAssistant extends User implements Meetable {
      */
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    /**
+     * Return the section this TA is assigned to
+     * @return the section this TA is assigned to
+     */
+    public int getSection() {
+        return section;
     }
 }

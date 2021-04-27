@@ -5,6 +5,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import me.labconnect.webapp.TARepository;
 import me.labconnect.webapp.livesession.LiveSessionManager;
 import me.labconnect.webapp.testing.Tester;
 
@@ -18,6 +21,9 @@ import me.labconnect.webapp.testing.Tester;
 public class LabAssignment extends Assignment {
 
     // Variables
+    @Autowired
+    private TARepository assistantRepository;
+    
     boolean isLive;
 
     // Constructor
@@ -48,8 +54,12 @@ public class LabAssignment extends Assignment {
         ArrayList<TeachingAssistant> sessionTAs;
         ArrayList<Tutor> sessionTutors;
 
-        // TODO Query for section TAs and (maybe) available tutors
         sessionTAs = new ArrayList<>();
+        for (int section : getSections()) {
+            sessionTAs.addAll(assistantRepository.findBySection(section));
+        }
+
+        // TODO (maybe) query for available tutors
         sessionTutors = new ArrayList<>();
 
         // TODO generate an ID for the live session
