@@ -57,7 +57,7 @@ public class Attempt {
         this.submission = submission;
 
         // Create submission dir
-        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT, submission.ID));
+        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT, submission.getStudent().getUserId() + ""));
 
         submissionDir = Files.createTempDirectory(submissionParent, "attempt");
 

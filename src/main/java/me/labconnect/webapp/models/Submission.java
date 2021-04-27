@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Id;
 public class Submission {
     
     // Variables
-    @Id public String ID;
+    @Id private String objectID;
     private Student submitter;
     private Assignment assignment;
     private ArrayList<Attempt> attempts;
