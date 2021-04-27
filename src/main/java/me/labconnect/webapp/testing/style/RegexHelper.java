@@ -80,6 +80,25 @@ public class RegexHelper {
     }
 
     /**
+     * Checks the method calling statement if it complies to Java conventions or not
+     * .
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to the Java
+     *         conventions, {@code false} otherwise.
+     */
+    public static boolean javadocCommentBlockRegexMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "/\\*\\*((?:[^*]+|\\*[^/])*)\\*/";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
      * Checks if the method is named conventionally or not.
      *
      * @param str The string that is going to be checked.
@@ -185,7 +204,7 @@ public class RegexHelper {
         regex = "(else if)\\s*(\\()";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
-        
+
         return patternMatcher.find();
     }
 
