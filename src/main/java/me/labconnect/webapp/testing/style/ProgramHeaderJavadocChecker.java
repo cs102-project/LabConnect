@@ -37,7 +37,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
                 errorList.add("Missing or incorrect version (@version) information in the header");
             }
         } else {
-            errorList.add("Javadoc comment (information) block is missing in the beginning of the program");
+            errorList.add("Header javadoc comment block is missing or incorrect in the beginning of the program");
         }
         return errorList;
     }
