@@ -2,6 +2,8 @@ package me.labconnect.webapp.models;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Class representing a TA, i.e., a User that can grade Attempts, meet with
  * students and manage a meeting queue
@@ -10,6 +12,7 @@ import java.util.ArrayList;
  * @author Berkan Şahin
  * @version 27.04.2021
  */
+@Document(collection = "users")
 public class TeachingAssistant extends User implements Meetable {
 
     // Properties

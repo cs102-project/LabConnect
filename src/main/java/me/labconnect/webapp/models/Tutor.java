@@ -1,5 +1,7 @@
 package me.labconnect.webapp.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Class representing a Tutor, i.e., a user that can meet with Students during a
  * live session
@@ -7,6 +9,7 @@ package me.labconnect.webapp.models;
  * @author Borga Haktan Bilen
  * @version 22.04.2021
  */
+@Document(collection = "users")
 public class Tutor extends User implements Meetable {
 
     // Properties

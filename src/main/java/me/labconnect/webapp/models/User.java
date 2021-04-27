@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * A generic User of LabConnect
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.Id;
  * @author Berkan Şahin
  * @version 22.04.2021
  */
+@Document(collection = "users")
 public abstract class User {
 
     // Properties

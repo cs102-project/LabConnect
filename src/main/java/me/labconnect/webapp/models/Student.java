@@ -3,6 +3,8 @@ package me.labconnect.webapp.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * A class representing a student, i.e., a User that submits solutions to
  * assignments and waits in queues
@@ -11,6 +13,7 @@ import java.util.HashMap;
  * @author Berkan Şahin
  * @version 23.04.2021
  */
+@Document(collection = "users")
 public class Student extends User {
 
     // Properties
