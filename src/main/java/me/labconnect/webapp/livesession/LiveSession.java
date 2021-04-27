@@ -1,23 +1,23 @@
 package me.labconnect.webapp.livesession;
 
-import java.util.Queue;
+import java.util.ArrayList;
 
 import me.labconnect.webapp.models.Assignment;
 import me.labconnect.webapp.models.Student;
 
 /**
- * A Live Session Manager is to control the meetings held during the lab hours.
+ * A live session with a singular queue of students
  * 
  * @author Alp Ertan
  * @author Berkan Şahin
- * @version 25.04.2021
+ * @version 27.04.2021
  */
 public abstract class LiveSession {
 
     // Properties
     protected String sessionID;
     protected Assignment sessionLab;
-    protected Queue<Student> studentQueue;
+    protected ArrayList<Student> studentQueue;
 
     // Constructors
 
@@ -30,20 +30,15 @@ public abstract class LiveSession {
     public LiveSession(String sessionID, Assignment sessionLab) {
         this.sessionID = sessionID;
         this.sessionLab = sessionLab;
-        this.studentQueue = initQueue();
+        this.studentQueue = new ArrayList<>();
     }
 
     // Methods
 
     /**
-     * Initialize the internal student queue
-     * 
-     * @return the newly created student queue
-     */
-    protected abstract Queue<Student> initQueue();
-
-    /**
      * Adds a new student to the live session queue
+     * <p>
+     * Any custom ordering of the queue must be implemented in this method
      * 
      * @param newStudent The student being added to the session queue
      * @return {@code true} if the student can attend this session
@@ -56,12 +51,35 @@ public abstract class LiveSession {
     }
 
     /**
-     * Returns the next student in the queue
+     * Retrieves, but <b>does not remove</b> the next student in the queue
      * 
+     * @see LiveSession#proceedQueue()
      * @return next student in queue
      */
     public Student getNextStudent() {
-        return studentQueue.poll();
+        return studentQueue.get(0);
+    }
+
+    /**
+     * Procceds the student queue by removing the leftmost student, i.e, the student
+     * at the beginning of the underlying list
+     * 
+     * @return The student that was removed
+     */
+    public Student proceedQueue() {
+        if (studentQueue.size() > 0) {
+            return studentQueue.remove(0);
+        }
+        return null;
+    }
+
+    /**
+     * Returns the amount of the students waiting for a live session
+     * 
+     * @return The number of students waiting in the queue
+     */
+    public int getWaitingStudentCount() {
+        return studentQueue.size();
     }
 
     /**
@@ -72,7 +90,19 @@ public abstract class LiveSession {
     }
 
     /**
+     * Return the <b>ordered</b> list of the students currently in queue
+     * <p>
+     * The returned ArrayList is ordered from front to back
+     * 
+     * @return
+     */
+    public ArrayList<Student> getStudentQueue() {
+        return studentQueue;
+    }
+
+    /**
      * Returns the assignment for this live session
+     * 
      * @return the assignment for this live session
      */
     public Assignment getSessionAssignment() {

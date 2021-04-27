@@ -1,18 +1,17 @@
 package me.labconnect.webapp.livesession;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Collections;
 
 import me.labconnect.webapp.models.Assignment;
 import me.labconnect.webapp.models.Student;
 import me.labconnect.webapp.models.TeachingAssistant;
 
 /**
- * Manages a live session for a singular TA where the students are queued based
- * on their attempt count
+ * A live session for a singular TA where the students are queued based on their
+ * attempt count
  * 
  * @author Berkan Şahin
- * @version 25.04.2021
+ * @version 27.04.2021
  */
 public class CodeReviewSession extends LiveSession {
 
@@ -31,26 +30,22 @@ public class CodeReviewSession extends LiveSession {
     }
 
     /**
-     * Initializes a new priority queue where students are ordered based on their
-     * attempt count
-     * 
-     * @return the newly created PriorityQueue instance
-     * @see AttemptAmountComparator
-     */
-    @Override
-    protected Queue<Student> initQueue() {
-        return new PriorityQueue<>(new AttemptAmountComparator(getSessionAssignment()));
-    }
-
-    /**
      * Add a new student to the queue if their last attempt was successful
+     * <p>
+     * The place of the new student is based on their attempt count
      * 
-     * @return {@code true} if the student is added to the queue, otherwise {@code false}
+     * @param newStudent The student to add
+     * @return {@code true} if the student is added to the queue, otherwise
+     *         {@code false}
      */
     @Override
     public boolean addStudent(Student newStudent) {
         if (newStudent.getSubmissionFor(sessionLab).getFinalAttempt().passedAllTests()) {
-            return super.addStudent(newStudent);
+            getStudentQueue().add(newStudent);
+            Collections.sort(getStudentQueue(), new AttemptAmountComparator(sessionLab)); // This uses TimSort, which
+                                                                                          // has near O(n) complexity
+                                                                                          // for mostly sorted lists
+            return true;
         } else {
             return false;
         }
@@ -58,6 +53,7 @@ public class CodeReviewSession extends LiveSession {
 
     /**
      * Return the teaching assistant hosting this session
+     * 
      * @return the teaching assistant hosting this session
      */
     public TeachingAssistant getSessionTA() {
