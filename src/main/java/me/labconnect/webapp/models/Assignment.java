@@ -23,13 +23,14 @@ public class Assignment {
 
     // Constants
     final int MAX_GRADE = 100;
-    final int MAX_ATTEMPTS = 5; 
+    final int MAX_ATTEMPTS = 5;
     final String ASSIGNMENT_ROOT = "/var/labconnect/assignments";
 
     // Variables
     @Id
-    public String id; // handled by the Mongo backend, do not modify by hand!
+    private String id; // handled by the Mongo backend, do not modify by hand!
 
+    private String assignmentID;
     private boolean isCompleted;
     private boolean isVisible;
     private int[] sections;
@@ -56,8 +57,9 @@ public class Assignment {
     public Assignment(String title, Date dueDate, boolean visible, Path instructionFile, ArrayList<Tester> tests,
             int[] sections) throws IOException {
 
-        assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "assignment-");
+        assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "");
         instructions = Files.copy(instructionFile, assignmentDir.resolve(instructionFile.getFileName()));
+        assignmentID = assignmentDir.getFileName().toString();
 
         this.tests = tests;
         this.title = title;
@@ -164,7 +166,6 @@ public class Assignment {
         this.title = title;
     }
 
-
     /**
      * Gets the due date
      * 
@@ -224,4 +225,15 @@ public class Assignment {
         return assignmentDir;
     }
 
+    /**
+     * Returns the identifier String for this assignment
+     * <p>
+     * The identifier is derived from the randomly-created and unique assignment
+     * directory name
+     * 
+     * @return the identifier for this assignment
+     */
+    public String getAssignmentID() {
+        return assignmentID;
+    }
 }

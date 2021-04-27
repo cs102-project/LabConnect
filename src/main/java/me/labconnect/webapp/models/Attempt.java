@@ -57,7 +57,8 @@ public class Attempt {
         this.submission = submission;
 
         // Create submission dir
-        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT, submission.getStudent().getUserId() + ""));
+        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT,
+                submission.getAssignment().getAssignmentID(), submission.getStudent().getUserId() + ""));
 
         submissionDir = Files.createTempDirectory(submissionParent, "attempt");
 
@@ -126,9 +127,9 @@ public class Attempt {
      * @return The test result if it is found, otherwise {@code null}
      */
     public TestResult getResultFor(Tester test) {
-        
+
         return testResults.stream().filter(result -> result.getTest().equals(test)).findAny().orElseGet(() -> null);
-        
+
     }
 
     /**
@@ -155,9 +156,9 @@ public class Attempt {
      * @return {@code true} if all tests were successful, otherwise {@code false}
      */
     public boolean passedAllTests() {
-        
+
         return testResults.stream().map(result -> !result.isSuccessful()).anyMatch(success -> success);
-        
+
     }
 
     /**
