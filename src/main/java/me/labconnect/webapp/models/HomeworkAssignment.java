@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import me.labconnect.webapp.testing.Tester;
 
 /**
@@ -14,6 +16,7 @@ import me.labconnect.webapp.testing.Tester;
  * @version 23.04.2021
  * @see Assignment
  */
+@Document(collection = "assignments")
 public class HomeworkAssignment extends Assignment {
 
     // Properties

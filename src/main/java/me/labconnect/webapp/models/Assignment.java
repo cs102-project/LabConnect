@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.testing.Tester;
 
@@ -19,6 +20,7 @@ import me.labconnect.webapp.testing.Tester;
  * @author Borga Haktan Bilen
  * @version 23.04.2021
  */
+@Document(collection = "assignments")
 public class Assignment {
 
     // Constants

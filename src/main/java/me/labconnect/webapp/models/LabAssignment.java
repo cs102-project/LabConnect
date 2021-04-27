@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.TARepository;
 import me.labconnect.webapp.livesession.LiveSessionManager;
@@ -18,6 +19,7 @@ import me.labconnect.webapp.testing.Tester;
  * @author Berkan Şahin
  * @version 25.04.2021
  */
+@Document(collection = "assignments")
 public class LabAssignment extends Assignment {
 
     // Variables
