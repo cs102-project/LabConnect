@@ -97,14 +97,46 @@ public class LiveSessionManager {
     }
 
     /**
+     * Check whether or not the given meetable user is currently hosting a live
+     * session
+     * 
+     * @param host The user to check
+     * @return {@code true} if the user hosts a session, otherwise {@code false}
+     */
+    public boolean hostsLiveSession(Meetable host) {
+        return sessionTAs.contains(host) || tutoringSession.getTutors().contains(host);
+    }
+
+    /**
      * End all the live sessions managed by this session
      */
     public void endSession() {
-        for (CodeReviewSession reviewSession :reviewSessions.values()) {
+        for (CodeReviewSession reviewSession : reviewSessions.values()) {
             reviewSession.endSession();
         }
 
         tutoringSession.endSession();
         sessionLab.setLive(false);
+    }
+
+    /**
+     * Assign a new Tutor to the tutoring session
+     * 
+     * @param tutor The tutor to add
+     */
+    public void assignToSession(Tutor tutor) {
+        tutoringSession.addTutor(tutor);
+    }
+
+    /**
+     * Assign a new TA to a review session, if they aren't already hosting one
+     * 
+     * @param newTA The TA to assign
+     */
+    public void assignToSession(TeachingAssistant newTA) {
+        if (!sessionTAs.contains(newTA)) {
+            sessionTAs.add(newTA);
+            reviewSessions.put(newTA, new CodeReviewSession(sessionID, sessionLab, newTA));
+        }
     }
 }
