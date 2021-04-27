@@ -94,7 +94,7 @@ public abstract class LiveSession {
      * <p>
      * The returned ArrayList is ordered from front to back
      * 
-     * @return
+     * @return The student queue as a list
      */
     public ArrayList<Student> getStudentQueue() {
         return studentQueue;
