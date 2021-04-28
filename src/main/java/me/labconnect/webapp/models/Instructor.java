@@ -28,6 +28,8 @@ public class Instructor extends User {
         this.sections = sections;
     }
 
+    private Instructor() {}
+
     // Methods
 
     /**

@@ -54,6 +54,8 @@ public class Student extends User {
         submissions = new HashMap<>();
     }
 
+    private Student() {}
+
     // Methods
     /**
      * Adds an assignment object to the assignments list.

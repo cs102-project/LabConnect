@@ -52,6 +52,8 @@ public class TeachingAssistant extends User implements Meetable {
         students = assignedStudents;
     }
 
+    private TeachingAssistant() {}
+
     // Methods
     /**
      * Gets the meeting link as String.
