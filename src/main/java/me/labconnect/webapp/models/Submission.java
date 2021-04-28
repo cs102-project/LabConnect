@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Submission {
     
     // Variables
-    private Student submitter;
+    private long submitterID;
     private Assignment assignment;
     private ArrayList<Attempt> attempts;
 
@@ -24,7 +24,7 @@ public class Submission {
      * @param assignment The assignment this submission is for
      */
     public Submission(Student submitter, Assignment assignment) {
-        this.submitter = submitter;
+        this.submitterID = submitter.getUserId();
         this.assignment = assignment;
         attempts = new ArrayList<>();
     }
@@ -32,11 +32,11 @@ public class Submission {
     // Methods
 
     /**
-     * Returns the student this submission belongs to
+     * Returns the ID of the student this submission belongs to
      * @return the student this submission belongs to
      */
-    public Student getStudent() {
-        return submitter;
+    public long getSubmitterID() {
+        return submitterID;
     }
 
     /**

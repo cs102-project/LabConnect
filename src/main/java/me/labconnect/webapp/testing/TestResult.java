@@ -2,6 +2,7 @@ package me.labconnect.webapp.testing;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class TestResult {
     private Tester test;
     private TestState state;
     private ArrayList<String> testOutput;
-    private Path submission;
+    private String submissionPath;
 
     /**
      * Create a TestResult instance for a unit test
@@ -30,15 +31,15 @@ public class TestResult {
      * @apiNote If an error occured during the compilation phase, use
      *          {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
      * @param unitTest  The unit test the instance is instantiated from
-     * @param submisson The submission used in the unit test
+     * @param submission The submission used in the unit test, as an absolute path
      * @param output    The compiler or runtime output, depending on state
      * @param state     The test state
      * 
      * @throws IOException If an I/O error occurs while reading the output
      */
-    public TestResult(UnitTest unitTest, Path submisson, Path output, TestState state) throws IOException {
+    public TestResult(UnitTest unitTest, Path submission, Path output, TestState state) throws IOException {
         this.test = unitTest;
-        this.submission = submisson;
+        this.submissionPath = submission.toString();
         this.state = state;
 
         Scanner scan = new Scanner(output);
@@ -60,7 +61,7 @@ public class TestResult {
      */
     public TestResult(StyleChecker styleCheck, Path submission, ArrayList<String> offendingLines) {
         this.test = styleCheck;
-        this.submission = submission;
+        this.submissionPath = submission.toString();
         this.testOutput = offendingLines;
         
         state = offendingLines.isEmpty() ? TestState.SUCCESS : TestState.DESIGN_ERROR;
@@ -76,7 +77,7 @@ public class TestResult {
      */
     public TestResult(UnitTest unitTest, Path submission, CompilationException exception) {
         this.test = unitTest;
-        this.submission = submission;
+        this.submissionPath = submission.toString();
         state = TestState.COMPILER_ERROR;
 
         testOutput = exception.getCompilerOutput();
@@ -116,7 +117,7 @@ public class TestResult {
      * @return the path of the submitted source code
      */
     public Path getSubmission() {
-        return submission;
+        return Paths.get(submissionPath);
     }
 
     /**

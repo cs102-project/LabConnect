@@ -16,19 +16,17 @@ import me.labconnect.webapp.testing.Tester;
  * 
  * @author Berkan Şahin
  * @author Vedat Eren Arican
- * @version 23.04.2021
+ * @version 28.04.2021
  */
 public class Attempt {
 
     // Constants
-    private final String SUBMISSION_ROOT = "/var/labconnect/submissions";
+    private final String ATTEMPT_ROOT = "/var/labconnect/submissions";
 
     // Variables
-    public String attemptID;
     private ArrayList<TestResult> testResults;
     private ArrayList<String> feedback;
-    private Path submissionDir;
-    private Submission submission;
+    private String attemptPath;
     private int grade;
 
     // Constructors
@@ -43,6 +41,7 @@ public class Attempt {
      */
     public Attempt(Path submissionArchive, Submission submission) throws IOException {
         Path submissionParent;
+        Path submissionDir;
         ArrayList<String> extractorArgs;
         ProcessBuilder extractorBuilder;
         Process extractor;
@@ -51,13 +50,12 @@ public class Attempt {
             throw new IOException("Invalid archive");
         }
 
-        this.submission = submission;
-
         // Create submission dir
-        submissionParent = Files.createDirectories(Paths.get(SUBMISSION_ROOT,
-                submission.getAssignment().getAssignmentID(), submission.getStudent().getUserId() + ""));
+        submissionParent = Files.createDirectories(Paths.get(ATTEMPT_ROOT, submission.getAssignment().getAssignmentID(),
+                submission.getSubmitterID() + ""));
 
-        submissionDir = Files.createTempDirectory(submissionParent, "attempt");
+        submissionDir = Files.createTempDirectory(submissionParent, "");
+        attemptPath = submissionDir.toString();
 
         // Unzip submission
         extractorArgs = new ArrayList<>();
@@ -85,7 +83,7 @@ public class Attempt {
             throw new IOException("unzip was interrupted");
         }
 
-        testResults = runTests();
+        testResults = runTests(submissionDir, submission);
     }
 
     // Methods
@@ -96,7 +94,7 @@ public class Attempt {
      * @return The list of results
      * @throws IOException If processing the submission directory fails
      */
-    private ArrayList<TestResult> runTests() throws IOException {
+    private ArrayList<TestResult> runTests(Path submissionDir, Submission submission) throws IOException {
         ArrayList<TestResult> results;
 
         results = new ArrayList<>();
@@ -174,6 +172,15 @@ public class Attempt {
      */
     public ArrayList<String> getFeedback() {
         return feedback;
+    }
+
+    /**
+     * Get the directory this attempt is stored in
+     * 
+     * @return the directory this attempt is stored in
+     */
+    public Path getAttemptDir() {
+        return Paths.get(attemptPath);
     }
 
 }
