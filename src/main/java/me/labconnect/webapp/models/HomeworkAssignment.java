@@ -7,7 +7,7 @@ import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.testing.Tester;
+import me.labconnect.webapp.models.testing.Tester;
 
 /**
  * Class representing homework assignments

@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import me.labconnect.webapp.testing.TestResult;
-import me.labconnect.webapp.testing.Tester;
+import me.labconnect.webapp.models.testing.TestResult;
+import me.labconnect.webapp.models.testing.Tester;
 
 /**
  * Model of a singular attempt, containing the submission path and results of

@@ -1,4 +1,4 @@
-package me.labconnect.webapp;
+package me.labconnect.webapp.repository;
 
 import me.labconnect.webapp.models.Instructor;
 

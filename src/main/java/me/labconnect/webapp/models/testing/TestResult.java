@@ -1,4 +1,4 @@
-package me.labconnect.webapp.testing;
+package me.labconnect.webapp.models.testing;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import me.labconnect.webapp.testing.style.StyleChecker;
+import me.labconnect.webapp.models.testing.style.StyleChecker;
 
 /**
  * A model of a test result.

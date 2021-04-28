@@ -1,4 +1,4 @@
-package me.labconnect.webapp.testing;
+package me.labconnect.webapp.models.testing;
 
 /**
  * An enumeration of possible states for a UnitTest

@@ -1,4 +1,4 @@
-package me.labconnect.webapp.testing.style;
+package me.labconnect.webapp.models.testing.style;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

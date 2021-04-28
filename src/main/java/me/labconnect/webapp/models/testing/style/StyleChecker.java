@@ -1,4 +1,4 @@
-package me.labconnect.webapp.testing.style;
+package me.labconnect.webapp.models.testing.style;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import me.labconnect.webapp.testing.Tester;
-import me.labconnect.webapp.testing.TestResult;
+import me.labconnect.webapp.models.testing.TestResult;
+import me.labconnect.webapp.models.testing.Tester;
 
 /**
  * A style check performed for all source files in the submission

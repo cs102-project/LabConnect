@@ -1,4 +1,4 @@
-package me.labconnect.webapp;
+package me.labconnect.webapp.repository;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;

@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.TARepository;
 import me.labconnect.webapp.livesession.LiveSessionManager;
-import me.labconnect.webapp.testing.Tester;
+import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.repository.TARepository;
 
 /**
  * A Lab Assignment, which is an assignment that is reviewed live by TAs

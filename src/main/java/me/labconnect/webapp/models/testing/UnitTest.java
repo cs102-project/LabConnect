@@ -1,4 +1,4 @@
-package me.labconnect.webapp.testing;
+package me.labconnect.webapp.models.testing;
 
 import java.io.IOException;
 import java.nio.file.Files;

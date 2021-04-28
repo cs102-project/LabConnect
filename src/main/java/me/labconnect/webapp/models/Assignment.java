@@ -13,7 +13,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.testing.Tester;
+import me.labconnect.webapp.models.testing.Tester;
 
 /**
  * A generic assignment model class
