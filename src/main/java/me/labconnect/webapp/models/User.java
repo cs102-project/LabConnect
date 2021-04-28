@@ -38,7 +38,8 @@ public abstract class User {
     /**
      * Internal constructor for MongoDB use
      */
-    protected User() {}
+    protected User() {
+    }
 
     // Methods
     /**

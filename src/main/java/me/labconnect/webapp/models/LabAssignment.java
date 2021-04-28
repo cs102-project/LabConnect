@@ -25,7 +25,7 @@ public class LabAssignment extends Assignment {
     // Variables
     @Autowired
     private TARepository assistantRepository;
-    
+
     boolean isLive;
 
     // Constructor

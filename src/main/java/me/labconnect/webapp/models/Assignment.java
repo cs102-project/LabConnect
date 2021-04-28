@@ -64,7 +64,6 @@ public class Assignment {
         instructionFileName = instructionFile.getFileName().toString();
         Files.copy(instructionFile, assignmentDir.resolve(instructionFileName));
 
-
         assignmentID = assignmentDir.getFileName().toString();
 
         this.tests = tests;

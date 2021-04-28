@@ -54,7 +54,8 @@ public class Student extends User {
         submissions = new HashMap<>();
     }
 
-    private Student() {}
+    private Student() {
+    }
 
     // Methods
     /**

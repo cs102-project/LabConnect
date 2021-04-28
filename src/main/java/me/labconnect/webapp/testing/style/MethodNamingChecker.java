@@ -13,11 +13,11 @@ public class MethodNamingChecker extends StyleChecker {
             "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte" };
 
     /**
-    * Checks whether method names are conventional or not.
-    *
-    * @param codeFile The file. List of every line.
-    * @return The lines that are voiding the convention.
-    */
+     * Checks whether method names are conventional or not.
+     *
+     * @param codeFile The file. List of every line.
+     * @return The lines that are voiding the convention.
+     */
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
@@ -35,6 +35,7 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method extracts the method name from the given line.
+     * 
      * @param line is the line to be processed.
      * @return Name of the method.
      */
@@ -98,6 +99,7 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method checks whether the method name has a valid casing style or not.
+     * 
      * @param methodName is the methodName to be checked.
      * @return {@code true} if the naming is valid, otherwise {@code false}
      */

@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class ConstantNamingChecker extends StyleChecker {
 
     /**
-    * Checks whether constant names are conventional or not.
-    *
-    * @param codeFile The file. List of every line.
-    * @return The lines that are voiding the convention.
-    */
+     * Checks whether constant names are conventional or not.
+     *
+     * @param codeFile The file. List of every line.
+     * @return The lines that are voiding the convention.
+     */
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
@@ -34,6 +34,7 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method gets the end position of the constant expression.
+     * 
      * @param line is the line which includes the constant expression.
      * @return End position of the constant expression.
      */
@@ -52,10 +53,11 @@ public class ConstantNamingChecker extends StyleChecker {
     }
 
     /**
-    * This method extracts the constant name from the given line.
-    * @param line is the line to be processed.
-    * @return Name of the constant.
-    */
+     * This method extracts the constant name from the given line.
+     * 
+     * @param line is the line to be processed.
+     * @return Name of the constant.
+     */
     private String extractConstant(String line) {
         String constant = "";
         for (int i = getEndPosition(line); i < line.length(); i++) {
@@ -66,10 +68,12 @@ public class ConstantNamingChecker extends StyleChecker {
     }
 
     /**
-    * This method checks whether the constant name is all caps or not.
-    * @param constant is the constant to be checked.
-    * @return {@code true} if the constant name is all caps, otherwise {@code false}.
-    */
+     * This method checks whether the constant name is all caps or not.
+     * 
+     * @param constant is the constant to be checked.
+     * @return {@code true} if the constant name is all caps, otherwise
+     *         {@code false}.
+     */
     private boolean isAllCaps(String constant) {
         if (!constant.equals(constant.toUpperCase())) {
             return false;
