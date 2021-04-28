@@ -3,17 +3,16 @@ package me.labconnect.webapp.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is to check whether different kinds of loops in a file have the
+ * This class is to check whether different kinds of decision statements in a file have the
  * required brackets or not.
  *
  * @author Berk Çakar
- * @author Alp Ertan
- * @version 22.04.2021
+ * @version 28.04.2021
  */
-public class LoopCurlyBracketsChecker extends StyleChecker {
+public class DecisionCurlyBracketsChecker extends StyleChecker {
 
     /**
-     * Checks whether every loop statement have curly brackets or not.
+     * Checks whether every decision statement have curly brackets or not.
      *
      * @param codeFile The file. List of every line.
      * @return The lines that are failed the check.
@@ -23,15 +22,19 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int i = 0; i < codeFile.size(); i++) {
-            if (RegexHelper.whileRegexMatcher(codeFile.get(i))) {
+            if (RegexHelper.ifRegexMatcher(codeFile.get(i))) {
                 if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
                     errorList.add(codeFile.get(i));
                 }
-            } else if (RegexHelper.forRegexMatcher(codeFile.get(i))) {
+            } else if (RegexHelper.elseifRegexMatcher(codeFile.get(i))) {
                 if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
                     errorList.add(codeFile.get(i));
                 }
-            } else if (RegexHelper.doRegexMatcher(codeFile.get(i))) {
+            } else if (RegexHelper.elseRegexMatcher(codeFile.get(i))) {
+                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                    errorList.add(codeFile.get(i));
+                }
+            } else if (RegexHelper.switchRegexMatcher(codeFile.get(i))) {
                 if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
                     errorList.add(codeFile.get(i));
                 }
@@ -48,6 +51,7 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
      */
     @Override
     public String getName() {
-        return "Loop curly bracket checker";
+        return "Decision curly bracket checker";
     }
+
 }
