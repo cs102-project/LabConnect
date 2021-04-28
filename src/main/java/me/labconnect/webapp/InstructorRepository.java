@@ -1,7 +1,5 @@
 package me.labconnect.webapp;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import me.labconnect.webapp.models.Instructor;
 
 /**
@@ -10,7 +8,7 @@ import me.labconnect.webapp.models.Instructor;
  * @author Berkan Şahin
  * @version 27.04.2021
  */
-public interface InstructorRepository extends MongoRepository<Instructor, String> {
+public interface InstructorRepository extends UserRepository<Instructor> {
 
     /**
      * Find the instructor teaching a particular section

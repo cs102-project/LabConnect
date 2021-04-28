@@ -3,6 +3,7 @@ package me.labconnect.webapp.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -11,14 +12,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
- * @version 23.04.2021
+ * @version 28.04.2021
  */
 @Document(collection = "users")
+@TypeAlias("student")
 public class Student extends User {
 
     // Properties
-    ArrayList<Assignment> assignments;
-    HashMap<Assignment, Submission> submissions;
+    private ArrayList<Assignment> assignments;
+    private HashMap<Assignment, Submission> submissions;
+    private int section;
 
     // Constructor
 
@@ -28,10 +31,11 @@ public class Student extends User {
      * @param name          Name of the student.
      * @param institutionId Unique institution id of the student.
      * @param department    Student's department.
+     * @param section       The section this student is in
      * @param assignments   Assignments this student is responsible for
      */
-    public Student(String name, long institutionId, String department, ArrayList<Assignment> assignments) {
-        this(name, institutionId, department);
+    public Student(String name, long institutionId, String department, int section, ArrayList<Assignment> assignments) {
+        this(name, institutionId, department, section);
         this.assignments = assignments;
     }
 
@@ -41,9 +45,11 @@ public class Student extends User {
      * @param name          The name of the student
      * @param institutionId Unique institution ID of the student.
      * @param department    The student's department
+     * @param section       The section this student is in
      */
-    public Student(String name, long institutionId, String department) {
+    public Student(String name, long institutionId, String department, int section) {
         super(name, institutionId, department);
+        this.section = section;
         assignments = new ArrayList<>();
         submissions = new HashMap<>();
     }
@@ -119,4 +125,12 @@ public class Student extends User {
         return submissions.get(assignment);
     }
 
+    /**
+     * Returns the section this student is in
+     * 
+     * @return the section this student is in
+     */
+    public int getSection() {
+        return section;
+    }
 }

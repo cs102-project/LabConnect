@@ -1,8 +1,6 @@
 package me.labconnect.webapp;
 
 import java.util.List;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import me.labconnect.webapp.models.TeachingAssistant;
@@ -14,7 +12,7 @@ import me.labconnect.webapp.models.TeachingAssistant;
  * @version 27.04.2021
  */
 @Repository
-public interface TARepository extends MongoRepository<TeachingAssistant, String>{
+public interface TARepository extends UserRepository<TeachingAssistant>{
     
  
     /**

@@ -1,9 +1,24 @@
 package me.labconnect.webapp;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
 
 import me.labconnect.webapp.models.Student;
 
-public interface StudentRepository extends MongoRepository<Student, String> {
-    // TODO
+/**
+ * A repository interface for querying Student objects in the database
+ * 
+ * @author Berkan Şahin
+ * @version 28.04.2021
+ */
+public interface StudentRepository extends UserRepository<Student> {
+    
+    /**
+     * Retrieve all students in a given section
+     * 
+     * @param section The section to query
+     * @return The list of all students in the given section
+     */
+    public List<Student> findBySection(int section);
+
+    // TODO the rest
 }
