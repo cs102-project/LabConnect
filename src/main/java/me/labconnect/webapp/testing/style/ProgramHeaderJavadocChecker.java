@@ -29,7 +29,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
         for (String line : headerBlock) {
             headerBlockSingleLine = headerBlockSingleLine + line;
         }
-        if (RegexHelper.javadocCommentBlockRegexMatcher(headerBlockSingleLine)) {
+        if (RegexHelper.commentBlockRegexMatcher(headerBlockSingleLine)) {
             if (!headerBlockSingleLine.contains("@author")) {
                 errorList.add("Missing or incorrect author (@author) information in the header");
             }

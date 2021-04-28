@@ -81,17 +81,17 @@ public class RegexHelper {
 
     /**
      * Checks the method calling statement if it complies to Java conventions or not
-     * .
+     * . Tries to match both javadoc style and C style comments (excluding {@code //} style).
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
      *         conventions, {@code false} otherwise.
      */
-    public static boolean javadocCommentBlockRegexMatcher(String str) {
+    public static boolean commentBlockRegexMatcher(String str) {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "/\\*\\*((?:[^*]+|\\*[^/])*)\\*/";
+        regex = "(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
