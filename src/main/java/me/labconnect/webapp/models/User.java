@@ -35,6 +35,12 @@ public abstract class User {
         this.department = department;
     }
 
+    /**
+     * Internal constructor for MongoDB use
+     */
+    protected User() {
+    }
+
     // Methods
     /**
      * Gets the user id

@@ -26,35 +26,35 @@ public class HomeworkAssignment extends Assignment {
     /**
      * Initializes every property
      * 
-     * @param groupMembers The list containing the group member objects
-     * @param title The title of the assignment
-     * @param dueDate The due date of the assignment
-     * @param isVisible The visibility of the assignment (to students)
+     * @param groupMembers    The list containing the group member objects
+     * @param title           The title of the assignment
+     * @param dueDate         The due date of the assignment
+     * @param isVisible       The visibility of the assignment (to students)
      * @param instructionFile Instructions file path
-     * @param tests The list of test for this assignment
-     * @param sections The list of assigned sections
+     * @param tests           The list of test for this assignment
+     * @param sections        The list of assigned sections
      * @throws IOException if proccessing the instruction file fails
      */
-    public HomeworkAssignment(ArrayList<Student> groupMembers, String title, Date dueDate, boolean isVisible, 
-                                Path instructionFile, ArrayList<Tester> tests, int[] sections)  throws IOException {
+    public HomeworkAssignment(ArrayList<Student> groupMembers, String title, Date dueDate, boolean isVisible,
+            Path instructionFile, ArrayList<Tester> tests, int[] sections) throws IOException {
         super(title, dueDate, isVisible, instructionFile, tests, sections);
         this.groupMembers = groupMembers;
     }
 
     /**
-     * Initializes properties except for the list of group members. Which
-     * is going to be initiliazed as blank list
+     * Initializes properties except for the list of group members. Which is going
+     * to be initiliazed as blank list
      * 
-     * @param title The title of the assignment
-     * @param dueDate The due date of the assignment
-     * @param isVisible The visibility of the assignment (to students)
+     * @param title           The title of the assignment
+     * @param dueDate         The due date of the assignment
+     * @param isVisible       The visibility of the assignment (to students)
      * @param instructionFile Instructions file path
-     * @param tests The list of test for this assignment
-     * @param sections The list of assigned sections
+     * @param tests           The list of test for this assignment
+     * @param sections        The list of assigned sections
      * @throws IOException if proccessing the instruction file fails
      */
-    public HomeworkAssignment( String title, Date dueDate, boolean isVisible, Path instructionFile, 
-                                ArrayList<Tester> tests, int[] sections ) throws IOException {
+    public HomeworkAssignment(String title, Date dueDate, boolean isVisible, Path instructionFile,
+            ArrayList<Tester> tests, int[] sections) throws IOException {
         this(new ArrayList<>(), title, dueDate, isVisible, instructionFile, tests, sections);
     }
 

@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.testing.Tester;
@@ -24,8 +26,11 @@ import me.labconnect.webapp.testing.Tester;
 public class Assignment {
 
     // Constants
+    @Transient
     final int MAX_GRADE = 100;
+    @Transient
     final int MAX_ATTEMPTS = 5;
+    @Transient
     final String ASSIGNMENT_ROOT = "/var/labconnect/assignments";
 
     // Variables
@@ -36,13 +41,27 @@ public class Assignment {
     private boolean isCompleted;
     private boolean isVisible;
     private int[] sections;
-    private Path instructions;
-    private Path assignmentDir;
+    private String instructionFileName;
     private String title;
     private Date dueDate;
     private ArrayList<Tester> tests;
 
     // Constructor
+
+    @PersistenceConstructor
+    public Assignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
+            String instructionFileName, String title, ArrayList<Tester> tests) {
+        
+        this.id = id;
+        this.assignmentID = assignmentID;
+        this.isCompleted = isCompleted;
+        this.isVisible = isVisible;
+        this.sections = sections;
+        this.instructionFileName = instructionFileName;
+        this.title = title;
+        this.tests = tests;
+    }
+
     /**
      * Creates an assignment object which contains every property of an assignment
      * 
@@ -59,8 +78,12 @@ public class Assignment {
     public Assignment(String title, Date dueDate, boolean visible, Path instructionFile, ArrayList<Tester> tests,
             int[] sections) throws IOException {
 
+        Path assignmentDir;
+
         assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "");
-        instructions = Files.copy(instructionFile, assignmentDir.resolve(instructionFile.getFileName()));
+        instructionFileName = instructionFile.getFileName().toString();
+        Files.copy(instructionFile, assignmentDir.resolve(instructionFileName));
+
         assignmentID = assignmentDir.getFileName().toString();
 
         this.tests = tests;
@@ -135,7 +158,7 @@ public class Assignment {
      * @return The assignment prompt file
      */
     public Path getInstructions() {
-        return instructions;
+        return Paths.get(ASSIGNMENT_ROOT, assignmentID, instructionFileName);
     }
 
     /**
@@ -147,7 +170,8 @@ public class Assignment {
      *           therefore it is safe to delete the file afterwards
      */
     public void setInstructions(Path instructions) throws IOException {
-        this.instructions = Files.copy(instructions, assignmentDir.resolve(instructions.getFileName()));
+        Files.copy(instructions, getAssignmentDir().resolve(instructions.getFileName()));
+        instructionFileName = instructions.getFileName().toString();
     }
 
     /**
@@ -224,7 +248,7 @@ public class Assignment {
      * @return the directory assignment-related files are stored
      */
     public Path getAssignmentDir() {
-        return assignmentDir;
+        return Paths.get(ASSIGNMENT_ROOT, assignmentID);
     }
 
     /**

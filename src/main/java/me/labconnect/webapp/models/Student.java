@@ -3,7 +3,7 @@ package me.labconnect.webapp.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -15,10 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version 28.04.2021
  */
 @Document(collection = "users")
-@TypeAlias("student")
 public class Student extends User {
 
     // Properties
+    @DBRef
     private ArrayList<Assignment> assignments;
     private HashMap<Assignment, Submission> submissions;
     private int section;
@@ -52,6 +52,9 @@ public class Student extends User {
         this.section = section;
         assignments = new ArrayList<>();
         submissions = new HashMap<>();
+    }
+
+    private Student() {
     }
 
     // Methods

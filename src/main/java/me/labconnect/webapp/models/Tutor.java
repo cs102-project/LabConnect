@@ -40,6 +40,9 @@ public class Tutor extends User implements Meetable {
         this.meetingLink = meetingLink;
     }
 
+    private Tutor() {
+    }
+
     // Methods
     /**
      * Gets the meeting link as String.

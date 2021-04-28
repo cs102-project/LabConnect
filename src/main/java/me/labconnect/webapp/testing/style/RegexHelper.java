@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @author Borga Haktan Bilen
  * @author Alp Ertan
  * @author Vedat Eren Arıcan
- * @version 22.04.2021
+ * @version 28.04.2021
  */
 public class RegexHelper {
 
@@ -81,17 +81,20 @@ public class RegexHelper {
 
     /**
      * Checks the method calling statement if it complies to Java conventions or not
-     * .
+     * . Tries to match both javadoc style and C style comments (excluding
+     * {@code //} style).
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
      *         conventions, {@code false} otherwise.
+     * @apiNote Do not try to match the file line by line. Comments should be in a
+     *          continous state.
      */
-    public static boolean javadocCommentBlockRegexMatcher(String str) {
+    public static boolean commentBlockRegexMatcher(String str) {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "/\\*\\*((?:[^*]+|\\*[^/])*)\\*/";
+        regex = "(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 

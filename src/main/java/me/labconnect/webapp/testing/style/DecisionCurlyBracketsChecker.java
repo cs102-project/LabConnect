@@ -3,8 +3,8 @@ package me.labconnect.webapp.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is to check whether different kinds of decision statements in a file have the
- * required brackets or not.
+ * This class is to check whether different kinds of decision statements in a
+ * file have the required brackets or not.
  *
  * @author Berk Çakar
  * @version 28.04.2021
