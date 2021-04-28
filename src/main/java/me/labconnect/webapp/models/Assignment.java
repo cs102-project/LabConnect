@@ -36,8 +36,7 @@ public class Assignment {
     private boolean isCompleted;
     private boolean isVisible;
     private int[] sections;
-    private Path instructions;
-    private Path assignmentDir;
+    private String instructionFileName;
     private String title;
     private Date dueDate;
     private ArrayList<Tester> tests;
@@ -59,8 +58,13 @@ public class Assignment {
     public Assignment(String title, Date dueDate, boolean visible, Path instructionFile, ArrayList<Tester> tests,
             int[] sections) throws IOException {
 
+        Path assignmentDir;
+
         assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "");
-        instructions = Files.copy(instructionFile, assignmentDir.resolve(instructionFile.getFileName()));
+        instructionFileName = instructionFile.getFileName().toString();
+        Files.copy(instructionFile, assignmentDir.resolve(instructionFileName));
+
+
         assignmentID = assignmentDir.getFileName().toString();
 
         this.tests = tests;
@@ -135,7 +139,7 @@ public class Assignment {
      * @return The assignment prompt file
      */
     public Path getInstructions() {
-        return instructions;
+        return Paths.get(ASSIGNMENT_ROOT, assignmentID, instructionFileName);
     }
 
     /**
@@ -147,7 +151,8 @@ public class Assignment {
      *           therefore it is safe to delete the file afterwards
      */
     public void setInstructions(Path instructions) throws IOException {
-        this.instructions = Files.copy(instructions, assignmentDir.resolve(instructions.getFileName()));
+        Files.copy(instructions, getAssignmentDir().resolve(instructions.getFileName()));
+        instructionFileName = instructions.getFileName().toString();
     }
 
     /**
@@ -224,7 +229,7 @@ public class Assignment {
      * @return the directory assignment-related files are stored
      */
     public Path getAssignmentDir() {
-        return assignmentDir;
+        return Paths.get(ASSIGNMENT_ROOT, assignmentID);
     }
 
     /**
