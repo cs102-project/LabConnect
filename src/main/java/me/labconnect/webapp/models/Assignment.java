@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.testing.Tester;
@@ -24,8 +26,11 @@ import me.labconnect.webapp.testing.Tester;
 public class Assignment {
 
     // Constants
+    @Transient
     final int MAX_GRADE = 100;
+    @Transient
     final int MAX_ATTEMPTS = 5;
+    @Transient
     final String ASSIGNMENT_ROOT = "/var/labconnect/assignments";
 
     // Variables
@@ -42,6 +47,21 @@ public class Assignment {
     private ArrayList<Tester> tests;
 
     // Constructor
+
+    @PersistenceConstructor
+    public Assignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
+            String instructionFileName, String title, ArrayList<Tester> tests) {
+        
+        this.id = id;
+        this.assignmentID = assignmentID;
+        this.isCompleted = isCompleted;
+        this.isVisible = isVisible;
+        this.sections = sections;
+        this.instructionFileName = instructionFileName;
+        this.title = title;
+        this.tests = tests;
+    }
+
     /**
      * Creates an assignment object which contains every property of an assignment
      * 

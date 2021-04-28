@@ -2,6 +2,7 @@ package me.labconnect.webapp.models;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -17,6 +18,7 @@ public class TeachingAssistant extends User implements Meetable {
 
     // Properties
     private String meetingLink;
+    @DBRef
     private ArrayList<Student> students;
     private int section;
 

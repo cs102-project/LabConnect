@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.TARepository;
@@ -29,6 +30,14 @@ public class LabAssignment extends Assignment {
     boolean isLive;
 
     // Constructor
+
+
+    @PersistenceConstructor
+    public LabAssignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
+            String instructionFileName, String title, ArrayList<Tester> tests, boolean isLive) {
+                super(id, assignmentID, isCompleted, isVisible, sections, instructionFileName, title, tests);
+                this.isLive = isLive;
+            }
     /**
      * Creates an assignment object which contains every property of an assignment
      * 

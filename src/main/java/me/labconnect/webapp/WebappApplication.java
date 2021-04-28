@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import me.labconnect.webapp.models.Assignment;
 import me.labconnect.webapp.models.Instructor;
 import me.labconnect.webapp.models.LabAssignment;
 import me.labconnect.webapp.models.Student;
@@ -42,6 +43,7 @@ public class WebappApplication {
 	@GetMapping("/api/dummy")
 	public String dummyWorkflow() throws IOException {
 		TeachingAssistant tempTA;
+		Student tempStudent;
 		Path dummyInstruction;
 		ArrayList<Tester> dummyTesters;
 		LabAssignment dummyAssignment;
@@ -71,6 +73,14 @@ public class WebappApplication {
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
 
 		assignmentRepository.save(dummyAssignment);	
+
+		tempStudent = studentRepository.findByInstitutionID(22003211);
+		
+		for (Assignment assignment : assignmentRepository.findBySectionsContaining(tempStudent.getSection())) {
+			tempStudent.giveAssignment(assignment);
+		}
+		studentRepository.save(tempStudent);
+
 		return "Success!\n";
 	}
 }
