@@ -33,15 +33,17 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int i = 0; i < codeFile.size(); i++) {
-            if ((RegexHelper.classRegexMatcher(codeFile.get(i))
-                    || RegexHelper.interfaceRegexMatcher(codeFile.get(i)))) {
-                if (codeFile.get(i + 1).trim().charAt(0) == '{' && !codeFile.get(i + 2).isEmpty()) {
-                    errorList.add(codeFile.get(i + 2));
-                }
+            if ( i < codeFile.size() - 2 ) {
+                if ((RegexHelper.classRegexMatcher(codeFile.get(i))
+                        || RegexHelper.interfaceRegexMatcher(codeFile.get(i)))) {
+                    if (codeFile.get(i + 1).trim().charAt(0) == '{' && !codeFile.get(i + 2).isEmpty()) {
+                        errorList.add(codeFile.get(i + 2));
+                    }
 
-                else if (codeFile.get(i).trim().charAt(codeFile.get(i).trim().length() - 1) == '{'
-                        && !codeFile.get(i + 1).isEmpty()) {
-                    errorList.add(codeFile.get(i + 1));
+                    else if (codeFile.get(i).trim().charAt(codeFile.get(i).trim().length() - 1) == '{'
+                            && !codeFile.get(i + 1).isEmpty()) {
+                        errorList.add(codeFile.get(i + 1));
+                    }
                 }
             }
         }

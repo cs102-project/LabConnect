@@ -23,17 +23,35 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int i = 0; i < codeFile.size(); i++) {
-            if (RegexHelper.whileRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
+            if ( i != codeFile.size() - 1 ) {
+                if (RegexHelper.whileRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.forRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.doRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
                 }
-            } else if (RegexHelper.forRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
-                }
-            } else if (RegexHelper.doRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
+            }
+
+            else {
+                if (RegexHelper.whileRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.forRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.doRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
                 }
             }
         }
