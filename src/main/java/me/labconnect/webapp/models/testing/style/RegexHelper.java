@@ -356,7 +356,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "[^&]&[^&]";
+        regex = "(if|else if)\\s*\\(.+[^&]&[^&]";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
@@ -374,7 +374,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "[^\\|]\\|[^\\|]";
+        regex = "(if|else if)\\s*\\(.+[^\\|]\\|[^\\|]";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
