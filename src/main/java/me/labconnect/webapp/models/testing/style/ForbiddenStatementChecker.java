@@ -53,7 +53,7 @@ public class ForbiddenStatementChecker extends StyleChecker {
         errorList = new ArrayList<>();
         for (String line : fileInput) {
             // If you want to include the comments in the improper lines change this the String
-            line = RegexHelper.inlineCommentRegexReplacer(line);
+            line = RegexHelper.inlineCommentRegexReplacer(line, "");
 
             for (String forbidden : forbiddenStatements) {
                 temporary = Pattern.compile(Pattern.quote(forbidden));

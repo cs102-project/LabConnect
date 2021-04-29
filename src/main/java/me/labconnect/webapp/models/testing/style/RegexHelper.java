@@ -129,7 +129,7 @@ public class RegexHelper {
      * @param str The string that is going to be processed.
      * @return String with inline comments removed
      */
-    public static String inlineCommentRegexReplacer(String str) {
+    public static String inlineCommentRegexReplacer(String str, String replacement) {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
@@ -137,7 +137,7 @@ public class RegexHelper {
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
-        return patternMatcher.replaceAll("");
+        return patternMatcher.replaceAll(replacement);
     }
 
     /**
