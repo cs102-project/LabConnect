@@ -1,5 +1,7 @@
 package me.labconnect.webapp.repository;
 
+import java.util.Optional;
+
 import me.labconnect.webapp.models.Instructor;
 
 /**
@@ -15,6 +17,6 @@ public interface InstructorRepository extends UserRepository<Instructor> {
      * @param section The section to query
      * @return The instructor teaching the given section
      */
-    public Instructor findBySectionsContaining(int section);
+    public Optional<Instructor> findBySectionsContaining(int section);
     
 }

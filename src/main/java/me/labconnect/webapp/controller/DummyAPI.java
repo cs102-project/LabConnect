@@ -51,9 +51,9 @@ public class DummyAPI {
 				new ArrayList<Student>(), 1));
 
 		// Assign the student to our TA
-		tempTA = assistantRepository.findByInstitutionId(1234);
+		tempTA = assistantRepository.findByInstitutionId(1234).orElseThrow();
 
-		tempTA.getStudents().add(studentRepository.findByInstitutionId(22003211));
+		tempTA.getStudents().add(studentRepository.findByInstitutionId(22003211).orElseThrow());
 
 		assistantRepository.save(tempTA); // Save and retrieve the object for every atomic operation!
 
@@ -67,7 +67,7 @@ public class DummyAPI {
 
 		assignmentRepository.save(dummyAssignment);
 
-		tempStudent = studentRepository.findByInstitutionId(22003211);
+		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
 
 		for (Assignment assignment : assignmentRepository.findBySectionsContaining(tempStudent.getSection())) {
 			tempStudent.giveAssignment(assignment);

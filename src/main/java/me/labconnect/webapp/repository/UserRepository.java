@@ -1,6 +1,7 @@
 package me.labconnect.webapp.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -37,5 +38,5 @@ public interface UserRepository<T extends User> extends MongoRepository<T, Strin
      * @param institutionId The ID number of the wanted user.
      * @return The user object which has the required ID number.
      */
-    public T findByInstitutionId(long institutionId);
+    public Optional<T> findByInstitutionId(long institutionId);
 }
