@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.models.*;
 import me.labconnect.webapp.models.testing.Tester;
@@ -18,9 +19,10 @@ import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.UserRepository;
 
+@RestController
 public class DummyAPI {
-    
-    @Autowired
+
+	@Autowired
 	private UserRepository<User> userRepository;
 	@Autowired
 	private InstructorRepository instructorRepository;
@@ -30,8 +32,8 @@ public class DummyAPI {
 	private AssignmentRepository assignmentRepository;
 	@Autowired
 	private TARepository assistantRepository;
-    
-    @GetMapping("/api/dummy")
+
+	@GetMapping("/api/dummy")
 	public String dummyWorkflow() throws IOException {
 		TeachingAssistant tempTA;
 		Student tempStudent;
@@ -47,11 +49,11 @@ public class DummyAPI {
 		studentRepository.save(new Student("Cemudes Torno", 22003211, "Computer Science", 1));
 		assistantRepository.save(new TeachingAssistant("Richard Matthew Stallman", 1234, "Computer Science",
 				new ArrayList<Student>(), 1));
-		
+
 		// Assign the student to our TA
-		tempTA = assistantRepository.findByInstitutionID(1234);
-		
-		tempTA.getStudents().add(studentRepository.findByInstitutionID(22003211));
+		tempTA = assistantRepository.findByInstitutionId(1234);
+
+		tempTA.getStudents().add(studentRepository.findByInstitutionId(22003211));
 
 		assistantRepository.save(tempTA); // Save and retrieve the object for every atomic operation!
 
@@ -63,10 +65,10 @@ public class DummyAPI {
 		dummyAssignment = new LabAssignment("Minecraft", new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
 
-		assignmentRepository.save(dummyAssignment);	
+		assignmentRepository.save(dummyAssignment);
 
-		tempStudent = studentRepository.findByInstitutionID(22003211);
-		
+		tempStudent = studentRepository.findByInstitutionId(22003211);
+
 		for (Assignment assignment : assignmentRepository.findBySectionsContaining(tempStudent.getSection())) {
 			tempStudent.giveAssignment(assignment);
 		}
@@ -74,5 +76,6 @@ public class DummyAPI {
 
 		return "Success!\n";
 	}
-    
+
+
 }
