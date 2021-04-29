@@ -17,7 +17,25 @@ function App(): JSX.Element {
         </Route>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/logout" component={Logout} />
       </Switch>
+    </div>
+  );
+  
+}
+
+function Logout(): JSX.Element {
+  
+  fetch("/logout", {
+    method: "POST",
+    headers: {
+      "X-XSRF-TOKEN": document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN='))?.split('=')[1] || ""
+    }
+  });
+  
+  return (
+    <div>
+      <p>Successfully logged out.</p>
     </div>
   );
   
@@ -31,6 +49,7 @@ function Login(): JSX.Element {
       <form name="login-form" action="login" method="POST">
         <input type="text" name="username" />
         <input type="password" name="password" />
+        <input type="hidden" name="_csrf" value={document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN='))?.split('=')[1]} />
         <input name="submit" type="submit" value="submit" />
       </form>
     </div>

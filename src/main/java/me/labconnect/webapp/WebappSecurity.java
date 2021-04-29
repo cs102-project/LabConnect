@@ -9,24 +9,29 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity /*(debug = true)*/
 public class WebappSecurity extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         
         http.authorizeRequests()
-                .antMatchers("/", "/static/**").permitAll()
+                .antMatchers("/", "/static/**", "/{regex:^.*\\.(?:ico|png|json|txt)$}", "/error").permitAll()
                 .anyRequest().authenticated()
             .and()
             .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
                 .permitAll()
             .and()
             .logout()
-                .permitAll();
+                .permitAll()
+            .and()
+            .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         
     }
     
@@ -35,7 +40,7 @@ public class WebappSecurity extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         
         UserDetails user = User.withDefaultPasswordEncoder()
-            .username("user").password("test").roles("USER").build();
+            .username("user").password("test").roles("ADMIN").build();
         
         return new InMemoryUserDetailsManager(user);
         
