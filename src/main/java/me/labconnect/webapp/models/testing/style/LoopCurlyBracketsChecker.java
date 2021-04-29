@@ -38,6 +38,22 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
                     }
                 }
             }
+
+            else {
+                if (RegexHelper.whileRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.forRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.doRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                }
+            }
         }
 
         return errorList;

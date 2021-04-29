@@ -41,6 +41,26 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
                     }
                 }
             }
+
+            else {
+                if (RegexHelper.ifRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.elseRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.switchRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                }
+            }
         }
 
         return errorList;

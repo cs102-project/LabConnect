@@ -52,8 +52,23 @@ public class OperatorsSpaceChecker extends StyleChecker {
                         errorList.add(codeFile.get(i));
                     }
                 }
+
+                else {
+                    if (codeFile.get(i).charAt(j) == '+' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
+                        errorList.add(codeFile.get(i));
+                    } else if (codeFile.get(i).charAt(j) == '-' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
+                        errorList.add(codeFile.get(i));
+                    } else if (codeFile.get(i).charAt(j) == '*' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
+                        errorList.add(codeFile.get(i));
+                    } else if (codeFile.get(i).charAt(j) == '/' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
+                        errorList.add(codeFile.get(i));
+                    } else if (codeFile.get(i).charAt(j) == '%' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
+                        errorList.add(codeFile.get(i));
+                    }
+                }
             }
         }
+
         return errorList;
     }
 
