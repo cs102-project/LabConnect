@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.models.Instructor;
@@ -42,5 +44,25 @@ public class InstructorAPI {
     @GetMapping("/api/instructor")
     public List<Instructor> allInstructors() {
         return instructorRepository.findAll();
+    }
+
+    /**
+     * Return the instructor matching the specified ID, if they exist
+     * @param institutionId The institution ID for the instructor
+     * @return The matching instructor, or a 404 response
+     */
+    @GetMapping("/api/instructor/by_id/{institutionId}")
+    public Instructor getById(@PathVariable Long institutionId) {
+        return instructorRepository.findByInstitutionId(institutionId).orElseThrow(() -> new UserNotFoundException(institutionId));
+    }
+
+    /**
+     * Return the instructor teaching the specified section, if they exist
+     * @param section The section of the required instructor
+     * @return The matching instructor, or a 404 response
+     */
+    @GetMapping("/api/instructor/by_section/{section}")
+    public Instructor getBySection(@PathVariable int section) {
+        return instructorRepository.findBySectionsContaining(section).orElseThrow(() -> new UserNotFoundException());
     }
 }
