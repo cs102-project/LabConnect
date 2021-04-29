@@ -52,8 +52,9 @@ public class ForbiddenStatementChecker extends StyleChecker {
 
         errorList = new ArrayList<>();
         for (String line : fileInput) {
-            // If you want to include the comments in the improper lines change this the String
-            line = RegexHelper.inlineCommentRegexReplacer(line, "");
+            // If you want to include the comments in the improper lines change this the
+            // String
+            line = RegexHelper.generalCommentRegexReplacer(line, "");
 
             for (String forbidden : forbiddenStatements) {
                 temporary = Pattern.compile(Pattern.quote(forbidden));
@@ -61,7 +62,8 @@ public class ForbiddenStatementChecker extends StyleChecker {
 
                 if (illegalMatcher.find()) {
                     errorList.add(line);
-                } else if (RegexHelper.bitwiseAmpersandMatcher(line) || RegexHelper.bitwiseOrMatcher(line)) {
+                } else if (RegexHelper.generalBitwiseAmpersandMatcher(line)
+                        || RegexHelper.generalBitwiseOrMatcher(line)) {
                     errorList.add(line);
                 }
             }
