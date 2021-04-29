@@ -178,7 +178,7 @@ public class RegexHelper {
 
     /**
      * Checks if the interface is named conventionally or not.
-     * 
+     *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
      *         conventions, {@code false} otherwise.
@@ -356,7 +356,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "((?<!&)&(?!&))|(&{3,})";
+        regex = "[^&]&[^&]";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
@@ -374,7 +374,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "((?<!\\|)\\|(?!\\|))|(\\|{3,})";
+        regex = "[^\\|]\\|[^\\|]";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
