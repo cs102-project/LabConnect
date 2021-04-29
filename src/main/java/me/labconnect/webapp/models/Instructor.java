@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Berkan Şahin
  * @version 27.04.2021
  */
-@Document(collection = "users")
+@Document(collection = "instructors")
 public class Instructor extends User {
 
     // Variables

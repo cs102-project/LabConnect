@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Borga Haktan Bilen
  * @version 22.04.2021
  */
-@Document(collection = "users")
+@Document(collection = "tutors")
 public class Tutor extends User implements Meetable {
 
     // Properties

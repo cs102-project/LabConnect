@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Berkan Şahin
  * @version 27.04.2021
  */
-@Document(collection = "users")
+@Document(collection = "assistants")
 public class TeachingAssistant extends User implements Meetable {
 
     // Properties

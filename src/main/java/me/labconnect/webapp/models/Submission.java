@@ -24,7 +24,7 @@ public class Submission {
      * @param assignment The assignment this submission is for
      */
     public Submission(Student submitter, Assignment assignment) {
-        this.submitterID = submitter.getUserId();
+        this.submitterID = submitter.getInstitutionId();
         this.assignment = assignment;
         attempts = new ArrayList<>();
     }

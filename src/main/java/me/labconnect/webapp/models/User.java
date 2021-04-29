@@ -15,11 +15,11 @@ public abstract class User {
 
     // Properties
     @Id
-    private String objectID;
-    private long institutionID;
-    private String name;
-    private String department;
-    private boolean isOnline;
+    protected String objectID;
+    protected Long institutionId;
+    protected String name;
+    protected String department;
+    protected boolean isOnline;
 
     // Constructor
     /**
@@ -31,7 +31,7 @@ public abstract class User {
      */
     public User(String name, long institutionId, String department) {
         this.name = name;
-        this.institutionID = institutionId;
+        this.institutionId = institutionId;
         this.department = department;
     }
 
@@ -47,8 +47,8 @@ public abstract class User {
      * 
      * @return The user id as long type
      */
-    public long getUserId() {
-        return institutionID;
+    public long getInstitutionId() {
+        return institutionId;
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class User {
         if (other instanceof User) {
             User tmp;
             tmp = (User) other;
-            return institutionID == tmp.institutionID;
+            return institutionId == tmp.institutionId;
         }
 
         return false;

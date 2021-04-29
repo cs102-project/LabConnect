@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Berkan Şahin
  * @version 28.04.2021
  */
-@Document(collection = "users")
+@Document(collection = "students")
 public class Student extends User {
 
     // Properties
