@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /**
  * LoopParanthesisSpaceChecker
  */
-public class ParanthesisSpaceChecker extends StyleChecker {
+public class ParenthesisSpaceChecker extends StyleChecker {
 
     @Override
     public String getName() {
-        return "Paranthesis space checker";
+        return "Parenthesis space checker";
     }
 
     @Override

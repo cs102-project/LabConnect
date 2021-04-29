@@ -22,21 +22,23 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int i = 0; i < codeFile.size(); i++) {
-            if (RegexHelper.ifRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
-                }
-            } else if (RegexHelper.elseifRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
-                }
-            } else if (RegexHelper.elseRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
-                }
-            } else if (RegexHelper.switchRegexMatcher(codeFile.get(i))) {
-                if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
-                    errorList.add(codeFile.get(i));
+            if ( i != codeFile.size() - 1 ) {
+                if (RegexHelper.ifRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.elseRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
+                } else if (RegexHelper.switchRegexMatcher(codeFile.get(i))) {
+                    if (!codeFile.get(i).contains("{") && !codeFile.get(i + 1).contains("{")) {
+                        errorList.add(codeFile.get(i));
+                    }
                 }
             }
         }
