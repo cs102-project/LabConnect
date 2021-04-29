@@ -125,6 +125,23 @@ public class RegexHelper {
     }
 
     /**
+     * Removes comments.
+     *
+     * @param str The string that is going to be processed.
+     * @return String with inline comments removed
+     */
+    public static String generalCommentRegexReplacer(String str, String replacement) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.replaceAll(replacement);
+    }
+
+    /**
      * Removes inline comments.
      *
      * @param str The string that is going to be processed.
@@ -353,11 +370,29 @@ public class RegexHelper {
      * @return {@code true} if the line containes bitwise ampersand operator ,
      *         {@code false} otherwise.
      */
-    public static boolean bitwiseAmpersandMatcher(String str) {
+    public static boolean ifBitwiseAmpersandMatcher(String str) {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
         regex = "(if|else if)\\s*\\(.+[^&]&[^&]";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Checks if the line containes bitwise ampersand operator or not
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes bitwise ampersand operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean generalBitwiseAmpersandMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "((?<!&)&(?!&))|(&{3,})";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
@@ -371,11 +406,29 @@ public class RegexHelper {
      * @return {@code true} if the line containes bitwise or operator ,
      *         {@code false} otherwise.
      */
-    public static boolean bitwiseOrMatcher(String str) {
+    public static boolean ifBitwiseOrMatcher(String str) {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
         regex = "(if|else if)\\s*\\(.+[^\\|]\\|[^\\|]";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Checks if the line containes bitwise or operator or not
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes bitwise or operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean generalBitwiseOrMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "((?<!\\|)\\|(?!\\|))|(\\|{3,})";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
