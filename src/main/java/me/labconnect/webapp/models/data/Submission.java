@@ -1,6 +1,8 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.data;
 
 import java.util.ArrayList;
+
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * An aggregation of attempts for a certain assignment

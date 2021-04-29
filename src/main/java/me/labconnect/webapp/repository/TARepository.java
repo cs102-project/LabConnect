@@ -3,7 +3,7 @@ package me.labconnect.webapp.repository;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
-import me.labconnect.webapp.models.TeachingAssistant;
+import me.labconnect.webapp.models.users.TeachingAssistant;
 
 /**
  * A Repository interface for TeachingAssistant objects in the database

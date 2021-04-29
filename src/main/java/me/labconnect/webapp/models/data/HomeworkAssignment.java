@@ -1,4 +1,4 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.data;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,6 +8,7 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * Class representing homework assignments

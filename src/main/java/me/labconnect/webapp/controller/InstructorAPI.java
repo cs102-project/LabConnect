@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.controller.assembler.InstructorModelAssembler;
-import me.labconnect.webapp.models.Instructor;
+import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.repository.InstructorRepository;
 
 /**

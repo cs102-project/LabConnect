@@ -1,6 +1,8 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.users;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.livesession.Meetable;
 
 /**
  * Class representing a Tutor, i.e., a user that can meet with Students during a

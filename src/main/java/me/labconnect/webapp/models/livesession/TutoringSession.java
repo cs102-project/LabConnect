@@ -1,9 +1,9 @@
-package me.labconnect.webapp.livesession;
+package me.labconnect.webapp.models.livesession;
 
 import java.util.List;
 
-import me.labconnect.webapp.models.Assignment;
-import me.labconnect.webapp.models.Tutor;
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.users.Tutor;
 
 /**
  * A live session where Students are tutored by any tutor available

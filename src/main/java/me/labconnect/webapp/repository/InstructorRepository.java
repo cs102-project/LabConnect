@@ -2,7 +2,7 @@ package me.labconnect.webapp.repository;
 
 import java.util.Optional;
 
-import me.labconnect.webapp.models.Instructor;
+import me.labconnect.webapp.models.users.Instructor;
 
 /**
  * A repository interface for the Instructor objects stored in the database

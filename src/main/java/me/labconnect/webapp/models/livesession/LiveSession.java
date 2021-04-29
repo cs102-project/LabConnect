@@ -1,9 +1,9 @@
-package me.labconnect.webapp.livesession;
+package me.labconnect.webapp.models.livesession;
 
 import java.util.ArrayList;
 
-import me.labconnect.webapp.models.Assignment;
-import me.labconnect.webapp.models.Student;
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * A live session with a singular queue of students

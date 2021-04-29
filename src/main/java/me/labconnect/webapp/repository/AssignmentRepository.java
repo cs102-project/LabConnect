@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import me.labconnect.webapp.models.Assignment;
+import me.labconnect.webapp.models.data.Assignment;
 
 /**
  * A repository interface for the assignments stored in the database

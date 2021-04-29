@@ -1,4 +1,4 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.data;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,14 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.livesession.LiveSessionManager;
+import me.labconnect.webapp.models.livesession.LiveSessionManager;
 import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.users.TeachingAssistant;
+import me.labconnect.webapp.models.users.Tutor;
 import me.labconnect.webapp.repository.TARepository;
 
 /**
  * A Lab Assignment, which is an assignment that is reviewed live by TAs
  * 
- * @see me.labconnect.webapp.livesession.LiveSessionManager
+ * @see me.labconnect.webapp.models.livesession.LiveSessionManager
  * @author Berkan Şahin
  * @version 25.04.2021
  */

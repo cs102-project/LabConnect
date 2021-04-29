@@ -1,17 +1,16 @@
-package me.labconnect.webapp.livesession;
+package me.labconnect.webapp.models.livesession;
 
 import java.util.HashMap;
 import java.util.List;
 
-import me.labconnect.webapp.models.LabAssignment;
-import me.labconnect.webapp.models.Meetable;
-import me.labconnect.webapp.models.Student;
-import me.labconnect.webapp.models.TeachingAssistant;
-import me.labconnect.webapp.models.Tutor;
+import me.labconnect.webapp.models.data.LabAssignment;
+import me.labconnect.webapp.models.users.Student;
+import me.labconnect.webapp.models.users.TeachingAssistant;
+import me.labconnect.webapp.models.users.Tutor;
 
 /**
  * Manages all live sessions (review and tutoring) related to a particular
- * {@link me.labconnect.webapp.models.LabAssignment}
+ * {@link me.labconnect.webapp.models.data.LabAssignment}
  * 
  * @author Berkan Şahin
  * @version 25.04.2021

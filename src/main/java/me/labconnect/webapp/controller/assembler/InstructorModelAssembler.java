@@ -6,7 +6,7 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import me.labconnect.webapp.controller.InstructorAPI;
-import me.labconnect.webapp.models.Instructor;
+import me.labconnect.webapp.models.users.Instructor;
 
 @Component
 public class InstructorModelAssembler implements RepresentationModelAssembler<Instructor, EntityModel<Instructor>> {

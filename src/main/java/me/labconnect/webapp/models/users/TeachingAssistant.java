@@ -1,9 +1,11 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.users;
 
 import java.util.ArrayList;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.livesession.Meetable;
 
 /**
  * Class representing a TA, i.e., a User that can grade Attempts, meet with

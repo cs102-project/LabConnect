@@ -1,4 +1,4 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.data;
 
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;

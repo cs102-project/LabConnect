@@ -1,4 +1,4 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.data;
 
 import java.util.ArrayList;
 import java.util.Date;

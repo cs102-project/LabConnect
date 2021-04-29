@@ -1,10 +1,13 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.users;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Submission;
 
 /**
  * A class representing a student, i.e., a User that submits solutions to

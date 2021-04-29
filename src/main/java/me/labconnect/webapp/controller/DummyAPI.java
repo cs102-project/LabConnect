@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.models.*;
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
+import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.models.users.Student;
+import me.labconnect.webapp.models.users.TeachingAssistant;
+import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.InstructorRepository;
 import me.labconnect.webapp.repository.StudentRepository;

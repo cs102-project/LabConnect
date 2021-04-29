@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import me.labconnect.webapp.models.Assignment;
+import me.labconnect.webapp.models.data.Assignment;
 
 /**
  * A model of a single unit test, with one tester class and a correct output

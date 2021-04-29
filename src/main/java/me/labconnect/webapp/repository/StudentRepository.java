@@ -2,7 +2,7 @@ package me.labconnect.webapp.repository;
 
 import java.util.List;
 
-import me.labconnect.webapp.models.Student;
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * A repository interface for querying Student objects in the database

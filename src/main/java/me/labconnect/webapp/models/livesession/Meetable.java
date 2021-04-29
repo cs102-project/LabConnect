@@ -1,4 +1,4 @@
-package me.labconnect.webapp.models;
+package me.labconnect.webapp.models.livesession;
 
 /**
  * A user that has a personal meeting room accessible by visiting an external

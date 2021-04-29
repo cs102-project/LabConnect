@@ -1,11 +1,11 @@
-package me.labconnect.webapp.livesession;
+package me.labconnect.webapp.models.livesession;
 
 import java.util.Comparator;
 
-import me.labconnect.webapp.models.Assignment;
-import me.labconnect.webapp.models.Attempt;
-import me.labconnect.webapp.models.Student;
-import me.labconnect.webapp.models.Submission;
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Attempt;
+import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * Compare two students based on their attempt count for a specific assignment
