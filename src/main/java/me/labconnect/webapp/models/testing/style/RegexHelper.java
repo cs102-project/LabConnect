@@ -102,6 +102,45 @@ public class RegexHelper {
     }
 
     /**
+     * Checks the method calling statement if it complies to Java conventions or not
+     * . Tries to match both javadoc style and C style comments (excluding
+     * {@code //} style).
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the style of the statement complies to the Java
+     *         conventions, {@code false} otherwise.
+     * @apiNote Do not try to match the file line by line. Comments should be in a
+     *          continous state.
+     */
+    public static boolean generalCommentRegexMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Removes inline comments.
+     *
+     * @param str The string that is going to be processed.
+     * @return String with inline comments removed
+     */
+    public static String inlineCommentRegexReplacer(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "(//.*)";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.replaceAll("");
+    }
+
+    /**
      * Checks if the method is named conventionally or not.
      *
      * @param str The string that is going to be checked.
@@ -300,6 +339,42 @@ public class RegexHelper {
         Pattern pattern;
         Matcher patternMatcher;
         regex = "(do)\\s*(\\()";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Checks if the line containes bitwise ampersand operator or not
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes bitwise ampersand operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean bitwiseAmpersandMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "((?<!&)&(?!&))|(&{3,})";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Checks if the line containes bitwise or operator or not
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes bitwise or operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean bitwiseOrMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "((?<!\\|)\\|(?!\\|))|(\\|{3,})";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
