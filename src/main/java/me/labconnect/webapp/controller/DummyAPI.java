@@ -18,7 +18,9 @@ import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.testing.BadExampleException;
 import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.testing.UnitTest;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.Student;
@@ -44,7 +46,7 @@ public class DummyAPI {
 	private AttemptRepository attemptRepository;
 
 	@GetMapping("/api/dummy")
-	public String dummyWorkflow(@RequestParam(name="attempt") String attemptPath) throws IOException {
+	public String dummyWorkflow(@RequestParam(name="attempt") String attemptPath) throws IOException, BadExampleException{
 		TeachingAssistant tempTA;
 		Student tempStudent;
 		Path dummyInstruction;
@@ -91,6 +93,10 @@ public class DummyAPI {
 
 		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
 		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow();
+
+		dummyAssignment.addTest(new UnitTest("BasednessTest", Paths.get("/dummy/CompanyTester.java"), Paths.get(attemptPath), dummyAssignment));
+		dummyAssignment = assignmentRepository.save(dummyAssignment);
+
 		if (!tempStudent.addSubmission(dummyAssignment, new Submission(tempStudent, dummyAssignment)))
 			return "Assignments do not match!\n";
 		studentRepository.save(tempStudent);

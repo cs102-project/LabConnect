@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.testing;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import me.labconnect.webapp.models.data.Assignment;
 
@@ -31,6 +34,13 @@ public class UnitTest implements Tester {
 
     // Constructors
 
+    @PersistenceConstructor
+    public UnitTest(String name, ArrayList<String> correctOutput, Long timeLimitInMS, String testerClassPath) {
+        this.name = name;
+        this.correctOutput = correctOutput;
+        this.timeLimitInMS = timeLimitInMS;
+        this.testerClassPath = testerClassPath;
+    }
     /**
      * Creates a new unit test from the given tester and generates the correct
      * output from the example implementation
@@ -59,7 +69,7 @@ public class UnitTest implements Tester {
         testerClassPath = Files.copy(testerClass, assignment.getAssignmentDir().resolve(testerClass.getFileName()))
                 .toString();
 
-        firstResult = runTest(exampleImpl);
+        firstResult = runTest(extractExampleImpl(exampleImpl));
         if (!firstResult.isSuccessful()) {
             throw new BadExampleException(firstResult);
         } else {
@@ -90,6 +100,59 @@ public class UnitTest implements Tester {
     // Methods
 
     /**
+     * A helper method that extracts the example implementation uploaded by the
+     * instructor
+     * 
+     * @param exampleImpl The example implementation as a .zip file
+     * @return The directory the archive is extracted to
+     * @throws IOException If extracting the example fails
+     */
+    private Path extractExampleImpl(Path exampleImpl) throws IOException {
+        Path extractionDir;
+        ArrayList<String> extractorArgs;
+        ProcessBuilder extractorBuilder;
+        Process extractor;
+
+        if (Files.isDirectory(exampleImpl)) {
+            return exampleImpl;
+        }
+        if (!exampleImpl.isAbsolute() || !exampleImpl.toString().endsWith(".zip")) {
+            throw new IOException("Invalid archive");
+        }
+
+        // Create extraction dir
+        extractionDir = Files.createTempDirectory("");
+
+        // Unzip example
+        extractorArgs = new ArrayList<>();
+        extractorArgs.add("unzip");
+
+        // Rest of the args are derived from unzip manpage
+        extractorArgs.add("-oqq"); // Overwrite existing files and suppress output
+
+        extractorArgs.add(exampleImpl.toString());
+
+        // Extract to the newly created dir
+        extractorArgs.add("-d");
+        extractorArgs.add(extractionDir.toString());
+
+        extractorBuilder = new ProcessBuilder(extractorArgs);
+        extractorBuilder.redirectOutput(Redirect.DISCARD);
+        extractor = extractorBuilder.start();
+
+        // Wait for extraction to end, then determine success from exit code
+        try {
+            if (extractor.waitFor() != 0) {
+                throw new IOException("Extraction error");
+            }
+        } catch (InterruptedException e) {
+            throw new IOException("unzip was interrupted");
+        }
+
+        return extractionDir;
+    }
+
+    /**
      * Compiles the tester together with the given source code submission
      * 
      * @param source The directory containing the submission code
@@ -107,7 +170,7 @@ public class UnitTest implements Tester {
         ProcessBuilder compilerBuilder;
         Process compilerProcess;
 
-        if (!Files.isDirectory(source) || !source.isAbsolute()) {
+        if (!Files.isDirectory(source) /* || !source.isAbsolute() */) {
             throw new IOException();
         }
 

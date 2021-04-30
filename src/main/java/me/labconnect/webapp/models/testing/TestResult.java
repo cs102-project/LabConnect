@@ -54,6 +54,7 @@ public class TestResult {
 
         Scanner scan = new Scanner(output);
 
+        testOutput = new ArrayList<>();
         while (scan.hasNextLine()) {
             testOutput.add(scan.nextLine());
         }

@@ -234,6 +234,15 @@ public class Assignment {
     }
 
     /**
+     * Add a unit or style test to the tester list
+     * 
+     * @param test The test to add
+     */
+    public void addTest(Tester test) {
+        tests.add(test);
+    }
+
+    /**
      * Sets the ArrayList of Tester objects
      * 
      * @param tests the ArrayList of Tester objects
@@ -262,7 +271,7 @@ public class Assignment {
     public String getAssignmentID() {
         return assignmentID;
     }
-    
+
     /**
      * Return the hash code of the unique assignment ID, for usage in hashmaps
      * 
