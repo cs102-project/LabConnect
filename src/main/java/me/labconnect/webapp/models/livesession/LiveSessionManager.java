@@ -1,5 +1,6 @@
 package me.labconnect.webapp.models.livesession;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import me.labconnect.webapp.models.users.Tutor;
  * {@link me.labconnect.webapp.models.data.LabAssignment}
  * 
  * @author Berkan Şahin
- * @version 25.04.2021
+ * @version 30.04.2021
  */
 public class LiveSessionManager {
 
@@ -36,17 +37,32 @@ public class LiveSessionManager {
      */
     public LiveSessionManager(LabAssignment sessionLab, String sessionID, List<TeachingAssistant> sessionTAs,
             List<Tutor> sessionTutors) {
+        this(sessionLab, sessionID, sessionTAs);
+
+        for (Tutor tutor : sessionTutors) {
+            tutoringSession.addTutor(tutor);
+        }
+    }
+
+    /**
+     * Create a new Live Session Manager for a lab assignment
+     * 
+     * @param sessionLab The lab assignment this session is for
+     * @param sessionID  The session ID
+     * @param sessionTAs The TAs participating in this session
+     */
+    public LiveSessionManager(LabAssignment sessionLab, String sessionID, List<TeachingAssistant> sessionTAs) {
         this.sessionLab = sessionLab;
         this.sessionID = sessionID;
         this.sessionTAs = sessionTAs;
 
-        // TODO (somehow) generate unique IDs for sessions
         reviewSessions = new HashMap<>();
         for (TeachingAssistant sessionTA : sessionTAs) {
-            reviewSessions.put(sessionTA, new CodeReviewSession(this.sessionID, this.sessionLab, sessionTA));
+            reviewSessions.put(sessionTA,
+                    new CodeReviewSession(this.sessionID + sessionTA.getInstitutionId(), this.sessionLab, sessionTA));
         }
 
-        tutoringSession = new TutoringSession(sessionID, sessionLab, sessionTutors);
+        tutoringSession = new TutoringSession(sessionID, sessionLab, new ArrayList<>());
         sessionLab.setLive(true);
     }
 

@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import me.labconnect.webapp.models.livesession.LiveSessionManager;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.users.TeachingAssistant;
-import me.labconnect.webapp.models.users.Tutor;
 import me.labconnect.webapp.repository.TARepository;
 
 /**
@@ -20,7 +19,7 @@ import me.labconnect.webapp.repository.TARepository;
  * 
  * @see me.labconnect.webapp.models.livesession.LiveSessionManager
  * @author Berkan Şahin
- * @version 25.04.2021
+ * @version 30.04.2021
  */
 @Document(collection = "assignments")
 public class LabAssignment extends Assignment {
@@ -33,13 +32,13 @@ public class LabAssignment extends Assignment {
 
     // Constructor
 
-
     @PersistenceConstructor
     public LabAssignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
             String instructionFileName, String title, ArrayList<Tester> tests, boolean isLive) {
-                super(id, assignmentID, isCompleted, isVisible, sections, instructionFileName, title, tests);
-                this.isLive = isLive;
-            }
+        super(id, assignmentID, isCompleted, isVisible, sections, instructionFileName, title, tests);
+        this.isLive = isLive;
+    }
+
     /**
      * Creates an assignment object which contains every property of an assignment
      * 
@@ -65,18 +64,13 @@ public class LabAssignment extends Assignment {
      */
     public LiveSessionManager startLiveSession() {
         ArrayList<TeachingAssistant> sessionTAs;
-        ArrayList<Tutor> sessionTutors;
 
         sessionTAs = new ArrayList<>();
         for (int section : getSections()) {
             sessionTAs.addAll(assistantRepository.findBySection(section));
         }
 
-        // TODO (maybe) query for available tutors
-        sessionTutors = new ArrayList<>();
-
-        // TODO generate an ID for the live session
-        return new LiveSessionManager(this, "FIXME", sessionTAs, sessionTutors);
+        return new LiveSessionManager(this, this.getAssignmentID(), sessionTAs);
 
     }
 
