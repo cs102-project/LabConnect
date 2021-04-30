@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.testing.TestResult;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
 import me.labconnect.webapp.models.users.Instructor;
@@ -47,10 +50,12 @@ public class DummyAPI {
 		Student tempStudent;
 		Path dummyInstruction;
 		ArrayList<Tester> dummyTesters;
+		List<String> allTestOutputs;
 		Assignment dummyAssignment;
 		String assignmentId;
 		Submission submission;
 		Attempt attempt;
+		String testOut;
 
 		assignmentRepository.deleteAll();
 
@@ -99,7 +104,14 @@ public class DummyAPI {
 		tempStudent.getSubmissionFor(dummyAssignment).addAttempt(attempt);
 		studentRepository.save(tempStudent);
 
-		return "success\n";
+		testOut = "";
+		
+		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream()).collect(Collectors.toList());
+
+		for (String outputLine : allTestOutputs) {
+			testOut += String.format("<p class=testOut>%s</p>", outputLine);
+		}
+		return testOut;
 	}
 
 
