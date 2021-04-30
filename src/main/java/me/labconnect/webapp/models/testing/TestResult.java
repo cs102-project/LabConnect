@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import me.labconnect.webapp.models.testing.style.StyleChecker;
 
 /**
@@ -16,7 +18,7 @@ import me.labconnect.webapp.models.testing.style.StyleChecker;
  * @see Tester
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
- * @version 21.04.2021
+ * @version 30.04.2021
  */
 public class TestResult {
 
@@ -24,6 +26,14 @@ public class TestResult {
     private TestState state;
     private ArrayList<String> testOutput;
     private String submissionPath;
+
+    @PersistenceConstructor
+    public TestResult(Tester test, TestState state, ArrayList<String> testOutput, String submissionPath) {
+        this.testOutput = testOutput;
+        this.test = test;
+        this.state = state;
+        this.submissionPath = submissionPath;
+    }
 
     /**
      * Create a TestResult instance for a unit test
