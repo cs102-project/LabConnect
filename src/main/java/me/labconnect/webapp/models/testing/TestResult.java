@@ -40,10 +40,10 @@ public class TestResult {
      * 
      * @apiNote If an error occured during the compilation phase, use
      *          {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
-     * @param unitTest  The unit test the instance is instantiated from
+     * @param unitTest   The unit test the instance is instantiated from
      * @param submission The submission used in the unit test, as an absolute path
-     * @param output    The compiler or runtime output, depending on state
-     * @param state     The test state
+     * @param output     The compiler or runtime output, depending on state
+     * @param state      The test state
      * 
      * @throws IOException If an I/O error occurs while reading the output
      */
@@ -58,8 +58,27 @@ public class TestResult {
         while (scan.hasNextLine()) {
             testOutput.add(scan.nextLine());
         }
-        
+
         scan.close();
+    }
+
+    /**
+     * Create a TestResult instance for a unit test
+     * 
+     * @apiNote If an error occured during the compilation phase, use
+     *          {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
+     * @param unitTest       The unit test the instance is instantiated from
+     * @param submission     The submission used in the unit test, as an absolute
+     *                       path
+     * @param offendingLines The lines that are different from the example
+     *                       implementation
+     * @param state          The test state
+     */
+    public TestResult(UnitTest unitTest, Path submission, ArrayList<String> offendingLines, TestState state) {
+        this.test = unitTest;
+        this.submissionPath = submission.toString();
+        this.state = state;
+        this.testOutput = offendingLines;
     }
 
     /**
@@ -74,9 +93,9 @@ public class TestResult {
         this.test = styleCheck;
         this.submissionPath = submission.toString();
         this.testOutput = offendingLines;
-        
+
         state = offendingLines.isEmpty() ? TestState.SUCCESS : TestState.DESIGN_ERROR;
-        
+
     }
 
     /**

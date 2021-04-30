@@ -22,6 +22,7 @@ import me.labconnect.webapp.models.testing.BadExampleException;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.UnitTest;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
+import me.labconnect.webapp.models.testing.style.ProgramHeaderJavadocChecker;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.TeachingAssistant;
@@ -171,7 +172,7 @@ public class DummyAPI {
 		// Make a new assignment
 		dummyInstruction = Files.createTempFile(null, ".pdf");
 		dummyTesters = new ArrayList<>();
-		dummyTesters.add(new IndentationChecker());
+		dummyTesters.add(new ProgramHeaderJavadocChecker());
 
 		dummyAssignment = new LabAssignment(assignmentName, new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });

@@ -41,6 +41,7 @@ public class UnitTest implements Tester {
         this.timeLimitInMS = timeLimitInMS;
         this.testerClassPath = testerClassPath;
     }
+
     /**
      * Creates a new unit test from the given tester and generates the correct
      * output from the example implementation
@@ -225,13 +226,17 @@ public class UnitTest implements Tester {
      */
     @Override
     public TestResult runTest(Path submission) throws IOException {
+        final String DIFF_TEMPLATE = "Expected %s, got %s";
+
         Path bytecodeDir;
         Path programOutput;
         ProcessBuilder runtimeBuilder;
         Process runtimeProcess;
         ArrayList<String> runtimeArgs;
+        ArrayList<String> offendingLines;
         String testerFileName;
         String testerClassName;
+        String currentLine;
         TestState endState;
         Scanner currentOutputScanner;
         boolean finishedInTime;
@@ -285,24 +290,33 @@ public class UnitTest implements Tester {
             endState = TestState.SUCCESS;
         } else {
 
-            // Assume success, change on mismatch
-            endState = TestState.SUCCESS;
-
             currentOutputScanner = new Scanner(programOutput);
+            offendingLines = new ArrayList<>();
 
             for (String correctLine : correctOutput) {
-                if (!currentOutputScanner.hasNextLine() || !correctLine.equals(currentOutputScanner.nextLine())) {
-                    endState = TestState.OUTPUT_MISMATCH;
-                    break;
+                if (!currentOutputScanner.hasNextLine()) {
+                    offendingLines.add(String.format(DIFF_TEMPLATE, correctLine, "EOF"));
+                } else {
+                    currentLine = currentOutputScanner.nextLine();
+                    if (!correctLine.equals(currentLine)) {
+                        offendingLines.add(String.format(DIFF_TEMPLATE, correctLine, currentLine));
+                    }
                 }
             }
 
             // If both files don't reach EOF at the same time, they are different
-            if (currentOutputScanner.hasNextLine()) {
-                endState = TestState.OUTPUT_MISMATCH;
+            while (currentOutputScanner.hasNextLine()) {
+                offendingLines.add(String.format(DIFF_TEMPLATE, "EOF", currentOutputScanner.nextLine()));
             }
 
             currentOutputScanner.close();
+            
+            if (offendingLines.isEmpty()) {
+                endState = TestState.SUCCESS;
+            } else {
+                endState = TestState.OUTPUT_MISMATCH;
+                return new TestResult(this, submission, offendingLines, endState);
+            }
         }
 
         return new TestResult(this, submission, programOutput, endState);
