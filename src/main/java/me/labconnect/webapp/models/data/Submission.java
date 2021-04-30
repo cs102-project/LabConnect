@@ -1,7 +1,10 @@
 package me.labconnect.webapp.models.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import me.labconnect.webapp.models.users.Student;
@@ -15,13 +18,23 @@ import me.labconnect.webapp.models.users.Student;
 public class Submission {
 
     // Variables
+    @Id
+    private String objectID;
     private long submitterID;
     @DBRef
     private Assignment assignment;
     @DBRef
-    private ArrayList<Attempt> attempts;
+    private List<Attempt> attempts;
 
     // Constructors
+
+    @PersistenceConstructor
+    public Submission(String objectID,long submitterID, Assignment assignment, List<Attempt> attempts) {
+        this.submitterID = submitterID;
+        this.assignment = assignment;
+        this.attempts = attempts;
+        this.objectID = objectID;
+    }
 
     /**
      * Create a new submission
@@ -60,8 +73,9 @@ public class Submission {
      * 
      * @param attempt The attempt to add
      */
-    public void addAttempt(Attempt attempt) {
+    public Attempt addAttempt(Attempt attempt) {
         attempts.add(attempt);
+        return attempt;
     }
 
     /**
@@ -69,7 +83,7 @@ public class Submission {
      * 
      * @return the list of attempts
      */
-    public ArrayList<Attempt> getAttempts() {
+    public List<Attempt> getAttempts() {
         return attempts;
     }
 

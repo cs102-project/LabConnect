@@ -6,6 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.models.testing.TestResult;
 import me.labconnect.webapp.models.testing.Tester;
@@ -16,21 +22,33 @@ import me.labconnect.webapp.models.testing.Tester;
  * 
  * @author Berkan Şahin
  * @author Vedat Eren Arican
- * @version 28.04.2021
+ * @version 30.04.2021
  */
+@Document(collection="attempts")
 public class Attempt {
 
     // Constants
+    @Transient
     private final String ATTEMPT_ROOT = "/var/labconnect/submissions";
 
     // Variables
-    private ArrayList<TestResult> testResults;
-    private ArrayList<String> feedback;
-    private String attemptPath;
+    @Id
+    private String objectID;
+    private List<TestResult> testResults;
+    private List<String> feedback;
+    private String attemptID;
     private int grade;
 
     // Constructors
 
+    @PersistenceConstructor
+    public Attempt(String attemptID, int grade, List<String> feedback, List<TestResult> testResults, String objectID) {
+        this.attemptID = attemptID;
+        this.feedback = feedback;
+        this.grade = grade;
+        this.testResults = testResults;
+        this.objectID = objectID;
+    }
     /**
      * Extract and test the supplied attempt
      * 
@@ -40,22 +58,18 @@ public class Attempt {
      * @throws IOException If processing the archive fails
      */
     public Attempt(Path submissionArchive, Submission submission) throws IOException {
-        Path submissionParent;
         Path submissionDir;
         ArrayList<String> extractorArgs;
         ProcessBuilder extractorBuilder;
         Process extractor;
 
-        if (!submissionArchive.isAbsolute() || !submissionArchive.endsWith(".zip")) {
+        if (!submissionArchive.isAbsolute() || !submissionArchive.getFileName().toString().endsWith(".zip")) {
             throw new IOException("Invalid archive");
         }
 
         // Create submission dir
-        submissionParent = Files.createDirectories(Paths.get(ATTEMPT_ROOT, submission.getAssignment().getAssignmentID(),
-                submission.getSubmitterID() + ""));
-
-        submissionDir = Files.createTempDirectory(submissionParent, "");
-        attemptPath = submissionDir.toString();
+        submissionDir = Files.createTempDirectory(Paths.get(ATTEMPT_ROOT), "");
+        attemptID = submissionDir.getFileName().toString();
 
         // Unzip submission
         extractorArgs = new ArrayList<>();
@@ -111,7 +125,7 @@ public class Attempt {
      * 
      * @return the test results
      */
-    public ArrayList<TestResult> getTestResults() {
+    public List<TestResult> getTestResults() {
         return testResults;
     }
 
@@ -161,7 +175,7 @@ public class Attempt {
      * 
      * @param feedback The feedback as a list of lines
      */
-    public void giveFeedback(ArrayList<String> feedback) {
+    public void giveFeedback(List<String> feedback) {
         this.feedback = feedback;
     }
 
@@ -170,7 +184,7 @@ public class Attempt {
      * 
      * @return the feedback for this attempt
      */
-    public ArrayList<String> getFeedback() {
+    public List<String> getFeedback() {
         return feedback;
     }
 
@@ -180,7 +194,11 @@ public class Attempt {
      * @return the directory this attempt is stored in
      */
     public Path getAttemptDir() {
-        return Paths.get(attemptPath);
+        return Paths.get(ATTEMPT_ROOT, attemptID);
+    }
+
+    public String getAttemptID() {
+        return attemptID;
     }
 
 }
