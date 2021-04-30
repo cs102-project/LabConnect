@@ -45,34 +45,62 @@ public class DummyAPI {
 	@Autowired
 	private AttemptRepository attemptRepository;
 
-	@GetMapping("/api/dummy")
+	@GetMapping("/api/dummy/submit")
 	public String dummyWorkflow(@RequestParam(name = "attempt") String attemptPath,
-			@RequestParam(name = "tester") String testerClass) throws IOException, BadExampleException {
-		TeachingAssistant tempTA;
+			@RequestParam(name = "student_id") Long studentId,
+			@RequestParam(name = "assignment_id") String assignmentId) throws IOException {
 		Student tempStudent;
-		Path dummyInstruction;
-		ArrayList<Tester> dummyTesters;
 		List<String> allTestOutputs;
 		Assignment dummyAssignment;
-		String assignmentId;
 		Submission submission;
 		Attempt attempt;
 		String testOut;
 
-		assignmentRepository.deleteAll();
+		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow(() -> new AssignmentNotFoundException(assignmentId));
 
-		// Add our users
-		instructorRepository.save(new Instructor("David Davenport", 1, "Computer Science", new int[] { 1, 2, 3 }));
-		studentRepository.save(new Student("Linus Torvalds", 22003211, "Computer Science", 1));
-		assistantRepository.save(new TeachingAssistant("Richard Matthew Stallman", 1234, "Computer Science",
-				new ArrayList<Student>(), 1));
+		// Let's try submitting an attempt
+		tempStudent = studentRepository.findByInstitutionId(studentId).orElseThrow(() -> new UserNotFoundException(studentId));
 
-		// Assign the student to our TA
-		tempTA = assistantRepository.findByInstitutionId(1234).orElseThrow();
+		submission = tempStudent.getSubmissionFor(dummyAssignment);
+		attempt = attemptRepository.save(new Attempt(Paths.get(attemptPath), submission));
+		tempStudent.getSubmissionFor(dummyAssignment).addAttempt(attempt);
+		studentRepository.save(tempStudent);
 
-		tempTA.getStudents().add(studentRepository.findByInstitutionId(22003211).orElseThrow());
+		testOut = String.format("<p class=attemptId>Attempt ID: %s</p>", attempt.getAttemptID());
 
-		assistantRepository.save(tempTA); // Save and retrieve the object for every atomic operation!
+		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream())
+				.collect(Collectors.toList());
+
+		for (String outputLine : allTestOutputs) {
+			testOut += String.format("<p class=testOut>%s</p>", outputLine);
+		}
+		return testOut;
+	}
+
+	@GetMapping("/api/dummy/add_unit_test")
+	public String addUnitTest(@RequestParam(name = "assignment_id") String assignmentID,
+			@RequestParam(name = "tester") String testerClass, @RequestParam(name = "example") String exampleImpl,
+			@RequestParam(name = "name") String testerName) throws IOException, BadExampleException {
+		Assignment dummyAssignment;
+
+		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentID)
+				.orElseThrow(() -> new AssignmentNotFoundException(assignmentID));
+
+		dummyAssignment
+				.addTest(new UnitTest(testerName, Paths.get(testerClass), Paths.get(exampleImpl), dummyAssignment));
+		dummyAssignment = assignmentRepository.save(dummyAssignment);
+
+		return "<p>Added test successfully!</p>";
+
+	}
+
+	@GetMapping("/api/dummy/assignment_init")
+	public String initializeAssignment(@RequestParam(name = "name") String assignmentName) throws IOException {
+		final String RESPONSE_TEMPLATE = "<p class=assingmentID> Assignment ID: %s</p>";
+		Path dummyInstruction;
+		ArrayList<Tester> dummyTesters;
+		Assignment dummyAssignment;
+		String assignmentId;
 
 		// Make a new assignment
 		dummyInstruction = Files.createTempFile(null, ".pdf");
@@ -84,41 +112,28 @@ public class DummyAPI {
 
 		assignmentId = assignmentRepository.save(dummyAssignment).getAssignmentID();
 
-		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
+		return String.format(RESPONSE_TEMPLATE, assignmentId);
 
-		for (Assignment assignment : assignmentRepository.findBySectionsContaining(tempStudent.getSection())) {
-			tempStudent.giveAssignment(assignment);
-		}
-		studentRepository.save(tempStudent);
+	}
 
-		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
-		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow();
+	@GetMapping("/api/dummy/user_init")
+	public String initializeUsers() {
+		TeachingAssistant temproraryTA;
 
-		dummyAssignment.addTest(
-				new UnitTest("Company Tester", Paths.get(testerClass), Paths.get(attemptPath), dummyAssignment));
-		dummyAssignment = assignmentRepository.save(dummyAssignment);
+		// Add our users
+		instructorRepository.save(new Instructor("David Davenport", 1, "Computer Science", new int[] { 1, 2, 3 }));
+		studentRepository.save(new Student("Linus Torvalds", 22003211, "Computer Science", 1));
+		assistantRepository.save(new TeachingAssistant("Richard Matthew Stallman", 1234, "Computer Science",
+				new ArrayList<Student>(), 1));
 
-		if (!tempStudent.addSubmission(dummyAssignment, new Submission(tempStudent, dummyAssignment)))
-			return "Assignments do not match!\n";
-		studentRepository.save(tempStudent);
+		// Assign the student to our TA
+		temproraryTA = assistantRepository.findByInstitutionId(1234).orElseThrow();
 
-		// Let's try submitting an attempt
-		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
+		temproraryTA.getStudents().add(studentRepository.findByInstitutionId(22003211).orElseThrow());
 
-		submission = tempStudent.getSubmissionFor(dummyAssignment);
-		attempt = attemptRepository.save(new Attempt(Paths.get(attemptPath), submission));
-		tempStudent.getSubmissionFor(dummyAssignment).addAttempt(attempt);
-		studentRepository.save(tempStudent);
+		assistantRepository.save(temproraryTA); // Save and retrieve the object for every atomic operation!
 
-		testOut = String.format("<p class=assignmentID>Assignment ID: %s</p>", assignmentId);
-
-		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream())
-				.collect(Collectors.toList());
-
-		for (String outputLine : allTestOutputs) {
-			testOut += String.format("<p class=testOut>%s</p>", outputLine);
-		}
-		return testOut;
+		return "Success\n";
 	}
 
 }
