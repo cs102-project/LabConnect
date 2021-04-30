@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.labconnect.webapp.models.*;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.testing.Tester;

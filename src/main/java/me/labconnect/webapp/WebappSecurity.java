@@ -19,7 +19,7 @@ public class WebappSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         
         http.authorizeRequests()
-                .antMatchers("/", "/static/**", "/{regex:^.*\\.(?:ico|png|json|txt)$}", "/error").permitAll()
+                .antMatchers("/static/**", "/{regex:^.*\\.(?:ico|png|json|txt)$}", "/error").permitAll()
                 .anyRequest().authenticated()
             .and()
             .formLogin()
