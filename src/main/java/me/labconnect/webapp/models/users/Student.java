@@ -3,6 +3,7 @@ package me.labconnect.webapp.models.users;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,7 +16,7 @@ import me.labconnect.webapp.models.data.Submission;
  * 
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
- * @version 28.04.2021
+ * @version 30.04.2021
  */
 @Document(collection = "students")
 public class Student extends User {
@@ -57,7 +58,26 @@ public class Student extends User {
         submissions = new HashMap<>();
     }
 
-    private Student() {
+    /**
+     * Create a new Student with all properties initialized, including Object ID.
+     * Intended for retrieving students from a database.
+     * 
+     * @param name          Name of the student.
+     * @param institutionId Unique institution id of the student.
+     * @param department    Student's department.
+     * @param section       The section this student is in
+     * @param assignments   Assignments this student is responsible for
+     * @param submissions   A mapping of this student's assignments to submissions
+     * @param isOnline      The online status of the student
+     * @param objectID      The unique object ID assigned by the database
+     */
+    @PersistenceConstructor
+    public Student(String name, long institutionId, String department, int section, ArrayList<Assignment> assignments,
+            HashMap<Assignment, Submission> submissions, boolean isOnline, String objectID) {
+        this(name, institutionId, department, section, assignments);
+        this.submissions = submissions;
+        this.objectID = objectID;
+        this.isOnline = isOnline;
     }
 
     // Methods

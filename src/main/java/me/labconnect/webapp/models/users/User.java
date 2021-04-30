@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.users;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
- * @version 22.04.2021
+ * @version 30.04.2021
  */
 @Document(collection = "users")
 public abstract class User {
@@ -36,9 +37,21 @@ public abstract class User {
     }
 
     /**
-     * Internal constructor for MongoDB use
+     * A constructor for retrieving User entries from the database
+     * 
+     * @param objectID      The unique objectID assigned by the database
+     * @param institutionId The unique ID number assigned by the institution
+     * @param name          The name of the user
+     * @param department    The department of the user
+     * @param isOnline      The online status of the user
      */
-    protected User() {
+    @PersistenceConstructor
+    public User(String objectID, Long institutionId, String name, String department, boolean isOnline) {
+        this.name = name;
+        this.institutionId = institutionId;
+        this.objectID = objectID;
+        this.department = department;
+        this.isOnline = isOnline;
     }
 
     // Methods

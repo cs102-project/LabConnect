@@ -1,5 +1,6 @@
 package me.labconnect.webapp.models.users;
 
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.models.livesession.Meetable;
@@ -42,7 +43,23 @@ public class Tutor extends User implements Meetable {
         this.meetingLink = meetingLink;
     }
 
-    private Tutor() {
+    /**
+     * Initialize all properties of a Tutor object, including Object ID. Intended to
+     * be used while retrieving entries from the database
+     * 
+     * @param name          Name of the tutor
+     * @param institutionId Unique institution ID of the tutor
+     * @param department    Tutor's department
+     * @param meetingLink   The URL of the online meeting.
+     * @param isOnline      The online status of the tutor
+     * @param objectID      The unique object ID assigned to the database entry
+     */
+    @PersistenceConstructor
+    public Tutor(String name, long institutionId, String department, String meetingLink, boolean isOnline,
+            String objectID) {
+        this(name, institutionId, department, meetingLink);
+        this.isOnline = isOnline;
+        this.objectID = objectID;
     }
 
     // Methods

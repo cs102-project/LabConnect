@@ -2,6 +2,7 @@ package me.labconnect.webapp.models.users;
 
 import java.util.ArrayList;
 
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,7 +14,7 @@ import me.labconnect.webapp.models.livesession.Meetable;
  * 
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
- * @version 27.04.2021
+ * @version 30.04.2021
  */
 @Document(collection = "assistants")
 public class TeachingAssistant extends User implements Meetable {
@@ -33,7 +34,8 @@ public class TeachingAssistant extends User implements Meetable {
      * @param department       TA's department
      * @param assignedStudents The students this TA is assigned to
      */
-    public TeachingAssistant(String name, long institutionId, String department, ArrayList<Student> assignedStudents, int section) {
+    public TeachingAssistant(String name, long institutionId, String department, ArrayList<Student> assignedStudents,
+            int section) {
         super(name, institutionId, department);
         students = assignedStudents;
         this.section = section;
@@ -50,13 +52,32 @@ public class TeachingAssistant extends User implements Meetable {
      * @param section          The section this TA is assgined to
      */
     public TeachingAssistant(String name, long institutionId, String department, String meetingLink,
-            ArrayList<Student> assignedStudents) {
+            ArrayList<Student> assignedStudents, int section) {
         super(name, institutionId, department);
         this.meetingLink = meetingLink;
         students = assignedStudents;
+        this.section = section;
     }
 
-    private TeachingAssistant() {}
+    /**
+     * Initializes all properties of the TA object, including the Object ID
+     * 
+     * @param name          Name of the TA.
+     * @param institutionId Unique institution id of the TA.
+     * @param department    TA's department.
+     * @param meetingLink   The URL of the online meeting hosted by the TA
+     * @param students      The students this TA is assigned to
+     * @param section       The section this TA is assgined to
+     * @param isOnline      The online status of this TA
+     * @param objectID      The object ID assigned by the database
+     */
+    @PersistenceConstructor
+    public TeachingAssistant(String name, long institutionId, String department, String meetingLink,
+            ArrayList<Student> students, int section, boolean isOnline, String objectID) {
+        this(name, institutionId, department, meetingLink, students, section);
+        this.isOnline = isOnline;
+        this.objectID = objectID;
+    }
 
     // Methods
     /**
@@ -109,6 +130,7 @@ public class TeachingAssistant extends User implements Meetable {
 
     /**
      * Return the section this TA is assigned to
+     * 
      * @return the section this TA is assigned to
      */
     public int getSection() {
