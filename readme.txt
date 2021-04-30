@@ -28,14 +28,15 @@ The student experience can be improved further by adding helpful
 features such as personal notes for students and so on.
 
 Current Status:
-TODO
+Back-end is mostly done. Now, we can create, test assignment files from command-line. In front-end side,
+we implemented the user login interface and background process for gaining session for user client.
 
 Further Development:
-TODO
+Real API implementation and front-end development need to be completed.
 
 Contributions:
-Berkan Şahin -> 
-Berk Çakar -> 
-Borga Haktan Bilen -> 
-Alp Ertan -> 
-Vedat Eren Arıcan -> 
+Berkan Şahin ->
+Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
+Borga Haktan Bilen ->
+Alp Ertan ->
+Vedat Eren Arıcan ->
