@@ -44,9 +44,6 @@ public class IndentationChecker extends StyleChecker {
         int properIndent = 0;
 
         for (int line = 0; line < codeFile.size(); line++) {
-            if ( codeFile.get(line).trim().length() > 3 && !codeFile.get(line).trim().substring(0, 3).equals("/**") && !codeFile.get(line).trim().substring(0, 2).equals("*/") && !codeFile.get(line).trim().substring(0, 2).equals("//")
-                    && codeFile.get(line).trim().charAt(0) != '*' && codeFile.get(line).trim().charAt(0) != '@' ) {
-
                 int foundIndent = countLeadingSpaces(codeFile.get(line));
 
                 // Before checking the current line for indentation, check to see if it should
@@ -69,7 +66,6 @@ public class IndentationChecker extends StyleChecker {
                     properIndent += 4;
                 }
             }
-        }
         return errorList;
     }
 

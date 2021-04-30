@@ -35,8 +35,8 @@ Further Development:
 Real API implementation and front-end development need to be completed.
 
 Contributions:
-Berkan Şahin -> 
+Berkan Şahin -> Further developed API, Database, Model classes & Unit tests
 Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
 Borga Haktan Bilen -> Added new style checker classes & their maintaince + Further Regex improvements + General Testing
-Alp Ertan ->
+Alp Ertan -> General Testing + Documentation
 Vedat Eren Arıcan -> Worked on Spring Security and Spring Session integrations, structured the react-client and wrote the login page
