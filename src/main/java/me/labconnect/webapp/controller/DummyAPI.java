@@ -3,14 +3,17 @@ package me.labconnect.webapp.controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.testing.Tester;
@@ -18,18 +21,15 @@ import me.labconnect.webapp.models.testing.style.IndentationChecker;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.TeachingAssistant;
-import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.repository.AssignmentRepository;
+import me.labconnect.webapp.repository.AttemptRepository;
 import me.labconnect.webapp.repository.InstructorRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.TARepository;
-import me.labconnect.webapp.repository.UserRepository;
 
 @RestController
 public class DummyAPI {
 
-	@Autowired
-	private UserRepository<User> userRepository;
 	@Autowired
 	private InstructorRepository instructorRepository;
 	@Autowired
@@ -38,17 +38,20 @@ public class DummyAPI {
 	private AssignmentRepository assignmentRepository;
 	@Autowired
 	private TARepository assistantRepository;
+	@Autowired
+	private AttemptRepository attemptRepository;
 
 	@GetMapping("/api/dummy")
-	public String dummyWorkflow() throws IOException {
+	public String dummyWorkflow(@RequestParam(name="attempt") String attemptPath) throws IOException {
 		TeachingAssistant tempTA;
 		Student tempStudent;
 		Path dummyInstruction;
 		ArrayList<Tester> dummyTesters;
 		Assignment dummyAssignment;
 		String assignmentId;
+		Submission submission;
+		Attempt attempt;
 
-		userRepository.deleteAll();
 		assignmentRepository.deleteAll();
 
 		// Add our users
@@ -88,7 +91,15 @@ public class DummyAPI {
 			return "Assignments do not match!\n";
 		studentRepository.save(tempStudent);
 
-		return "Success!\n";
+		// Let's try submitting an attempt
+		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
+
+		submission = tempStudent.getSubmissionFor(dummyAssignment);
+		attempt = attemptRepository.save(new Attempt(Paths.get(attemptPath), submission));
+		tempStudent.getSubmissionFor(dummyAssignment).addAttempt(attempt);
+		studentRepository.save(tempStudent);
+
+		return "success\n";
 	}
 
 
