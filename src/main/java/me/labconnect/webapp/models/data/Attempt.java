@@ -5,9 +5,12 @@ import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
@@ -207,4 +210,51 @@ public class Attempt {
         return attemptID;
     }
 
+
+    /**
+     * Archive the source code submitted for this attempt as a ZIP file
+     * 
+     * @return The resource corresponding to the newly created archive
+     * @throws IOException If archiving the source code fails
+     */
+    public Resource getCodeArchive() throws IOException {
+        ProcessBuilder archiverBuilder;
+        Process archiver;
+        List<String> archiverArgs;
+        Path attemptPath;
+        Path archiveFile;
+        String archiveFileName;
+
+        attemptPath = getAttemptDir();
+
+        archiverArgs = new ArrayList<>();
+        archiverArgs.add("zip");
+        archiverArgs.add("-qr"); // Suppress output and recurse into directories
+
+        archiveFileName = attemptPath.getFileName().toString() + ".zip";
+        archiverArgs.add(archiveFileName);
+        archiverArgs.add("."); // Archive everything
+
+        archiverBuilder = new ProcessBuilder(archiverArgs);
+        archiverBuilder.directory(attemptPath.toFile());
+        archiverBuilder.redirectOutput(Redirect.DISCARD);
+        archiver = archiverBuilder.start();
+
+        // Wait for compression to end, then determine success from exit code
+        try {
+            if (archiver.waitFor() != 0) {
+                throw new IOException("Compression error");
+            }
+        } catch (InterruptedException e) {
+            throw new IOException("zip was interrupted");
+        }
+
+        archiveFile = attemptPath.resolve(archiveFileName);
+
+        // Move the file to a temprorary place, then return it
+        archiveFile = Files.move(archiveFile, Files.createTempDirectory("").resolve(archiveFileName),
+                StandardCopyOption.REPLACE_EXISTING);
+
+        return new UrlResource(archiveFile.toUri());
+    }
 }

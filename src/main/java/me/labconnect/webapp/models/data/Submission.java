@@ -1,14 +1,10 @@
 package me.labconnect.webapp.models.data;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.core.io.Resource;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -27,8 +23,6 @@ public class Submission {
     @Id
     private String objectID;
     private long submitterID;
-    private int submitterSection;
-    private String submitterName;
     @DBRef
     private Assignment assignment;
     @DBRef
@@ -37,14 +31,11 @@ public class Submission {
     // Constructors
 
     @PersistenceConstructor
-    public Submission(String objectID, long submitterID, int submitterSection, String submitterName,
-            Assignment assignment, List<Attempt> attempts) {
+    public Submission(String objectID, long submitterID, Assignment assignment, List<Attempt> attempts) {
         this.submitterID = submitterID;
         this.assignment = assignment;
         this.attempts = attempts;
         this.objectID = objectID;
-        this.submitterName = submitterName;
-        this.submitterSection = submitterSection;
     }
 
     /**
@@ -55,9 +46,6 @@ public class Submission {
      */
     public Submission(Student submitter, Assignment assignment) {
         this.submitterID = submitter.getInstitutionId();
-        this.submitterName = submitter.getName();
-        this.submitterSection = submitter.getSection();
-
         this.assignment = assignment;
         attempts = new ArrayList<>();
     }
@@ -137,49 +125,12 @@ public class Submission {
     }
 
     /**
-     * Archive the source code submitted for a given attempt as a ZIP file
+     * Archive the source code for the final attempt as a ZIP file
      * 
-     * @param attempt The attempt to archive
-     * @return The path corresponding to the newly created archive
-     * @throws IOException If archiving the source code fails
+     * @return The resource corresponding to the source code archive
+     * @throws IOException If processing the final attempt fails
      */
-    public Path getCodeArchiveFor(Attempt attempt) throws IOException {
-        final String fileNameTemplate = "%d_%s_%s.zip";
-        ProcessBuilder archiverBuilder;
-        Process archiver;
-        List<String> archiverArgs;
-        Path attemptPath;
-        Path archiveFile;
-        String archiveFileName;
-
-        attemptPath = attempt.getAttemptDir();
-
-        archiverArgs = new ArrayList<>();
-        archiverArgs.add("zip");
-        archiverArgs.add("-qr"); // Suppress output and recurse into directories
-
-        archiveFileName = String.format(fileNameTemplate, submitterSection, assignment.getTitle(), submitterName);
-        archiverArgs.add(archiveFileName);
-        archiverArgs.add("."); // Archive everything
-
-        archiverBuilder = new ProcessBuilder(archiverArgs);
-        archiverBuilder.directory(attemptPath.toFile());
-        archiverBuilder.redirectOutput(Redirect.DISCARD);
-        archiver = archiverBuilder.start();
-
-        // Wait for compression to end, then determine success from exit code
-        try {
-            if (archiver.waitFor() != 0) {
-                throw new IOException("Compression error");
-            }
-        } catch (InterruptedException e) {
-            throw new IOException("zip was interrupted");
-        }
-
-        archiveFile = attemptPath.resolve(archiveFileName);
-
-        // Move the file to a temprorary place, then return it
-        return Files.move(archiveFile, Files.createTempDirectory("").resolve(archiveFileName),
-                StandardCopyOption.REPLACE_EXISTING);
+    public Resource getFinalCodeArchive() throws IOException {
+        return getFinalAttempt().getCodeArchive();
     }
 }
