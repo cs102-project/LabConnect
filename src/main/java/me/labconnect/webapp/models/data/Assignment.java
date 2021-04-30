@@ -51,7 +51,7 @@ public class Assignment {
     @PersistenceConstructor
     public Assignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
             String instructionFileName, String title, ArrayList<Tester> tests) {
-        
+
         this.id = id;
         this.assignmentID = assignmentID;
         this.isCompleted = isCompleted;
@@ -262,7 +262,7 @@ public class Assignment {
     public String getAssignmentID() {
         return assignmentID;
     }
-
+    
     /**
      * Return the hash code of the unique assignment ID, for usage in hashmaps
      * 
@@ -271,5 +271,20 @@ public class Assignment {
     @Override
     public int hashCode() {
         return assignmentID.hashCode();
+    }
+
+    /**
+     * Check if two assignments have the same ID
+     * 
+     * @return {@code true} if the assignment IDs match, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        Assignment tmp;
+        if (obj instanceof Assignment) {
+            tmp = (Assignment) obj;
+            return tmp.assignmentID.equals(assignmentID);
+        }
+        return false;
     }
 }

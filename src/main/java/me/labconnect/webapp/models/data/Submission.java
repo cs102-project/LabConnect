@@ -2,6 +2,8 @@ package me.labconnect.webapp.models.data;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import me.labconnect.webapp.models.users.Student;
 
 /**
@@ -14,7 +16,9 @@ public class Submission {
 
     // Variables
     private long submitterID;
+    @DBRef
     private Assignment assignment;
+    @DBRef
     private ArrayList<Attempt> attempts;
 
     // Constructors

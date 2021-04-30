@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.LabAssignment;
+import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
 import me.labconnect.webapp.models.users.Instructor;
@@ -44,7 +45,8 @@ public class DummyAPI {
 		Student tempStudent;
 		Path dummyInstruction;
 		ArrayList<Tester> dummyTesters;
-		LabAssignment dummyAssignment;
+		Assignment dummyAssignment;
+		String assignmentId;
 
 		userRepository.deleteAll();
 		assignmentRepository.deleteAll();
@@ -70,13 +72,20 @@ public class DummyAPI {
 		dummyAssignment = new LabAssignment("Minecraft", new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
 
-		assignmentRepository.save(dummyAssignment);
+
+		assignmentId = assignmentRepository.save(dummyAssignment).getAssignmentID();
 
 		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
 
 		for (Assignment assignment : assignmentRepository.findBySectionsContaining(tempStudent.getSection())) {
 			tempStudent.giveAssignment(assignment);
 		}
+		studentRepository.save(tempStudent);
+
+		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
+		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId);
+		if (!tempStudent.addSubmission(dummyAssignment, new Submission(tempStudent, dummyAssignment)))
+			return "Assignments do not match!\n";
 		studentRepository.save(tempStudent);
 
 		return "Success!\n";

@@ -24,7 +24,7 @@ public class Student extends User {
     // Properties
     @DBRef
     private ArrayList<Assignment> assignments;
-    private HashMap<Assignment, Submission> submissions;
+    private HashMap<String, Submission> submissions;
     private int section;
 
     // Constructor
@@ -73,7 +73,7 @@ public class Student extends User {
      */
     @PersistenceConstructor
     public Student(String name, long institutionId, String department, int section, ArrayList<Assignment> assignments,
-            HashMap<Assignment, Submission> submissions, boolean isOnline, String objectID) {
+            HashMap<String, Submission> submissions, boolean isOnline, String objectID) {
         this(name, institutionId, department, section, assignments);
         this.submissions = submissions;
         this.objectID = objectID;
@@ -126,18 +126,18 @@ public class Student extends User {
         if (!assignments.contains(assignment)) {
             return false;
         } else {
-            submissions.put(assignment, submission);
+            submissions.put(assignment.getAssignmentID(), submission);
             return true;
         }
 
     }
 
     /**
-     * Return a mapping of submissions to assignments
+     * Return a mapping of submissions to assignment IDs
      * 
-     * @return a mapping of submissions to assignments
+     * @return a mapping of submissions to assignment IDs
      */
-    public HashMap<Assignment, Submission> getSubmissions() {
+    public HashMap<String, Submission> getSubmissions() {
         return submissions;
     }
 
@@ -148,7 +148,7 @@ public class Student extends User {
      * @return The submission if it's found, otherwise {@code null}
      */
     public Submission getSubmissionFor(Assignment assignment) {
-        return submissions.get(assignment);
+        return submissions.get(assignment.getAssignmentID());
     }
 
     /**
