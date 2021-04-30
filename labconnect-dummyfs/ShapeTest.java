@@ -74,7 +74,7 @@ public class ShapeTest {
         circle = new Circle(13, 15, 7);
         square = new Square(-2, -5, 5);
         square2 = new Square(-2, -5, 5);
-        square3 = new Square(-1, -5, 5);
+        square3 = new Square(-2, -5, 4);
         square4 = null;
 
         shapes = new Shape2D[3];
