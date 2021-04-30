@@ -46,7 +46,8 @@ public class DummyAPI {
 	private AttemptRepository attemptRepository;
 
 	@GetMapping("/api/dummy")
-	public String dummyWorkflow(@RequestParam(name="attempt") String attemptPath) throws IOException, BadExampleException{
+	public String dummyWorkflow(@RequestParam(name = "attempt") String attemptPath,
+			@RequestParam(name = "tester") String testerClass) throws IOException, BadExampleException {
 		TeachingAssistant tempTA;
 		Student tempStudent;
 		Path dummyInstruction;
@@ -62,7 +63,7 @@ public class DummyAPI {
 
 		// Add our users
 		instructorRepository.save(new Instructor("David Davenport", 1, "Computer Science", new int[] { 1, 2, 3 }));
-		studentRepository.save(new Student("Cemudes Torno", 22003211, "Computer Science", 1));
+		studentRepository.save(new Student("Linus Torvalds", 22003211, "Computer Science", 1));
 		assistantRepository.save(new TeachingAssistant("Richard Matthew Stallman", 1234, "Computer Science",
 				new ArrayList<Student>(), 1));
 
@@ -78,9 +79,8 @@ public class DummyAPI {
 		dummyTesters = new ArrayList<>();
 		dummyTesters.add(new IndentationChecker());
 
-		dummyAssignment = new LabAssignment("Minecraft", new GregorianCalendar(2021, 05, 06).getTime(), true,
+		dummyAssignment = new LabAssignment("Lab04", new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
-
 
 		assignmentId = assignmentRepository.save(dummyAssignment).getAssignmentID();
 
@@ -94,7 +94,8 @@ public class DummyAPI {
 		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
 		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow();
 
-		dummyAssignment.addTest(new UnitTest("BasednessTest", Paths.get("/dummy/CompanyTester.java"), Paths.get(attemptPath), dummyAssignment));
+		dummyAssignment.addTest(
+				new UnitTest("Company Tester", Paths.get(testerClass), Paths.get(attemptPath), dummyAssignment));
 		dummyAssignment = assignmentRepository.save(dummyAssignment);
 
 		if (!tempStudent.addSubmission(dummyAssignment, new Submission(tempStudent, dummyAssignment)))
@@ -110,14 +111,14 @@ public class DummyAPI {
 		studentRepository.save(tempStudent);
 
 		testOut = String.format("<p class=assignmentID>Assignment ID: %s</p>", assignmentId);
-		
-		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream()).collect(Collectors.toList());
+
+		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream())
+				.collect(Collectors.toList());
 
 		for (String outputLine : allTestOutputs) {
 			testOut += String.format("<p class=testOut>%s</p>", outputLine);
 		}
 		return testOut;
 	}
-
 
 }
