@@ -77,6 +77,21 @@ public class DummyAPI {
 		return testOut;
 	}
 
+	public String assignToStudent(@RequestParam(name="student_id") Long studentID, @RequestParam(name="assignment_id") String assignmentID) {
+		Assignment assignment;
+		Student student;
+
+		assignment = assignmentRepository.findByAssignmentID(assignmentID).orElseThrow(() -> new AssignmentNotFoundException(assignmentID));
+		student = studentRepository.findByInstitutionId(studentID).orElseThrow(() -> new UserNotFoundException(studentID));
+
+		student.giveAssignment(assignment);
+		student.addSubmission(assignment, new Submission(student, assignment));
+
+		studentRepository.save(student);
+
+		return "Success!";
+	}
+
 	@GetMapping("/api/dummy/add_unit_test")
 	public String addUnitTest(@RequestParam(name = "assignment_id") String assignmentID,
 			@RequestParam(name = "tester") String testerClass, @RequestParam(name = "example") String exampleImpl,
