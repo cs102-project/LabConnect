@@ -39,4 +39,4 @@ Berkan Şahin ->
 Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
 Borga Haktan Bilen -> Added new style checker classes & their maintaince + Further Regex improvements + General Testing
 Alp Ertan ->
-Vedat Eren Arıcan ->
+Vedat Eren Arıcan -> Worked on Spring Security and Spring Session integrations, structured the react-client and wrote the login page
