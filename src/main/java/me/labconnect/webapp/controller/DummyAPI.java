@@ -34,12 +34,13 @@ import me.labconnect.webapp.repository.TARepository;
 /**
  * API for testing core functions of the project
  * 
+ * @author Berkan Şahin
  * @version 30.04.2021
  */
 @RestController
 public class DummyAPI {
 	// Testing fields
-	@Autowired		// For dependecy injection (from spring side)
+	@Autowired // For dependecy injection (from spring side)
 	private InstructorRepository instructorRepository;
 	@Autowired
 	private StudentRepository studentRepository;
@@ -50,6 +51,16 @@ public class DummyAPI {
 	@Autowired
 	private AttemptRepository attemptRepository;
 
+	/**
+	 * Submit an attempt for the assignment with the given ID as the student with
+	 * the given student ID
+	 * 
+	 * @param attemptPath  The path to the attempt ZIP
+	 * @param studentId    The ID of the student submitting this attempt
+	 * @param assignmentId The ID of the assignment
+	 * @return The output of the unit/style tests
+	 * @throws IOException If processing the attempt fails
+	 */
 	@GetMapping("/api/dummy/submit")
 	public String dummyWorkflow(@RequestParam(name = "attempt") String attemptPath,
 			@RequestParam(name = "student_id") Long studentId,
@@ -61,10 +72,12 @@ public class DummyAPI {
 		Attempt attempt;
 		String testOut;
 
-		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow(() -> new AssignmentNotFoundException(assignmentId));
+		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId)
+				.orElseThrow(() -> new AssignmentNotFoundException(assignmentId));
 
 		// Let's try submitting an attempt
-		tempStudent = studentRepository.findByInstitutionId(studentId).orElseThrow(() -> new UserNotFoundException(studentId));
+		tempStudent = studentRepository.findByInstitutionId(studentId)
+				.orElseThrow(() -> new UserNotFoundException(studentId));
 
 		submission = tempStudent.getSubmissionFor(dummyAssignment);
 		attempt = attemptRepository.save(new Attempt(Paths.get(attemptPath), submission));
@@ -82,13 +95,23 @@ public class DummyAPI {
 		return testOut;
 	}
 
+	/**
+	 * Assign an assignment to a student
+	 * 
+	 * @param studentID    The ID of the student this assignment is for
+	 * @param assignmentID The ID of the assignment
+	 * @return "Success" upon successful assignment
+	 */
 	@GetMapping("/api/dummy/assign_to_student")
-	public String assignToStudent(@RequestParam(name="student_id") Long studentID, @RequestParam(name="assignment_id") String assignmentID) {
+	public String assignToStudent(@RequestParam(name = "student_id") Long studentID,
+			@RequestParam(name = "assignment_id") String assignmentID) {
 		Assignment assignment;
 		Student student;
 
-		assignment = assignmentRepository.findByAssignmentID(assignmentID).orElseThrow(() -> new AssignmentNotFoundException(assignmentID));
-		student = studentRepository.findByInstitutionId(studentID).orElseThrow(() -> new UserNotFoundException(studentID));
+		assignment = assignmentRepository.findByAssignmentID(assignmentID)
+				.orElseThrow(() -> new AssignmentNotFoundException(assignmentID));
+		student = studentRepository.findByInstitutionId(studentID)
+				.orElseThrow(() -> new UserNotFoundException(studentID));
 
 		student.giveAssignment(assignment);
 		student.addSubmission(assignment, new Submission(student, assignment));
@@ -98,6 +121,21 @@ public class DummyAPI {
 		return "Success!";
 	}
 
+	/**
+	 * Add a unit test for the given assignment
+	 * 
+	 * @param assignmentID The unique ID of the assignment
+	 * @param testerClass  The tester class for the unit test, a single .java file
+	 * @param exampleImpl  The example implementation, path to a ZIP file of the
+	 *                     contents of src/
+	 * @param testerName   The name of the unit test
+	 * @return A success message upon a successful unit test
+	 * @throws IOException         If processing the tester class or the example
+	 *                             implementation fails
+	 * @throws BadExampleException If the example implementation does not compile or
+	 *                             if it generates a runtime error (or a non-zero
+	 *                             exit code)
+	 */
 	@GetMapping("/api/dummy/add_unit_test")
 	public String addUnitTest(@RequestParam(name = "assignment_id") String assignmentID,
 			@RequestParam(name = "tester") String testerClass, @RequestParam(name = "example") String exampleImpl,
@@ -115,10 +153,16 @@ public class DummyAPI {
 
 	}
 
-
+	/**
+	 * Initializes a dummy assignment with the given name
+	 * 
+	 * @param assignmentName The name of the assignment
+	 * @return The unique assignment ID upon succesful initialization
+	 * @throws IOException If an I/O error occurs
+	 */
 	@GetMapping("/api/dummy/assignment_init")
 	public String initializeAssignment(@RequestParam(name = "name") String assignmentName) throws IOException {
-		final String RESPONSE_TEMPLATE = "<p class=assingmentID> Assignment ID: %s</p>";
+		final String RESPONSE_TEMPLATE = "<p class=assignmentID> Assignment ID: %s</p>";
 		Path dummyInstruction;
 		ArrayList<Tester> dummyTesters;
 		Assignment dummyAssignment;
@@ -129,7 +173,7 @@ public class DummyAPI {
 		dummyTesters = new ArrayList<>();
 		dummyTesters.add(new IndentationChecker());
 
-		dummyAssignment = new LabAssignment("Lab04", new GregorianCalendar(2021, 05, 06).getTime(), true,
+		dummyAssignment = new LabAssignment(assignmentName, new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
 
 		assignmentId = assignmentRepository.save(dummyAssignment).getAssignmentID();
@@ -138,6 +182,12 @@ public class DummyAPI {
 
 	}
 
+	/**
+	 * Add a TA, an Instructor and a Student with predetermined properties to
+	 * initialize the database
+	 * 
+	 * @return "Success" upon successful initialization
+	 */
 	@GetMapping("/api/dummy/user_init")
 	public String initializeUsers() {
 		TeachingAssistant temproraryTA;
