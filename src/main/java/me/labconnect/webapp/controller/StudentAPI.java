@@ -30,6 +30,14 @@ public class StudentAPI {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
+    /**
+     * Download the final attempt for the given assignment by the given student
+     * 
+     * @param studentID    The ID of the student being reviewed
+     * @param assignmentID The assignment that is checked
+     * @return The attempt archive as a HTTP Response (a file download)
+     * @throws IOException If archiving the attempt fails
+     */
     @GetMapping("/api/student/{studentID}/submissions/{assignmentID}/get_final")
     public ResponseEntity<Resource> downloadFinalAttempt(@PathVariable Long studentID,
             @PathVariable String assignmentID) throws IOException {
@@ -47,6 +55,7 @@ public class StudentAPI {
         assignment = assignmentRepository.findByAssignmentID(assignmentID)
                 .orElseThrow(() -> new AssignmentNotFoundException(assignmentID));
         finalArchive = student.getSubmissionFor(assignment).getFinalCodeArchive();
+
         meaningfulFileName = String.format(fileNameTemplate, student.getSection(), assignment.getTitle(),
                 student.getName());
 
