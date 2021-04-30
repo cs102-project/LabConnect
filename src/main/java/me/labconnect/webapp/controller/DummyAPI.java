@@ -31,10 +31,15 @@ import me.labconnect.webapp.repository.InstructorRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.TARepository;
 
+/**
+ * API for testing core functions of the project
+ * 
+ * @version 30.04.2021
+ */
 @RestController
 public class DummyAPI {
-
-	@Autowired
+	// Testing fields
+	@Autowired		// For dependecy injection (from spring side)
 	private InstructorRepository instructorRepository;
 	@Autowired
 	private StudentRepository studentRepository;
@@ -93,6 +98,7 @@ public class DummyAPI {
 		return "<p>Added test successfully!</p>";
 
 	}
+
 
 	@GetMapping("/api/dummy/assignment_init")
 	public String initializeAssignment(@RequestParam(name = "name") String assignmentName) throws IOException {

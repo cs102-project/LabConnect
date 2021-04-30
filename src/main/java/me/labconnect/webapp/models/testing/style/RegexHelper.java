@@ -72,7 +72,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        //regex = "(_*)(|[A-Z]+|[a-z]+|[1-9]*)(_*)\\s*(\\(\\s*\\))\\s*\\;";
+        // regex = "(_*)(|[A-Z]+|[a-z]+|[1-9]*)(_*)\\s*(\\(\\s*\\))\\s*\\;";
         regex = "(?!\\bif\\b|\\bfor\\b|\\bwhile\\b|\\bswitch\\b|\\btry\\b|\\bcatch\\b)(\\b[\\w]+\\b)[\\s\\n\\r]*(?=\\(.*\\))";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);

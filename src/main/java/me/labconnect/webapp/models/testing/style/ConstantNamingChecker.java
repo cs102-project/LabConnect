@@ -21,10 +21,10 @@ public class ConstantNamingChecker extends StyleChecker {
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
 
-        for (int i = 0; i < codeFile.size(); i++) {
-            if (RegexHelper.constantRegexMatcher(codeFile.get(i))) {
-                if (isAllCaps(extractConstant(codeFile.get(i))) == false) {
-                    errorList.add(codeFile.get(i));
+        for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
+            if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
+                if (isAllCaps(extractConstant(codeFile.get(lineIndex))) == false) {
+                    errorList.add(codeFile.get(lineIndex));
                 }
             }
         }
@@ -43,9 +43,9 @@ public class ConstantNamingChecker extends StyleChecker {
         String[] identifiers = { "int", "double", "float", "long", "String", "Character", "char", "Integer", "Double",
                 "Float", "Long", "Boolean", "boolean", "Byte", "byte", "Short", "short" };
 
-        for (int i = 0; i < identifiers.length; i++) {
-            if (line.contains(identifiers[i])) {
-                endPos = line.indexOf(identifiers[i]) + identifiers[i].length();
+        for (int typeIndex = 0; typeIndex < identifiers.length; typeIndex++) {
+            if (line.contains(identifiers[typeIndex])) {
+                endPos = line.indexOf(identifiers[typeIndex]) + identifiers[typeIndex].length();
             }
         }
 
@@ -60,8 +60,8 @@ public class ConstantNamingChecker extends StyleChecker {
      */
     private String extractConstant(String line) {
         String constant = "";
-        for (int i = getEndPosition(line); i < line.length(); i++) {
-            constant += line.charAt(i);
+        for (int charIndex = getEndPosition(line); charIndex < line.length(); charIndex++) {
+            constant += line.charAt(charIndex);
         }
 
         return constant;

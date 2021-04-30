@@ -22,10 +22,10 @@ public class MethodNamingChecker extends StyleChecker {
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
 
-        for (int i = 0; i < codeFile.size(); i++) {
-            if (RegexHelper.methodRegexMatcher(codeFile.get(i))) {
-                if (checkCasing(extractMethodName(codeFile.get(i))) == false) {
-                    errorList.add(codeFile.get(i));
+        for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
+            if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))) {
+                if (checkCasing(extractMethodName(codeFile.get(lineIndex))) == false) {
+                    errorList.add(codeFile.get(lineIndex));
                 }
             }
         }
@@ -46,44 +46,44 @@ public class MethodNamingChecker extends StyleChecker {
         int methodNameStartIndex = 0;
         String sB = "";
 
-        for (int j = 0; j < line.length(); j++) {
-            if (line.indexOf(identifiers[j]) == 0) {
+        for (int charIndex = 0; charIndex < line.length(); charIndex++) {
+            if (line.indexOf(identifiers[charIndex]) == 0) {
                 continue;
             }
 
-            else if (line.indexOf(identifiers[j]) > 0) {
-                returnTypeStartIndex = line.indexOf(identifiers[j]);
+            else if (line.indexOf(identifiers[charIndex]) > 0) {
+                returnTypeStartIndex = line.indexOf(identifiers[charIndex]);
                 break;
             }
         }
 
-        for (int i = returnTypeStartIndex; i < line.length(); i++) {
-            currentChar = line.charAt(i);
+        for (int charIndex = returnTypeStartIndex; charIndex < line.length(); charIndex++) {
+            currentChar = line.charAt(charIndex);
             if (!currentChar.equals(' ')) {
                 continue;
             }
 
             else {
-                returnTypeEndIndex = i;
+                returnTypeEndIndex = charIndex;
                 break;
             }
         }
 
-        for (int k = returnTypeEndIndex; k < line.length(); k++) {
-            currentChar = line.charAt(k);
+        for (int charIndex = returnTypeEndIndex; charIndex < line.length(); charIndex++) {
+            currentChar = line.charAt(charIndex);
 
             if (currentChar == ' ') {
                 continue;
             }
 
             else {
-                methodNameStartIndex = k;
+                methodNameStartIndex = charIndex;
                 break;
             }
         }
 
-        for (int l = methodNameStartIndex; l < line.length(); l++) {
-            currentChar = line.charAt(l);
+        for (int charIndex = methodNameStartIndex; charIndex < line.length(); charIndex++) {
+            currentChar = line.charAt(charIndex);
 
             if (currentChar.equals(' ') || currentChar.equals('(')) {
                 break;
@@ -108,8 +108,8 @@ public class MethodNamingChecker extends StyleChecker {
             return false;
         }
 
-        for (int i = 1; i < methodName.length(); i++) {
-            if (!Character.isLowerCase(methodName.charAt(i))) {
+        for (int charIndex = 1; charIndex < methodName.length(); charIndex++) {
+            if (!Character.isLowerCase(methodName.charAt(charIndex))) {
                 return false;
             }
         }

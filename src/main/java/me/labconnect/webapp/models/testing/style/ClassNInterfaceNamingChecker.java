@@ -22,22 +22,22 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
-        String name;
-        String regex;
-        Pattern pattern;
+        String topLevelName;
+        String classNameRegexp;
+        Pattern compiledPattern;
         Matcher matcher;
 
         // Checks for correct conventional naming
-        regex = "^[A-Z][a-zA-Z0-9].*";
-        pattern = Pattern.compile(regex);
+        classNameRegexp = "^[A-Z][a-zA-Z0-9].*";
+        compiledPattern = Pattern.compile(classNameRegexp);
         for (int index = 0; index < codeFile.size(); index++) {
             String currentLine = codeFile.get(index);
 
             if ((RegexHelper.classRegexMatcher(currentLine) || RegexHelper.interfaceRegexMatcher(currentLine))) {
-                name = nameExtractor(currentLine);
-                matcher = pattern.matcher(name);
+                topLevelName = nameExtractor(currentLine);
+                matcher = compiledPattern.matcher(topLevelName);
 
-                if (!matcher.find() || name.contains(" ")) {
+                if (!matcher.find() || topLevelName.contains(" ")) {
                     errorList.add(currentLine);
                 }
             }
