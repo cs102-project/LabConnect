@@ -16,7 +16,7 @@ import me.labconnect.webapp.models.testing.Tester;
  *
  * @author Berk Çakar
  * @author Berkan Şahin
- * @version 21.04.2021
+ * @version 30.04.2021
  */
 public abstract class StyleChecker implements Tester {
 
@@ -40,7 +40,7 @@ public abstract class StyleChecker implements Tester {
       List<Path> codeFiles;
       ArrayList<String> offendingLines;
 
-      codeFiles = Files.walk(submission).filter(p -> p.endsWith(".java")).collect(Collectors.toList());
+      codeFiles = Files.walk(submission).filter(p -> p.toString().endsWith(".java")).collect(Collectors.toList());
       offendingLines = new ArrayList<>();
 
       for (Path codeFile : codeFiles) {
