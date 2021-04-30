@@ -35,8 +35,8 @@ Further Development:
 Real API implementation and front-end development need to be completed.
 
 Contributions:
-Berkan Şahin ->
+Berkan Şahin -> 
 Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
-Borga Haktan Bilen ->
+Borga Haktan Bilen -> Added new style checker classes & their maintaince + Further Regex improvements + General Testing
 Alp Ertan ->
 Vedat Eren Arıcan ->
