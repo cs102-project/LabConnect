@@ -117,4 +117,14 @@ public abstract class User {
     public boolean isOnline() {
         return isOnline;
     }
+
+    /**
+     * Returns the hash code of the institution ID, for usage in hashmaps
+     * 
+     * @return The hash code of the institution ID
+     */
+    @Override
+    public int hashCode() {
+        return institutionId.hashCode();
+    }
 }

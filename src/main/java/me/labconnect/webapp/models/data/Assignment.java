@@ -20,7 +20,7 @@ import me.labconnect.webapp.models.testing.Tester;
  * 
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
- * @version 23.04.2021
+ * @version 30.04.2021
  */
 @Document(collection = "assignments")
 public class Assignment {
@@ -261,5 +261,15 @@ public class Assignment {
      */
     public String getAssignmentID() {
         return assignmentID;
+    }
+
+    /**
+     * Return the hash code of the unique assignment ID, for usage in hashmaps
+     * 
+     * @return the hash code of the unique assignment ID
+     */
+    @Override
+    public int hashCode() {
+        return assignmentID.hashCode();
     }
 }
