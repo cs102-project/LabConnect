@@ -1,6 +1,7 @@
 package me.labconnect.webapp.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -21,7 +22,7 @@ public interface AssignmentRepository extends MongoRepository<Assignment, String
      * @param assignmentID The assignment ID to query
      * @return The assignment with the given ID
      */
-    public Assignment findByAssignmentID(String assignmentID);
+    public Optional<Assignment> findByAssignmentID(String assignmentID);
 
     /**
      * Find all assignments for the given section

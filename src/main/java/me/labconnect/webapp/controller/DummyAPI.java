@@ -18,7 +18,6 @@ import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.LabAssignment;
 import me.labconnect.webapp.models.data.Submission;
-import me.labconnect.webapp.models.testing.TestResult;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.style.IndentationChecker;
 import me.labconnect.webapp.models.users.Instructor;
@@ -91,7 +90,7 @@ public class DummyAPI {
 		studentRepository.save(tempStudent);
 
 		tempStudent = studentRepository.findByInstitutionId(22003211).orElseThrow();
-		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId);
+		dummyAssignment = assignmentRepository.findByAssignmentID(assignmentId).orElseThrow();
 		if (!tempStudent.addSubmission(dummyAssignment, new Submission(tempStudent, dummyAssignment)))
 			return "Assignments do not match!\n";
 		studentRepository.save(tempStudent);
@@ -104,7 +103,7 @@ public class DummyAPI {
 		tempStudent.getSubmissionFor(dummyAssignment).addAttempt(attempt);
 		studentRepository.save(tempStudent);
 
-		testOut = "";
+		testOut = String.format("<p class=assignmentID>Assignment ID: %s</p>", assignmentId);
 		
 		allTestOutputs = attempt.getTestResults().stream().flatMap(r -> r.getOutput().stream()).collect(Collectors.toList());
 
