@@ -24,7 +24,7 @@ import me.labconnect.webapp.models.testing.Tester;
  * @author Vedat Eren Arican
  * @version 30.04.2021
  */
-@Document(collection="attempts")
+@Document(collection = "attempts")
 public class Attempt {
 
     // Constants
@@ -34,9 +34,9 @@ public class Attempt {
     // Variables
     @Id
     private String objectID;
+    private String attemptID;
     private List<TestResult> testResults;
     private List<String> feedback;
-    private String attemptID;
     private int grade;
 
     // Constructors
@@ -49,6 +49,7 @@ public class Attempt {
         this.testResults = testResults;
         this.objectID = objectID;
     }
+
     /**
      * Extract and test the supplied attempt
      * 
@@ -197,6 +198,11 @@ public class Attempt {
         return Paths.get(ATTEMPT_ROOT, attemptID);
     }
 
+    /**
+     * Return the unique attempt identifier
+     * 
+     * @return the unique attempt identifier
+     */
     public String getAttemptID() {
         return attemptID;
     }
