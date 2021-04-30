@@ -46,6 +46,7 @@ public class ForbiddenStatementChecker extends StyleChecker {
      */
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> fileInput) {
+        boolean bitwiseCheck = true;
         ArrayList<String> errorList;
         Pattern forbiddenRegexp;
         Matcher forbiddenMatcher;
@@ -60,11 +61,15 @@ public class ForbiddenStatementChecker extends StyleChecker {
 
                 if (forbiddenMatcher.find()) {
                     errorList.add(line);
-                } else if (RegexHelper.generalBitwiseAmpersandMatcher(line)
-                        || RegexHelper.generalBitwiseOrMatcher(line)) {
-                    errorList.add(line);
+                    bitwiseCheck = false;
+                    break; // Preventing double returns
                 }
             }
+            if (((RegexHelper.generalBitwiseAmpersandMatcher(line) || RegexHelper.generalBitwiseOrMatcher(line)))
+                    && bitwiseCheck) {
+                errorList.add(line);
+            }
+            bitwiseCheck = true;
         }
 
         return errorList;
