@@ -1,4 +1,5 @@
 LabConnect
+Group: G2C
 
 Group Members:
 Borga Haktan Bilen 22002733
