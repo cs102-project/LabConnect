@@ -187,7 +187,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "(public?|private?)(\\s+)(class{1})\\s+(\\w+|\\d*)";
+        regex = "(public?|private?|abstract?)(\\s+)(class{1})\\s+(\\w+|\\d*)";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
