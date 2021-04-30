@@ -82,6 +82,7 @@ public class DummyAPI {
 		return testOut;
 	}
 
+	@GetMapping("/api/dummy/assign_to_student")
 	public String assignToStudent(@RequestParam(name="student_id") Long studentID, @RequestParam(name="assignment_id") String assignmentID) {
 		Assignment assignment;
 		Student student;
