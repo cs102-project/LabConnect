@@ -28,15 +28,20 @@ The student experience can be improved further by adding helpful
 features such as personal notes for students and so on.
 
 Current Status:
-Back-end is mostly done. Now, we can create, test assignment files from command-line. In front-end side,
-we implemented the user login interface and background process for gaining session for user client.
+Testing logic (Unit test and style checker) was implemented, as well as the general 
+I/O infrastructure for files needing persistent storage. Assignment, submission, 
+and user type model classes were also implemented.
 
 Further Development:
-Real API implementation and front-end development need to be completed.
+The only "business logic" needing implementation is the Live Session logic. 
+Once unit classes are complete, Repository classes for DB queries must be written 
+(most of the heavy lifting is already done by Spring Data) and a REST API should be 
+provided for manipulating the model classes. After this, frontend code will be written based 
+on the UI report and the REST API provided by the backend.
 
 Contributions:
-Berkan Şahin -> Further developed API, Database, Model classes & Unit tests
-Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
-Borga Haktan Bilen -> Added new style checker classes & their maintaince + Further Regex improvements + General Testing
-Alp Ertan -> General Testing + Documentation
-Vedat Eren Arıcan -> Worked on Spring Security and Spring Session integrations, structured the react-client and wrote the login page
+Berkan Şahin -> Model Classes (Unit & Style Testing Logic) + Docker Composition
+Berk Çakar -> Style Checker (Regex Logic and Checker Classes)
+Borga Haktan Bilen -> Model Classes + Style Checker Classes
+Alp Ertan -> Unit Test related classes (Exceptions) + Style Checker Classes
+Vedat Eren Arıcan -> TestResult + Style Checker (Regex Logic) + Code clean-up/refactoring
