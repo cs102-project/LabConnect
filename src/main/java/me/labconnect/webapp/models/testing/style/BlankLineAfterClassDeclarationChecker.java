@@ -32,17 +32,17 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
 
-        for (int i = 0; i < codeFile.size(); i++) {
-            if ( i < codeFile.size() - 2 ) {
-                if ((RegexHelper.classRegexMatcher(codeFile.get(i))
-                        || RegexHelper.interfaceRegexMatcher(codeFile.get(i)))) {
-                    if (codeFile.get(i + 1).trim().charAt(0) == '{' && !codeFile.get(i + 2).isEmpty()) {
-                        errorList.add(codeFile.get(i + 2));
+        for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
+            if (lineIndex < codeFile.size() - 2) {
+                if ((RegexHelper.classRegexMatcher(codeFile.get(lineIndex))
+                        || RegexHelper.interfaceRegexMatcher(codeFile.get(lineIndex)))) {
+                    if (codeFile.get(lineIndex + 1).trim().charAt(0) == '{' && !codeFile.get(lineIndex + 2).isEmpty()) {
+                        errorList.add(codeFile.get(lineIndex + 2));
                     }
 
-                    else if (codeFile.get(i).trim().charAt(codeFile.get(i).trim().length() - 1) == '{'
-                            && !codeFile.get(i + 1).isEmpty()) {
-                        errorList.add(codeFile.get(i + 1));
+                    else if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1) == '{'
+                            && !codeFile.get(lineIndex + 1).isEmpty()) {
+                        errorList.add(codeFile.get(lineIndex + 1));
                     }
                 }
             }

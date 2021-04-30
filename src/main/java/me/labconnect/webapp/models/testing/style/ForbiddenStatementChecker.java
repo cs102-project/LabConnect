@@ -47,20 +47,18 @@ public class ForbiddenStatementChecker extends StyleChecker {
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> fileInput) {
         ArrayList<String> errorList;
-        Pattern temporary;
-        Matcher illegalMatcher;
+        Pattern forbiddenRegexp;
+        Matcher forbiddenMatcher;
 
         errorList = new ArrayList<>();
         for (String line : fileInput) {
-            // If you want to include the comments in the improper lines change this the
-            // String
             line = RegexHelper.generalCommentRegexReplacer(line, "");
 
             for (String forbidden : forbiddenStatements) {
-                temporary = Pattern.compile(Pattern.quote(forbidden));
-                illegalMatcher = temporary.matcher(line);
+                forbiddenRegexp = Pattern.compile(Pattern.quote(forbidden));
+                forbiddenMatcher = forbiddenRegexp.matcher(line);
 
-                if (illegalMatcher.find()) {
+                if (forbiddenMatcher.find()) {
                     errorList.add(line);
                 } else if (RegexHelper.generalBitwiseAmpersandMatcher(line)
                         || RegexHelper.generalBitwiseOrMatcher(line)) {

@@ -21,7 +21,8 @@ public class IndentationChecker extends StyleChecker {
         int spaceCount = 0;
 
         if (line.length() > 0) {
-            for (int c = 0; (line.charAt(c) == ' ') && (c < line.length() - 1); c++) {
+            for (int leadingIndex = 0; (line.charAt(leadingIndex) == ' ')
+                    && (leadingIndex < line.length() - 1); leadingIndex++) {
                 spaceCount++;
             }
         } else {

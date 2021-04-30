@@ -32,38 +32,48 @@ public class OperatorsSpaceChecker extends StyleChecker {
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
         ArrayList<String> errorList = new ArrayList<>();
 
-        for (int i = 0; i < codeFile.size(); i++) {
-            for (int j = 1; j < codeFile.get(i).length() - 1; j++) {
-                if ( j != codeFile.get(i).length() - 1) {
-                    if (codeFile.get(i).charAt(j) == '+' && !(codeFile.get(i).charAt(j - 1) == ' ')
-                            || !(codeFile.get(i).charAt(j + 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '-' && !(codeFile.get(i).charAt(j - 1) == ' ')
-                            || !(codeFile.get(i).charAt(j + 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '*' && !(codeFile.get(i).charAt(j - 1) == ' ')
-                            || !(codeFile.get(i).charAt(j + 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '/' && !(codeFile.get(i).charAt(j - 1) == ' ')
-                            || !(codeFile.get(i).charAt(j + 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '%' && !(codeFile.get(i).charAt(j - 1) == ' ')
-                            || !(codeFile.get(i).charAt(j + 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
+        for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
+            for (int charIndex = 1; charIndex < codeFile.get(lineIndex).length() - 1; charIndex++) {
+                if (charIndex != codeFile.get(lineIndex).length() - 1) {
+                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
                     }
                 }
 
                 else {
-                    if (codeFile.get(i).charAt(j) == '+' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '-' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '*' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '/' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
-                    } else if (codeFile.get(i).charAt(j) == '%' && !(codeFile.get(i).charAt(j - 1) == ' ')) {
-                        errorList.add(codeFile.get(i));
+                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
+                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                        errorList.add(codeFile.get(lineIndex));
                     }
                 }
             }
