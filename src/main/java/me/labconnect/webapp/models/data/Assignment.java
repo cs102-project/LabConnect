@@ -30,20 +30,20 @@ public class Assignment {
 
     private int maxGrade;
     private int maxAttempts;
-    private String instructionFileName;
+    private String instructionPath;
     private List<Tester> tests;
     private List<ObjectId> submissions;
 
     // Constructor
 
     public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
-            int maxAttempts, String instructionFileName, List<Tester> tests) {
+            int maxAttempts, String instructionPath, List<Tester> tests) {
         this.title = title;
         this.homeworkType = homeworkType;
         this.courses = courses;
         this.maxGrade = maxGrade;
         this.maxAttempts = maxAttempts;
-        this.instructionFileName = instructionFileName;
+        this.instructionPath = instructionPath;
         this.tests = tests;
 
     }
@@ -84,8 +84,8 @@ public class Assignment {
         return maxAttempts;
     }
 
-    public String getInstructionFileName() {
-        return instructionFileName;
+    public String getInstructionPath() {
+        return instructionPath;
     }
 
     public List<Tester> getTests() {

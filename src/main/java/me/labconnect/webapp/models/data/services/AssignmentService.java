@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
 import me.labconnect.webapp.models.data.Assignment;
@@ -39,11 +41,12 @@ public class AssignmentService {
     }
 
     public Path getInstructionsPath(Assignment assignment) {
-        return Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString(), assignment.getInstructionFileName());
+        return Paths.get(assignment.getInstructionPath());
     }
 
-    public Path getAssignmentDir(Assignment assignment) {
-        return Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString());
+
+    public Resource getInstructions(Assignment assignment) throws IOException {
+        return new UrlResource(getInstructionsPath(assignment).toUri());
     }
 
     public Assignment createAssignment(String assignmentName, String institution, Path instructionFile, Date dueDate,
