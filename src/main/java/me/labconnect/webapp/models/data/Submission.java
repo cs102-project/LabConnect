@@ -46,5 +46,9 @@ public class Submission {
     public ObjectId getSubmitterId() {
         return submitterId;
     }
+
+    public void addAttempt(Attempt attempt) {
+        attempts.add(attempt);
+    }
     
 }
