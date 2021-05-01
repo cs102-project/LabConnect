@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.data.Assignment;
 
 /**
  * A class representing a student, i.e., a User that submits solutions to
@@ -21,11 +24,24 @@ public class Student {
     @Id
     private ObjectId id;
     private List<ObjectId> assignments;
+    private int section;
 
     // Constructor
 
-    public Student(List<ObjectId> assignments) {
+    public Student(List<ObjectId> assignments, int section) {
         this.assignments = assignments;
+        this.section = section;
+    }
+
+    @PersistenceConstructor
+    public Student(ObjectId id, List<ObjectId> assignments, int section) {
+        this.assignments = assignments;
+        this.id = id;
+        this.section = section;
+    }
+
+    public int getSection() {
+        return section;
     }
 
     // Methods
@@ -41,6 +57,14 @@ public class Student {
      */
     public List<ObjectId> getAssignments() {
         return assignments;
+    }
+
+    public void giveAssignment(Assignment assignment) {
+        giveAssignment(assignment.getObjectId());
+    }
+
+    private void giveAssignment(ObjectId assignmentId) {
+        assignments.add(assignmentId);
     }
     
 }
