@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.Transient;
 
 import me.labconnect.webapp.models.data.Assignment;
 
@@ -25,6 +26,10 @@ import me.labconnect.webapp.models.data.Assignment;
  * @version 30.04.2021
  */
 public class UnitTest implements Tester {
+
+    @Transient
+    private final String ASSIGNMENT_ROOT = "/var/labconnect/assignments"; // Very janky but couldn't find a better
+                                                                          // solution
 
     // Variables
     private String name;
@@ -67,8 +72,7 @@ public class UnitTest implements Tester {
         this.name = name;
         this.timeLimitInMS = timeLimitMiliseconds;
 
-        testerClassPath = Files.copy(testerClass, assignment.getAssignmentDir().resolve(testerClass.getFileName()))
-                .toString();
+        testerClassPath = copyTesterOver(assignment, testerClass).toString();
 
         firstResult = runTest(extractExampleImpl(exampleImpl));
         if (!firstResult.isSuccessful()) {
@@ -76,6 +80,11 @@ public class UnitTest implements Tester {
         } else {
             correctOutput = firstResult.getOutput();
         }
+    }
+
+    private Path copyTesterOver(Assignment assignment, Path testerClass) throws IOException {
+        return Files.copy(testerClass,
+                Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString()).resolve(testerClass.getFileName()));
     }
 
     /**
@@ -310,7 +319,7 @@ public class UnitTest implements Tester {
             }
 
             currentOutputScanner.close();
-            
+
             if (offendingLines.isEmpty()) {
                 endState = TestState.SUCCESS;
             } else {

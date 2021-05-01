@@ -3,9 +3,9 @@ package me.labconnect.webapp.models.data;
 public class Course {
     
     private String course;
-    private String section;
+    private int section;
     
-    public Course(String course, String section) {
+    public Course(String course, int section) {
         this.course = course;
         this.section = section;
     }
@@ -14,7 +14,7 @@ public class Course {
         return course;
     }
     
-    public String getSection() {
+    public int getSection() {
         return section;
     }
     

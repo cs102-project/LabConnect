@@ -27,6 +27,6 @@ public interface UserRepository extends MongoRepository<User, ObjectId> {
     List<User> findByCourse(String institution, String course);
     
     @Query("{ institution: ?0, courses: { $elemMatch: { course: ?1, section: ?2 } } }")
-    List<User> findByCourseSection(String institution, String course, String section);
+    List<User> findByCourseSection(String institution, String course, int section);
     
 }
