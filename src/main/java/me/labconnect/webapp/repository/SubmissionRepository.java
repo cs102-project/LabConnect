@@ -4,9 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.models.data.Submission;
 
 @Repository
-public interface InstructorRepository extends MongoRepository<Instructor, ObjectId> {
+public interface SubmissionRepository extends MongoRepository<Submission, ObjectId> {
+    
+    
     
 }

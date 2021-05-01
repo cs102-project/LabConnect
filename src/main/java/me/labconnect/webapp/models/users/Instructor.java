@@ -1,7 +1,12 @@
 package me.labconnect.webapp.models.users;
 
-import org.springframework.data.annotation.PersistenceConstructor;
+import java.util.List;
+
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.data.Announcement;
 
 /**
  * An instructor, which is the user that creates assignments, starts live
@@ -11,52 +16,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version 27.04.2021
  */
 @Document(collection = "instructors")
-public class Instructor extends User {
+public class Instructor {
 
     // Variables
-    private int[] sections;
-
-    /**
-     * Create a new Instructor instance
-     * 
-     * @param name          The name of the instructor
-     * @param institutionId The unique institution ID of the instructor
-     * @param department    The department of the instructor
-     * @param sections      The sections taught by this instructor
-     */
-    public Instructor(String name, long institutionId, String department, int[] sections) {
-        super(name, institutionId, department);
-        this.sections = sections;
-    }
-
-    /**
-     * Create a new Instructor instance with all properties (including Object ID)
-     * initialized. Intended for retrieving instructors from the database.
-     * 
-     * @param name          The name of the instructor
-     * @param institutionId The unique institution ID of the instructor
-     * @param department    The department of the instructor
-     * @param sections      The sections taught by this instructor
-     * @param isOnline      The online status of the instructor
-     * @param objectID      The unique object ID of the instructor assigned by the
-     *                      database
-     */
-    @PersistenceConstructor
-    public Instructor(String name, long institutionId, String department, int[] sections, boolean isOnline,
-            String objectID) {
-        super(objectID, institutionId, name, department, isOnline);
-        this.sections = sections;
+    @Id
+    private ObjectId id;
+    private List<Announcement> announcements;
+    private List<ObjectId> assignments;
+    
+    public Instructor(List<Announcement> announcements, List<ObjectId> assignments) {
+        this.announcements = announcements;
+        this.assignments = assignments;
     }
 
     // Methods
 
-    /**
-     * Returns the sections taught by this instructor
-     * 
-     * @return the sections taught by this instructor
-     */
-    public int[] getSections() {
-        return sections;
+    public ObjectId getId() {
+        return id;
     }
-
+    
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+    
+    public List<ObjectId> getAssignments() {
+        return assignments;
+    }
+    
 }
