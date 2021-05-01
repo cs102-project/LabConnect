@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.users.Student;
 
 /**
  * An aggregation of attempts for a certain assignment
@@ -17,10 +20,19 @@ public class Submission {
 
     @Id
     private ObjectId id;
+    private ObjectId submitterId;
     private List<Attempt> attempts;
     
-    public Submission(List<Attempt> attempts) {
+    public Submission(List<Attempt> attempts, Student submitter) {
         this.attempts = attempts;
+        this.submitterId = submitter.getId();
+    }
+
+    @PersistenceConstructor
+    public Submission(ObjectId id, ObjectId submitterId, List<Attempt> atttempts) {
+        this.id = id;
+        this.submitterId = submitterId;
+        this.attempts = atttempts;
     }
     
     public ObjectId getId() {
@@ -29,6 +41,10 @@ public class Submission {
     
     public List<Attempt> getAttempts() {
         return attempts;
+    }
+
+    public ObjectId getSubmitterId() {
+        return submitterId;
     }
     
 }
