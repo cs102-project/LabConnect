@@ -34,7 +34,7 @@ import me.labconnect.webapp.repository.TARepository;
 
 /**
  * API for testing core functions of the project
- * 
+ *
  * @author Berkan Şahin
  * @version 30.04.2021
  */
@@ -55,7 +55,7 @@ public class DummyAPI {
 	/**
 	 * Submit an attempt for the assignment with the given ID as the student with
 	 * the given student ID
-	 * 
+	 *
 	 * @param attemptPath  The path to the attempt ZIP
 	 * @param studentId    The ID of the student submitting this attempt
 	 * @param assignmentId The ID of the assignment
@@ -98,7 +98,7 @@ public class DummyAPI {
 
 	/**
 	 * Assign an assignment to a student
-	 * 
+	 *
 	 * @param studentID    The ID of the student this assignment is for
 	 * @param assignmentID The ID of the assignment
 	 * @return "Success" upon successful assignment
@@ -124,7 +124,7 @@ public class DummyAPI {
 
 	/**
 	 * Add a unit test for the given assignment
-	 * 
+	 *
 	 * @param assignmentID The unique ID of the assignment
 	 * @param testerClass  The tester class for the unit test, a single .java file
 	 * @param exampleImpl  The example implementation, path to a ZIP file of the
@@ -156,7 +156,7 @@ public class DummyAPI {
 
 	/**
 	 * Initializes a dummy assignment with the given name
-	 * 
+	 *
 	 * @param assignmentName The name of the assignment
 	 * @return The unique assignment ID upon succesful initialization
 	 * @throws IOException If an I/O error occurs
@@ -172,7 +172,7 @@ public class DummyAPI {
 		// Make a new assignment
 		dummyInstruction = Files.createTempFile(null, ".pdf");
 		dummyTesters = new ArrayList<>();
-		dummyTesters.add(new ProgramHeaderJavadocChecker());
+		dummyTesters.add(new IndentationChecker());
 
 		dummyAssignment = new LabAssignment(assignmentName, new GregorianCalendar(2021, 05, 06).getTime(), true,
 				dummyInstruction, dummyTesters, new int[] { 1, 2, 3 });
@@ -186,7 +186,7 @@ public class DummyAPI {
 	/**
 	 * Add a TA, an Instructor and a Student with predetermined properties to
 	 * initialize the database
-	 * 
+	 *
 	 * @return "Success" upon successful initialization
 	 */
 	@GetMapping("/api/dummy/user_init")

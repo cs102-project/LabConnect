@@ -37,37 +37,92 @@ public class IndentationChecker extends StyleChecker {
      *
      * @param codeFile The file. List of every line.
      * @return List of lines that indentation violation occured
+     *
+     * I tried my best but regex is insufficient for many use cases...
      */
     @Override
     protected ArrayList<String> checkFile(ArrayList<String> codeFile) {
-        ArrayList<String> errorList = new ArrayList<>();
-        int properIndent = 0;
+            final int INDENTATION_SPACE = 4;
+            ArrayList<String> errorList = new ArrayList<>();
+            int braces = 0;
+            boolean casePresent = false;
+            boolean defaultPresent = false;
+            boolean lineWrapped = false;
+            boolean sameLineAdded = false;
+            for (int i = 0; i < codeFile.size(); i++) {
+                sameLineAdded = false;
+                String line = codeFile.get(i);
 
-        for (int line = 0; line < codeFile.size(); line++) {
-                int foundIndent = countLeadingSpaces(codeFile.get(line));
+                if (!line.isBlank() && line.trim().charAt(0) != '*') {
+                    if (line.contains("}")) {
+                        if (defaultPresent) {
+                            braces--;
+                            defaultPresent = false;
+                        }
+                        braces--;
+                    }
 
-                // Before checking the current line for indentation, check to see if it should
-                // be indented less.
-                // If it closes a body of some kind, it should be indented less.
-                if (codeFile.get(line).contains("}") && !codeFile.get(line).contains("{")) {
-                    properIndent -= 4;
-                }
+                    if ((braces == 1 || RegexHelper.ifRegexMatcher( line ) || RegexHelper.elseifRegexMatcher( line ) || RegexHelper.elseRegexMatcher( line ) || RegexHelper.switchRegexMatcher( line ) ||
+                        RegexHelper.forRegexMatcher( line ) || RegexHelper.whileRegexMatcher( line ) || line.contains("catch")) &&
+                        line.contains("(") && !line.contains("{")) {
+                        lineWrapped = true;
+                    }
 
-                // Otherwise, check if the indentation is the proper number of spaces.
-                else if (foundIndent != properIndent && codeFile.get(line).trim().length() > 0
-                        && codeFile.get(line).trim().startsWith("")) {
-                    errorList.add(codeFile.get(line));
-                }
+                    if (line.contains(" default:")) {
+                        braces--;
+                        casePresent = false;
+                        defaultPresent = true;
+                    }
 
-                // After checking the current line, check to see if the next line should be
-                // indented more.
-                // If it opens a body of some kind, it should be indented more.
-                if (codeFile.get(line).contains("{") && !codeFile.get(line).contains("}")) {
-                    properIndent += 4;
+                    if (line.contains(" case ")) {
+                        if (casePresent) {
+                            braces--;
+                        }
+                        casePresent = true;
+                    }
+
+                    if (!lineWrapped) {
+                        for (int j = 0; j < INDENTATION_SPACE  * braces; j++) {
+                            if (line.charAt(j) != ' ') {
+                                errorList.add( codeFile.get(i) );
+                                sameLineAdded = true;
+                                break;
+                            }
+                        }
+
+                        if (line.length() > 1 + INDENTATION_SPACE  * braces &&
+                            line.charAt(INDENTATION_SPACE  * braces) == ' ' &&
+                            line.charAt(1 + INDENTATION_SPACE  * braces) != '*' && sameLineAdded == false) {
+                                // if ( errorList.indexOf( codeFile.get(i) ) == -1 ) {
+                                    if ( i > 0 ) {
+                                        //if ( !(codeFile.get( i - 1 ).length() > 80) && !(codeFile.get(i).trim().endsWith(";"))) {
+                                            errorList.add( codeFile.get(i) );
+                                        //}
+                                    }
+                                // }
+                        }
+                    }
+
+                    if (lineWrapped && (line.contains("{") || line.contains(";"))) {
+                        lineWrapped = false;
+                    }
+
+                    if (!RegexHelper.ifRegexMatcher( line ) && !RegexHelper.switchRegexMatcher( line ) && !RegexHelper.forRegexMatcher( line ) &&
+                        !RegexHelper.whileRegexMatcher( line ) && !line.contains("catch") &&
+                        !RegexHelper.classRegexMatcher( line ) && !RegexHelper.elseRegexMatcher( line ) &&
+                        !line.contains("finally") && !line.contains("try") && RegexHelper.elseifRegexMatcher( line ) &&
+                        !RegexHelper.doRegexMatcher( line ) && !line.contains("{}") &&
+                            line.charAt(line.length() - 1) != ';') {
+                        lineWrapped = true;
+                    }
+
+                    if (line.contains(" default:") || line.contains("{") || line.contains(" case ")) {
+                        braces++;
+                    }
                 }
             }
-        return errorList;
-    }
+            return errorList;
+        }
 
     /**
      * Gets the name of the checker
