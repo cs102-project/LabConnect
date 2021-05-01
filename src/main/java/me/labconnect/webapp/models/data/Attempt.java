@@ -49,6 +49,15 @@ public class Attempt {
     }
 
     /**
+     * Set the test results
+     *
+     * @param testResults The test results
+     */
+    public void setTestResults(List<TestResult> testResults) {
+        this.testResults = testResults;
+    }
+
+    /**
      * Set the grade for this attempt
      * 
      * @param grade The grade

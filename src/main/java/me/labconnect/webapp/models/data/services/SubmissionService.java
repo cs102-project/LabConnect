@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class SubmissionService {
     /**
      * Add a submission for a given assignment
      * 
-     * @param assignmentId The unique ID of the asignment this submission is for
+     * @param assignmentId The unique ID of the assignment this submission is for
      * @param submitterId  The unique ID of the student this submission belongs to
      * @return The newly created submission instance
      */
@@ -49,8 +50,8 @@ public class SubmissionService {
         Submission submission;
         Assignment assignment;
 
-        if (!studentRepository.findAllByAssignmentId(assignmentId).stream()
-                .anyMatch(s -> s.getId().equals(submitterId))) {
+        if (studentRepository.findAllByAssignmentId(assignmentId).stream()
+                .noneMatch(s -> s.getId().equals(submitterId))) {
             throw new NoSuchElementException("The assignment is not assigned to this student");
         }
 
@@ -77,13 +78,8 @@ public class SubmissionService {
      */
     public Attempt addAttempt(ObjectId assignmentId, ObjectId submitterId, Path attemptArchive) throws IOException {
         
-        Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId);
+        Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId).orElse(addSubmission(assignmentId, submitterId));
         Assignment assignment = assignmentRepository.findBySubmissionId(submission.getId());
-        
-        // If the assignment doesn't have a submission by this student yet, make one
-        if (submission == null) {
-            submission = addSubmission(assignmentId, submitterId);
-        }
         
         Attempt attempt;
         
@@ -106,17 +102,17 @@ public class SubmissionService {
         
     }
     
-    public Submission getAssignmentSubmissionBySubmitter(ObjectId assignmentId, ObjectId submitterId) {
+    public Optional<Submission> getAssignmentSubmissionBySubmitter(ObjectId assignmentId, ObjectId submitterId) {
         
         Assignment assignment;
         List<Submission> submissionsOfAssignment;
         
         submissionsOfAssignment = new ArrayList<>();
-        assignment = assignmentRepository.findById(assignmentId).get();
+        assignment = assignmentRepository.findById(assignmentId).orElseThrow();
         
-        submissionRepository.findAllById(assignment.getSubmissions()).forEach(submission -> submissionsOfAssignment.add(submission));
+        submissionRepository.findAllById(assignment.getSubmissions()).forEach(submissionsOfAssignment::add);
         
-        return submissionsOfAssignment.stream().filter(submission -> submission.getSubmitterId().equals(submitterId)).findAny().orElse(null);
+        return submissionsOfAssignment.stream().filter(submission -> submission.getSubmitterId().equals(submitterId)).findAny();
         
     }
     

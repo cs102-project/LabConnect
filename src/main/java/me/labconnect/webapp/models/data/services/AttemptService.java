@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.labconnect.webapp.models.testing.TestResult;
+import me.labconnect.webapp.models.testing.Tester;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -60,7 +62,7 @@ public class AttemptService {
         }
 
         // Create extraction dir
-        extractionDir = Files.createTempDirectory(ATTEMPT_ROOT);
+        extractionDir = Files.createTempDirectory("");
 
         // Unzip example
         extractorArgs = new ArrayList<>();
@@ -89,6 +91,29 @@ public class AttemptService {
         }
 
         return extractionDir;
+    }
+
+    /**
+     * Run the unit and style tests for this attempt and return the attempt with the results added
+     *
+     * @param attempt The attempt to test
+     * @return The attempt with the test results added
+     * @throws IOException If extracting the attempt archive fails
+     */
+    public Attempt runTests(Attempt attempt) throws IOException {
+        List<Tester> tests = assignmentRepository.findByAttemptId(attempt.getId()).getTests();
+        Path extractedAttempt = extractAttempt(getAttemptArchive(attempt).getFile().toPath());
+
+        List<TestResult> results = new ArrayList<>();
+
+        for (Tester test : tests) {
+            results.add(test.runTest(extractedAttempt));
+        }
+
+        attempt.setTestResults(results);
+        update(attempt);
+
+        return attempt;
     }
     
     /**
