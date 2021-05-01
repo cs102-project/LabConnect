@@ -19,6 +19,13 @@ import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
 
+/**
+ * A service class that provides creation and retrieval operations for
+ * Submissions
+ * 
+ * @author Berkan Şahin
+ * @version 01.05.2021
+ */
 @Service
 public class SubmissionService {
 
@@ -31,6 +38,13 @@ public class SubmissionService {
     @Autowired
     private AssignmentService assignmentService;
 
+    /**
+     * Add a submission for a given assignment
+     * 
+     * @param assignmentId The unique ID of the asignment this submission is for
+     * @param submitterId  The unique ID of the student this submission belongs to
+     * @return The newly created submission instance
+     */
     private Submission addSubmission(ObjectId assignmentId, ObjectId submitterId) {
         Submission submission;
         Assignment assignment;
@@ -46,11 +60,21 @@ public class SubmissionService {
 
         assignment.addSubmission(submission);
         assignmentRepository.save(assignment);
-        
+
         return submission;
 
     }
     
+    /**
+     * A method that adds an attempt for the given assignment by the given student
+     * 
+     * @param assignmentId      The assignment that is attempted
+     * @param submitterId       The submitter of this attempt
+     * @param attemptArchive    A ZIP archive of the attempt (contents of the src
+     *                          directory)
+     * @return The newly created Attempt
+     * @throws IOException If processing the archive fails
+     */
     public Attempt addAttempt(ObjectId assignmentId, ObjectId submitterId, Path attemptArchive) throws IOException {
         
         Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId);
@@ -96,14 +120,32 @@ public class SubmissionService {
         
     }
     
+    /**
+     * Retrieve the submission with the given unique ID
+     * 
+     * @param submissionId The unique submission ID
+     * @return The submission with the given ID if it exists
+     */
     public Submission getById(ObjectId submissionId) {
         return submissionRepository.findById(submissionId).orElseThrow();
     }
 
+    /**
+     * Get all the submissions authored by the student with the given ID
+     * 
+     * @param studentId The ID of the student
+     * @return The submissions belonging to the student with the given ID
+     */
     public List<Submission> getSubmissionsBy(ObjectId studentId) {
         return submissionRepository.findBySubmitterId(studentId);
     }
 
+    /**
+     * Get all the submissions authored by the given student
+     * 
+     * @param student The student to retrieve submissions authored by
+     * @return The submissions belonging to the given student
+     */
     public List<Submission> getSubmissionsBy(Student student) {
         return getSubmissionsBy(student.getId());
     }
