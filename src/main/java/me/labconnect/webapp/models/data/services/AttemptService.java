@@ -24,6 +24,14 @@ import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
 import me.labconnect.webapp.repository.UserRepository;
 
+/**
+ * A service that provides operations for creation, modification and retrieval
+ * of Attempts
+ * 
+ * @author Berkan Şahin
+ * @author Vedat Eren Arican
+ * @version 01.05.2021
+ */
 @Service
 public class AttemptService {
 
@@ -89,6 +97,16 @@ public class AttemptService {
         return extractionDir;
     }
 
+    /**
+     * A method that adds an attempt for the given assignment by the given student
+     * 
+     * @param student        The student submitting the attempt
+     * @param assignment     The assignment that is attempted
+     * @param attemptArchive A ZIP archive of the attempt (contents of the src
+     *                       directory)
+     * @return The newly created Attempt
+     * @throws IOException If processing the archive fails
+     */
     public Attempt addAttempt(Student student, Assignment assignment, Path attemptArchive) throws IOException {
         Submission submission;
         Path attemptDir;
@@ -106,6 +124,14 @@ public class AttemptService {
         return attempt;
     }
 
+    /**
+     * Archive the source code for this attempt and return it as a serveable
+     * Resource
+     * 
+     * @param attempt The attempt to archive
+     * @return The ZIP archive of the attempt as a Resource ready for download
+     * @throws IOException If archiving the attempt fails
+     */
     public Resource getCodeArchive(Attempt attempt) throws IOException {
         Submission parent;
         User submitter;
@@ -168,6 +194,13 @@ public class AttemptService {
         return new UrlResource(archiveFile.toUri());
     }
 
+    /**
+     * Give an attempt feedback and update its database entry accordingly
+     * 
+     * @param attempt  The attempt to give feedback to
+     * @param feedback The feedback as a list of lines
+     * @return The attempt with the feedback added
+     */
     public Attempt giveFeedback(Attempt attempt, List<String> feedback) {
         attempt.giveFeedback(feedback);
         update(attempt);
@@ -196,6 +229,12 @@ public class AttemptService {
         return true;
     }
 
+    /**
+     * A helper method that replaces a "stale" attempt in a submission with an
+     * updated one
+     * 
+     * @param attempt The attempt to update
+     */
     private void update(Attempt attempt) {
         Submission parent;
         int index;
@@ -207,11 +246,23 @@ public class AttemptService {
         submissionRepository.save(parent);
     }
 
+    /**
+     * Retrieve an attempt by its unique identifier
+     * 
+     * @param attemptId The unique ID of the attempt
+     * @return The corresponding attempt if it exists
+     */
     public Attempt getById(ObjectId attemptId) {
         return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
                 .filter(a -> a.getID().equals(attemptId)).findAny().orElseThrow();
     }
 
+    /**
+     * Get all the attempts for a submission
+     * 
+     * @param submissionId The unique ID of the submission
+     * @return The attempts for the submission if the submission exists
+     */
     public List<Attempt> getAttemptsFor(ObjectId submissionId) {
         return submissionRepository.findById(submissionId).orElseThrow().getAttempts();
     }
