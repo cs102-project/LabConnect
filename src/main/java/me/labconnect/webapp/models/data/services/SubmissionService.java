@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.data.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.bson.types.ObjectId;
@@ -48,4 +49,17 @@ public class SubmissionService {
         return submission;
 
     }
+
+    public Submission getById(ObjectId submissionId) {
+        return submissionRepository.findById(submissionId).orElseThrow();
+    }
+
+    public List<Submission> getSubmissionsBy(ObjectId studentId) {
+        return submissionRepository.findBySubmitterId(studentId);
+    }
+
+    public List<Submission> getSubmissionsBy(Student student) {
+        return getSubmissionsBy(student.getId());
+    }
+
 }

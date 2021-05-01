@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -40,7 +41,7 @@ public class AssignmentService {
         return assignment.getDueDate().after(new Date());
     }
 
-    public Path getInstructionsPath(Assignment assignment) {
+    private Path getInstructionsPath(Assignment assignment) {
         return Paths.get(assignment.getInstructionPath());
     }
 
@@ -84,6 +85,10 @@ public class AssignmentService {
         }
 
         return assignment;
+    }
+
+    public Assignment getById(ObjectId assignmentId) {
+        return assignmentRepository.findById(assignmentId).orElseThrow();
     }
 
 }
