@@ -55,12 +55,22 @@ public abstract class StyleChecker implements Tester {
             currentFileLines.add(scan.nextLine());
          }
 
-         currentOffendingLines = checkFile(currentFileLines);
-         if (!currentOffendingLines.isEmpty()) {
-            offendingLines.add("In file " + submission.relativize(codeFile) + ":");
-            offendingLines.addAll(currentOffendingLines);
-         }
          scan.close();
+         currentOffendingLines = new ArrayList<>();
+
+         try {
+            currentOffendingLines = checkFile(currentFileLines);
+         } catch (RuntimeException ex) {
+            currentOffendingLines.clear();
+            currentOffendingLines.add("Test failed");
+
+         } finally {
+            if (!currentOffendingLines.isEmpty()) {
+               offendingLines.add("In file " + submission.relativize(codeFile) + ":");
+               offendingLines.addAll(currentOffendingLines);
+            }
+
+         }
       }
 
       return new TestResult(this, submission, offendingLines);
