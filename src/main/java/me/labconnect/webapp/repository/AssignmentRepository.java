@@ -1,7 +1,10 @@
 package me.labconnect.webapp.repository;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import me.labconnect.webapp.models.data.Assignment;
 
@@ -11,7 +14,10 @@ import me.labconnect.webapp.models.data.Assignment;
  * @author Berkan Şahin
  * @version 27.04.2021
  */
+@Repository
 public interface AssignmentRepository extends MongoRepository<Assignment, String> {
-
+    
+    @Query("{ submissions: ?0 }")
+    Assignment findBySubmissionId(ObjectId submissionId);
     
 }
