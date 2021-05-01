@@ -6,18 +6,18 @@ services:
             - redis
         build: .
         ports:
-            - "8080:8080"
+            - "80:8080"
         volumes: 
-            - labconnect-submissions:/var/labconnect/submissions
-            - labconnect-assignments:/var/labconnect/assignments
+            - submissions:/var/labconnect/submissions
+            - assignments:/var/labconnect/assignments
     mongo-db:
         image: mongo
         volumes:
-            - labconnect-mongo:/data/db
+            - mongodb:/data/db
     redis:
         image: redis
 
 volumes: 
-    labconnect-submissions:
-    labconnect-assignments:
-    labconnect-mongo:
+    submissions:
+    assignments:
+    mongodb:

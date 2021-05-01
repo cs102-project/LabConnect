@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.testing.Tests;
 
 /**
@@ -30,11 +31,11 @@ public class Assignment {
     private int maxGrade;
     private int maxAttempts;
     private String instructionFileName;
-    private List<Tests> tests;
+    private List<Tester> tests;
 
     // Constructor
     
-    public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade, int maxAttempts, String instructionFileName, List<Tests> tests) {
+    public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade, int maxAttempts, String instructionFileName, List<Tester> tests) {
 
         // TODO make sure that instructions are stored permanently
         this.title = title;
@@ -81,7 +82,7 @@ public class Assignment {
         return instructionFileName;
     }
     
-    public List<Tests> getTests() {
+    public List<Tester> getTests() {
         return tests;
     }
     
