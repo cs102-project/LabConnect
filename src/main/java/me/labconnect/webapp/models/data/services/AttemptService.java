@@ -111,7 +111,7 @@ public class AttemptService {
         }
 
         attempt.setTestResults(results);
-        update(attempt);
+        updateSubmissionOf(attempt);
 
         return attempt;
     }
@@ -148,7 +148,7 @@ public class AttemptService {
      */
     public Attempt giveFeedback(Attempt attempt, String feedback) {
         attempt.giveFeedback(feedback);
-        update(attempt);
+        updateSubmissionOf(attempt);
         return attempt;
     }
 
@@ -170,7 +170,7 @@ public class AttemptService {
         }
 
         attempt.setGrade(grade);
-        update(attempt);
+        updateSubmissionOf(attempt);
         return true;
     }
 
@@ -180,15 +180,8 @@ public class AttemptService {
      * 
      * @param attempt The attempt to update
      */
-    private void update(Attempt attempt) {
-        Submission parent;
-        int index;
-        parent = submissionRepository.findByAttemptId(attempt.getId());
-
-        index = parent.getAttempts().indexOf(attempt);
-        parent.getAttempts().set(index, attempt);
-
-        submissionRepository.save(parent);
+    private void updateSubmissionOf(Attempt attempt) {
+        submissionRepository.save(submissionRepository.findByAttemptId(attempt.getId()));
     }
 
     /**
