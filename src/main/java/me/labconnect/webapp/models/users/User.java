@@ -1,14 +1,13 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.core.GrantedAuthority;
 
 import me.labconnect.webapp.models.data.Course;
+import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 
 /**
  * A generic User of LabConnect
@@ -25,6 +24,7 @@ public class User {
     @Id
     protected ObjectId id;
     protected ObjectId roleDocumentId;
+    protected LCUserRoleTypes roleType;
     
     protected String institution;
     protected String institutionId;
@@ -34,7 +34,6 @@ public class User {
     
     protected String email;
     protected String password;
-    protected Collection<? extends GrantedAuthority> authorities; // There needs to be some indicator as to what level of authorization this user has.
 
     // Constructor
     /**
@@ -46,7 +45,7 @@ public class User {
      * @param email    The department of the user
      * @param isOnline      The online status of the user
      */
-    public User(ObjectId roleDocumentId, String institution, String institutionId, List<Course> courses, String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses, String name, String email, String password) {
         this.roleDocumentId = roleDocumentId;
         this.name = name;
         this.institution = institution;
@@ -54,7 +53,6 @@ public class User {
         this.courses = courses;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
     }
 
     // Methods
@@ -63,8 +61,8 @@ public class User {
         return id;
     }
     
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    public LCUserRoleTypes getRoleType() {
+        return roleType;
     }
     
     public ObjectId getRoleDocumentId() {

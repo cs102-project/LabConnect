@@ -2,12 +2,10 @@ package me.labconnect.webapp.models.users.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,11 +51,9 @@ public class UserCreatorService {
     private String name;
     private String email;
     private String password;
-    private Collection<? extends GrantedAuthority> authorities;
     
     public UserCreatorService() {
         this.courses = new ArrayList<>();
-        this.authorities = new ArrayList<>();
     }
     
     public UserCreatorService setRoleType(LCUserRoleTypes roleType) {
@@ -116,7 +112,7 @@ public class UserCreatorService {
                 break;
         }
         
-        userRepository.save(new User(roleDocumentId, institution, institutionId, courses, name, email, passwordEncoder.encode(password), authorities));
+        userRepository.save(new User(roleDocumentId, roleType, institution, institutionId, courses, name, email, passwordEncoder.encode(password)));
         
     }
     

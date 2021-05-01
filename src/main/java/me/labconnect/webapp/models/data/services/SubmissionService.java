@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Submission;
-import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
@@ -27,7 +26,6 @@ public class SubmissionService {
     public Submission addSubmission(ObjectId assignmentId, ObjectId submitterId) {
         Submission submission;
         Assignment assignment;
-        Student submitter;
 
         if (!studentRepository.findAllByAssignmentId(assignmentId).stream()
                 .anyMatch(s -> s.getId().equals(submitterId))) {
@@ -35,12 +33,11 @@ public class SubmissionService {
         }
 
         assignment = assignmentRepository.findById(assignmentId).orElseThrow();
-        submitter = studentRepository.findById(submitterId).orElseThrow();
 
         // Create a new submission if one doesn't exist
         submission = assignment.getSubmissions().stream().map(id -> submissionRepository.findById(id).orElseThrow())
                 .filter(s -> s.getSubmitterId().equals(submitterId)).findFirst()
-                .orElse(submissionRepository.save(new Submission(new ArrayList<>(), submitter)));
+                .orElse(submissionRepository.save(new Submission(new ArrayList<>(), submitterId)));
 
         assignment.addSubmission(submission);
         assignmentRepository.save(assignment);

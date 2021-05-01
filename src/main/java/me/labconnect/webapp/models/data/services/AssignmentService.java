@@ -19,6 +19,7 @@ import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
+import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.UserRepository;
@@ -41,12 +42,16 @@ public class AssignmentService {
     }
 
     public Path getInstructionsPath(Assignment assignment) {
-        return Paths.get(assignment.getInstructionPath());
+        return Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString(), assignment.getInstructionFilename());
     }
-
 
     public Resource getInstructions(Assignment assignment) throws IOException {
         return new UrlResource(getInstructionsPath(assignment).toUri());
+    }
+    
+    public void setInstructionsFile(Assignment assignment, Path newInstructionPath) throws IOException {
+        Files.deleteIfExists(getInstructionsPath(assignment));
+        Files.move(newInstructionPath, getInstructionsPath(assignment).resolve(newInstructionPath.getFileName()));
     }
 
     public Assignment createAssignment(String assignmentName, String institution, Path instructionFile, Date dueDate,
@@ -61,19 +66,18 @@ public class AssignmentService {
             courses.add(new Course(courseName, section));
         }
 
-        instructionFile = Files.copy(instructionFile,
-                Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "").resolve(instructionFile.getFileName()));
-
         assignment = assignmentRepository.save(new Assignment(assignmentName, courses, homeworkType, dueDate, maxGrade,
-                maxAttempts, instructionFile.toString(), testers));
+                maxAttempts, instructionFile.getFileName().toString(), testers, new ArrayList<>()));
+        
+        setInstructionsFile(assignment, instructionFile);
+        
         // TODO handle IOException in the controller
 
         students = new ArrayList<>();
 
-        // TODO identify student auth
         for (int section : sections) {
             students.addAll(userRepository.findByCourseSection(institution, courseName, section).stream()
-                    .filter(u -> u.getAuthorities().contains("FIXME")).map(User::getRoleDocumentId)
+                    .filter(u -> u.getRoleType() == LCUserRoleTypes.STUDENT).map(User::getRoleDocumentId)
                     .map(id -> studentRepository.findById(id).orElseThrow()).collect(Collectors.toList()));
 
         }

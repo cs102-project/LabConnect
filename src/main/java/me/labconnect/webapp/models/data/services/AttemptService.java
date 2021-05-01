@@ -18,6 +18,7 @@ import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
+import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
 import me.labconnect.webapp.repository.UserRepository;
@@ -113,7 +114,7 @@ public class AttemptService {
 
         assignment = assignmentRepository.findBySubmissionId(parent.getId());
 
-        submitter = userRepository.findAll().stream().filter(u -> u.getAuthorities().contains("FIXME"))
+        submitter = userRepository.findAll().stream().filter(u -> u.getRoleType() == LCUserRoleTypes.STUDENT)
                 .filter(u -> u.getRoleDocumentId().equals(parent.getSubmitterId())).findAny().orElseThrow();
 
         return buildCodeArchive(attempt, assignment.getTitle(), submitter.getName());

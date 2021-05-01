@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import me.labconnect.webapp.models.testing.Tester;
@@ -30,30 +29,24 @@ public class Assignment {
 
     private int maxGrade;
     private int maxAttempts;
-    private String instructionPath;
+    private String instructionFilename;
     private List<Tester> tests;
     private List<ObjectId> submissions;
 
     // Constructor
 
     public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
-            int maxAttempts, String instructionPath, List<Tester> tests) {
+            int maxAttempts, String instructionFilename, List<Tester> tests, List<ObjectId> submissions) {
         this.title = title;
         this.homeworkType = homeworkType;
         this.courses = courses;
         this.maxGrade = maxGrade;
         this.maxAttempts = maxAttempts;
-        this.instructionPath = instructionPath;
+        this.instructionFilename = instructionFilename;
         this.tests = tests;
-
-    }
-
-    @PersistenceConstructor
-    public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
-            int maxAttempts, String instructionFileName, List<Tester> tests, List<ObjectId> submissions) {
-        this(title, courses, homeworkType, dueDate, maxGrade, maxAttempts, instructionFileName, tests);
         this.submissions = submissions;
     }
+    
     // Methods
 
     public ObjectId getId() {
@@ -84,8 +77,8 @@ public class Assignment {
         return maxAttempts;
     }
 
-    public String getInstructionPath() {
-        return instructionPath;
+    public String getInstructionFilename() {
+        return instructionFilename;
     }
 
     public List<Tester> getTests() {
