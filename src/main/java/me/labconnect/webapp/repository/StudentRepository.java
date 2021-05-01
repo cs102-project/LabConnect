@@ -12,7 +12,7 @@ import me.labconnect.webapp.models.users.Student;
 @Repository
 public interface StudentRepository extends MongoRepository<Student, ObjectId> {
     
-    @Query("{ assignments: ?0 }")
+    @Query("{ assignments: { $in : ?0 } }")
     List<Student> findAllByAssignmentId(ObjectId assignmentId);
     
 

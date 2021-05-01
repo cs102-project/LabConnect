@@ -17,7 +17,7 @@ import me.labconnect.webapp.models.data.Assignment;
 @Repository
 public interface AssignmentRepository extends MongoRepository<Assignment, ObjectId> {
     
-    @Query("{ submissions: ?0 }")
+    @Query("{ submissions: { $in : ?0 } }")
     Assignment findBySubmissionId(ObjectId submissionId);
     
 }

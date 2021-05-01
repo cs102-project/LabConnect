@@ -15,12 +15,10 @@ import org.springframework.stereotype.Service;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
-import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.repository.AssignmentRepository;
-import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
 import me.labconnect.webapp.repository.UserRepository;
 
@@ -34,8 +32,6 @@ public class AttemptService {
     private AssignmentRepository assignmentRepository;
     @Autowired
     private SubmissionRepository submissionRepository;
-    @Autowired
-    private StudentRepository studentRepository;
     @Autowired
     private UserRepository userRepository;
 
@@ -113,11 +109,9 @@ public class AttemptService {
         User submitter;
         Assignment assignment;
 
-        parent = submissionRepository.findAll().stream().filter(s -> s.getAttempts().contains(attempt)).findAny()
-                .orElseThrow();
+        parent = submissionRepository.findByAttempt(attempt);
 
-        assignment = assignmentRepository.findAll().stream().filter(a -> a.getSubmissions().contains(parent.getId()))
-                .findAny().orElseThrow();
+        assignment = assignmentRepository.findBySubmissionId(parent.getId());
 
         submitter = userRepository.findAll().stream().filter(u -> u.getAuthorities().contains("FIXME"))
                 .filter(u -> u.getRoleDocumentId().equals(parent.getSubmitterId())).findAny().orElseThrow();
