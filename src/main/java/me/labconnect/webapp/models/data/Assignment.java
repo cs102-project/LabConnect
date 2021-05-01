@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
@@ -35,7 +36,7 @@ public class Assignment {
 
     // Variables
     @Id
-    private String id; // handled by the Mongo backend, do not modify by hand!
+    private ObjectId id; // handled by the Mongo backend, do not modify by hand!
 
     private String assignmentID;
     private boolean isCompleted;
@@ -49,7 +50,7 @@ public class Assignment {
     // Constructor
 
     @PersistenceConstructor
-    public Assignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
+    public Assignment(ObjectId id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
             String instructionFileName, String title, ArrayList<Tester> tests) {
 
         this.id = id;
@@ -295,5 +296,9 @@ public class Assignment {
             return tmp.assignmentID.equals(assignmentID);
         }
         return false;
+    }
+
+    public ObjectId getObjectId() {
+        return id;
     }
 }
