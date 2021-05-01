@@ -38,8 +38,6 @@ public class Assignment {
 
     public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
             int maxAttempts, String instructionFileName, List<Tester> tests) {
-
-        // TODO make sure that instructions are stored permanently
         this.title = title;
         this.homeworkType = homeworkType;
         this.courses = courses;

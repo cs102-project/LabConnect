@@ -46,11 +46,6 @@ public class AssignmentService {
         return Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString());
     }
 
-    public void setInstructionsFile(Path newInstructionPath, Assignment assignment) throws IOException {
-        Files.deleteIfExists(getInstructionsPath(assignment));
-        Files.move(newInstructionPath, getInstructionsPath(assignment).resolveSibling(newInstructionPath));
-    }
-
     public Assignment createAssignment(String assignmentName, String institution, Path instructionFile, Date dueDate,
             int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts, List<Tester> testers)
             throws IOException {
@@ -62,6 +57,9 @@ public class AssignmentService {
         for (int section : sections) {
             courses.add(new Course(courseName, section));
         }
+
+        instructionFile = Files.copy(instructionFile,
+                Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "").resolve(instructionFile.getFileName()));
 
         assignment = assignmentRepository.save(new Assignment(assignmentName, courses, homeworkType, dueDate, maxGrade,
                 maxAttempts, instructionFile.toString(), testers));
