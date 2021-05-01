@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
 
 @Repository
@@ -15,7 +14,7 @@ public interface SubmissionRepository extends MongoRepository<Submission, Object
     
      public List<Submission> findBySubmitterId(ObjectId submitterId);
     
-     @Query("{ attempts : { $in : ?0 } }")
-     public Submission findByAttempt(Attempt attempt);
+     @Query("{ attempts : { $elem_match : { _id: ?0 } } }")
+     public Submission findByAttemptId(ObjectId attemptId);
     
 }

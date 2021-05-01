@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.testing.TestResult;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.repository.AssignmentRepository;
@@ -109,7 +111,7 @@ public class AttemptService {
         User submitter;
         Assignment assignment;
 
-        parent = submissionRepository.findByAttempt(attempt);
+        parent = submissionRepository.findByAttemptId(attempt.getID());
 
         assignment = assignmentRepository.findBySubmissionId(parent.getId());
 
@@ -164,5 +166,53 @@ public class AttemptService {
                 StandardCopyOption.REPLACE_EXISTING);
 
         return new UrlResource(archiveFile.toUri());
+    }
+
+    public Attempt giveFeedback(Attempt attempt, List<String> feedback) {
+        attempt.giveFeedback(feedback);
+        update(attempt);
+        return attempt;
+    }
+
+    /**
+     * Give an attempt a grade and update its database entry accordingly
+     * 
+     * @param attempt The attempt to grade
+     * @param grade   The new grade
+     * @return {@code true} if the grade was within assignment bounds, otherwise
+     *         {@code false}
+     */
+    public boolean grade(Attempt attempt, int grade) {
+        Assignment assignment;
+
+        assignment = assignmentRepository.findByAttemptId(attempt.getID());
+
+        if (grade > assignment.getMaxGrade()) {
+            return false;
+        }
+
+        attempt.setGrade(grade);
+        update(attempt);
+        return true;
+    }
+
+    private void update(Attempt attempt) {
+        Submission parent;
+        int index;
+        parent = submissionRepository.findByAttemptId(attempt.getID());
+
+        index = parent.getAttempts().indexOf(attempt);
+        parent.getAttempts().set(index, attempt);
+
+        submissionRepository.save(parent);
+    }
+
+    public Attempt getById(ObjectId attemptId) {
+        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
+                .filter(a -> a.getID().equals(attemptId)).findAny().orElseThrow();
+    }
+
+    public List<Attempt> getAttemptsFor(ObjectId submissionId) {
+        return submissionRepository.findById(submissionId).orElseThrow().getAttempts();
     }
 }
