@@ -1,6 +1,8 @@
 package me.labconnect.webapp.models.testing.style;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Berk Çakar
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class MethodNamingChecker extends StyleChecker {
 
     String[] identifiers = { "void", "int", "Integer", "double", "Double", "float", "Float", "long", "Long", "short",
-            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte" };
+            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte", "String" };
 
     /**
      * Checks whether method names are conventional or not.
@@ -23,7 +25,8 @@ public class MethodNamingChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))) {
+            if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
+                    && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
                 if (checkCasing(extractMethodName(codeFile.get(lineIndex))) == false) {
                     errorList.add(codeFile.get(lineIndex));
                 }
@@ -104,16 +107,16 @@ public class MethodNamingChecker extends StyleChecker {
      * @return {@code true} if the naming is valid, otherwise {@code false}
      */
     private boolean checkCasing(String methodName) {
-        if (Character.isUpperCase(methodName.charAt(0))) {
+        Pattern methodNamingPattern;
+        Matcher methodNamingMatcher;
+        methodNamingPattern = Pattern.compile("^[a-z][a-zA-Z0-9].*");
+        methodNamingMatcher = methodNamingPattern.matcher(methodName);
+        if (methodName.contains("|") || methodName.contains("&") || methodName.contains("+") || methodName.contains("-")
+                || methodName.contains("*") || methodName.charAt(0) == '_' || methodName.charAt(0) == '$') {
             return false;
+        } else {
+            return methodNamingMatcher.find();
         }
-
-        for (int charIndex = 1; charIndex < methodName.length(); charIndex++) {
-            if (!Character.isLowerCase(methodName.charAt(charIndex))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
