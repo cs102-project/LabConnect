@@ -33,47 +33,49 @@ public class OperatorsSpaceChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            for (int charIndex = 1; charIndex < codeFile.get(lineIndex).length() - 1; charIndex++) {
-                if (charIndex != codeFile.get(lineIndex).length() - 1) {
-                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
+            if (RegexHelper.operatorsSpaceRegexMatcher(codeFile.get(lineIndex))) {
+                for (int charIndex = 1; charIndex < codeFile.get(lineIndex).length() - 1; charIndex++) {
+                    if (charIndex != codeFile.get(lineIndex).length() - 1) {
+                        if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
-                }
 
-                else {
-                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
+                    else {
+                        if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }

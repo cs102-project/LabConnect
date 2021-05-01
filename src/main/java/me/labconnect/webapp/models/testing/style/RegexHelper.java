@@ -434,4 +434,22 @@ public class RegexHelper {
 
         return patternMatcher.find();
     }
+    
+    /**
+     * Checks if the line containes operator which used as arithmetically.
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes arithmetical operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean operatorsSpaceRegexMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "^(\\(?)(?:\\s*\\w+\\s*[\\+\\-\\*\\/\\%]\\s*\\(?)+\\s*\\w+\\s*\\)?(\\s*$|$)";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
 }
