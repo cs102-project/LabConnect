@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -24,7 +25,7 @@ public class Attempt {
 
     // Variables
     @Id
-    private String objectID;
+    private ObjectId objectID;
     private String attemptDir;
     private List<TestResult> testResults;
     private List<String> feedback;
@@ -33,7 +34,7 @@ public class Attempt {
     // Constructors
 
     @PersistenceConstructor
-    public Attempt(String attemptDir, int grade, List<String> feedback, List<TestResult> testResults, String objectID) {
+    public Attempt(String attemptDir, int grade, List<String> feedback, List<TestResult> testResults, ObjectId objectID) {
         this.attemptDir = attemptDir;
         this.feedback = feedback;
         this.grade = grade;
@@ -159,8 +160,20 @@ public class Attempt {
      * 
      * @return the unique object identifier
      */
-    public String getID() {
+    public ObjectId getID() {
         return objectID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Attempt tmp;
+
+        if (obj instanceof Attempt) {
+            tmp = (Attempt) obj;
+            return objectID.equals(tmp.getID());
+        }
+
+        return false;
     }
 
 }
