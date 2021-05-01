@@ -31,7 +31,7 @@ public class WebappApplication implements CommandLineRunner {
 			.setName("Vedat Eren Arican")
 			.setInstitution("Bilkent University")
 			.setInstitutionId("22002643")
-			.setCourses(new Course("CS102", "2"))
+			.setCourses(new Course("CS102", 2))
 			.setEmail("dev@vedat.xyz")
 			.setPassword("myPasswd")
 			.create();
