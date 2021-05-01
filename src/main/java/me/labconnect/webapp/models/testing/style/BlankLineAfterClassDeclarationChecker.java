@@ -46,8 +46,4 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
 
         return errorList;
     }
-
-    public boolean indexExists(final ArrayList<String> list, final int index) {
-        return index >= 0 && index < list.size();
-    }
 }

@@ -12,27 +12,6 @@ import java.util.ArrayList;
 public class IndentationChecker extends StyleChecker {
 
     /**
-     * Counts the leading spaces of a line
-     *
-     * @param line A line containing a statement
-     * @return Number of leading spaces
-     */
-    private int countLeadingSpaces(String line) {
-        int spaceCount = 0;
-
-        if (line.length() > 0) {
-            for (int leadingIndex = 0; (line.charAt(leadingIndex) == ' ')
-                    && (leadingIndex < line.length() - 1); leadingIndex++) {
-                spaceCount++;
-            }
-        } else {
-            return 0;
-        }
-
-        return spaceCount;
-    }
-
-    /**
      * Checks every line in a file for indentation errors.
      *
      * @param codeFile The file. List of every line.

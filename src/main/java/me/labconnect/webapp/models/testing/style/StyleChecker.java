@@ -75,4 +75,8 @@ public abstract class StyleChecker implements Tester {
 
       return new TestResult(this, submission, offendingLines);
    }
+
+   public boolean indexExists(final ArrayList<String> list, final int index) {
+      return index >= 0 && index < list.size();
+  }
 }
