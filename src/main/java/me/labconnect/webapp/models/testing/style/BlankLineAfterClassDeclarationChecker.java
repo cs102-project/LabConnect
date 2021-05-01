@@ -36,12 +36,7 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
             if (lineIndex < codeFile.size() - 2) {
                 if ((RegexHelper.classRegexMatcher(codeFile.get(lineIndex))
                         || RegexHelper.interfaceRegexMatcher(codeFile.get(lineIndex)))) {
-                    if (codeFile.get(lineIndex + 1).trim().charAt(0) == '{' && !codeFile.get(lineIndex + 2).isEmpty()) {
-                        errorList.add(codeFile.get(lineIndex + 2));
-                    }
-
-                    else if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1) == '{'
-                            && !codeFile.get(lineIndex + 1).isEmpty()) {
+                    if (codeFile.get(lineIndex).trim().charAt( codeFile.get(lineIndex).trim().length() - 1 ) == '{' && !codeFile.get(lineIndex + 1).isBlank()) {
                         errorList.add(codeFile.get(lineIndex + 1));
                     }
                 }
