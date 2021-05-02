@@ -14,36 +14,43 @@ import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.repository.UserRepository;
 
+/**
+ * 
+ * 
+ * @author Vedat Eren Arıcan
+ * @author Berkan Şahin
+ * @version 02.05.2021
+ */
 public class InstructorController {
-    
+
     // /api/instructor/announcements/
     // POST -> add announcement
-    
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
     @Autowired
     private InstructorService instructorService;
-    
+
     @PostMapping("/api/instructor/announcements")
     public void addAnnouncement(Authentication authentication, @RequestBody Announcement announcement) {
-        
+
         if (authentication == null || !authentication.isAuthenticated()) {
             return;
         }
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
-        
+
         if (user.getRoleType() != LCUserRoleTypes.INSTRUCTOR) {
             return;
         }
-        
+
         Instructor instructor = userService.getInstructorDocumentOf(user);
-        
+
         instructorService.addAnnouncementFrom(instructor, announcement);
-        
+
     }
-    
+
 }
