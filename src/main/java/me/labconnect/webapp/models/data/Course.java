@@ -15,9 +15,10 @@ public class Course {
     private int section;
 
     /**
-     * Default constructor for the {@code Course} class takes name of the course and section number as parameters
+     * Default constructor for the {@code Course} class takes name of the course and
+     * section number as parameters
      *
-     * @param course The name of the course
+     * @param course  The name of the course
      * @param section The section number of the course
      */
     public Course(String course, int section) {
@@ -47,12 +48,15 @@ public class Course {
      * Checks whether two {@code Course} objects are the same or not
      *
      * @param o The {@code Course} object to compare with
-     * @return {code true} if two {@code Course} objects are the same, {@code false} otherwise
+     * @return {code true} if two {@code Course} objects are the same, {@code false}
+     *         otherwise
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Course course1 = (Course) o;
         return section == course1.section && Objects.equals(course, course1.course);
     }

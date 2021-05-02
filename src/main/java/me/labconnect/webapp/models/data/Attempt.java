@@ -69,6 +69,7 @@ public class Attempt {
     public void giveFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
+
     // TODO fix the javadocs for feedback methods
     /**
      * Gets the feedback for this attempt
@@ -97,10 +98,20 @@ public class Attempt {
         return id;
     }
 
+    /**
+     * Returns the string representation of the Note
+     * 
+     * @return The string representation of the Note
+     */
     public String getNote() {
         return note;
     }
 
+    /**
+     * Sets the notes content with specified parameter
+     * 
+     * @param note The content of the note
+     */
     public void setNote(String note) {
         this.note = note;
     }

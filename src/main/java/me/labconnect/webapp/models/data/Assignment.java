@@ -17,7 +17,7 @@ import me.labconnect.webapp.models.testing.Tester;
  * 
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
- * @version 30.04.2021
+ * @version 03.05.2021
  */
 @Document(collection = "assignments")
 public class Assignment {
@@ -41,8 +41,22 @@ public class Assignment {
 
     // Constructor
 
-    public Assignment(String title, String shortDescription, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
-            int maxAttempts, String instructionFilename, List<Tester> tests, List<ObjectId> submissions) {
+    /**
+     * Default constructor for the {@code Assignment} class
+     * 
+     * @param title The title of the assignment
+     * @param shortDescription Description of the assignment
+     * @param courses Assigned courses for the assignment
+     * @param homeworkType Type of the assignment
+     * @param dueDate Due date of the assignment
+     * @param maxGrade Maximum grade possible for the assignment
+     * @param maxAttempts Maximum attempt number for the assignment
+     * @param instructionFilename Name of the instruction file for the assignment
+     * @param tests List of test which is going to be applied to the assignment
+     * @param submissions List of submission to the assignment
+     */
+    public Assignment(String title, String shortDescription, List<Course> courses, String homeworkType, Date dueDate,
+            int maxGrade, int maxAttempts, String instructionFilename, List<Tester> tests, List<ObjectId> submissions) {
         this.title = title;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
@@ -54,7 +68,7 @@ public class Assignment {
         this.submissions = submissions;
         this.dueDate = dueDate;
     }
-    
+
     // Methods
 
     public ObjectId getId() {
@@ -64,7 +78,7 @@ public class Assignment {
     public String getTitle() {
         return title;
     }
-    
+
     public String getShortDescription() {
         return shortDescription;
     }
@@ -111,6 +125,11 @@ public class Assignment {
         addSubmission(submission.getId());
     }
 
+    /**
+     * Adds a submission with id to the list <b>if it doesn't exist</b>
+     * 
+     * @param submissionId The id of the submission
+     */
     private void addSubmission(ObjectId submissionId) {
         if (!submissions.contains(submissionId))
             submissions.add(submissionId);
@@ -118,8 +137,10 @@ public class Assignment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Assignment that = (Assignment) o;
         return Objects.equals(id, that.id);
     }
