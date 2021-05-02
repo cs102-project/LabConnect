@@ -27,7 +27,7 @@ public class RegexHelper {
         Pattern pattern;
         Matcher patternMatcher;
 
-        regex = "(public|private|protected)\\s+(static?|abstract?)\\s+(String|void|int|boolean|char|long|byte|float|double|)\\s+(\\w*)\\s*(\\()";
+        regex = "(public|private|protected)(\\s?static?\\s?|\\s?abstract?\\s?|\\s?)(String|void|int|boolean|char|long|byte|float|double|)\\s+(\\w*)\\s*(\\()";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
@@ -429,6 +429,24 @@ public class RegexHelper {
         Pattern pattern;
         Matcher patternMatcher;
         regex = "((?<!\\|)\\|(?!\\|))|(\\|{3,})";
+        pattern = Pattern.compile(regex);
+        patternMatcher = pattern.matcher(str);
+
+        return patternMatcher.find();
+    }
+
+    /**
+     * Checks if the line containes bitwise or operator or not
+     *
+     * @param str The string that is going to be checked.
+     * @return {@code true} if the line containes bitwise or operator ,
+     *         {@code false} otherwise.
+     */
+    public static boolean operatorsSpaceRegexMatcher(String str) {
+        String regex;
+        Pattern pattern;
+        Matcher patternMatcher;
+        regex = "^\\(?(?:\\s*\\w+\\s*[\\+\\-\\*\\/\\%]\\s*\\(?)+\\s*\\w+\\s*\\)?(\\s*$|$)";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 
