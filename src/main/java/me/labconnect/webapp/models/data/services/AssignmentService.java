@@ -8,9 +8,12 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.repository.InstructorRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +23,11 @@ import org.springframework.stereotype.Service;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Course;
+import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
-import me.labconnect.webapp.repository.UserRepository;
 
 /**
  * A service that provides assignment creation and retrieval operations
@@ -44,11 +47,11 @@ public class AssignmentService {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private InstructorRepository instructorRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SubmissionService submissionService;
 
     /**
      * Check if the given assignment is overdue
@@ -160,5 +163,22 @@ public class AssignmentService {
     public Stream<Assignment> findByCourse(Course course) {
         return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection()).stream();
     }
-
+    
+    public List<Submission> getAssignmentSubmissionsForInstructor(Instructor instructor, ObjectId assignmentId) {
+        
+        Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow();
+        List<ObjectId> submissionIds = assignment.getSubmissions();
+        
+        return submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
+        
+    }
+    
+    public List<Submission> getAssignmentSubmissionsForTA(TeachingAssistant assistant, ObjectId assignmentId) {
+        
+        return assistant.getStudents().stream()
+            .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentId, studentId))
+            .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
+        
+    }
+    
 }

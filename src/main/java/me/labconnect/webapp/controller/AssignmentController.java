@@ -9,7 +9,7 @@ import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.users.LCUserDetails;
-import me.labconnect.webapp.models.users.TeachingAssistant;
+import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.UserRepository;
@@ -128,39 +128,28 @@ public class AssignmentController {
 
     }
 
-    @GetMapping("/api/assignments/{assignmentID}/submissions")
+    @GetMapping("/api/assignments/{assignmentId}/submissions")
     @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
-    public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentID) {
-
-        List<Submission> submissions;
-        Assignment assignment = assignmentService.getById(assignmentID);
+    public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentId) {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
         switch (user.getRoleType()) {
+            
             case INSTRUCTOR:
-                List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
-                submissions = submissionIds.stream().flatMap(submissionService::getStreamById).distinct()
-                        .collect(Collectors.toList());
-                break;
+                return assignmentService.getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId);
+            
             case TEACHING_ASSISTANT:
-                TeachingAssistant teachingAssistant = userService.getTADocumentOf(user);
-                submissions = teachingAssistant.getStudents().stream()
-                        .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentID, studentId))
-                        .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
-                break;
+                return assignmentService.getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
+            
             case STUDENT:
-                ObjectId submissionId = assignment.getSubmissions().stream()
-                        .filter(s -> submissionService.getById(s).getSubmitterId().equals(user.getId())).findAny()
-                        .orElseThrow();
-                submissions = List.of(submissionService.getById(submissionId));
-                break;
+                return List.of(submissionService.getAssignmentSubmissionBySubmitter(assignmentId, userService.getStudentDocumentOf(user).getId()).orElseThrow());
+            
             default:
                 throw new RuntimeException("Invalid role!");
+            
         }
-
-        return submissions;
 
     }
 
@@ -173,13 +162,18 @@ public class AssignmentController {
     }
 
     @PostMapping("/api/assignments/{assignmentId}/submissions")
+    @Secured({ "ROLE_STUDENT" })
     public Attempt addAttempt(Authentication authentication,
             @PathVariable ObjectId assignmentId,
             @RequestParam MultipartFile attemptArchive) throws IOException {
+        
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
-        return submissionService.addAttempt(assignmentId, user.getId(), attemptArchive.getResource().getFile().toPath());
+        Student student = userService.getStudentDocumentOf(user);
+        
+        return submissionService.addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
+        
     }
 
 }
