@@ -15,16 +15,14 @@ import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleT
 import me.labconnect.webapp.repository.UserRepository;
 
 /**
- * 
+ * REST controller for handling {@code HTTP} requests for instructor specific
+ * functions
  * 
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
  * @version 02.05.2021
  */
 public class InstructorController {
-
-    // /api/instructor/announcements/
-    // POST -> add announcement
 
     @Autowired
     private UserRepository userRepository;
@@ -33,6 +31,12 @@ public class InstructorController {
     @Autowired
     private InstructorService instructorService;
 
+    /**
+     * Adds/{@code POST} announcement
+     * 
+     * @param authentication Token for authentication request
+     * @param announcement   The announcement which is going to be added
+     */
     @PostMapping("/api/instructor/announcements")
     public void addAnnouncement(Authentication authentication, @RequestBody Announcement announcement) {
 
