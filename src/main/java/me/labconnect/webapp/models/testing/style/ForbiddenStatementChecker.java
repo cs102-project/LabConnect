@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  * 
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
+ * @author Berk Çakar
  * @version 21.04.2021
  */
 public class ForbiddenStatementChecker extends StyleChecker {

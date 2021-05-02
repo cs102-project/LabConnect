@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * before and after them or not.
  *
  * @author Berk Çakar
+ * @author Borga Haktan Bilen
  * @version 28.04.2021
  */
 public class OperatorsSpaceChecker extends StyleChecker {

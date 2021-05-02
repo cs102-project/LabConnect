@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Berk Çakar
+ * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
  * @version 22/04/2021
  */

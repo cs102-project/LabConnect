@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * interface declaration.
  *
  * @author Berk Çakar
+ * @author Borga Haktan Bilen
  * @version 27.04.2021
  */
 public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
