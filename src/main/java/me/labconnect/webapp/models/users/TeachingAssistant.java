@@ -5,6 +5,8 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import me.labconnect.webapp.models.livesession.Meetable;
 /**
  * Class representing a TA, i.e., a User that can grade Attempts, meet with
  * students and manage a meeting queue
@@ -14,11 +16,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version 30.04.2021
  */
 @Document(collection = "assistants")
-public class TeachingAssistant {
+public class TeachingAssistant implements Meetable {
 
     // Properties
     @Id
     private ObjectId id;
+    private String meetingLink;
     private List<ObjectId> students; // not sure whether to point to a user ref or a student ref. 
 
     // Constructors
@@ -33,7 +36,8 @@ public class TeachingAssistant {
      * @param assignedStudents The students this TA is assigned to
      * @param section          The section this TA is assgined to
      */
-    public TeachingAssistant(List<ObjectId> students) {
+    public TeachingAssistant(String meetingLink, List<ObjectId> students) {
+        this.meetingLink = meetingLink;
         this.students = students;
     }
 
@@ -41,6 +45,10 @@ public class TeachingAssistant {
     
     public ObjectId getId() {
         return id;
+    }
+    
+    public String getMeetingLink() {
+        return meetingLink;
     }
     
     /**

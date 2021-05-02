@@ -47,6 +47,7 @@ public class User {
      */
     public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses, String name, String email, String password) {
         this.roleDocumentId = roleDocumentId;
+        this.roleType = roleType;
         this.name = name;
         this.institution = institution;
         this.institutionId = institutionId;

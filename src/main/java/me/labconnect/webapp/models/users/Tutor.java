@@ -4,6 +4,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import me.labconnect.webapp.models.livesession.Meetable;
+
 /**
  * Class representing a Tutor, i.e., a user that can meet with Students during a
  * live session
@@ -13,11 +15,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version 22.04.2021
  */
 @Document(collection = "tutors")
-public class Tutor {
+public class Tutor implements Meetable {
 
     // Properties
     @Id
     private ObjectId id;
+    private String meetingLink;
 
     // Constructors
     
@@ -32,14 +35,16 @@ public class Tutor {
      * @param isOnline      The online status of the tutor
      * @param objectID      The unique object ID assigned to the database entry
      */
-    public Tutor() {
-        
+    public Tutor(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 
     public ObjectId getId() {
         return id;
     }
-
-    // Methods
+    
+    public String getMeetingLink() {
+        return meetingLink;
+    }
     
 }

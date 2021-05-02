@@ -91,7 +91,7 @@ public class UserCreatorService {
         return this;
     }
     
-    public void create() throws Exception {
+    public User create() throws Exception {
         
         if (roleType == null) {
             throw new Exception("Role type must be defined.");
@@ -99,7 +99,7 @@ public class UserCreatorService {
         
         switch (roleType) {
             case TUTOR:
-                roleDocumentId = tutorRepository.save(new Tutor()).getId();
+                roleDocumentId = tutorRepository.save(new Tutor("")).getId();
                 break;
             case STUDENT:
                 roleDocumentId = studentRepository.save(new Student(new ArrayList<>())).getId();
@@ -108,11 +108,11 @@ public class UserCreatorService {
                 roleDocumentId = instructorRepository.save(new Instructor(new ArrayList<>(), new ArrayList<>())).getId();
                 break;
             case TEACHING_ASSISTANT:
-                roleDocumentId = taRepository.save(new TeachingAssistant(new ArrayList<>())).getId();
+                roleDocumentId = taRepository.save(new TeachingAssistant("", new ArrayList<>())).getId();
                 break;
         }
         
-        userRepository.save(new User(roleDocumentId, roleType, institution, institutionId, courses, name, email, passwordEncoder.encode(password)));
+        return userRepository.save(new User(roleDocumentId, roleType, institution, institutionId, courses, name, email, passwordEncoder.encode(password)));
         
     }
     

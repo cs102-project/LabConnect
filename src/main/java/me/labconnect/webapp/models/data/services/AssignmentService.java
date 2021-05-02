@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,7 @@ import org.springframework.stereotype.Service;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.testing.Tester;
-import me.labconnect.webapp.models.users.Student;
-import me.labconnect.webapp.models.users.User;
-import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.UserRepository;
@@ -44,6 +41,8 @@ public class AssignmentService {
     private StudentRepository studentRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     /**
      * Check if the given assignment is overdue
@@ -108,35 +107,28 @@ public class AssignmentService {
      * @return The newly created assignment instance
      * @throws IOException If processing the instructions fails
      */
-    public Assignment createAssignment(String assignmentName, String institution, Path instructionFile, Date dueDate,
+    public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile, Date dueDate,
             int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts, List<Tester> testers)
             throws IOException {
+        
         Assignment assignment;
         ArrayList<Course> courses;
-        ArrayList<Student> students;
-
+        
         courses = new ArrayList<>();
         for (int section : sections) {
             courses.add(new Course(courseName, section));
         }
 
-        assignment = assignmentRepository.save(new Assignment(assignmentName, courses, homeworkType, dueDate, maxGrade,
+        assignment = assignmentRepository.save(new Assignment(assignmentName, shortDescription, courses, homeworkType, dueDate, maxGrade,
                 maxAttempts, instructionFile.getFileName().toString(), testers, new ArrayList<>()));
 
         moveInstructionsFile(assignment, instructionFile);
 
-        students = new ArrayList<>();
-
-        for (int section : sections) {
-            students.addAll(userRepository.findByCourseSection(institution, courseName, section).stream()
-                    .filter(u -> u.getRoleType() == LCUserRoleTypes.STUDENT).map(User::getRoleDocumentId)
-                    .map(id -> studentRepository.findById(id).orElseThrow()).collect(Collectors.toList()));
-
-        }
-
-        for (Student student : students) {
-            student.giveAssignment(assignment);
-            studentRepository.save(student);
+        for (Course course : courses) {
+            userService.getStudentsOfCourseSection(institution, course).forEach(student -> {
+                student.giveAssignment(assignment);
+                studentRepository.save(student);
+            });
         }
 
         return assignment;

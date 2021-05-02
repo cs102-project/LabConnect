@@ -23,6 +23,7 @@ public class Assignment {
     @Id
     private ObjectId id;
     private String title;
+    private String shortDescription;
     private String homeworkType;
     private List<Course> courses;
     private Date dueDate;
@@ -35,9 +36,10 @@ public class Assignment {
 
     // Constructor
 
-    public Assignment(String title, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
+    public Assignment(String title, String shortDescription, List<Course> courses, String homeworkType, Date dueDate, int maxGrade,
             int maxAttempts, String instructionFilename, List<Tester> tests, List<ObjectId> submissions) {
         this.title = title;
+        this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
         this.courses = courses;
         this.maxGrade = maxGrade;
@@ -55,6 +57,10 @@ public class Assignment {
 
     public String getTitle() {
         return title;
+    }
+    
+    public String getShortDescription() {
+        return shortDescription;
     }
 
     public String getHomeworkType() {

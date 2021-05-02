@@ -37,17 +37,6 @@ public class WebappSecurity extends WebSecurityConfigurerAdapter {
         
     }
     
-    // @Bean
-    // @Override
-    // public UserDetailsService userDetailsService() {
-        
-    //     UserDetails user = User.withDefaultPasswordEncoder()
-    //         .username("user").password("test").roles("ADMIN").build();
-        
-    //     return new InMemoryUserDetailsManager(user);
-        
-    // }
-    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
