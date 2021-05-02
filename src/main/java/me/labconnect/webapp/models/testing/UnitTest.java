@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -363,4 +364,18 @@ public class UnitTest implements Tester {
         return Paths.get(testerClassPath);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UnitTest unitTest = (UnitTest) o;
+        return Objects.equals(name, unitTest.name) && Objects
+                .equals(correctOutput, unitTest.correctOutput) && Objects
+                .equals(timeLimitInMS, unitTest.timeLimitInMS) && Objects.equals(testerClassPath, unitTest.testerClassPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, correctOutput, timeLimitInMS, testerClassPath);
+    }
 }

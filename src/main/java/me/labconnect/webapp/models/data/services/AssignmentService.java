@@ -5,13 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import me.labconnect.webapp.models.testing.BadExampleException;
+import me.labconnect.webapp.models.testing.Tests;
+import me.labconnect.webapp.models.testing.UnitTest;
+import me.labconnect.webapp.models.testing.style.*;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.repository.InstructorRepository;
@@ -28,14 +29,15 @@ import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
+import org.springframework.web.servlet.tags.form.SelectTag;
 
 /**
  * A service that provides assignment creation and retrieval operations
  *
- * @see me.labconnect.webapp.models.data.Assignment
  * @author Vedat Eren Arican
  * @author Berkan Şahin
  * @version 01.05.2021
+ * @see me.labconnect.webapp.models.data.Assignment
  */
 @Service
 public class AssignmentService {
@@ -58,7 +60,7 @@ public class AssignmentService {
      *
      * @param assignment The assignment to check
      * @return {@code true} if the given assignment's due date was before the
-     *         current date, otherwise {@code false}
+     * current date, otherwise {@code false}
      */
     public boolean isOverdue(Assignment assignment) {
         return assignment.getDueDate().after(new Date());
@@ -96,7 +98,8 @@ public class AssignmentService {
      */
     private void moveInstructionsFile(Assignment assignment, Path instructionPath) throws IOException {
 
-        Files.move(instructionPath, getInstructionsPath(assignment).resolve(instructionPath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+        Files.move(instructionPath, getInstructionsPath(assignment).resolve(instructionPath.getFileName()),
+                StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
@@ -113,17 +116,69 @@ public class AssignmentService {
      * @param homeworkType    The type of the assignment
      * @param maxGrade        The maximum grade for this assignment
      * @param maxAttempts     The maximum attempts allowed for this assignment
-     * @param testers         A list of the unit tests/style checks applied to the
+     * @param styleTests      A list of the unit style checks applied to the
      *                        submissions
      * @return The newly created assignment instance
      * @throws IOException If processing the instructions fails
      */
-    public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile, Date dueDate,
-            int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts, List<Tester> testers)
-            throws IOException {
+    public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile,
+                                       Date dueDate,
+                                       int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts,
+                                       List<Tests> styleTests, String unitTestName, Long unitTestTimeLimit, Path exampleImplementation,
+                                       Path testerClass, ArrayList<String> forbiddenStatements)
+            throws IOException, BadExampleException {
 
         Assignment assignment;
         ArrayList<Course> courses;
+        ArrayList<Tester> testers;
+        UnitTest unitTest;
+        Set<Tester> styleCheckers = new HashSet<>();
+
+        for (Tests testName : styleTests ) {
+            switch (testName) {
+                case INDENTATION:
+                    styleCheckers.add(new IndentationChecker());
+                    break;
+                case METHOD_NAMING:
+                    styleCheckers.add(new MethodNamingChecker());
+                    break;
+                case CONSTANT_NAMING:
+                    styleCheckers.add(new ConstantNamingChecker());
+                    break;
+                case OPERATORS_SPACE:
+                    styleCheckers.add(new OperatorsSpaceChecker());
+                    break;
+                case UNIT_TEST:
+                    styleCheckers.add(new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
+                    break;
+                case PARENTHESIS_SPACE:
+                    styleCheckers.add(new ParenthesisSpaceChecker());
+                    break;
+                case FOR_LOOP_SEMICOLON:
+                    styleCheckers.add(new ForLoopSemicolonChecker());
+                    break;
+                case LOOP_CURLY_BRACKETS:
+                    styleCheckers.add(new LoopCurlyBracketsChecker());
+                    break;
+                case FORBIDDEN_STATEMENTS:
+                    styleCheckers.add(new ForbiddenStatementChecker(forbiddenStatements));
+                    break;
+                case CLASS_INTERFACE_NAMING:
+                    styleCheckers.add(new ClassNInterfaceNamingChecker());
+                    break;
+                case PROGRAM_HEADER_JAVADOC:
+                    styleCheckers.add(new ProgramHeaderJavadocChecker());
+                    break;
+                case DECISION_CURLY_BRACKETS:
+                    styleCheckers.add(new DecisionCurlyBracketsChecker());
+                    break;
+                case METHOD_PARENTHESIS_SPACE:
+                    styleCheckers.add(new MethodParenthesisSpaceChecker());
+                    break;
+                case BLANK_LINE_AFTER_CLASS_DECLARATION:
+                    styleCheckers.add(new BlankLineAfterClassDeclarationChecker());
+            }
+        }
 
         courses = new ArrayList<>();
         for (int section : sections) {
@@ -131,7 +186,7 @@ public class AssignmentService {
         }
 
         assignment = assignmentRepository.save(new Assignment(assignmentName, shortDescription, courses, homeworkType, dueDate, maxGrade,
-                maxAttempts, instructionFile.getFileName().toString(), testers, new ArrayList<>()));
+                maxAttempts, instructionFile.getFileName().toString(), new ArrayList<>(styleCheckers), new ArrayList<>()));
 
         moveInstructionsFile(assignment, instructionFile);
 
@@ -163,22 +218,22 @@ public class AssignmentService {
     public Stream<Assignment> findByCourse(Course course) {
         return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection()).stream();
     }
-    
+
     public List<Submission> getAssignmentSubmissionsForInstructor(Instructor instructor, ObjectId assignmentId) {
-        
+
         Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow();
         List<ObjectId> submissionIds = assignment.getSubmissions();
-        
+
         return submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
-        
+
     }
-    
+
     public List<Submission> getAssignmentSubmissionsForTA(TeachingAssistant assistant, ObjectId assignmentId) {
-        
+
         return assistant.getStudents().stream()
-            .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentId, studentId))
-            .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
-        
+                .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentId, studentId))
+                .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
+
     }
-    
+
 }

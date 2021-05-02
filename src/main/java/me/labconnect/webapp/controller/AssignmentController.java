@@ -8,6 +8,7 @@ import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
+import me.labconnect.webapp.models.testing.BadExampleException;
 import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
@@ -97,14 +98,16 @@ public class AssignmentController {
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
     public Assignment createAssignment(Authentication authentication,
-                                       @RequestParam("uploaded-file") MultipartFile instructions,
+                                       @RequestParam("instructions-file") MultipartFile instructions,
+                                       @RequestParam("example-implementation") MultipartFile exampleImplementation,
+                                       @RequestParam("tester-class") MultipartFile testerClass,
                                        @RequestBody NewAssignment newAssignment)
-            throws IOException {
+            throws IOException, BadExampleException {
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        // TODO Find a way to add tests
+        // TODO Handle BadExampleException
 
         return assignmentService.createAssignment(
                 newAssignment.getAssignmentTitle(),
@@ -117,7 +120,12 @@ public class AssignmentController {
                 newAssignment.getHomeworkType(),
                 newAssignment.getMaxGrade(),
                 newAssignment.getMaxAttempts(),
-                new ArrayList<>()
+                newAssignment.getStyleTests(),
+                newAssignment.getUnitTestName(),
+                newAssignment.getUnitTestTimeLimit(),
+                exampleImplementation.getResource().getFile().toPath(),
+                testerClass.getResource().getFile().toPath(),
+                newAssignment.getForbiddenStatements()
         );
 
     }
@@ -130,26 +138,27 @@ public class AssignmentController {
     }
 
     @GetMapping("/api/assignments/{assignmentId}/submissions")
-    @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
+    @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT"})
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentId) {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
         switch (user.getRoleType()) {
-            
+
             case INSTRUCTOR:
                 return assignmentService.getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId);
-            
+
             case TEACHING_ASSISTANT:
                 return assignmentService.getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
-            
+
             case STUDENT:
-                return List.of(submissionService.getAssignmentSubmissionBySubmitter(assignmentId, userService.getStudentDocumentOf(user).getId()).orElseThrow());
-            
+                return List.of(submissionService
+                        .getAssignmentSubmissionBySubmitter(assignmentId, userService.getStudentDocumentOf(user).getId()).orElseThrow());
+
             default:
                 throw new RuntimeException("Invalid role!");
-            
+
         }
 
     }
@@ -163,20 +172,20 @@ public class AssignmentController {
     }
 
     @PostMapping("/api/assignments/{assignmentId}/submissions")
-    @Secured({ "ROLE_STUDENT" })
+    @Secured({"ROLE_STUDENT"})
     public Attempt addAttempt(
             Authentication authentication,
             @PathVariable ObjectId assignmentId,
             @RequestParam MultipartFile attemptArchive
-        ) throws IOException {
-        
+    ) throws IOException {
+
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
         Student student = userService.getStudentDocumentOf(user);
-        
+
         return submissionService.addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
-        
+
     }
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")

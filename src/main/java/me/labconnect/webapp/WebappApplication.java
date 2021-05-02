@@ -55,7 +55,7 @@ public class WebappApplication implements CommandLineRunner {
         assignmentService.createAssignment("Lab03", "Dummy Lab", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
                 new GregorianCalendar(2021, Calendar.MAY, 4).getTime(),
-                new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>());
+                new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>(), null, null, null, null, null);
     }
 
 }
