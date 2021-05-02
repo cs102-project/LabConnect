@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 /**
  * REST controller for handling {@code HTTP} requests for assignments
- * 
+ *
  * @author Vedat Eren Arıcan
  * @author Borga Haktan Bilen
  * @author Berk Çakar
@@ -53,63 +53,47 @@ public class AssignmentController {
      *
      * assignment api:
      *
-     * /api/assignments/ GET -> assignments of user POST -> create assignment
+     * /api/assignments/ GET -> assignments of user POST -> create assignment +++
      *
-     * /api/assignments/{objectid}/ GET -> data of assignment
+     * /api/assignments/{objectid}/ GET -> data of assignment +++
      *
      * /api/assignments/{objectid}/download GET -> download instructions of
-     * assignment
+     * assignment ???
      *
      * /api/assignments/{objectid}/submissions/ GET -> get submissions of assignment
-     * POST -> add attempt to assignment
+     * POST -> add attempt to assignment +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/ GET -> get
-     * attempts of assignment
+     * attempts of assignment +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid} GET ->
-     * get details of attempt POST -> give feedback
+     * get details of attempt POST -> give feedback ???
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/
-     * download GET -> get source code archive of attempt
+     * download GET -> get source code archive of attempt +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/notes
-     * GET -> get notes POST -> add notes
+     * GET -> get notes POST -> add notes +++
      *
      */
 
     /**
-     * Gets the note written for specific attempt
-     * 
+     * Gets the specified assignment.
+     *
+     * @param assignmentId Id of the assignment
      * @param authentication Token for authentication request
-     * @param attemptId Id of the attempt
-     * @return Note content
+     * @return The requested assignment
      */
-    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
-    @Secured("ROLE_STUDENT")
-    public String getNote(Authentication authentication, @PathVariable ObjectId attemptId) {
+    @GetMapping("/api/assignments/{assignmentId}")
+    public Assignment getAssignment(@PathVariable ObjectId assignmentId, Authentication authentication) {
 
-        return attemptService.getById(attemptId).getNote();
-
-    }
-
-    /**
-     * Adds/{@code POST} note to the specificied attempt
-     * 
-     * @param authentication Token for authentication request
-     * @param attemptId Id of the attempt
-     * @param note Note which is going to be added to the attempt
-     */
-    @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
-    @Secured("ROLE_STUDENT")
-    public void addNote(Authentication authentication, @PathVariable ObjectId attemptId, @RequestBody Note note) {
-
-        attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
+        return assignmentService.getById(assignmentId);
 
     }
 
     /**
      * Gets the assignments of a student
-     * 
+     *
      * @param authentication Token for authentication request
      * @return List of assignments
      */
@@ -126,7 +110,7 @@ public class AssignmentController {
 
     /**
      * Creates/{@code POST} an assignment with given parameters
-     * 
+     *
      * @param authentication Token for authentication request
      * @param instructions Instructions file for the assignment
      * @param newAssignment New assignment object
@@ -139,8 +123,7 @@ public class AssignmentController {
                                        @RequestParam("instructions-file") MultipartFile instructions,
                                        @RequestParam("example-implementation") MultipartFile exampleImplementation,
                                        @RequestParam("tester-class") MultipartFile testerClass,
-                                       @RequestBody NewAssignment newAssignment)
-            throws IOException, BadExampleException {
+                                       @RequestBody NewAssignment newAssignment) throws IOException, BadExampleException {
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
@@ -169,22 +152,8 @@ public class AssignmentController {
     }
 
     /**
-     * Gets the specified assignment.
-     * 
-     * @param assignmentId Id of the assignment
-     * @param authentication Token for authentication request
-     * @return The requested assignment
-     */
-    @GetMapping("/api/assignments/{assignmentId}")
-    public Assignment getAssignment(@PathVariable ObjectId assignmentId, Authentication authentication) {
-
-        return assignmentService.getById(assignmentId);
-
-    }
-
-    /**
      * Gets the submissions of an assignment
-     * 
+     *
      * @param authentication Token for authentication request
      * @param assignmentId Id of the assignment
      * @return List of submissions of the specified assignment
@@ -216,29 +185,13 @@ public class AssignmentController {
     }
 
     /**
-     * Gets the attempts of a submission 
-     * 
-     * @param authentication Token for authentication request
-     * @param assignmentId Id of the assignment
-     * @param submissionId Id of the submission
-     * @return The list of attempts for the specified assignment and submission
-     */
-    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
-    public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId) {
-
-        return attemptService.getAttemptsFor(submissionId);
-
-    }
-
-    /**
      * Creates/{@code POST} an attempt for submission
-     * 
+     *
      * @param authentication Token for authentication request
      * @param assignmentId Id of the assignment
      * @param attemptArchive
      * @return The added attempt
-     * @throws IOException If processing the archive fails 
+     * @throws IOException If processing the archive fails
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions")
     @Secured({"ROLE_STUDENT"})
@@ -258,9 +211,25 @@ public class AssignmentController {
     }
 
     /**
+     * Gets the attempts of a submission
+     *
+     * @param authentication Token for authentication request
+     * @param assignmentId Id of the assignment
+     * @param submissionId Id of the submission
+     * @return The list of attempts for the specified assignment and submission
+     */
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
+    public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
+            @PathVariable ObjectId submissionId) {
+
+        return attemptService.getAttemptsFor(submissionId);
+
+    }
+
+    /**
      * Gets attempts archive file from the database of a specific submission of
      * specific assignment
-     * 
+     *
      * @param assignmentId Id of the assignment
      * @param submissionId Id of the submission
      * @param attemptId Id of the attempt
@@ -278,6 +247,36 @@ public class AssignmentController {
         }
 
         return attemptArchive;
+    }
+
+    /**
+     * Gets the note written for specific attempt
+     *
+     * @param authentication Token for authentication request
+     * @param attemptId Id of the attempt
+     * @return Note content
+     */
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
+    @Secured("ROLE_STUDENT")
+    public String getNote(Authentication authentication, @PathVariable ObjectId attemptId) {
+
+        return attemptService.getById(attemptId).getNote();
+
+    }
+
+    /**
+     * Adds/{@code POST} note to the specificied attempt
+     *
+     * @param authentication Token for authentication request
+     * @param attemptId Id of the attempt
+     * @param note Note which is going to be added to the attempt
+     */
+    @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
+    @Secured("ROLE_STUDENT")
+    public void addNote(Authentication authentication, @PathVariable ObjectId attemptId, @RequestBody Note note) {
+
+        attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
+
     }
 
 }
