@@ -1,8 +1,6 @@
 package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.models.data.Announcement;
-import me.labconnect.webapp.models.data.Course;
-import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,7 +11,6 @@ import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,8 +43,7 @@ public class SelfController {
 
     @GetMapping("/api/self/announcements")
     public List<Announcement> getAnnouncements(Authentication authentication) {
-        List<Announcement> announcements = new ArrayList<>();
-
+        
         if (authentication == null || !authentication.isAuthenticated()) {
             return null;
         }
@@ -55,13 +51,8 @@ public class SelfController {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-
-        user.getCourses().stream()
-                .map(c -> userService.getInstructorOfCourseSection(user.getInstitution(), c))
-                .distinct()
-                .forEach(instructor -> announcements.addAll(instructor.getAnnouncements()));
-
-        return announcements;
+        return userService.getAnnouncementsOfUser(user);
+        
     }
 
 }

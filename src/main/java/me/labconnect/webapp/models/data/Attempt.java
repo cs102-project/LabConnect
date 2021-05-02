@@ -23,20 +23,20 @@ public class Attempt {
     @Id
     private ObjectId id;
     private String attemptFilename;
-    private Note note;
+    private String note;
     private List<TestResult> testResults;
     private String feedback;
     private int grade;
 
     // Constructors
 
-    public Attempt(ObjectId id, String attemptFilename, int grade, String feedback, List<TestResult> testResults) {
+    public Attempt(ObjectId id, String attemptFilename, String note, int grade, String feedback, List<TestResult> testResults) {
         this.id = id;
         this.attemptFilename = attemptFilename;
+        this.note = note;
         this.grade = grade;
         this.feedback = feedback;
         this.testResults = testResults;
-        note = new Note("");
     }
     
     // Methods
@@ -113,11 +113,11 @@ public class Attempt {
         return id;
     }
 
-    public Note getNote() {
+    public String getNote() {
         return note;
     }
 
-    public void setNote(Note note) {
+    public void setNote(String note) {
         this.note = note;
     }
 

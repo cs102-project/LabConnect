@@ -84,7 +84,7 @@ public class SubmissionService {
         
         Attempt attempt;
         
-        attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), 0, "", new ArrayList<>());
+        attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), "", 0, "", new ArrayList<>());
 
         submission.addAttempt(attempt);
         submissionRepository.save(submission);
@@ -100,6 +100,12 @@ public class SubmissionService {
         );
 
         return attempt;
+        
+    }
+    
+    public Attempt getAttemptById(ObjectId attemptId) {
+        
+        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId().equals(attemptId)).findAny().orElseThrow();
         
     }
     

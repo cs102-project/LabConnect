@@ -1,8 +1,9 @@
 package me.labconnect.webapp.controller;
 
+import me.labconnect.webapp.controller.httpmodels.NewAssignment;
+import me.labconnect.webapp.controller.httpmodels.Note;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
-import me.labconnect.webapp.models.data.Note;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
@@ -12,6 +13,7 @@ import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.repository.SubmissionRepository;
 import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -35,11 +37,13 @@ public class AssignmentController {
     @Autowired
     private SubmissionService submissionService;
     @Autowired
+    private SubmissionRepository submissionRepository;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
     @Autowired
-    private TARepository teachingAssistantRepository;
+    private TARepository taRepository;
 
     /*
      * 
@@ -71,64 +75,76 @@ public class AssignmentController {
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public Note getNotes(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId, @PathVariable ObjectId attemptId) {
+    public String getNote(Authentication authentication, @PathVariable ObjectId attemptId) {
+        
         return attemptService.getById(attemptId).getNote();
+        
     }
 
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public void addNotes(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId, @PathVariable ObjectId attemptId,
-            @RequestParam(name = "note-content") String noteContent) {
-        if ( attemptService.getById(attemptId).getNote() != null ) {
-            attemptService.getById(attemptId).getNote().setContent(noteContent);
-        }
-        else {
-            attemptService.getById(attemptId).setNote(new Note(noteContent));
-        }
+    public void addNote(Authentication authentication, @PathVariable ObjectId attemptId, @RequestBody Note note) {
+        
+        attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
+        
     }
 
     @GetMapping("/api/assignments")
     public List<Assignment> getAssignmentsFor(Authentication authentication) {
+        
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
         return user.getCourses().stream().flatMap(assignmentService::findByCourse).distinct()
                 .collect(Collectors.toList());
+        
     }
 
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
     public Assignment createAssignment(Authentication authentication,
-            @RequestParam(name = "name") String assignmentName,
-            @RequestParam(name = "description") String shortDescription, @RequestParam MultipartFile instructions,
-            @RequestParam(name = "due-date") Date dueDate, @RequestParam(name = "course") String courseName,
-            @RequestParam(name = "type") String homeworkType, @RequestParam int[] sections,
-            @RequestParam(name = "max-grade") int maxGrade, @RequestParam(name = "max-attempts") int maxAttempts)
+            @RequestParam("uploaded-file") MultipartFile instructions,
+            @RequestBody NewAssignment newAssignment)
             throws IOException {
+        
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
         // TODO Find a way to add tests
-        return assignmentService.createAssignment(assignmentName, shortDescription, user.getInstitution(),
-                instructions.getResource().getFile().toPath(), dueDate, sections, courseName, homeworkType, maxGrade,
-                maxAttempts, new ArrayList<>());
+        
+        return assignmentService.createAssignment(
+            newAssignment.getAssignmentTitle(), 
+            newAssignment.getShortDescription(), 
+            user.getInstitution(),
+            instructions.getResource().getFile().toPath(), 
+            newAssignment.getDueDate(), 
+            newAssignment.getSections(), 
+            newAssignment.getCourseName(), 
+            newAssignment.getHomeworkType(), 
+            newAssignment.getMaxGrade(),
+            newAssignment.getMaxAttempts(),
+            new ArrayList<>()
+        );
+        
     }
 
     @GetMapping("/api/assignments/{assignmentId}")
     public Assignment getAssignment(@PathVariable ObjectId assignmentId, Authentication authentication) {
 
         return assignmentService.getById(assignmentId);
+        
     }
 
     @GetMapping("/api/assignments/{assignmentID}/submissions")
     @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentID) {
+        
         List<Submission> submissions;
         Assignment assignment = assignmentService.getById(assignmentID);
+        
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
+        
         switch (user.getRoleType()) {
             case INSTRUCTOR:
                 List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
@@ -150,12 +166,17 @@ public class AssignmentController {
             default:
                 throw new RuntimeException("Invalid role!");
         }
+        
         return submissions;
+        
     }
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
             @PathVariable ObjectId submissionId) {
+        
         return attemptService.getAttemptsFor(submissionId);
+        
     }
+    
 }

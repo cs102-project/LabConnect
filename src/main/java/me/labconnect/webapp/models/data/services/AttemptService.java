@@ -173,6 +173,10 @@ public class AttemptService {
         updateSubmissionOf(attempt);
         return true;
     }
+    
+    public void setNoteOfAttempt(Attempt attempt, String note) {
+        attempt.setNote(note);
+    }
 
     /**
      * A helper method that replaces a "stale" attempt in a submission with an

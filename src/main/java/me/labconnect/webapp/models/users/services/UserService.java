@@ -1,5 +1,6 @@
 package me.labconnect.webapp.models.users.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import me.labconnect.webapp.models.data.Announcement;
 import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.Student;
@@ -83,4 +85,18 @@ public class UserService {
                 .findAny().orElseThrow();
 
     }
+    
+    public List<Announcement> getAnnouncementsOfUser(User user) {
+        
+        List<Announcement> announcements = new ArrayList<>();
+        
+        user.getCourses().stream()
+                .map(course -> getInstructorOfCourseSection(user.getInstitution(), course))
+                .distinct()
+                .forEach(instructor -> announcements.addAll(instructor.getAnnouncements()));
+        
+        return announcements;
+        
+    }
+    
 }
