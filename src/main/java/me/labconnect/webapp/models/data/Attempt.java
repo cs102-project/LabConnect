@@ -15,7 +15,7 @@ import me.labconnect.webapp.models.testing.TestResult;
 /**
  * Model of a singular attempt, containing the submission path and results of
  * the tests
- * 
+ *
  * @author Berkan Şahin
  * @author Vedat Eren Arican
  * @version 01.05.2021
@@ -40,13 +40,13 @@ public class Attempt {
         this.feedback = feedback;
         this.testResults = testResults;
     }
-    
+
     // Methods
 
     /**
-     * Returns the test results
-     * 
-     * @return the test results
+     * Gets the test results
+     *
+     * @return The test results
      */
     public List<TestResult> getTestResults() {
         return testResults;
@@ -63,7 +63,7 @@ public class Attempt {
 
     /**
      * Give feedback for this attempt
-     * 
+     *
      * @param feedback The feedback as a list of lines
      */
     public void giveFeedback(Feedback feedback) {
@@ -71,9 +71,9 @@ public class Attempt {
     }
     // TODO fix the javadocs for feedback methods
     /**
-     * Returns the feedback for this attempt
-     * 
-     * @return the feedback for this attempt
+     * Gets the feedback for this attempt
+     *
+     * @return The feedback for this attempt
      */
     public Feedback getFeedback() {
         return feedback;
@@ -81,7 +81,7 @@ public class Attempt {
 
     /**
      * Get the directory this attempt is stored in
-     * 
+     *
      * @return the directory this attempt is stored in
      */
     public Path getAttemptFilename() {
@@ -90,7 +90,7 @@ public class Attempt {
 
     /**
      * Return the unique object identifier
-     * 
+     *
      * @return the unique object identifier
      */
     public ObjectId getId() {

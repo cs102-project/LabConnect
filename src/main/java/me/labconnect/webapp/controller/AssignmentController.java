@@ -152,7 +152,15 @@ public class AssignmentController {
 
     }
 
-    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId, Authentication authentication) {
+    /**
+     * Gets the instructions file of the given assignment
+     *
+     * @param assignmentId Id of the assignment
+     * @param authentication Token for authentication request
+     * @return Instruction file of the assignment
+     * @throws IOException If there is not such assignment
+     */
+    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId, Authentication authentication) throws IOException {
         Resource instructionsFile = assignmentService.getInstructions(assignmentService.getById(assignmentId));
 
         if (assignmentService.getById(assignmentId) == null) {
@@ -236,6 +244,14 @@ public class AssignmentController {
 
     }
 
+    /**
+     * Gets the details of the given submission attempt.
+     *
+     * @param assignmentId Id of the assignment
+     * @param submissionId Id of the submission
+     * @param attemptId Id of the attempt
+     * @return Details of the specified submission attempt.
+     */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
                                      @PathVariable ObjectId attemptId) {
@@ -243,6 +259,14 @@ public class AssignmentController {
         return attemptService.getById(attemptId);
     }
 
+    /**
+     * Creates/{@code POST} a feedback for the given submission attempt
+     *
+     * @param assignmentId Id of the assignment
+     * @param submissionId Id of the submission
+     * @param attemptId Id of the attempt
+     * @param feedback Feedback which is going to be added to the attempt
+     */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
                                       @PathVariable ObjectId attemptId, @RequestBody Feedback feedback) {

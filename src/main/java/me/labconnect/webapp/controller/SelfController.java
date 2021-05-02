@@ -20,6 +20,7 @@ import java.util.List;
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
+ * @author Berk Çakar
  * @version 02.05.2021
  */
 @RestController
@@ -36,6 +37,12 @@ public class SelfController {
 
     // The below example demonstrates the usage of sessions
 
+    /**
+     * Gets the existing note entries for the user
+     *
+     * @param authentication Token for authentication request
+     * @return Available notes for the user
+     */
     @GetMapping("/api/self/notes")
     public List<Note> getNotes(Authentication authentication) {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
@@ -48,6 +55,11 @@ public class SelfController {
         return userService.getNotesForUser(user);
     }
 
+    /**
+     * Gets the detailed data of the user
+     * @param authentication Token for authentication request
+     * @return Data belonging to the user
+     */
     @GetMapping("/api/self")
     public User selfData(Authentication authentication) {
 
@@ -62,6 +74,12 @@ public class SelfController {
 
     }
 
+    /**
+     * Gets the existing announcement entries for the user
+     *
+     * @param authentication Token for authentication request
+     * @return Available announcements for the user
+     */
     @GetMapping("/api/self/announcements")
     public List<Announcement> getAnnouncements(Authentication authentication) {
 

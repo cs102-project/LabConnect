@@ -99,6 +99,12 @@ public class SubmissionService {
 
     }
 
+    /**
+     * Retrieve the submission attempt with the given unique ID
+     *
+     * @param submissionId The unique submission attempt ID
+     * @return The submission attempt with the given ID if it exists
+     */
     public Attempt getAttemptById(ObjectId attemptId) {
 
         return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId().equals(attemptId))
@@ -106,6 +112,13 @@ public class SubmissionService {
 
     }
 
+    /**
+     * Retrieve the assignment submissions with the given unique assignment and submitter ID
+     *
+     * @param assignmentId The unique assignment ID
+     * @param submitterId The unique ID of the submitter of the specified assignment submission
+     * @return The submissions of assignment with the given assignment and submitter ID if it exists
+     */
     public Optional<Submission> getAssignmentSubmissionBySubmitter(ObjectId assignmentId, ObjectId submitterId) {
 
         Assignment assignment;
