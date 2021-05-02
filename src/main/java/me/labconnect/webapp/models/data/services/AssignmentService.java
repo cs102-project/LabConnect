@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
+import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.repository.InstructorRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -43,6 +45,8 @@ public class AssignmentService {
     private StudentRepository studentRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private InstructorRepository instructorRepository;
     @Autowired
     private UserService userService;
 
@@ -133,6 +137,11 @@ public class AssignmentService {
                 student.giveAssignment(assignment);
                 studentRepository.save(student);
             });
+
+            Instructor instructor = userService.getInstructorOfCourseSection(institution, course);
+            instructor.getAssignments().add(assignment.getId());
+            instructorRepository.save(instructor);
+
         }
 
         return assignment;
