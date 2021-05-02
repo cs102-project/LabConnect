@@ -2,6 +2,7 @@ package me.labconnect.webapp.models.data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -47,6 +48,7 @@ public class Assignment {
         this.instructionFilename = instructionFilename;
         this.tests = tests;
         this.submissions = submissions;
+        this.dueDate = dueDate;
     }
     
     // Methods
@@ -96,7 +98,7 @@ public class Assignment {
     }
 
     /**
-     * Add a submission to the list <b>if it doesn't exists</b>
+     * Add a submission to the list <b>if it doesn't exist</b>
      * 
      * @param submission The submission to add
      */
@@ -109,4 +111,16 @@ public class Assignment {
             submissions.add(submissionId);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assignment that = (Assignment) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
