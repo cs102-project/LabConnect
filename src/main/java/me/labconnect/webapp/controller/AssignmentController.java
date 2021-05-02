@@ -10,6 +10,7 @@ import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -20,9 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,6 +35,8 @@ public class AssignmentController {
     private SubmissionService submissionService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
     @Autowired
     private TARepository teachingAssistantRepository;
 
@@ -100,7 +101,7 @@ public class AssignmentController {
         return assignmentService.getById(assignmentId);
     }
 
-    @GetMapping("/api/assignments/{assignmentID}/submissions/")
+    @GetMapping("/api/assignments/{assignmentID}/submissions")
     @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentID) {
         List<Submission> submissions;
@@ -111,16 +112,21 @@ public class AssignmentController {
             case INSTRUCTOR:
                 List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
                 submissions = submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
+                break;
             case TEACHING_ASSISTANT:
-                // TODO
+                TeachingAssistant teachingAssistant = userService.getTADocumentOf(user);
+                submissions = teachingAssistant.getStudents().stream()
+                        .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentID, studentId))
+                        .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
+                break;
             case STUDENT:
                 ObjectId submissionId = assignment.getSubmissions().stream()
                         .filter(s -> submissionService.getById(s).getSubmitterId().equals(user.getId())).findAny()
                         .orElseThrow();
                 submissions = List.of( submissionService.getById(submissionId) );
-            default:
-                submissions = null;         // I couldn't find a better solution
                 break;
+            default:
+                throw new RuntimeException("Invalid role!");
         }
         return submissions;
     }
