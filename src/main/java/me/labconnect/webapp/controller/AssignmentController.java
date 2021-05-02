@@ -8,6 +8,7 @@ import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
+import me.labconnect.webapp.models.testing.BadExampleException;
 import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
@@ -135,19 +136,35 @@ public class AssignmentController {
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
     public Assignment createAssignment(Authentication authentication,
-            @RequestParam("uploaded-file") MultipartFile instructions, @RequestBody NewAssignment newAssignment)
-            throws IOException {
+                                       @RequestParam("instructions-file") MultipartFile instructions,
+                                       @RequestParam("example-implementation") MultipartFile exampleImplementation,
+                                       @RequestParam("tester-class") MultipartFile testerClass,
+                                       @RequestBody NewAssignment newAssignment)
+            throws IOException, BadExampleException {
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        // TODO Find a way to add tests
+        // TODO Handle BadExampleException
 
-        return assignmentService.createAssignment(newAssignment.getAssignmentTitle(),
-                newAssignment.getShortDescription(), user.getInstitution(),
-                instructions.getResource().getFile().toPath(), newAssignment.getDueDate(), newAssignment.getSections(),
-                newAssignment.getCourseName(), newAssignment.getHomeworkType(), newAssignment.getMaxGrade(),
-                newAssignment.getMaxAttempts(), new ArrayList<>());
+        return assignmentService.createAssignment(
+                newAssignment.getAssignmentTitle(),
+                newAssignment.getShortDescription(),
+                user.getInstitution(),
+                instructions.getResource().getFile().toPath(),
+                newAssignment.getDueDate(),
+                newAssignment.getSections(),
+                newAssignment.getCourseName(),
+                newAssignment.getHomeworkType(),
+                newAssignment.getMaxGrade(),
+                newAssignment.getMaxAttempts(),
+                newAssignment.getStyleTests(),
+                newAssignment.getUnitTestName(),
+                newAssignment.getUnitTestTimeLimit(),
+                exampleImplementation.getResource().getFile().toPath(),
+                testerClass.getResource().getFile().toPath(),
+                newAssignment.getForbiddenStatements()
+        );
 
     }
 
@@ -173,7 +190,7 @@ public class AssignmentController {
      * @return List of submissions of the specified assignment
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions")
-    @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
+    @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT"})
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentId) {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
@@ -182,15 +199,14 @@ public class AssignmentController {
         switch (user.getRoleType()) {
 
             case INSTRUCTOR:
-                return assignmentService
-                        .getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId);
+                return assignmentService.getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId);
 
             case TEACHING_ASSISTANT:
                 return assignmentService.getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
 
             case STUDENT:
-                return List.of(submissionService.getAssignmentSubmissionBySubmitter(assignmentId,
-                        userService.getStudentDocumentOf(user).getId()).orElseThrow());
+                return List.of(submissionService
+                        .getAssignmentSubmissionBySubmitter(assignmentId, userService.getStudentDocumentOf(user).getId()).orElseThrow());
 
             default:
                 throw new RuntimeException("Invalid role!");
@@ -225,17 +241,19 @@ public class AssignmentController {
      * @throws IOException If processing the archive fails 
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions")
-    @Secured({ "ROLE_STUDENT" })
-    public Attempt addAttempt(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @RequestParam MultipartFile attemptArchive) throws IOException {
+    @Secured({"ROLE_STUDENT"})
+    public Attempt addAttempt(
+            Authentication authentication,
+            @PathVariable ObjectId assignmentId,
+            @RequestParam MultipartFile attemptArchive
+    ) throws IOException {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
         Student student = userService.getStudentDocumentOf(user);
 
-        return submissionService.addAttempt(assignmentId, student.getId(),
-                attemptArchive.getResource().getFile().toPath());
+        return submissionService.addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
 
     }
 

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -61,7 +62,6 @@ public abstract class StyleChecker implements Tester {
          try {
             currentOffendingLines = checkFile(currentFileLines);
          } catch (RuntimeException ex) {
-            currentOffendingLines.clear();
             currentOffendingLines.add("Test failed");
 
          } finally {
@@ -79,4 +79,9 @@ public abstract class StyleChecker implements Tester {
    public boolean indexExists(final ArrayList<String> list, final int index) {
       return index >= 0 && index < list.size();
   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(getName());
+   }
 }
