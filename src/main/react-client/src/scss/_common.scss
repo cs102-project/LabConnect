@@ -2,6 +2,9 @@ $fg-color: rgb(0, 91, 117);
 $bg-color: rgb(39, 39, 39);
 $accent-color: rgb(218, 98, 0);
 $def-text-color: #eee;
+$theme-orange: #f47d11;
+$theme-blue-active: #076f9b;
+$theme-blue-deactive: #084765;
 
 .button {
     background: linear-gradient(to bottom, lighten($color: $accent-color, $amount: 30), $accent-color);

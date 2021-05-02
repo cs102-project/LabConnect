@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,6 +125,16 @@ public class SubmissionService {
      */
     public Submission getById(ObjectId submissionId) {
         return submissionRepository.findById(submissionId).orElseThrow();
+    }
+
+    /**
+     * Retrieve the submission with the given unique ID
+     * 
+     * @param submissionId The unique submission ID
+     * @return The submission with the given ID if it exists
+     */
+    public Stream<Submission> getStreamById(ObjectId submissionId) {
+        return submissionRepository.findById(submissionId).stream();
     }
 
     /**
