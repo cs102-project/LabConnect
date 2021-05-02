@@ -37,60 +37,60 @@ public class AssignmentController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-    
+
     /*
-     * 
+     *
      * assignment api:
-     * 
+     *
      * /api/assignments/ GET -> assignments of user POST -> create assignment
-     * 
+     *
      * /api/assignments/{objectid}/ GET -> data of assignment
-     * 
+     *
      * /api/assignments/{objectid}/download GET -> download instructions of
      * assignment
-     * 
+     *
      * /api/assignments/{objectid}/submissions/ GET -> get submissions of assignment
      * POST -> add attempt to assignment
-     * 
+     *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/ GET -> get
      * attempts of assignment
-     * 
+     *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid} GET ->
      * get details of attempt POST -> give feedback
-     * 
+     *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/
      * download GET -> get source code archive of attempt
-     * 
+     *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/notes
      * GET -> get notes POST -> add notes
-     * 
+     *
      */
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
     public String getNote(Authentication authentication, @PathVariable ObjectId attemptId) {
-        
+
         return attemptService.getById(attemptId).getNote();
-        
+
     }
 
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
     public void addNote(Authentication authentication, @PathVariable ObjectId attemptId, @RequestBody Note note) {
-        
+
         attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
-        
+
     }
 
     @GetMapping("/api/assignments")
     public List<Assignment> getAssignmentsFor(Authentication authentication) {
-        
+
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
         return user.getCourses().stream().flatMap(assignmentService::findByCourse).distinct()
                 .collect(Collectors.toList());
-        
+
     }
 
     @PostMapping("/api/assignments")
@@ -99,45 +99,45 @@ public class AssignmentController {
             @RequestParam("uploaded-file") MultipartFile instructions,
             @RequestBody NewAssignment newAssignment)
             throws IOException {
-        
+
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
         // TODO Find a way to add tests
-        
+
         return assignmentService.createAssignment(
-            newAssignment.getAssignmentTitle(), 
-            newAssignment.getShortDescription(), 
+            newAssignment.getAssignmentTitle(),
+            newAssignment.getShortDescription(),
             user.getInstitution(),
-            instructions.getResource().getFile().toPath(), 
-            newAssignment.getDueDate(), 
-            newAssignment.getSections(), 
-            newAssignment.getCourseName(), 
-            newAssignment.getHomeworkType(), 
+            instructions.getResource().getFile().toPath(),
+            newAssignment.getDueDate(),
+            newAssignment.getSections(),
+            newAssignment.getCourseName(),
+            newAssignment.getHomeworkType(),
             newAssignment.getMaxGrade(),
             newAssignment.getMaxAttempts(),
             new ArrayList<>()
         );
-        
+
     }
 
     @GetMapping("/api/assignments/{assignmentId}")
     public Assignment getAssignment(@PathVariable ObjectId assignmentId, Authentication authentication) {
 
         return assignmentService.getById(assignmentId);
-        
+
     }
 
     @GetMapping("/api/assignments/{assignmentID}/submissions")
     @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentID) {
-        
+
         List<Submission> submissions;
         Assignment assignment = assignmentService.getById(assignmentID);
-        
+
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
-        
+
         switch (user.getRoleType()) {
             case INSTRUCTOR:
                 List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
@@ -159,17 +159,27 @@ public class AssignmentController {
             default:
                 throw new RuntimeException("Invalid role!");
         }
-        
+
         return submissions;
-        
+
     }
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
             @PathVariable ObjectId submissionId) {
-        
+
         return attemptService.getAttemptsFor(submissionId);
-        
+
     }
-    
+
+    @PostMapping("/api/assignments/{assignmentId}/submissions")
+    public Attempt addAttempt(Authentication authentication,
+            @PathVariable ObjectId assignmentId,
+            @RequestParam MultipartFile attemptArchive) throws IOException {
+        LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
+        User user = userRepository.findById(userDetail.getId()).orElseThrow();
+
+        return submissionService.addAttempt(assignmentId, user.getId(), attemptArchive.getResource().getFile().toPath());
+    }
+
 }
