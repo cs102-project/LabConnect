@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,7 @@ import me.labconnect.webapp.repository.UserRepository;
 
 /**
  * A service that provides assignment creation and retrieval operations
- * 
+ *
  * @see me.labconnect.webapp.models.data.Assignment
  * @author Vedat Eren Arican
  * @author Berkan Şahin
@@ -47,7 +48,7 @@ public class AssignmentService {
 
     /**
      * Check if the given assignment is overdue
-     * 
+     *
      * @param assignment The assignment to check
      * @return {@code true} if the given assignment's due date was before the
      *         current date, otherwise {@code false}
@@ -57,18 +58,20 @@ public class AssignmentService {
     }
 
     /**
-     * Return the absolute path to the instructions for the given assignment
-     * 
+     * Return the absolute path to the instructions for the given assignment, creating
+     * the parent directory if it doesn't exist
+     *
      * @param assignment The assignment to retrieve instructions from
      * @return The absolute path to the instructions for the given assignment
      */
-    public Path getInstructionsPath(Assignment assignment) {
-        return Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString(), assignment.getInstructionFilename());
+    public Path getInstructionsPath(Assignment assignment) throws IOException {
+
+        return Files.createDirectories(Paths.get(ASSIGNMENT_ROOT, assignment.getId().toString()));
     }
 
     /**
      * Return the instructions for the given assignment as a serveable Resource
-     * 
+     *
      * @param assignment The assignment to retrieve instructions from
      * @return The instructions as a Resource ready to serve for downloads
      * @throws IOException If retrieving the instructions fails
@@ -79,20 +82,20 @@ public class AssignmentService {
 
     /**
      * A helper method that moves the instruction file into an appropriate location
-     * 
+     *
      * @param assignment      The assignment the instructions are for
      * @param instructionPath The absolute path of the instruction file
      * @throws IOException If the instructions cannot be retrieved
      */
     private void moveInstructionsFile(Assignment assignment, Path instructionPath) throws IOException {
-        Files.deleteIfExists(getInstructionsPath(assignment));
-        Files.move(instructionPath, getInstructionsPath(assignment).resolve(instructionPath.getFileName()));
+
+        Files.move(instructionPath, getInstructionsPath(assignment).resolve(instructionPath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
      * Creates a new assignment and assigns it to students taking the specified
      * course in the specified sections
-     * 
+     *
      * @param assignmentName  The name or title of the assignment
      * @param institution     The institution offering the course this assignment is
      *                        a part of
@@ -111,10 +114,10 @@ public class AssignmentService {
     public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile, Date dueDate,
             int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts, List<Tester> testers)
             throws IOException {
-        
+
         Assignment assignment;
         ArrayList<Course> courses;
-        
+
         courses = new ArrayList<>();
         for (int section : sections) {
             courses.add(new Course(courseName, section));
@@ -137,7 +140,7 @@ public class AssignmentService {
 
     /**
      * Retrieve a particular assignment with the given Object ID
-     * 
+     *
      * @param assignmentId The unique identifier of the assignment
      * @return The assignment with the corresponding ID, if it exists
      */
