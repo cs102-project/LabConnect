@@ -15,6 +15,7 @@ import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -96,8 +97,8 @@ public class AssignmentController {
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
     public Assignment createAssignment(Authentication authentication,
-            @RequestParam("uploaded-file") MultipartFile instructions,
-            @RequestBody NewAssignment newAssignment)
+                                       @RequestParam("uploaded-file") MultipartFile instructions,
+                                       @RequestBody NewAssignment newAssignment)
             throws IOException {
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
@@ -106,17 +107,17 @@ public class AssignmentController {
         // TODO Find a way to add tests
 
         return assignmentService.createAssignment(
-            newAssignment.getAssignmentTitle(),
-            newAssignment.getShortDescription(),
-            user.getInstitution(),
-            instructions.getResource().getFile().toPath(),
-            newAssignment.getDueDate(),
-            newAssignment.getSections(),
-            newAssignment.getCourseName(),
-            newAssignment.getHomeworkType(),
-            newAssignment.getMaxGrade(),
-            newAssignment.getMaxAttempts(),
-            new ArrayList<>()
+                newAssignment.getAssignmentTitle(),
+                newAssignment.getShortDescription(),
+                user.getInstitution(),
+                instructions.getResource().getFile().toPath(),
+                newAssignment.getDueDate(),
+                newAssignment.getSections(),
+                newAssignment.getCourseName(),
+                newAssignment.getHomeworkType(),
+                newAssignment.getMaxGrade(),
+                newAssignment.getMaxAttempts(),
+                new ArrayList<>()
         );
 
     }
@@ -155,7 +156,7 @@ public class AssignmentController {
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId) {
+                                     @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
 
@@ -163,9 +164,11 @@ public class AssignmentController {
 
     @PostMapping("/api/assignments/{assignmentId}/submissions")
     @Secured({ "ROLE_STUDENT" })
-    public Attempt addAttempt(Authentication authentication,
+    public Attempt addAttempt(
+            Authentication authentication,
             @PathVariable ObjectId assignmentId,
-            @RequestParam MultipartFile attemptArchive) throws IOException {
+            @RequestParam MultipartFile attemptArchive
+        ) throws IOException {
         
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
@@ -174,6 +177,19 @@ public class AssignmentController {
         
         return submissionService.addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
         
+    }
+
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
+    @Secured({"ROLE_TEACHING_ASSISTANT"})
+    public Resource getAttemptArchive(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                                      @PathVariable ObjectId attemptId) throws IOException {
+        Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
+
+        if (assignmentService.getById(assignmentId).getSubmissions().stream().noneMatch(submissionId::equals)) {
+            throw new RuntimeException("The submission and the assignment do not match");
+        }
+
+        return attemptArchive;
     }
 
 }
