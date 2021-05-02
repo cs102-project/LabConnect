@@ -11,10 +11,7 @@ import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.models.users.User;
-import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.models.users.services.UserService;
-import me.labconnect.webapp.repository.SubmissionRepository;
-import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +34,10 @@ public class AssignmentController {
     @Autowired
     private SubmissionService submissionService;
     @Autowired
-    private SubmissionRepository submissionRepository;
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private TARepository taRepository;
-
+    
     /*
      * 
      * assignment api:

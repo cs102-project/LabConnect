@@ -5,6 +5,9 @@ $def-text-color: #eee;
 $theme-orange: #f47d11;
 $theme-blue-active: #076f9b;
 $theme-blue-deactive: #084765;
+$code-background: #002B36;
+$test-success: #859900;
+$test-failed: #F24E1E;
 
 .button {
     background: linear-gradient(to bottom, lighten($color: $accent-color, $amount: 30), $accent-color);
