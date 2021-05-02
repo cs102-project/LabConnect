@@ -5,6 +5,7 @@ import me.labconnect.webapp.controller.httpmodels.Note;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.data.Feedback;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
@@ -67,7 +68,7 @@ public class AssignmentController {
      * attempts of assignment +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid} GET ->
-     * get details of attempt POST -> give feedback ???
+     * get details of attempt POST -> give feedback +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/
      * download GET -> get source code archive of attempt +++
@@ -151,6 +152,16 @@ public class AssignmentController {
 
     }
 
+    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId, Authentication authentication) {
+        Resource instructionsFile = assignmentService.getInstructions(assignmentService.getById(assignmentId));
+
+        if (assignmentService.getById(assignmentId) == null) {
+            throw new RuntimeException("An assignment with specified assignment ID does not exist");
+        }
+
+        return instructionsFile;
+    }
+
     /**
      * Gets the submissions of an assignment
      *
@@ -198,8 +209,7 @@ public class AssignmentController {
     public Attempt addAttempt(
             Authentication authentication,
             @PathVariable ObjectId assignmentId,
-            @RequestParam MultipartFile attemptArchive
-    ) throws IOException {
+            @RequestParam MultipartFile attemptArchive) throws IOException {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
@@ -220,10 +230,31 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId) {
+                                     @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
 
+    }
+
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
+    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                                     @PathVariable ObjectId attemptId) {
+
+        return attemptService.getById(attemptId);
+    }
+
+    @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
+    public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                                      @PathVariable ObjectId attemptId, @RequestBody Feedback feedback) {
+        if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
+            throw new RuntimeException("The grade in the feedback is bigger than maximum allowed grade " + assignmentService.getById(assignmentId).getMaxGrade());
+        }
+
+        else if (feedback.getGrade() < 0) {
+            throw new RuntimeException("The grade in the feedback cannot be less than 0");
+        }
+
+        attemptService.getById(attemptId).giveFeedback(feedback);
     }
 
     /**
@@ -239,7 +270,7 @@ public class AssignmentController {
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
     @Secured({ "ROLE_TEACHING_ASSISTANT" })
     public Resource getAttemptArchive(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
-            @PathVariable ObjectId attemptId) throws IOException {
+                                      @PathVariable ObjectId attemptId) throws IOException {
         Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
 
         if (assignmentService.getById(assignmentId).getSubmissions().stream().noneMatch(submissionId::equals)) {
