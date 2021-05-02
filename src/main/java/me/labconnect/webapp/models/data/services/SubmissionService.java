@@ -85,7 +85,7 @@ public class SubmissionService {
 
         Attempt attempt;
 
-        attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), "", 0, "", new ArrayList<>());
+        attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), "", null, new ArrayList<>());
 
         submission.addAttempt(attempt);
         submissionRepository.save(submission);

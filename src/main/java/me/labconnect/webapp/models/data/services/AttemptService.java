@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
+import me.labconnect.webapp.models.data.Feedback;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.SubmissionRepository;
@@ -136,7 +137,7 @@ public class AttemptService {
         );
         
     }
-    
+    // TODO fix javadoc for feedbacks
     /**
      * Give an attempt feedback and update its database entry accordingly
      * 
@@ -144,32 +145,10 @@ public class AttemptService {
      * @param feedback The feedback as a string
      * @return The attempt with the feedback added
      */
-    public Attempt giveFeedback(Attempt attempt, String feedback) {
+    public Attempt giveFeedback(Attempt attempt, Feedback feedback) {
         attempt.giveFeedback(feedback);
         updateSubmissionOf(attempt);
         return attempt;
-    }
-
-    /**
-     * Give an attempt a grade and update its database entry accordingly
-     * 
-     * @param attempt The attempt to grade
-     * @param grade   The new grade
-     * @return {@code true} if the grade was within assignment bounds, otherwise
-     *         {@code false}
-     */
-    public boolean grade(Attempt attempt, int grade) {
-        Assignment assignment;
-
-        assignment = assignmentRepository.findByAttemptId(attempt.getId());
-
-        if (grade > assignment.getMaxGrade()) {
-            return false;
-        }
-
-        attempt.setGrade(grade);
-        updateSubmissionOf(attempt);
-        return true;
     }
     
     public void setNoteOfAttempt(Attempt attempt, String note) {

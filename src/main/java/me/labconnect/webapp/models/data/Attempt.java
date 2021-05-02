@@ -29,16 +29,14 @@ public class Attempt {
     private String attemptFilename;
     private String note;
     private List<TestResult> testResults;
-    private String feedback;
-    private int grade;
+    private Feedback feedback;
 
     // Constructors
 
-    public Attempt(ObjectId id, String attemptFilename, String note, int grade, String feedback, List<TestResult> testResults) {
+    public Attempt(ObjectId id, String attemptFilename, String note, Feedback feedback, List<TestResult> testResults) {
         this.id = id;
         this.attemptFilename = attemptFilename;
         this.note = note;
-        this.grade = grade;
         this.feedback = feedback;
         this.testResults = testResults;
     }
@@ -64,38 +62,20 @@ public class Attempt {
     }
 
     /**
-     * Set the grade for this attempt
-     * 
-     * @param grade The grade
-     */
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    /**
-     * Returns the grade for this attempt
-     * 
-     * @return The grade for this attempt
-     */
-    public int getGrade() {
-        return grade;
-    }
-
-    /**
      * Give feedback for this attempt
      * 
      * @param feedback The feedback as a list of lines
      */
-    public void giveFeedback(String feedback) {
+    public void giveFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
-
+    // TODO fix the javadocs for feedback methods
     /**
      * Returns the feedback for this attempt
      * 
      * @return the feedback for this attempt
      */
-    public String getFeedback() {
+    public Feedback getFeedback() {
         return feedback;
     }
 

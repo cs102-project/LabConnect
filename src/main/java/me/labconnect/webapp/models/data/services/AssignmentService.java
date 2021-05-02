@@ -29,7 +29,6 @@ import me.labconnect.webapp.models.testing.Tester;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.StudentRepository;
-import org.springframework.web.servlet.tags.form.SelectTag;
 
 /**
  * A service that provides assignment creation and retrieval operations
