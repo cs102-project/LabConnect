@@ -33,16 +33,12 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (lineIndex < codeFile.size() - 2) {
+            if (indexExists(codeFile, lineIndex + 1)) {
                 if ((RegexHelper.classRegexMatcher(codeFile.get(lineIndex))
                         || RegexHelper.interfaceRegexMatcher(codeFile.get(lineIndex)))) {
-                    if (codeFile.get(lineIndex + 1).trim().charAt(0) == '{' && !codeFile.get(lineIndex + 2).isEmpty()) {
-                        errorList.add(codeFile.get(lineIndex + 2));
-                    }
-
-                    else if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1) == '{'
-                            && !codeFile.get(lineIndex + 1).isEmpty()) {
-                        errorList.add(codeFile.get(lineIndex + 1));
+                    if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1) == '{'
+                            && !codeFile.get(lineIndex + 1).isBlank()) {
+                        errorList.add("Blank line missing after class or interface declaration.");
                     }
                 }
             }

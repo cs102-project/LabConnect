@@ -23,7 +23,7 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (lineIndex != codeFile.size() - 1) {
+            if (indexExists(codeFile, lineIndex + 1)) {
                 if (RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
                     if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
                         errorList.add(codeFile.get(lineIndex));
