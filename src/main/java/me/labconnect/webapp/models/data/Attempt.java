@@ -36,6 +36,7 @@ public class Attempt {
         this.grade = grade;
         this.feedback = feedback;
         this.testResults = testResults;
+        note = new Note("");
     }
     
     // Methods
@@ -110,6 +111,14 @@ public class Attempt {
      */
     public ObjectId getId() {
         return id;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
     }
 
     @Override

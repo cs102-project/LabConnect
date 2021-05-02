@@ -2,6 +2,7 @@ package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
+import me.labconnect.webapp.models.data.Note;
 import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
@@ -68,6 +69,26 @@ public class AssignmentController {
      * 
      */
 
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
+    @Secured("ROLE_STUDENT")
+    public Note getNotes(Authentication authentication, @PathVariable ObjectId assignmentId,
+            @PathVariable ObjectId submissionId, @PathVariable ObjectId attemptId) {
+        return attemptService.getById(attemptId).getNote();
+    }
+
+    @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
+    @Secured("ROLE_STUDENT")
+    public void addNotes(Authentication authentication, @PathVariable ObjectId assignmentId,
+            @PathVariable ObjectId submissionId, @PathVariable ObjectId attemptId,
+            @RequestParam(name = "note-content") String noteContent) {
+        if ( attemptService.getById(attemptId).getNote() != null ) {
+            attemptService.getById(attemptId).getNote().setContent(noteContent);
+        }
+        else {
+            attemptService.getById(attemptId).setNote(new Note(noteContent));
+        }
+    }
+
     @GetMapping("/api/assignments")
     public List<Assignment> getAssignmentsFor(Authentication authentication) {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
@@ -111,7 +132,8 @@ public class AssignmentController {
         switch (user.getRoleType()) {
             case INSTRUCTOR:
                 List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
-                submissions = submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
+                submissions = submissionIds.stream().flatMap(submissionService::getStreamById).distinct()
+                        .collect(Collectors.toList());
                 break;
             case TEACHING_ASSISTANT:
                 TeachingAssistant teachingAssistant = userService.getTADocumentOf(user);
@@ -123,14 +145,14 @@ public class AssignmentController {
                 ObjectId submissionId = assignment.getSubmissions().stream()
                         .filter(s -> submissionService.getById(s).getSubmitterId().equals(user.getId())).findAny()
                         .orElseThrow();
-                submissions = List.of( submissionService.getById(submissionId) );
+                submissions = List.of(submissionService.getById(submissionId));
                 break;
             default:
                 throw new RuntimeException("Invalid role!");
         }
         return submissions;
     }
-    
+
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
             @PathVariable ObjectId submissionId) {
