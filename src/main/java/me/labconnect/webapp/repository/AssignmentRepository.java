@@ -22,9 +22,9 @@ public interface AssignmentRepository extends MongoRepository<Assignment, Object
     @Query("{ submissions: ?0  }")
     Assignment findBySubmissionId(ObjectId submissionId);
     
-    @Query(" { submissions: { $elem_match : { attempts : { $elem_match : { _id : ?0} } } } }")
+    @Query(" { submissions: { $elemMatch : { attempts : { $elemMatch : { _id : ?0} } } } }")
     Assignment findByAttemptId(ObjectId attemptId);
 
-    @Query(" { course: ?0, sections: ?1 }")
+    @Query(" { courses: { $elemMatch: { course: ?0, sections: ?1 } } }")
     List<Assignment> findByCourseSection(String course, int section);
 }

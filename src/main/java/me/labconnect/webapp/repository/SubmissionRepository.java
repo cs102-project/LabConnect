@@ -12,9 +12,9 @@ import me.labconnect.webapp.models.data.Submission;
 @Repository
 public interface SubmissionRepository extends MongoRepository<Submission, ObjectId> {
     
-     public List<Submission> findBySubmitterId(ObjectId submitterId);
+     List<Submission> findBySubmitterId(ObjectId submitterId);
     
-     @Query("{ attempts : { $elem_match : { _id: ?0 } } }")
-     public Submission findByAttemptId(ObjectId attemptId);
+     @Query("{ attempts : { $elemMatch : { _id: ?0 } } }")
+     Submission findByAttemptId(ObjectId attemptId);
     
 }
