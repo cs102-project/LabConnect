@@ -24,7 +24,7 @@ import me.labconnect.webapp.repository.SubmissionRepository;
 /**
  * A service class that provides creation and retrieval operations for
  * Submissions
- * 
+ *
  * @author Berkan Şahin
  * @version 01.05.2021
  */
@@ -42,7 +42,7 @@ public class SubmissionService {
 
     /**
      * Add a submission for a given assignment
-     * 
+     *
      * @param assignmentId The unique ID of the assignment this submission is for
      * @param submitterId  The unique ID of the student this submission belongs to
      * @return The newly created submission instance
@@ -66,66 +66,63 @@ public class SubmissionService {
         return submission;
 
     }
-    
+
     /**
      * A method that adds an attempt for the given assignment by the given student
-     * 
-     * @param assignmentId      The assignment that is attempted
-     * @param submitterId       The submitter of this attempt
-     * @param attemptArchive    A ZIP archive of the attempt (contents of the src
-     *                          directory)
+     *
+     * @param assignmentId   The assignment that is attempted
+     * @param submitterId    The submitter of this attempt
+     * @param attemptArchive A ZIP archive of the attempt (contents of the src
+     *                       directory)
      * @return The newly created Attempt
      * @throws IOException If processing the archive fails
      */
     public Attempt addAttempt(ObjectId assignmentId, ObjectId submitterId, Path attemptArchive) throws IOException {
-        
-        Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId).orElse(addSubmission(assignmentId, submitterId));
+
+        Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId)
+                .orElse(addSubmission(assignmentId, submitterId));
         Assignment assignment = assignmentRepository.findBySubmissionId(submission.getId());
-        
+
         Attempt attempt;
-        
+
         attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), "", 0, "", new ArrayList<>());
 
         submission.addAttempt(attempt);
         submissionRepository.save(submission);
-        
+
         // Move the user's zip archive to storage
         Path assignmentDir = assignmentService.getInstructionsPath(assignment).getParent();
-        Files.move(
-            attemptArchive,
-            assignmentDir
-            .resolve(submission.getId().toString())
-            .resolve(attempt.getId().toString())
-            .resolve(attempt.getAttemptFilename())
-        );
+        Path attemptDir = Files.createDirectories(assignmentDir.resolve(submission.getId().toString()).resolve(attempt.getId().toString()));
+        Files.move(attemptArchive, attemptDir.resolve(attempt.getAttemptFilename()));
 
         return attempt;
-        
+
     }
-    
+
     public Attempt getAttemptById(ObjectId attemptId) {
-        
-        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId().equals(attemptId)).findAny().orElseThrow();
-        
+
+        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId().equals(attemptId))
+                .findAny().orElseThrow();
+
     }
-    
+
     public Optional<Submission> getAssignmentSubmissionBySubmitter(ObjectId assignmentId, ObjectId submitterId) {
-        
+
         Assignment assignment;
         List<Submission> submissionsOfAssignment;
-        
+
         submissionsOfAssignment = new ArrayList<>();
         assignment = assignmentRepository.findById(assignmentId).orElseThrow();
-        
+
         submissionRepository.findAllById(assignment.getSubmissions()).forEach(submissionsOfAssignment::add);
-        
+
         return submissionsOfAssignment.stream().filter(submission -> submission.getSubmitterId().equals(submitterId)).findAny();
-        
+
     }
-    
+
     /**
      * Retrieve the submission with the given unique ID
-     * 
+     *
      * @param submissionId The unique submission ID
      * @return The submission with the given ID if it exists
      */
@@ -135,7 +132,7 @@ public class SubmissionService {
 
     /**
      * Retrieve the submission with the given unique ID
-     * 
+     *
      * @param submissionId The unique submission ID
      * @return The submission with the given ID if it exists
      */
@@ -145,7 +142,7 @@ public class SubmissionService {
 
     /**
      * Get all the submissions authored by the student with the given ID
-     * 
+     *
      * @param studentId The ID of the student
      * @return The submissions belonging to the student with the given ID
      */
@@ -155,7 +152,7 @@ public class SubmissionService {
 
     /**
      * Get all the submissions authored by the given student
-     * 
+     *
      * @param student The student to retrieve submissions authored by
      * @return The submissions belonging to the given student
      */
