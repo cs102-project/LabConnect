@@ -21,6 +21,7 @@ public class Attempt {
 
     // Variables
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private String attemptFilename;
     private String note;
