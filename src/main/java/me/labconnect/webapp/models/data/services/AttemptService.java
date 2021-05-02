@@ -32,8 +32,6 @@ import me.labconnect.webapp.repository.SubmissionRepository;
 @Service
 public class AttemptService {
 
-    private final String SUBMISSION_ROOT = "/var/labconnect/submissions";
-
     @Autowired
     private AssignmentRepository assignmentRepository;
     @Autowired

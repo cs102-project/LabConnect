@@ -8,7 +8,6 @@ services:
         ports:
             - "80:8080"
         volumes: 
-            - submissions:/var/labconnect/submissions
             - assignments:/var/labconnect/assignments
     mongo-db:
         image: mongo
@@ -18,6 +17,5 @@ services:
         image: redis
 
 volumes: 
-    submissions:
     assignments:
     mongodb:
