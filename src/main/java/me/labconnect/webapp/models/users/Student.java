@@ -2,6 +2,8 @@ package me.labconnect.webapp.models.users;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,7 +23,9 @@ public class Student {
 
     // Properties
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
+    @JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> assignments;
 
     // Constructor
@@ -41,6 +45,7 @@ public class Student {
      * 
      * @return ArrayList of assigned Assignments.
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getAssignments() {
         return assignments;
     }

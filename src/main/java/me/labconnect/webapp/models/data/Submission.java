@@ -2,6 +2,8 @@ package me.labconnect.webapp.models.data;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Submission {
 
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private ObjectId submitterId;
     private List<Attempt> attempts;

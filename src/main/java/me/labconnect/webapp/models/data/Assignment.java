@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,6 +24,7 @@ public class Assignment {
 
     // Variables
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private String title;
     private String shortDescription;
@@ -33,6 +36,7 @@ public class Assignment {
     private int maxAttempts;
     private String instructionFilename;
     private List<Tester> tests;
+    @JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> submissions;
 
     // Constructor
@@ -93,6 +97,7 @@ public class Assignment {
         return tests;
     }
 
+    @JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getSubmissions() {
         return submissions;
     }
