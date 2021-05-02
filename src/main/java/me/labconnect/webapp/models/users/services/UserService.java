@@ -30,6 +30,14 @@ import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.TutorRepository;
 import me.labconnect.webapp.repository.UserRepository;
 
+/**
+ * Serves different user functions for controllers
+ * 
+ * @author Vedat Eren Arıcan
+ * @author Berkan Şahin
+ * @author Borga Haktan Bilen
+ * @version 02.05.2021
+ */
 @Service
 public class UserService {
 
@@ -107,8 +115,8 @@ public class UserService {
 
     public List<Note> getNotesForUser(User user) {
         List<Note> notes = new ArrayList<>();
-        List<Submission> submissions = new ArrayList();
-        List<Attempt> attempts = new ArrayList();
+        List<Submission> submissions = new ArrayList<>();
+        List<Attempt> attempts = new ArrayList<>();
         List<Assignment> assignemnts;
 
         assignemnts = user.getCourses().stream().flatMap(assignmentService::findByCourse).distinct()
