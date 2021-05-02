@@ -7,8 +7,10 @@ import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.users.LCUserDetails;
+import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import me.labconnect.webapp.repository.TARepository;
 import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class AssignmentController {
     private SubmissionService submissionService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TARepository teachingAssistantRepository;
 
     /*
      * 
@@ -97,24 +101,30 @@ public class AssignmentController {
     }
 
     @GetMapping("/api/assignments/{assignmentID}/submissions/")
-    @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT" })
+    @Secured({ "ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT" })
     public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentID) {
-        List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
-        return submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
-    }
-
-    @GetMapping("/api/assignments/{assignmentID}/submissions/")
-    @Secured({ "ROLE_STUDENT" })
-    public Submission getSubmissionFor(Authentication authentication, @PathVariable ObjectId assignmentID) {
-        LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
-        User student = userRepository.findById(userDetail.getId()).orElseThrow();
+        List<Submission> submissions;
         Assignment assignment = assignmentService.getById(assignmentID);
-        ObjectId submissionId = assignment.getSubmissions().stream()
-                .filter(s -> submissionService.getById(s).getSubmitterId().equals(student.getId())).findAny()
-                .orElseThrow();
-        return submissionService.getById(submissionId);
+        LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
+        User user = userRepository.findById(userDetail.getId()).orElseThrow();
+        switch (user.getRoleType()) {
+            case INSTRUCTOR:
+                List<ObjectId> submissionIds = assignmentService.getById(assignmentID).getSubmissions();
+                submissions = submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
+            case TEACHING_ASSISTANT:
+                // TODO
+            case STUDENT:
+                ObjectId submissionId = assignment.getSubmissions().stream()
+                        .filter(s -> submissionService.getById(s).getSubmitterId().equals(user.getId())).findAny()
+                        .orElseThrow();
+                submissions = List.of( submissionService.getById(submissionId) );
+            default:
+                submissions = null;         // I couldn't find a better solution
+                break;
+        }
+        return submissions;
     }
-
+    
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
             @PathVariable ObjectId submissionId) {
