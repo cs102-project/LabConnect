@@ -39,11 +39,10 @@ public class User {
     /**
      * A constructor for retrieving User entries from the database
      * 
-     * @param id      The unique objectID assigned by the database
+     * @param roleDocumentId      The unique objectID assigned by the database
      * @param institutionId The unique ID number assigned by the institution
      * @param name          The name of the user
      * @param email    The department of the user
-     * @param isOnline      The online status of the user
      */
     public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses, String name, String email, String password) {
         this.roleDocumentId = roleDocumentId;
@@ -101,8 +100,12 @@ public class User {
      * 
      * @return Department of the user.
      */
-    public String getDepartment() {
+    public String getInstitution() {
         return institution;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
     /**
@@ -117,7 +120,7 @@ public class User {
         if (other instanceof User) {
             User tmp;
             tmp = (User) other;
-            return institutionId == tmp.institutionId;
+            return institutionId.equals(tmp.institutionId);
         }
 
         return false;

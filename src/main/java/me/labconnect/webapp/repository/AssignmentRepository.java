@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import me.labconnect.webapp.models.data.Assignment;
 
+import java.util.List;
+
 /**
  * A repository interface for the assignments stored in the database
  * 
@@ -22,4 +24,7 @@ public interface AssignmentRepository extends MongoRepository<Assignment, Object
     
     @Query(" { submissions: { $elem_match : { attempts : { $elem_match : { _id : ?0} } } } }")
     Assignment findByAttemptId(ObjectId attemptId);
+
+    @Query(" { course: ?0, sections: ?1 }")
+    List<Assignment> findByCourseSection(String course, int section);
 }

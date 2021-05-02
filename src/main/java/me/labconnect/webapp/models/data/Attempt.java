@@ -23,6 +23,7 @@ public class Attempt {
     @Id
     private ObjectId id;
     private String attemptFilename;
+    private Note note;
     private List<TestResult> testResults;
     private String feedback;
     private int grade;

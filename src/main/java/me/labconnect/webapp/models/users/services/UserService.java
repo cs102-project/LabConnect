@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.users.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,30 +34,30 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    public TeachingAssistant getTADocumentOf(User user) throws Exception {
+    public TeachingAssistant getTADocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.TEACHING_ASSISTANT) {
-            throw new Exception("Mismatch in requested user role document.");
+            throw new NoSuchElementException("Mismatch in requested user role document.");
         }
         return taRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
     
-    public Tutor getTutorDocumentOf(User user) throws Exception {
+    public Tutor getTutorDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.TUTOR) {
-            throw new Exception("Mismatch in requested user role document.");
+            throw new NoSuchElementException("Mismatch in requested user role document.");
         }
         return tutorRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
     
-    public Student getStudentDocumentOf(User user) throws Exception {
+    public Student getStudentDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.STUDENT) {
-            throw new Exception("Mismatch in requested user role document.");
+            throw new NoSuchElementException("Mismatch in requested user role document.");
         }
         return studentRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
     
-    public Instructor getInstructorDocumentOf(User user) throws Exception {
+    public Instructor getInstructorDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.INSTRUCTOR) {
-            throw new Exception("Mismatch in requested user role document.");
+            throw new NoSuchElementException("Mismatch in requested user role document.");
         }
         return instructorRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
@@ -67,9 +68,19 @@ public class UserService {
             .findByCourseSection(institution, course.getCourse(), course.getSection())
             .stream()
             .filter(user -> user.getRoleType() == LCUserRoleTypes.STUDENT)
-            .map(studentUser -> studentRepository.findById(studentUser.getRoleDocumentId()).get())
+            .map(this::getStudentDocumentOf)
             .collect(Collectors.toList());
         
     }
-    
+
+    public Instructor getInstructorOfCourseSection(String institution, Course course) {
+
+        return userRepository
+                .findByCourseSection(institution, course.getCourse(), course.getSection())
+                .stream()
+                .filter(user -> user.getRoleType() == LCUserRoleTypes.INSTRUCTOR)
+                .map(this::getInstructorDocumentOf)
+                .findAny().orElseThrow();
+
+    }
 }

@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +143,10 @@ public class AssignmentService {
      */
     public Assignment getById(ObjectId assignmentId) {
         return assignmentRepository.findById(assignmentId).orElseThrow();
+    }
+
+    public Stream<Assignment> findByCourse(Course course) {
+        return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection()).stream();
     }
 
 }
