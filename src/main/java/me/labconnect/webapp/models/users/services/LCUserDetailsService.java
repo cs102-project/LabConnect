@@ -1,13 +1,12 @@
 package me.labconnect.webapp.models.users.services;
 
+import me.labconnect.webapp.models.users.LCUserDetails;
+import me.labconnect.webapp.models.users.User;
+import me.labconnect.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import me.labconnect.webapp.models.users.LCUserDetails;
-import me.labconnect.webapp.models.users.User;
-import me.labconnect.webapp.repository.UserRepository;
 
 /**
  * Serves different LabConnect user details functions for controllers

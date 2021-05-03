@@ -34,14 +34,15 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method gets the end position of the constant expression.
-     * 
+     *
      * @param line is the line which includes the constant expression.
      * @return End position of the constant expression.
      */
     private int getEndPosition(String line) {
         int endPos = 0;
-        String[] identifiers = { "int", "double", "float", "long", "String", "Character", "char", "Integer", "Double",
-                "Float", "Long", "Boolean", "boolean", "Byte", "byte", "Short", "short" };
+        String[] identifiers = {"int", "double", "float", "long", "String", "Character", "char",
+                "Integer", "Double",
+                "Float", "Long", "Boolean", "boolean", "Byte", "byte", "Short", "short"};
 
         for (int typeIndex = 0; typeIndex < identifiers.length; typeIndex++) {
             if (line.contains(identifiers[typeIndex])) {
@@ -54,7 +55,7 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method extracts the constant name from the given line.
-     * 
+     *
      * @param line is the line to be processed.
      * @return Name of the constant.
      */
@@ -69,10 +70,9 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method checks whether the constant name is all caps or not.
-     * 
+     *
      * @param constant is the constant to be checked.
-     * @return {@code true} if the constant name is all caps, otherwise
-     *         {@code false}.
+     * @return {@code true} if the constant name is all caps, otherwise {@code false}.
      */
     private boolean isAllCaps(String constant) {
         return constant.equals(constant.toUpperCase());

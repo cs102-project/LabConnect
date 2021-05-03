@@ -1,15 +1,15 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.List;
-
+import me.labconnect.webapp.models.livesession.Meetable;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.livesession.Meetable;
+import java.util.List;
+
 /**
- * Class representing a TA, i.e., a User that can grade Attempts, meet with
- * students and manage a meeting queue
+ * Class representing a TA, i.e., a User that can grade Attempts, meet with students and manage a
+ * meeting queue
  *
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
@@ -32,7 +32,7 @@ public class TeachingAssistant implements Meetable {
      * Initializes the Teaching assistant object
      *
      * @param meetingLink The link to the personal meeting room of the TA
-     * @param students The Object IDs of the students assigned to the TAs
+     * @param students    The Object IDs of the students assigned to the TAs
      */
     public TeachingAssistant(String meetingLink, List<ObjectId> students) {
         this.meetingLink = meetingLink;

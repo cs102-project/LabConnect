@@ -1,17 +1,16 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.List;
-
+import me.labconnect.webapp.models.data.Assignment;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.data.Assignment;
+import java.util.List;
 
 /**
- * A class representing a student, i.e., a User that submits solutions to
- * assignments and waits in queues
- * 
+ * A class representing a student, i.e., a User that submits solutions to assignments and waits in
+ * queues
+ *
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
  * @version 30.04.2021
@@ -33,14 +32,14 @@ public class Student {
     }
 
     // Methods
-    
+
     public ObjectId getId() {
         return id;
     }
-    
+
     /**
      * Gets the assignments list of a specific Student.
-     * 
+     *
      * @return ArrayList of assigned Assignments.
      */
     //@JsonSerialize(using = ToStringSerializer.class)
@@ -55,5 +54,5 @@ public class Student {
     private void giveAssignment(ObjectId assignmentId) {
         assignments.add(assignmentId);
     }
-    
+
 }

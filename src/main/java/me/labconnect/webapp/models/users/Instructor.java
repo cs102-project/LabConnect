@@ -1,16 +1,15 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.List;
-
+import me.labconnect.webapp.models.data.Announcement;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.data.Announcement;
+import java.util.List;
 
 /**
- * An instructor, which is the user that creates assignments, starts live
- * sessions and uploads tests
+ * An instructor, which is the user that creates assignments, starts live sessions and uploads
+ * tests
  *
  * @author Berkan Şahin
  * @author Berk Çakar
@@ -29,8 +28,9 @@ public class Instructor {
 
     /**
      * Default constructor for Instructor takes lists of announcements and assignments as parameters
+     *
      * @param announcements Announcements of the instructor
-     * @param assignments Assignments given by the instructor
+     * @param assignments   Assignments given by the instructor
      */
     public Instructor(List<Announcement> announcements, List<ObjectId> assignments) {
         this.announcements = announcements;

@@ -1,11 +1,10 @@
 package me.labconnect.webapp.models.users.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import me.labconnect.webapp.models.data.Announcement;
 import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.repository.InstructorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Serves different instructor functions for controllers
@@ -22,7 +21,7 @@ public class InstructorService {
     /**
      * Adds an announcement from the given instructor
      *
-     * @param instructor The instructor who gives the announcemet
+     * @param instructor   The instructor who gives the announcemet
      * @param announcement The announcement which is going to be declared
      */
     public void addAnnouncementFrom(Instructor instructor, Announcement announcement) {

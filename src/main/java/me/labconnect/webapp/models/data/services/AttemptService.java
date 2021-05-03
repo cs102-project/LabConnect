@@ -1,5 +1,19 @@
 package me.labconnect.webapp.models.data.services;
 
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Attempt;
+import me.labconnect.webapp.models.data.Feedback;
+import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.testing.TestResult;
+import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.repository.AssignmentRepository;
+import me.labconnect.webapp.repository.SubmissionRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
@@ -7,25 +21,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.labconnect.webapp.models.testing.TestResult;
-import me.labconnect.webapp.models.testing.Tester;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-
-import me.labconnect.webapp.models.data.Assignment;
-import me.labconnect.webapp.models.data.Attempt;
-import me.labconnect.webapp.models.data.Feedback;
-import me.labconnect.webapp.models.data.Submission;
-import me.labconnect.webapp.repository.AssignmentRepository;
-import me.labconnect.webapp.repository.SubmissionRepository;
-
 /**
- * A service that provides operations for creation, modification and retrieval
- * of Attempts
- * 
+ * A service that provides operations for creation, modification and retrieval of Attempts
+ *
  * @author Berkan Şahin
  * @author Vedat Eren Arican
  * @version 01.05.2021
@@ -42,7 +40,7 @@ public class AttemptService {
 
     /**
      * A helper method that extracts the attempt archive
-     * 
+     *
      * @param attemptArchive The attempt as a ZIP file
      * @return The directory the archive is extracted to
      * @throws IOException If extracting the attempt fails
@@ -114,33 +112,33 @@ public class AttemptService {
 
         return attempt;
     }
-    
+
     /**
-     * Get the source code archive for this attempt and return it as a serveable
-     * Resource
-     * 
+     * Get the source code archive for this attempt and return it as a serveable Resource
+     *
      * @param attempt The attempt
      * @return The ZIP archive of the attempt as a Resource ready for download
      * @throws IOException If archiving the attempt fails
      */
     public Resource getAttemptArchive(Attempt attempt) throws IOException {
-        
+
         Assignment assignment = assignmentRepository.findByAttemptId(attempt.getId());
         Submission submission = submissionRepository.findByAttemptId(attempt.getId());
         Path assignmentDir = assignmentService.getInstructionsPath(assignment).getParent();
-        
+
         return new UrlResource(
-            assignmentDir
-            .resolve(submission.getId().toString())
-            .resolve(String.valueOf(attempt.getId()))
-            .resolve(attempt.getAttemptFilename()).toUri()
+                assignmentDir
+                        .resolve(submission.getId().toString())
+                        .resolve(String.valueOf(attempt.getId()))
+                        .resolve(attempt.getAttemptFilename()).toUri()
         );
-        
+
     }
     // TODO fix javadoc for feedbacks
+
     /**
      * Give an attempt feedback and update its database entry accordingly
-     * 
+     *
      * @param attempt  The attempt to give feedback to
      * @param feedback The feedback as a string
      * @return The attempt with the feedback added
@@ -150,16 +148,15 @@ public class AttemptService {
         updateSubmissionOf(attempt);
         return attempt;
     }
-    
+
     public void setNoteOfAttempt(Attempt attempt, String note) {
         attempt.setNote(note);
         updateSubmissionOf(attempt);
     }
 
     /**
-     * A helper method that replaces a "stale" attempt in a submission with an
-     * updated one
-     * 
+     * A helper method that replaces a "stale" attempt in a submission with an updated one
+     *
      * @param attempt The attempt to update
      */
     private void updateSubmissionOf(Attempt attempt) {
@@ -168,7 +165,7 @@ public class AttemptService {
 
     /**
      * Retrieve an attempt by its unique identifier
-     * 
+     *
      * @param attemptId The unique ID of the attempt
      * @return The corresponding attempt if it exists
      */
@@ -179,7 +176,7 @@ public class AttemptService {
 
     /**
      * Get all the attempts for a submission
-     * 
+     *
      * @param submissionId The unique ID of the submission
      * @return The attempts for the submission if the submission exists
      */

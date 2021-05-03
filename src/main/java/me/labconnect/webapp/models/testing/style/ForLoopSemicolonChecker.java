@@ -32,9 +32,10 @@ public class ForLoopSemicolonChecker extends StyleChecker {
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
-                for (int j = 0; j < codeFile.get(lineIndex).length(); j ++) {
-                    if( codeFile.get(lineIndex).charAt(j) == ';' && codeFile.get(lineIndex).charAt(j+1) != ' ' ) {
-                        errorList.add( codeFile.get(lineIndex) );
+                for (int j = 0; j < codeFile.get(lineIndex).length(); j++) {
+                    if (codeFile.get(lineIndex).charAt(j) == ';'
+                            && codeFile.get(lineIndex).charAt(j + 1) != ' ') {
+                        errorList.add(codeFile.get(lineIndex));
                     }
                 }
             }

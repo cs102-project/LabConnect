@@ -3,8 +3,8 @@ package me.labconnect.webapp.models.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is for checking whether every operator character have space right
- * before and after them or not.
+ * This class is for checking whether every operator character have space right before and after
+ * them or not.
  *
  * @author Berk Çakar
  * @author Borga Haktan Bilen
@@ -23,8 +23,7 @@ public class OperatorsSpaceChecker extends StyleChecker {
     }
 
     /**
-     * Checks whether every operator character have space right before and after
-     * them or not.
+     * Checks whether every operator character have space right before and after them or not.
      *
      * @param codeFile is the file. List of every line.
      * @return The lines that are failed the check.
@@ -58,9 +57,7 @@ public class OperatorsSpaceChecker extends StyleChecker {
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
                             errorList.add(codeFile.get(lineIndex));
                         }
-                    }
-
-                    else {
+                    } else {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '+'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
                             errorList.add(codeFile.get(lineIndex));

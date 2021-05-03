@@ -33,7 +33,8 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         for (int index = 0; index < codeFile.size(); index++) {
             String currentLine = codeFile.get(index);
 
-            if ((RegexHelper.classRegexMatcher(currentLine) || RegexHelper.interfaceRegexMatcher(currentLine))) {
+            if ((RegexHelper.classRegexMatcher(currentLine) || RegexHelper
+                    .interfaceRegexMatcher(currentLine))) {
                 topLevelName = nameExtractor(currentLine);
                 matcher = compiledPattern.matcher(topLevelName);
 

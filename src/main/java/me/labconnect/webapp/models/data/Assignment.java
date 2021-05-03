@@ -1,14 +1,13 @@
 package me.labconnect.webapp.models.data;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
+import me.labconnect.webapp.models.testing.Tester;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.testing.Tester;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A generic assignment model class
@@ -50,12 +49,13 @@ public class Assignment {
      * @param maxGrade            Maximum grade possible for the assignment
      * @param maxAttempts         Maximum attempt number for the assignment
      * @param instructionFilename Name of the instruction file for the assignment
-     * @param tests               List of test which is going to be applied to the
-     *                            assignment
+     * @param tests               List of test which is going to be applied to the assignment
      * @param submissions         List of submission to the assignment
      */
-    public Assignment(String title, String shortDescription, List<Course> courses, String homeworkType, Date dueDate,
-            int maxGrade, int maxAttempts, String instructionFilename, List<Tester> tests, List<ObjectId> submissions) {
+    public Assignment(String title, String shortDescription, List<Course> courses,
+                      String homeworkType, Date dueDate,
+                      int maxGrade, int maxAttempts, String instructionFilename, List<Tester> tests,
+                      List<ObjectId> submissions) {
         this.title = title;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
@@ -185,23 +185,25 @@ public class Assignment {
      * @param submissionId The id of the submission
      */
     private void addSubmission(ObjectId submissionId) {
-        if (!submissions.contains(submissionId))
+        if (!submissions.contains(submissionId)) {
             submissions.add(submissionId);
+        }
     }
 
     /**
      * Checks whether two assignment objects are the same or not
      *
      * @param o The assignment object to compare with
-     * @return {code true} if two assignment objects are the same, {@code false}
-     *         otherwise
+     * @return {code true} if two assignment objects are the same, {@code false} otherwise
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
         Assignment that = (Assignment) o;
         return Objects.equals(id, that.id);
     }

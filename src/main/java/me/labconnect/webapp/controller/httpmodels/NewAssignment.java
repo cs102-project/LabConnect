@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *  HTTP model class for {@code NewAssignment} objects
+ * HTTP model class for {@code NewAssignment} objects
+ *
  * @author Vedat Eren Arican
  * @author Berk Çakar
  * @version 03.05.2021
@@ -29,21 +30,24 @@ public class NewAssignment {
 
     /**
      * Default constructor for {@code NewAssignment} takes the required information for an assignment
-     * @param assignmentTitle The title of assignment
-     * @param shortDescription A short description for the assignment
-     * @param homeworkType Type of the homework
-     * @param dueDate Due date of the assignment
-     * @param courseName The course name which the assignment belongs to
-     * @param sections Section number which the assignment belongs to
-     * @param maxGrade Maximum possible grade for the assignment
-     * @param maxAttempts Maximum possible attempt count for the assignment
-     * @param styleTests Style tests to be applied
-     * @param unitTestName Name of the unit test to be applied
-     * @param unitTestTimeLimit Time limit for the unit test
+     *
+     * @param assignmentTitle     The title of assignment
+     * @param shortDescription    A short description for the assignment
+     * @param homeworkType        Type of the homework
+     * @param dueDate             Due date of the assignment
+     * @param courseName          The course name which the assignment belongs to
+     * @param sections            Section number which the assignment belongs to
+     * @param maxGrade            Maximum possible grade for the assignment
+     * @param maxAttempts         Maximum possible attempt count for the assignment
+     * @param styleTests          Style tests to be applied
+     * @param unitTestName        Name of the unit test to be applied
+     * @param unitTestTimeLimit   Time limit for the unit test
      * @param forbiddenStatements Statements not allowed for use in the assignment
      */
-    public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType, Date dueDate, String courseName,
-                         int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName, Long unitTestTimeLimit, ArrayList<String> forbiddenStatements) {
+    public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType,
+                         Date dueDate, String courseName,
+                         int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
+                         Long unitTestTimeLimit, ArrayList<String> forbiddenStatements) {
         this.assignmentTitle = assignmentTitle;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
@@ -141,6 +145,7 @@ public class NewAssignment {
 
     /**
      * Gets the name of the unit test to be applied
+     *
      * @return Name of the unit test to be applied
      */
     public String getUnitTestName() {

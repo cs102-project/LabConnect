@@ -1,10 +1,9 @@
 package me.labconnect.webapp.repository;
 
+import me.labconnect.webapp.models.users.Instructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-
-import me.labconnect.webapp.models.users.Instructor;
 
 /**
  * Instructor repository interface
