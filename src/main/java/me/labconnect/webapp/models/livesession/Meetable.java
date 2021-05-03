@@ -13,5 +13,5 @@ public interface Meetable {
      * 
      * @return The meeting link as a String.
      */
-    public String getMeetingLink();
+    String getMeetingLink();
 }

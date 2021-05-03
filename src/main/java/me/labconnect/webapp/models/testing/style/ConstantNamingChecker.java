@@ -23,7 +23,7 @@ public class ConstantNamingChecker extends StyleChecker {
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
-                if (isAllCaps(extractConstant(codeFile.get(lineIndex))) == false) {
+                if (!isAllCaps(extractConstant(codeFile.get(lineIndex)))) {
                     errorList.add(codeFile.get(lineIndex));
                 }
             }
@@ -75,11 +75,7 @@ public class ConstantNamingChecker extends StyleChecker {
      *         {@code false}.
      */
     private boolean isAllCaps(String constant) {
-        if (!constant.equals(constant.toUpperCase())) {
-            return false;
-        } else {
-            return true;
-        }
+        return constant.equals(constant.toUpperCase());
     }
 
     /**

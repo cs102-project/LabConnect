@@ -15,7 +15,7 @@ public class IndentationChecker extends StyleChecker {
      * Checks every line in a file for indentation errors.
      *
      * @param codeFile The file. List of every line.
-     * @return List of lines that indentation violation occured
+     * @return List of lines that indentation violation occurred
      *
      * I tried my best but regex is insufficient for many use cases...
      */
@@ -71,7 +71,7 @@ public class IndentationChecker extends StyleChecker {
 
                         if (line.length() > 1 + INDENTATION_SPACE  * braces &&
                             line.charAt(INDENTATION_SPACE  * braces) == ' ' &&
-                            line.charAt(1 + INDENTATION_SPACE  * braces) != '*' && sameLineAdded == false) {
+                            line.charAt(1 + INDENTATION_SPACE  * braces) != '*' && !sameLineAdded) {
                                 // if ( errorList.indexOf( codeFile.get(i) ) == -1 ) {
                                     if ( i > 0 ) {
                                         //if ( !(codeFile.get( i - 1 ).length() > 80) && !(codeFile.get(i).trim().endsWith(";"))) {

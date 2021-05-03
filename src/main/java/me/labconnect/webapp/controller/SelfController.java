@@ -48,7 +48,7 @@ public class SelfController {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        if ( ( user.getRoleType() != LCUserRoleTypes.STUDENT ) && ( authentication == null || !authentication.isAuthenticated() ) ) {
+        if (user.getRoleType() != LCUserRoleTypes.STUDENT && !authentication.isAuthenticated()) {
             return null;
         }
 
@@ -68,9 +68,8 @@ public class SelfController {
         }
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
-        User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        return user;
+        return userRepository.findById(userDetails.getId()).orElseThrow();
 
     }
 

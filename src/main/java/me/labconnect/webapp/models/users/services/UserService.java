@@ -117,12 +117,12 @@ public class UserService {
         List<Note> notes = new ArrayList<>();
         List<Submission> submissions = new ArrayList<>();
         List<Attempt> attempts = new ArrayList<>();
-        List<Assignment> assignemnts;
+        List<Assignment> assignments;
 
-        assignemnts = user.getCourses().stream().flatMap(assignmentService::findByCourse).distinct()
+        assignments = user.getCourses().stream().flatMap(assignmentService::findByCourse).distinct()
                 .collect(Collectors.toList());
 
-        for (Assignment assignment : assignemnts) {
+        for (Assignment assignment : assignments) {
             ObjectId tempAssignmentId = assignment.getId();
             submissions.add(submissionService
                     .getAssignmentSubmissionBySubmitter(tempAssignmentId, getStudentDocumentOf(user).getId())

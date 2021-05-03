@@ -58,7 +58,6 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         int endIndex;
 
         startingPosition = 0;
-        endIndex = 0;
         if (line.contains("class")) {
             startingPosition = line.indexOf("class") + 6;
         } else if (line.contains("interface")) {

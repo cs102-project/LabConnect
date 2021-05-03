@@ -112,11 +112,15 @@ public class AssignmentController {
     /**
      * Creates/{@code POST} an assignment with given parameters
      *
-     * @param authentication Token for authentication request
-     * @param instructions   Instructions file for the assignment
-     * @param newAssignment  New assignment object
+     * @param authentication        Token for authentication request
+     * @param instructions          Instructions file for the assignment
+     * @param exampleImplementation The example implementation for the unit test
+     * @param testerClass           The tester class for the unit test
+     * @param newAssignment         New assignment object
      * @return Constructed assignment object
-     * @throws IOException If processing the instructions fails
+     * @throws IOException         If processing the instructions fails
+     * @throws BadExampleException If the example implementation or the tester do not compile
+     *                             or generate a runtime error (Determined by a non-zero exit code)
      */
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
@@ -320,7 +324,7 @@ public class AssignmentController {
     }
 
     /**
-     * Adds/{@code POST} note to the specificied attempt
+     * Adds/{@code POST} note to the specified attempt
      *
      * @param authentication Token for authentication request
      * @param attemptId      Id of the attempt

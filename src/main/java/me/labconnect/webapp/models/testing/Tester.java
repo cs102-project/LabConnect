@@ -17,6 +17,7 @@ public interface Tester {
      * @param submission The <b>absolute</b> path of the submission directory
      *                   (usually src/)
      * @return TestResult object
+     * @throws IOException If processing the attempt fails
      */
     TestResult runTest(Path submission) throws IOException;
 

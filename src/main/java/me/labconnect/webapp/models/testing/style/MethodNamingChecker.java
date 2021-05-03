@@ -28,7 +28,7 @@ public class MethodNamingChecker extends StyleChecker {
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
                     && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
-                if (checkCasing(extractMethodName(codeFile.get(lineIndex))) == false) {
+                if (!checkCasing(extractMethodName(codeFile.get(lineIndex)))) {
                     errorList.add(codeFile.get(lineIndex));
                 }
             }

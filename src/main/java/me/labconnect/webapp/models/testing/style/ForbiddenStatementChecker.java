@@ -33,14 +33,14 @@ public class ForbiddenStatementChecker extends StyleChecker {
     /**
      * Default constructor. Initializes nothing
      * 
-     * @apiNote Added in case of ommiting constructor injection
+     * @apiNote Added in case of omitting constructor injection
      */
     public ForbiddenStatementChecker() {
         forbiddenStatements = new ArrayList<>();
     }
 
     /**
-     * Checkes the file for forbidden statements. Returns the violated lines.
+     * Checks the file for forbidden statements. Returns the violated lines.
      * 
      * @param fileInput Line by line file which is going to be checked
      * @return The ArrayList of lines that are containing the violated lines

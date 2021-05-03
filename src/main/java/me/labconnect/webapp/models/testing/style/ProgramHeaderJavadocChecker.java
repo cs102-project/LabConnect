@@ -21,7 +21,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
         String headerBlockSingleLine = "";
         ArrayList<String> headerBlock;
         ArrayList<String> errorList = new ArrayList<>();
-        int commentIndices[];
+        int[] commentIndices;
 
         commentIndices = indexFinder(codeFile);
         headerBlock = new ArrayList<>(codeFile.subList(commentIndices[0], commentIndices[1] + 1));
@@ -60,8 +60,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
                 endIndex = classIndex;
             }
         }
-        int indices[] = { startIndex, endIndex };
-        return indices;
+        return new int[]{ startIndex, endIndex };
     }
 
     /**
