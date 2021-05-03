@@ -14,7 +14,7 @@ import me.labconnect.webapp.models.testing.Tester;
 
 /**
  * A generic assignment model class
- * 
+ *
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
  * @version 03.05.2021
@@ -43,7 +43,7 @@ public class Assignment {
 
     /**
      * Default constructor for the {@code Assignment} class
-     * 
+     *
      * @param title               The title of the assignment
      * @param shortDescription    Description of the assignment
      * @param courses             Assigned courses for the assignment
@@ -74,7 +74,7 @@ public class Assignment {
 
     /**
      * Gets the unique id of the assignment
-     * 
+     *
      * @return Unique object id of the assignment
      */
     public ObjectId getId() {
@@ -83,7 +83,7 @@ public class Assignment {
 
     /**
      * Gets the title of the assignment
-     * 
+     *
      * @return Title of the assignment
      */
     public String getTitle() {
@@ -92,7 +92,7 @@ public class Assignment {
 
     /**
      * Gets the short description of the assignment
-     * 
+     *
      * @return Short description of the assignment
      */
     public String getShortDescription() {
@@ -101,7 +101,7 @@ public class Assignment {
 
     /**
      * Gets the type of the homework
-     * 
+     *
      * @return Type of the homework
      */
     public String getHomeworkType() {
@@ -110,7 +110,7 @@ public class Assignment {
 
     /**
      * Gets the list of assigned courses
-     * 
+     *
      * @return List of assigned courses
      */
     public List<Course> getCourses() {
@@ -119,7 +119,7 @@ public class Assignment {
 
     /**
      * Gets the due date of the assignment
-     * 
+     *
      * @return Due date of the assignment
      */
     public Date getDueDate() {
@@ -128,7 +128,7 @@ public class Assignment {
 
     /**
      * Gets the maximum possible grade
-     * 
+     *
      * @return Maximum possible grade
      */
     public int getMaxGrade() {
@@ -137,7 +137,7 @@ public class Assignment {
 
     /**
      * Gets the maximum attempt number
-     * 
+     *
      * @return Number of maximum attempts
      */
     public int getMaxAttempts() {
@@ -146,7 +146,7 @@ public class Assignment {
 
     /**
      * Gets the name of the instructions file
-     * 
+     *
      * @return Name of the instructions file
      */
     public String getInstructionFilename() {
@@ -155,7 +155,7 @@ public class Assignment {
 
     /**
      * Gets the list of tests which is going to be applied to the assignment
-     * 
+     *
      * @return List of tests which is going to be applied to the assignment
      */
     public List<Tester> getTests() {
@@ -164,7 +164,7 @@ public class Assignment {
 
     /**
      * Gets the list of unique ids of submissions for this assignment
-     * 
+     *
      * @return List of unique ids of submissions for this assignment
      */
     //@JsonSerialize(using = ToStringSerializer.class)
@@ -174,7 +174,7 @@ public class Assignment {
 
     /**
      * Add a submission to the list <b>if it doesn't exist</b>
-     * 
+     *
      * @param submission The submission to add
      */
     public void addSubmission(Submission submission) {
@@ -183,7 +183,7 @@ public class Assignment {
 
     /**
      * Adds a submission with id to the list <b>if it doesn't exist</b>
-     * 
+     *
      * @param submissionId The id of the submission
      */
     private void addSubmission(ObjectId submissionId) {
@@ -191,6 +191,13 @@ public class Assignment {
             submissions.add(submissionId);
     }
 
+    /**
+     * Checks whether two assignment objects are the same or not
+     *
+     * @param o The assignment object to compare with
+     * @return {code true} if two assignment objects are the same, {@code false}
+     *         otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -201,6 +208,11 @@ public class Assignment {
         return Objects.equals(id, that.id);
     }
 
+    /**
+     * Gets the hash code of the assignment
+     *
+     * @return Hash code of the assignment
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);

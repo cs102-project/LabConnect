@@ -222,10 +222,23 @@ public class AssignmentService {
         return assignmentRepository.findById(assignmentId).orElseThrow();
     }
 
+    /**
+     * Finds the assignments of the given course
+     *
+     * @param course The course to search for Assignments
+     * @return Assignments belonging to the given course
+     */
     public Stream<Assignment> findByCourse(Course course) {
         return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection()).stream();
     }
 
+    /**
+     * Finds the assignment submissions of the assignment given by a specific instructor
+     *
+     * @param instructor The instructor who gave the specified assignment
+     * @param assignmentId Id of the assignment
+     * @return Submissions of the assignment given by the instructor
+     */
     public List<Submission> getAssignmentSubmissionsForInstructor(Instructor instructor, ObjectId assignmentId) {
 
         Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow();
@@ -235,6 +248,13 @@ public class AssignmentService {
 
     }
 
+    /**
+     * Finds the assignment submissions assigned to the given teaching assistant
+     *
+     * @param assistant The teaching assistant who assigned to the specified assignment
+     * @param assignmentId Id of the assignment
+     * @return Assignment submissions assigned to the given teaching assistant
+     */
     public List<Submission> getAssignmentSubmissionsForTA(TeachingAssistant assistant, ObjectId assignmentId) {
 
         return assistant.getStudents().stream()
