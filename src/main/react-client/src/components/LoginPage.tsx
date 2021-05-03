@@ -10,7 +10,7 @@ function LoginPage(): JSX.Element {
     });
     
     return (
-        <div id="login-page-container">
+        <div id="login-page-container-x">
             <div id="login-primary">
                 <img id="login-logo" src={labconnectLogo} />
                 <div id="login-primary-content">

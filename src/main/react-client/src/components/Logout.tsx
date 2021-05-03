@@ -19,7 +19,7 @@ function Logout(): JSX.Element {
     });
 
     return (
-        <div id="logout-container">
+        <div id="logout-container-x">
             <p id="logout-message">You have successfully logged out.</p>
         </div>
     );
