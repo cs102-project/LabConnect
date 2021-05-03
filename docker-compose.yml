@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 services:
     webapp:
         depends_on: 
@@ -6,7 +6,7 @@ services:
             - redis
         build: .
         ports:
-            - "80:8080"
+            - "8080:8080"
         volumes: 
             - assignments:/var/labconnect/assignments
     mongo-db:

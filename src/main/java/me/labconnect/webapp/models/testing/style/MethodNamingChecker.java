@@ -5,10 +5,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Checks if method names in a given file obey the conventions
+ *
  * @author Berk Çakar
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
- * @version 22/04/2021
+ * @version 22.04.2021
  */
 public class MethodNamingChecker extends StyleChecker {
 
