@@ -102,7 +102,7 @@ public class SubmissionService {
     /**
      * Retrieve the submission attempt with the given unique ID
      *
-     * @param submissionId The unique submission attempt ID
+     * @param attemptId The unique submission attempt ID
      * @return The submission attempt with the given ID if it exists
      */
     public Attempt getAttemptById(ObjectId attemptId) {
