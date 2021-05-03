@@ -286,13 +286,12 @@ public class AssignmentController {
     }
 
     /**
-     * Gets attempts archive file from the database of a specific submission of
-     * specific assignment
+     * Retrieves the source code archive of a specific attempt for a specific assignment
      *
      * @param assignmentId Id of the assignment
      * @param submissionId Id of the submission
      * @param attemptId    Id of the attempt
-     * @return Ready to download archive file of attempts
+     * @return A ZIP archive of the attempt source code
      * @throws IOException If archiving the attempt fails
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
@@ -306,6 +305,18 @@ public class AssignmentController {
         }
 
         return attemptArchive;
+    }
+
+    /**
+     * Retrieves instructions for the assignment with the given ID as a downloadable file
+     *
+     * @param assignmentId The unique ID of the assignment
+     * @return The instructions as a ready to download resource
+     * @throws IOException If retrieving the assignment fails
+     */
+    @GetMapping("/api/assignments({assignmentId}/download")
+    public Resource downloadAssignmentInstructions(@PathVariable ObjectId assignmentId) throws IOException {
+        return assignmentService.getInstructions(assignmentService.getById(assignmentId));
     }
 
     /**
