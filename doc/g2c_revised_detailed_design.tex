@@ -191,22 +191,23 @@
     \begin{table}[htbp!]
         \renewcommand{\arraystretch}{1.4}
         \centering
-        \begin{tabular}{|c|c|c|c|c|}
+        \small
+        \begin{tabular}{|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|}
             {\bf Borga Haktan Bilen} & {\bf Vedat Eren Arıcan} & {\bf Berkan Şahin} & {\bf Berk Çakar} & {\bf Alp Ertan} \\ \hline
             AssignmentController & NewAssignment & NewAssignment & Note & LiveSession \\ \hline
             SelfController & Note & AssignmentController & AssignmentController & LoopCurlyBracketsChecker \\ \hline
             AttemptService & AssignmentController & InstructorController & SelfController & RegexHelper \\ \hline
             Assignment & InstructorController & SelfController & Announcement & CompilationException \\ \hline
             Feedback & SelfController & AssignmentService & Course & \\ \hline
-            Meetable & AssignmentService & AttemptService & BlankLineAfterClassDeclerationChecker & \\ \hline
-            BlankLineAfterClassDeclerationChecker & AttemptService & SubmissionService & ConstantNamingChecker & \\ \hline
-            ClassNInterfaceNamingChecker & Announcement & Assignment & DecisionCurlyBracketsChecker & \\ \hline
-            ForbiddenStatementChecker & Attempt & Attempt & ForbiddenStatementChecker & \\ \hline
+            Meetable & AssignmentService & AttemptService & LineAfterClassChecker & \\ \hline
+            LineAfterClassChecker & AttemptService & SubmissionService & ConstantNamingChecker & \\ \hline
+            ClassNamingChecker & Announcement & Assignment & DecisionBracketsChecker & \\ \hline
+            IllegalStatementChecker & Attempt & Attempt & IllegalStatementChecker & \\ \hline
             MethodNamingChecker & Course & Submission & ForLoopSemicolonChecker & \\ \hline
             OperatorsSpaceChecker & Feedback & LiveSession & IndentationChecker & \\ \hline
-            ProgramHeaderJavadocChecker & ForbiddenStatementChecker & LiveSessionManager & LoopCurlyBracketsChecker & \\ \hline
+            ProgramHeaderChecker & IllegalStatementChecker & LiveSessionManager & LoopCurlyBracketsChecker & \\ \hline
             RegexHelper & MethodNamingChecker & TutoringSession & MethodNamingChecker & \\ \hline
-            Tester & RegexHelper & RegexHelper & MethodParenthesisSpaceChecker & \\ \hline
+            Tester & RegexHelper & RegexHelper & MethodSpaceChecker & \\ \hline
             UserService & TestResult & StyleChecker & OperatorsSpaceChecker & \\ \hline
             Student & UserService & BadExampleException & ParenthesisSpaceChecker & \\ \hline
             TeachingAssistant & Tutor & TestResult & RegexHelper & \\ \hline
