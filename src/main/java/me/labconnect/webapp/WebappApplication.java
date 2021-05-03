@@ -64,7 +64,7 @@ public class WebappApplication implements CommandLineRunner {
         userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Teaching Assistant").setInstitution("Bilkent University")
                 .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("ta@bilkent.edu.tr").setPassword("passwd").create();
 
-        teachingAssistantService.addStudent(userService.getTADocumentOf(userRepository.findByEmail("mogus@mogus.com")),
+        teachingAssistantService.addStudent(userService.getTADocumentOf(userRepository.findByEmail("ta@bilkent.edu.tr")),
                 userService.getStudentDocumentOf(userRepository.findByEmail("dev@vedat.xyz")));
 
         assignmentService.createAssignment("Lab03", "Dummy Lab", "Bilkent University",
