@@ -50,12 +50,12 @@ function Sidebar(): JSX.Element | null {
                         <span className="nav-link-text">Analysis</span>
                     </NavLink>
                 </li>
-                <li>
+                {userData.roleType === "STUDENT" ? <li>
                     <NavLink to="/my-notes" className="nav-link" activeClassName="nav-active">
                         <span className="material-icons">note</span>
                         <span className="nav-link-text">My Notes</span>
                     </NavLink>
-                </li>
+                </li> : undefined}
                 <li>
                     <NavLink to="/messages" className="nav-link" activeClassName="nav-active">
                         <span className="material-icons">message</span>
