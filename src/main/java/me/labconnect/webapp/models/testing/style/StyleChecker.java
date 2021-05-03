@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  *
  * @author Berk Çakar
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 30.04.2021
  */
 public abstract class StyleChecker implements Tester {

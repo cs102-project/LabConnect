@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * brackets or not.
  *
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 28.04.2021
  */
 public class DecisionCurlyBracketsChecker extends StyleChecker {

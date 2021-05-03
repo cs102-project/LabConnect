@@ -7,6 +7,7 @@ import java.nio.file.Path;
  * Tester interface for classes that are testing distinct elements of an submission
  *
  * @author Borga Haktan Bilen
+ * @author Alp Ertan
  * @version 21.04.2021
  */
 public interface Tester {

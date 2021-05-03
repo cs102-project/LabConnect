@@ -19,6 +19,7 @@ import java.util.List;
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @RestController

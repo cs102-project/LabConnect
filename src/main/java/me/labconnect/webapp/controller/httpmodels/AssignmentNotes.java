@@ -9,6 +9,7 @@ import java.util.List;
  *
  * @author Vedat Eren Arican
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 03.05.2021
  */
 public class AssignmentNotes {

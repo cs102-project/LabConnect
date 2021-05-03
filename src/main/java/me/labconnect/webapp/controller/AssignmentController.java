@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
  * @author Borga Haktan Bilen
  * @author Berk Çakar
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @RestController

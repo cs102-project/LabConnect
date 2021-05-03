@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Responsible of the configuration of web application
  *
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @Configuration

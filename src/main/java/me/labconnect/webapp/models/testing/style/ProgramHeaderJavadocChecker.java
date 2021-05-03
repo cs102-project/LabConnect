@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Check if the header javadoc comment is written correctly.
  *
  * @author Borga Haktan Bilen
+ * @author Alp Ertan
  * @version 27.04.2021
  */
 public class ProgramHeaderJavadocChecker extends StyleChecker {

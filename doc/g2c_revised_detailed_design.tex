@@ -180,7 +180,7 @@
     to create a REST API. In the class diagram below [\ref{fig:class-diagram}], all the Java classes,
     interfaces and enums are showed with their relations. However, because of the magnitude of the project
     the diagram below might not be clear enough to examine. Thus, we uploaded the UML diagram
-    (with magnification script) and Javadocs to the LabConnect website under a new distinct subdomain for convience.
+    (with magnification script) and Javadocs to the \href{http://www.labconnect.me}{LabConnect} website under a new distinct subdomain for convience.
     Links for these are respectively: \href{http://docs.labconnect.me/uml/}{http://docs.labconnect.me/uml/}
     and \href{http://docs.labconnect.me/}{http://docs.labconnect.me/}.
 
@@ -213,29 +213,29 @@
 
             Feedback & SelfController & AssignmentService & Announcement & BadExampleException \\
 
-            Meetable & AssignmentService & AttemptService & Course &  \\
+            Meetable & AssignmentService & AttemptService & Course & AssignmentNotes \\
 
-            LineAfterClassChecker & AttemptService & SubmissionService & Instructor &  \\
+            LineAfterClassChecker & AttemptService & SubmissionService & Instructor & AssignmentController \\
 
-            ClassNInterfaceNamingChecker & Announcement & Assignment & OperatorsSpaceChecker &  \\
+            ClassNInterfaceNamingChecker & Announcement & Assignment & OperatorsSpaceChecker & SelfController \\
 
-            ForbiddenStatementChecker & Attempt & Attempt & ParenthesisSpaceChecker &  \\
+            ForbiddenStatementChecker & Attempt & Attempt & ParenthesisSpaceChecker & Tester \\
 
-            MethodNamingChecker & Course & Submission & ForbiddenStatementChecker &  \\
+            MethodNamingChecker & Course & Submission & ForbiddenStatementChecker & DecisionCurlyBracketsChecker \\
 
-            OperatorsSpaceChecker & Feedback & LiveSession & ConstantNamingChecker &  \\
+            OperatorsSpaceChecker & Feedback & LiveSession & ConstantNamingChecker & ProgramHeaderJavadocChecker \\
 
-            ProgramHeaderJavadocChecker & ForbiddenStatementChecker & LiveSessionManager & ForLoopSemicolonChecker &  \\
+            ProgramHeaderJavadocChecker & ForbiddenStatementChecker & LiveSessionManager & ForLoopSemicolonChecker & ForLoopSemicolonChecker \\
 
-            RegexHelper & MethodNamingChecker & TutoringSession & MethodNamingChecker &  \\
+            RegexHelper & MethodNamingChecker & TutoringSession & MethodNamingChecker & StyleChecker \\
 
-            Tester & RegexHelper & RegexHelper & IndentationChecker &  \\
+            Tester & RegexHelper & RegexHelper & IndentationChecker & MethodNamingChecker \\
 
-            UserService & TestResult & StyleChecker & DecisionCurlyBracketsChecker &  \\
+            UserService & TestResult & StyleChecker & DecisionCurlyBracketsChecker & TestResult \\
 
-            Student & UserService & BadExampleException & MethodParenthesisSpaceChecker &  \\
+            Student & UserService & BadExampleException & MethodParenthesisSpaceChecker & WebappConfiguration \\
 
-            TeachingAssistant & Tutor & TestResult & LineAfterClassChecker &  \\
+            TeachingAssistant & Tutor & TestResult & LineAfterClassChecker & InstructorController \\
 
             Tutor & User & TestState & RegexHelper &  \\
 

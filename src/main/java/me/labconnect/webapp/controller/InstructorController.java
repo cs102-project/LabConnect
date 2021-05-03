@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  *
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 public class InstructorController {

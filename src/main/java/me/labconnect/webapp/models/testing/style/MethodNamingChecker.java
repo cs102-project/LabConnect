@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @author Berk Çakar
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
+ * @author Alp Ertan
  * @version 22.04.2021
  */
 public class MethodNamingChecker extends StyleChecker {

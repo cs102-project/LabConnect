@@ -16,6 +16,7 @@ import java.util.Scanner;
  *
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 30.04.2021
  * @see Tester
  */
