@@ -76,6 +76,13 @@ public abstract class StyleChecker implements Tester {
       return new TestResult(this, submission, offendingLines);
    }
 
+   /**
+    * Checks if the specified index exist or not in a list 
+    * 
+    * @param list The list which is going to be checked
+    * @param index The index which is going to be checked
+    * @return {@code true} if index exists, {@code false} otherwise 
+    */
    public boolean indexExists(final ArrayList<String> list, final int index) {
       return index >= 0 && index < list.size();
   }
