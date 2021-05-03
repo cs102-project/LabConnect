@@ -3,6 +3,9 @@ package me.labconnect.webapp;
 import com.mongodb.client.MongoClient;
 
 import me.labconnect.webapp.models.data.services.AssignmentService;
+import me.labconnect.webapp.models.users.services.TeachingAssistantService;
+import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +27,12 @@ public class WebappApplication implements CommandLineRunner {
     private UserCreatorService userCreatorService;
     @Autowired
     private AssignmentService assignmentService;
+    @Autowired
+    private TeachingAssistantService teachingAssistantService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private MongoClient mongoClient;
 
@@ -51,6 +60,12 @@ public class WebappApplication implements CommandLineRunner {
                         new Course("CS102", 3),
                         new Course("CS101", 3))
                 .setEmail("david@cs.bilkent.edu.tr").setPassword("DBRefsBadRoboGood").create();
+
+        userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Teaching Assistant").setInstitution("Bilkent University")
+                .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("ta@bilkent.edu.tr").setPassword("passwd").create();
+
+        teachingAssistantService.addStudent(userService.getTADocumentOf(userRepository.findByEmail("ta@bilkent.edu.tr")),
+                userService.getStudentDocumentOf(userRepository.findByEmail("dev@vedat.xyz")));
 
         assignmentService.createAssignment("Lab03", "Dummy Lab", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),

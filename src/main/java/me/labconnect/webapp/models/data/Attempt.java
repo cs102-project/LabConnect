@@ -96,7 +96,7 @@ public class Attempt {
 
     /**
      * Returns the string representation of the Note
-     * 
+     *
      * @return The string representation of the Note
      */
     public String getNote() {
@@ -105,13 +105,20 @@ public class Attempt {
 
     /**
      * Sets the notes content with specified parameter
-     * 
+     *
      * @param note The content of the note
      */
     public void setNote(String note) {
         this.note = note;
     }
 
+    /**
+     * Checks whether two attempt objects are the same or not
+     *
+     * @param o The attempt object to compare with
+     * @return {code true} if two attempt objects are the same, {@code false}
+     *         otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         Attempt tmp;
