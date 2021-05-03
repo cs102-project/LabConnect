@@ -25,7 +25,7 @@ public class User {
 
     // Properties
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     protected ObjectId id;
     protected ObjectId roleDocumentId;
     protected LCUserRoleTypes roleType;

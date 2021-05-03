@@ -18,9 +18,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Submission {
 
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId submitterId;
     private List<Attempt> attempts;
 

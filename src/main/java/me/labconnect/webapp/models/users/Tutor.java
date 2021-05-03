@@ -22,7 +22,7 @@ public class Tutor implements Meetable {
 
     // Properties
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private String meetingLink;
 

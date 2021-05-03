@@ -24,7 +24,7 @@ public class Assignment {
 
     // Variables
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private String title;
     private String shortDescription;
@@ -36,7 +36,7 @@ public class Assignment {
     private int maxAttempts;
     private String instructionFilename;
     private List<Tester> tests;
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> submissions;
 
     // Constructor
@@ -167,7 +167,7 @@ public class Assignment {
      * 
      * @return List of unique ids of submissions for this assignment
      */
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getSubmissions() {
         return submissions;
     }

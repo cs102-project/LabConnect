@@ -22,10 +22,10 @@ public class TeachingAssistant implements Meetable {
 
     // Properties
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private String meetingLink;
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> students;
 
     // Constructors
@@ -56,7 +56,7 @@ public class TeachingAssistant implements Meetable {
      * 
      * @return ArrayList of assigned Student objects.
      */
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getStudents() {
         return students;
     }

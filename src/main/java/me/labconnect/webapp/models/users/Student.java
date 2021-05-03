@@ -23,9 +23,9 @@ public class Student {
 
     // Properties
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> assignments;
 
     // Constructor
@@ -45,7 +45,7 @@ public class Student {
      * 
      * @return ArrayList of assigned Assignments.
      */
-    @JsonSerialize(using = ToStringSerializer.class)
+    //@JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getAssignments() {
         return assignments;
     }
