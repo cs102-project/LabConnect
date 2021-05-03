@@ -3,8 +3,8 @@ package me.labconnect.webapp.models.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is to check whether different kinds of decision statements in a
- * file have the required brackets or not.
+ * This class is to check whether different kinds of decision statements in a file have the required
+ * brackets or not.
  *
  * @author Berk Çakar
  * @version 28.04.2021
@@ -24,25 +24,27 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (indexExists(codeFile, lineIndex + 1)) {
                 if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
+                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                            .contains("{")) {
                         errorList.add(codeFile.get(lineIndex));
                     }
                 } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
+                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                            .contains("{")) {
                         errorList.add(codeFile.get(lineIndex));
                     }
                 } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
+                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                            .contains("{")) {
                         errorList.add(codeFile.get(lineIndex));
                     }
                 } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
+                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                            .contains("{")) {
                         errorList.add(codeFile.get(lineIndex));
                     }
                 }
-            }
-
-            else {
+            } else {
                 if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
                     if (!codeFile.get(lineIndex).contains("{")) {
                         errorList.add(codeFile.get(lineIndex));

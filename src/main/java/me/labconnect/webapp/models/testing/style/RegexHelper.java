@@ -19,8 +19,8 @@ public class RegexHelper {
      * Checks the method header if it complies to Java conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean methodRegexMatcher(String str) {
         String regex;
@@ -46,8 +46,8 @@ public class RegexHelper {
      * Checks the constructor if it complies to Java conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean constructorRegexMatcher(String str) {
         String regex;
@@ -61,12 +61,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks the method calling statement if it complies to Java conventions or not
-     * .
+     * Checks the method calling statement if it complies to Java conventions or not .
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean methodCallRegexMatcher(String str) {
         String regex;
@@ -81,15 +80,13 @@ public class RegexHelper {
     }
 
     /**
-     * Checks the method calling statement if it complies to Java conventions or not
-     * . Tries to match both javadoc style and C style comments (excluding
-     * {@code //} style).
+     * Checks the method calling statement if it complies to Java conventions or not . Tries to match
+     * both javadoc style and C style comments (excluding {@code //} style).
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
-     * @apiNote Do not try to match the file line by line. Comments should be in a
-     * continuous state.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
+     * @apiNote Do not try to match the file line by line. Comments should be in a continuous state.
      */
     public static boolean commentBlockRegexMatcher(String str) {
         String regex;
@@ -103,15 +100,13 @@ public class RegexHelper {
     }
 
     /**
-     * Checks the method calling statement if it complies to Java conventions or not
-     * . Tries to match both javadoc style and C style comments (excluding
-     * {@code //} style).
+     * Checks the method calling statement if it complies to Java conventions or not . Tries to match
+     * both javadoc style and C style comments (excluding {@code //} style).
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
-     * @apiNote Do not try to match the file line by line. Comments should be in a
-     * continuous state.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
+     * @apiNote Do not try to match the file line by line. Comments should be in a continuous state.
      */
     public static boolean generalCommentRegexMatcher(String str) {
         String regex;
@@ -164,8 +159,8 @@ public class RegexHelper {
      * Checks if the method is named conventionally or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean methodLowerCaseRegexMatcher(String str) {
         String regex;
@@ -182,8 +177,8 @@ public class RegexHelper {
      * Checks if the class is named conventionally or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean classRegexMatcher(String str) {
         String regex;
@@ -200,8 +195,8 @@ public class RegexHelper {
      * Checks if the interface is named conventionally or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean interfaceRegexMatcher(String str) {
         String regex;
@@ -218,8 +213,8 @@ public class RegexHelper {
      * Checks if the constant is named conventionally or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean constantRegexMatcher(String str) {
         String regex;
@@ -233,12 +228,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code if} statement is constructed according to conventions or
-     * not.
+     * Checks if the {@code if} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean ifRegexMatcher(String str) {
         String regex;
@@ -252,12 +246,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code else if} statement is constructed according to
-     * conventions or not.
+     * Checks if the {@code else if} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean elseifRegexMatcher(String str) {
         String regex;
@@ -271,12 +264,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code else} statement is constructed according to conventions
-     * or not.
+     * Checks if the {@code else} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean elseRegexMatcher(String str) {
         String regex;
@@ -290,12 +282,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code switch} statement is constructed according to
-     * conventions or not.
+     * Checks if the {@code switch} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean switchRegexMatcher(String str) {
         String regex;
@@ -309,12 +300,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code for} statement is constructed according to conventions
-     * or not.
+     * Checks if the {@code for} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean forRegexMatcher(String str) {
         String regex;
@@ -328,12 +318,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code while} statement is constructed according to conventions
-     * or not.
+     * Checks if the {@code while} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean whileRegexMatcher(String str) {
         String regex;
@@ -347,12 +336,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the {@code do} statement is constructed according to conventions or
-     * not.
+     * Checks if the {@code do} statement is constructed according to conventions or not.
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the style of the statement complies to the Java
-     * conventions, {@code false} otherwise.
+     * @return {@code true} if the style of the statement complies to the Java conventions, {@code
+     * false} otherwise.
      */
     public static boolean doRegexMatcher(String str) {
         String regex;
@@ -369,8 +357,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise ampersand operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line contains bitwise ampersand operator ,
-     * {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise ampersand operator , {@code false} otherwise.
      */
     public static boolean ifBitwiseAmpersandMatcher(String str) {
         String regex;
@@ -387,8 +374,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise ampersand operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line contains bitwise ampersand operator ,
-     * {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise ampersand operator , {@code false} otherwise.
      */
     public static boolean generalBitwiseAmpersandMatcher(String str) {
         String regex;
@@ -405,8 +391,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line contains bitwise or operator ,
-     * {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise or operator , {@code false} otherwise.
      */
     public static boolean ifBitwiseOrMatcher(String str) {
         String regex;
@@ -423,8 +408,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise or operator ,
-     * {@code false} otherwise.
+     * @return {@code true} if the line containes bitwise or operator , {@code false} otherwise.
      */
     public static boolean generalBitwiseOrMatcher(String str) {
         String regex;
@@ -441,8 +425,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line contains bitwise or operator ,
-     * {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise or operator , {@code false} otherwise.
      */
     public static boolean operatorsSpaceRegexMatcher(String str) {
         String regex;

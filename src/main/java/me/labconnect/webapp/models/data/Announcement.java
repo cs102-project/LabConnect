@@ -16,10 +16,11 @@ public class Announcement {
     private String author;
 
     /**
-     * Default constructor for the {@code Announcement} class takes content of the note and date as parameters
+     * Default constructor for the {@code Announcement} class takes content of the note and date as
+     * parameters
      *
      * @param content String content of the {@code Announcement} object
-     * @param date Date of the {@code Announcement} object
+     * @param date    Date of the {@code Announcement} object
      */
     public Announcement(String content, Date date, String author) {
         this.content = content;
@@ -44,7 +45,7 @@ public class Announcement {
     public Date getDate() {
         return date;
     }
-    
+
     public String getAuthor() {
         return author;
     }

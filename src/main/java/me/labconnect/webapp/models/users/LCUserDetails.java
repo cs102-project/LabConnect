@@ -1,23 +1,22 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class LCUserDetails implements UserDetails {
-    
+
     private LCUserRoleTypes role;
     private String password;
     private String username;
     private ObjectId id;
     private Collection<GrantedAuthority> authorities;
-    
+
     public LCUserDetails(User user) {
         this.role = user.getRoleType();
         this.password = user.getPassword();
@@ -29,7 +28,7 @@ public class LCUserDetails implements UserDetails {
     public ObjectId getId() {
         return id;
     }
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
@@ -65,5 +64,5 @@ public class LCUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
+
 }

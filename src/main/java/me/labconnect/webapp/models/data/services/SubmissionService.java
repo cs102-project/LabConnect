@@ -1,5 +1,16 @@
 package me.labconnect.webapp.models.data.services;
 
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Attempt;
+import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.users.Student;
+import me.labconnect.webapp.repository.AssignmentRepository;
+import me.labconnect.webapp.repository.StudentRepository;
+import me.labconnect.webapp.repository.SubmissionRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,21 +20,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import me.labconnect.webapp.models.data.Assignment;
-import me.labconnect.webapp.models.data.Attempt;
-import me.labconnect.webapp.models.data.Submission;
-import me.labconnect.webapp.models.users.Student;
-import me.labconnect.webapp.repository.AssignmentRepository;
-import me.labconnect.webapp.repository.StudentRepository;
-import me.labconnect.webapp.repository.SubmissionRepository;
-
 /**
- * A service class that provides creation and retrieval operations for
- * Submissions
+ * A service class that provides creation and retrieval operations for Submissions
  *
  * @author Berkan Şahin
  * @version 01.05.2021
@@ -72,12 +70,12 @@ public class SubmissionService {
      *
      * @param assignmentId   The assignment that is attempted
      * @param submitterId    The submitter of this attempt
-     * @param attemptArchive A ZIP archive of the attempt (contents of the src
-     *                       directory)
+     * @param attemptArchive A ZIP archive of the attempt (contents of the src directory)
      * @return The newly created Attempt
      * @throws IOException If processing the archive fails
      */
-    public Attempt addAttempt(ObjectId assignmentId, ObjectId submitterId, Path attemptArchive) throws IOException {
+    public Attempt addAttempt(ObjectId assignmentId, ObjectId submitterId, Path attemptArchive)
+            throws IOException {
 
         Submission submission = getAssignmentSubmissionBySubmitter(assignmentId, submitterId)
                 .orElse(addSubmission(assignmentId, submitterId));
@@ -85,20 +83,22 @@ public class SubmissionService {
 
         Attempt attempt;
 
-        attempt = new Attempt(submission.getAttempts().size(), attemptArchive.getFileName().toString(), "", null, new ArrayList<>());
+        attempt = new Attempt(submission.getAttempts().size(), attemptArchive.getFileName().toString(),
+                "", null, new ArrayList<>());
 
         submission.addAttempt(attempt);
         submissionRepository.save(submission);
 
         // Move the user's zip archive to storage
         Path assignmentDir = assignmentService.getInstructionsPath(assignment).getParent();
-        Path attemptDir = Files.createDirectories(assignmentDir.resolve(submission.getId().toString()).resolve(String.valueOf(attempt.getId())));
+        Path attemptDir = Files.createDirectories(assignmentDir.resolve(submission.getId().toString())
+                .resolve(String.valueOf(attempt.getId())));
         Files.move(attemptArchive, attemptDir.resolve(attempt.getAttemptFilename()));
 
         return attempt;
 
     }
-    
+
     /**
      * Retrieve the submission attempt with the given unique ID
      *
@@ -107,7 +107,8 @@ public class SubmissionService {
      */
     public Attempt getAttemptById(int attemptId) {
 
-        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId() == attemptId)
+        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
+                .filter(attempt -> attempt.getId() == attemptId)
                 .findAny().orElseThrow();
 
     }
@@ -116,10 +117,11 @@ public class SubmissionService {
      * Retrieve the assignment submissions with the given unique assignment and submitter ID
      *
      * @param assignmentId The unique assignment ID
-     * @param submitterId The unique ID of the submitter of the specified assignment submission
+     * @param submitterId  The unique ID of the submitter of the specified assignment submission
      * @return The submissions of assignment with the given assignment and submitter ID if it exists
      */
-    public Optional<Submission> getAssignmentSubmissionBySubmitter(ObjectId assignmentId, ObjectId submitterId) {
+    public Optional<Submission> getAssignmentSubmissionBySubmitter(ObjectId assignmentId,
+                                                                   ObjectId submitterId) {
 
         Assignment assignment;
         List<Submission> submissionsOfAssignment;
@@ -127,9 +129,11 @@ public class SubmissionService {
         submissionsOfAssignment = new ArrayList<>();
         assignment = assignmentRepository.findById(assignmentId).orElseThrow();
 
-        submissionRepository.findAllById(assignment.getSubmissions()).forEach(submissionsOfAssignment::add);
+        submissionRepository.findAllById(assignment.getSubmissions())
+                .forEach(submissionsOfAssignment::add);
 
-        return submissionsOfAssignment.stream().filter(submission -> submission.getSubmitterId().equals(submitterId)).findAny();
+        return submissionsOfAssignment.stream()
+                .filter(submission -> submission.getSubmitterId().equals(submitterId)).findAny();
 
     }
 

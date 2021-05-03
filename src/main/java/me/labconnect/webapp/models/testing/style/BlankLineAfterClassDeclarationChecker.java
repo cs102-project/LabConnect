@@ -3,8 +3,7 @@ package me.labconnect.webapp.models.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is for checking if there is a blank line after the class or
- * interface declaration.
+ * This class is for checking if there is a blank line after the class or interface declaration.
  *
  * @author Berk Çakar
  * @author Borga Haktan Bilen
@@ -23,8 +22,7 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
     }
 
     /**
-     * This method checks if there is a blank line after the class or interface
-     * declaration.
+     * This method checks if there is a blank line after the class or interface declaration.
      *
      * @param codeFile is the code file to be checked.
      * @return An ArrayList which contains the lines that failed the test.
@@ -37,7 +35,8 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
             if (indexExists(codeFile, lineIndex + 1)) {
                 if ((RegexHelper.classRegexMatcher(codeFile.get(lineIndex))
                         || RegexHelper.interfaceRegexMatcher(codeFile.get(lineIndex)))) {
-                    if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1) == '{'
+                    if (codeFile.get(lineIndex).trim().charAt(codeFile.get(lineIndex).trim().length() - 1)
+                            == '{'
                             && !codeFile.get(lineIndex + 1).isBlank()) {
                         errorList.add("Blank line missing after class or interface declaration.");
                     }

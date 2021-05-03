@@ -3,9 +3,8 @@ package me.labconnect.webapp.models.testing.style;
 import java.util.ArrayList;
 
 /**
- * This class is for checking whether different kinds of method or constructor
- * calls in a file have the required spaces before and after their parenthesis
- * or not.
+ * This class is for checking whether different kinds of method or constructor calls in a file have
+ * the required spaces before and after their parenthesis or not.
  *
  * @author Berk Çakar
  * @version 29.04.2021
@@ -23,8 +22,8 @@ public class MethodParenthesisSpaceChecker extends StyleChecker {
     }
 
     /**
-     * Checks whether different kinds of method or constructor calls in a file have
-     * the required spaces before and after their parenthesis or not.
+     * Checks whether different kinds of method or constructor calls in a file have the required
+     * spaces before and after their parenthesis or not.
      *
      * @param codeFile The file. List of every line.
      * @return The lines that are failed the check.

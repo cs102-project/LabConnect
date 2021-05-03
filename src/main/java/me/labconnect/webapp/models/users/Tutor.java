@@ -1,14 +1,12 @@
 package me.labconnect.webapp.models.users;
 
+import me.labconnect.webapp.models.livesession.Meetable;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.livesession.Meetable;
-
 /**
- * Class representing a Tutor, i.e., a user that can meet with Students during a
- * live session
+ * Class representing a Tutor, i.e., a user that can meet with Students during a live session
  *
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arican
