@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../scss/login.scss";
 
 function Logout(): JSX.Element {
+    
     fetch('/logout', {
         method: 'POST',
         headers: {
@@ -13,10 +14,14 @@ function Logout(): JSX.Element {
         },
     });
     
-    useEffect(() => { window.document.title = "LabConnect | Logged out" });
+    useEffect(() => { 
+        window.document.title = "LabConnect | Logged out";
+    });
 
     return (
-        <p id="logout-message">You have successfully logged out.</p>
+        <div id="logout-container">
+            <p id="logout-message">You have successfully logged out.</p>
+        </div>
     );
 }
 

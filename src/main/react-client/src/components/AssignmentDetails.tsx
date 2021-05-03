@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function AssignmentDetails(): JSX.Element {
     
     return (
-        <p>AssignmentDetails</p>
+        <div id="assignment-details-container">
+            <PageHeader pageName="Title of Assignment" />
+        </div>
     );
     
 }

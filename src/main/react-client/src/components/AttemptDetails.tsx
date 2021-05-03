@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function AttemptDetails(): JSX.Element {
     
     return (
-        <p>AttemptDetails</p>
+        <div id="attempt-details-container">
+            <PageHeader pageName="Meaningful Attempt Name" />
+        </div>
     );
     
 }

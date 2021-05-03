@@ -37,7 +37,7 @@ public class SelfController {
     // The below example demonstrates the usage of sessions
 
     @GetMapping("/api/self/notes")
-    public List<Note> getNotes(Authentication authentication) {
+    public List<?> getNotes(Authentication authentication) {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
@@ -45,7 +45,7 @@ public class SelfController {
             return null;
         }
 
-        return userService.getNotesForUser(user);
+        return userService.getNotesForStudent(userService.getStudentDocumentOf(user), Note.class);
     }
 
     @GetMapping("/api/self")

@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function SubmissionDetails(): JSX.Element {
     
     return (
-        <p>SubmissionDetails</p>
+        <div id="submission-details-container">
+            <PageHeader pageName="Meaningful Submission Name" />
+        </div>
     );
     
 }

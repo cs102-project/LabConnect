@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function MyNotes(): JSX.Element {
     
     return (
-        <p>MyNotes</p>
+        <div id="my-notes-container">
+            <PageHeader pageName="My Notes" />
+        </div>
     );
     
 }

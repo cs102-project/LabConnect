@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function InstructorPanel(): JSX.Element {
     
     return (
-        <p>InstructorPanel</p>
+        <div id="instructor-panel-container">
+            <PageHeader pageName="Instructor Panel" />
+        </div>
     );
     
 }

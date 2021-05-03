@@ -1,0 +1,238 @@
+@import "common";
+
+#dashboard-course-status {
+    
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: $fg-color;
+    border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    
+}
+
+#dashboard-course-info {
+    
+    border-right: 1px solid $dim-text-color;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    
+    img {
+        
+        height: 60px;
+        float: left;
+        
+    }
+    
+    div {
+        
+        margin-left: 20px;
+        float: left;
+        
+        
+        h3 {
+            
+            margin: 0 0 5px 0;
+            
+        }
+        
+        span {
+            
+            vertical-align: middle;
+            
+        }
+        
+    }
+    
+}
+
+#dashboard-course-progress {
+    
+    padding-left: 15px;
+    flex-grow: 1;
+    
+}
+
+#course-progress-text {
+    
+    display: flex;
+    
+    p {
+        margin: 0 0 7px 0;
+    }
+    
+    p:last-child {
+        margin-left: auto;
+    }
+    
+    span {
+        color: lighten($bg-color, 40);
+    }
+    
+}
+
+#course-progress-bar {
+    
+    height: 8px;
+    width: 100%;
+    background-color: $def-text-color;
+    border-radius: 500px;
+    
+    div {
+        
+        width: 60%;
+        height: 100%;
+        border-radius: 500px;
+        background-color: lighten($bg-color, 20);
+        
+    }
+    
+}
+
+
+#assignments-list {
+    
+    background-color: $fg-color;
+    margin-top: 40px;
+    min-height: 300px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 30px 20px;
+    
+    h2 {
+        margin: 0 0 15px 0;
+    }
+    
+    
+    
+    #assignments-list-header {
+        
+        border-bottom: 1px solid $dim-text-color;
+        padding: 0 10px 3px 10px;
+        margin-bottom: 15px;
+        
+        span {
+            
+            color: $dim-text-color;
+            font-size: 0.9em;
+            text-align: center;
+            display: inline-block;
+            width: 12%;
+            
+            &:first-child {
+                text-align: left;
+                width: 64%;
+            }
+            
+            
+        }
+        
+    }
+    
+    article {
+        
+        border-radius: 10px;
+        background-color: lighten($bg-color, 10);
+        padding: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        
+        &.inactive-assignment {
+            background-color: darken($bg-color, 2);
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            
+            section:first-child span {
+                background-color: red;
+                box-shadow: none;
+            }
+            
+            &:hover {
+                opacity: 0.9;
+            }
+            
+        }
+        
+    }
+    
+    section {
+        
+        text-align: center;
+        width: 12%;
+        
+        &:last-child {
+            
+            a {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                opacity: 0.8;
+                transition: all 0.3s;
+                color: $dim-text-color;
+                
+                span {
+                    height: 100%;
+                    display: block;
+                    font-size: 5em;
+                }
+                
+                &:hover {
+                    
+                    opacity: 1;
+                    color: $def-text-color;
+                    
+                }
+                
+            }
+            
+        }
+        
+        &:first-child {
+            
+            text-align: left;
+            word-wrap: break-word;
+            width: 64%;
+            
+            div {
+                display: flex;
+                align-items: center;
+            }
+            
+            span {
+                display: block;
+                height: 10px;
+                width: 10px;
+                margin: 0 10px;
+                border-radius: 100px;
+                float: left;
+                background-color: greenyellow;
+                box-shadow: 0px 0px 5px 1px greenyellow;
+            }
+            
+            h3 {
+                
+                margin: 0 0 5px 0;
+                
+            }
+            
+            p {
+                margin: 0;
+            }
+            
+        }
+        
+    }
+    
+    #dashboard-no-assignments {
+        display: block;
+        text-align: center;
+        color: $dim-text-color;
+    }
+    
+}
+

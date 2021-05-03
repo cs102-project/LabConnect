@@ -2,15 +2,15 @@ import React from "react";
 import BlankTextPanel from "./BlankTextPanel";
 import PageHeader from "./PageHeader";
 
-function Messages(): JSX.Element {
+function Settings(): JSX.Element {
     
     return (
-        <div id="messages-container">
-            <PageHeader pageName="Messages" />
+        <div id="settings-container">
+            <PageHeader pageName="Settings" />
             <BlankTextPanel message="This feature isn't implemented yet." />
         </div>
     );
     
 }
 
-export default Messages;
+export default Settings;

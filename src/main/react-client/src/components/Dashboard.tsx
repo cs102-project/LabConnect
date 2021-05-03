@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import logo from '../img/logo.svg';
-import '../scss/App.scss';
+import '../scss/dashboard.scss';
+import AssignmentsList from "./AssignmentsList";
+import CourseStatus from "./CourseStatus";
+import PageHeader from "./PageHeader";
 
 function Dashboard(): JSX.Element {
     
     useEffect(() => { window.document.title = "LabConnect | Dashboard" });
     
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-            </header>
+        <div id="dashboard-container">
+            <PageHeader pageName="Dashboard" />
+            <CourseStatus />
+            <AssignmentsList />
         </div>
     );
 }

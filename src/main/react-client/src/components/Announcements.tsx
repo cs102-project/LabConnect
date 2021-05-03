@@ -1,9 +1,12 @@
 import React from "react";
+import PageHeader from "./PageHeader";
 
 function Announcements(): JSX.Element {
     
     return (
-        <p>Announcements</p>
+        <div id="announcements-container">
+            <PageHeader pageName="Announcements" />
+        </div>
     );
     
 }
