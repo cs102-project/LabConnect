@@ -9,7 +9,7 @@ import me.labconnect.webapp.models.livesession.Meetable;
 /**
  * Class representing a Tutor, i.e., a user that can meet with Students during a
  * live session
- * 
+ *
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arican
  * @version 22.04.2021
@@ -24,22 +24,32 @@ public class Tutor implements Meetable {
     private String meetingLink;
 
     // Constructors
-    
+
     /**
      * Initialize all properties of a Tutor object
-     * 
-     * @param meetingLink   The URL of the online meeting.
+     *
+     * @param meetingLink The URL of the online meeting
      */
     public Tutor(String meetingLink) {
         this.meetingLink = meetingLink;
     }
 
+    /**
+     * Gets the object ID of the tutor
+     *
+     * @return Object ID of the tutor
+     */
     public ObjectId getId() {
         return id;
     }
-    
+
+    /**
+     * Gets the meeting link of the tutor
+     *
+     * @return Meeting link of the tutor
+     */
     public String getMeetingLink() {
         return meetingLink;
     }
-    
+
 }
