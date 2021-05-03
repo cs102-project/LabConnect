@@ -18,7 +18,7 @@ public class WebappConfiguration implements WebMvcConfigurer {
     /**
      * Adds resource handlers
      * 
-     * @param ResourceHandlerRegistry Serves static resources through Spring MVC
+     * @param registry Serves static resources through Spring MVC
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -34,7 +34,7 @@ public class WebappConfiguration implements WebMvcConfigurer {
     /**
      * Adds view controllers to configurer (for set login condition)
      * 
-     * @param ViewControllerRegistry Assists the registration of automated
+     * @param registry Assists the registration of automated
      *                               controllers
      */
     @Override

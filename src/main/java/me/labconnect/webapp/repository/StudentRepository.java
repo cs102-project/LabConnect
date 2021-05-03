@@ -9,9 +9,16 @@ import org.springframework.stereotype.Repository;
 
 import me.labconnect.webapp.models.users.Student;
 
+/**
+ * Student repository interface
+ *
+ * @author Borga Haktan Bilen
+ * @author Vedat Eren Arican
+ * @version 22.04.2021
+ */
 @Repository
 public interface StudentRepository extends MongoRepository<Student, ObjectId> {
-    
+
     @Query("{ assignments: ?0 }")
     List<Student> findAllByAssignmentId(ObjectId assignmentId);
 

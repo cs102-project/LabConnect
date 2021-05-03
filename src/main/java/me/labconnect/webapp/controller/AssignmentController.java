@@ -5,6 +5,7 @@ import me.labconnect.webapp.controller.httpmodels.Note;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.data.Feedback;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
@@ -67,7 +68,7 @@ public class AssignmentController {
      * attempts of assignment +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid} GET ->
-     * get details of attempt POST -> give feedback ???
+     * get details of attempt POST -> give feedback +++
      *
      * /api/assignments/{objectid}/submissions/{objectid}/attempts/{objectid}/
      * download GET -> get source code archive of attempt +++
@@ -80,7 +81,7 @@ public class AssignmentController {
     /**
      * Gets the specified assignment.
      *
-     * @param assignmentId Id of the assignment
+     * @param assignmentId   Id of the assignment
      * @param authentication Token for authentication request
      * @return The requested assignment
      */
@@ -111,11 +112,15 @@ public class AssignmentController {
     /**
      * Creates/{@code POST} an assignment with given parameters
      *
-     * @param authentication Token for authentication request
-     * @param instructions Instructions file for the assignment
-     * @param newAssignment New assignment object
+     * @param authentication        Token for authentication request
+     * @param instructions          Instructions file for the assignment
+     * @param exampleImplementation The example implementation for the unit test
+     * @param testerClass           The tester class for the unit test
+     * @param newAssignment         New assignment object
      * @return Constructed assignment object
-     * @throws IOException If processing the instructions fails
+     * @throws IOException         If processing the instructions fails
+     * @throws BadExampleException If the example implementation or the tester do not compile
+     *                             or generate a runtime error (Determined by a non-zero exit code)
      */
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
@@ -152,10 +157,28 @@ public class AssignmentController {
     }
 
     /**
+     * Gets the instructions file of the given assignment
+     *
+     * @param assignmentId   Id of the assignment
+     * @param authentication Token for authentication request
+     * @return Instruction file of the assignment
+     * @throws IOException If there is not such assignment
+     */
+    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId, Authentication authentication) throws IOException {
+        Resource instructionsFile = assignmentService.getInstructions(assignmentService.getById(assignmentId));
+
+        if (assignmentService.getById(assignmentId) == null) {
+            throw new RuntimeException("An assignment with specified assignment ID does not exist");
+        }
+
+        return instructionsFile;
+    }
+
+    /**
      * Gets the submissions of an assignment
      *
      * @param authentication Token for authentication request
-     * @param assignmentId Id of the assignment
+     * @param assignmentId   Id of the assignment
      * @return List of submissions of the specified assignment
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions")
@@ -188,8 +211,8 @@ public class AssignmentController {
      * Creates/{@code POST} an attempt for submission
      *
      * @param authentication Token for authentication request
-     * @param assignmentId Id of the assignment
-     * @param attemptArchive
+     * @param assignmentId   Id of the assignment
+     * @param attemptArchive The contents of src/ as a ZIP file
      * @return The added attempt
      * @throws IOException If processing the archive fails
      */
@@ -198,8 +221,7 @@ public class AssignmentController {
     public Attempt addAttempt(
             Authentication authentication,
             @PathVariable ObjectId assignmentId,
-            @RequestParam MultipartFile attemptArchive
-    ) throws IOException {
+            @RequestParam MultipartFile attemptArchive) throws IOException {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
@@ -214,16 +236,53 @@ public class AssignmentController {
      * Gets the attempts of a submission
      *
      * @param authentication Token for authentication request
-     * @param assignmentId Id of the assignment
-     * @param submissionId Id of the submission
+     * @param assignmentId   Id of the assignment
+     * @param submissionId   Id of the submission
      * @return The list of attempts for the specified assignment and submission
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
     public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
-            @PathVariable ObjectId submissionId) {
+                                     @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
 
+    }
+
+    /**
+     * Gets the details of the given submission attempt.
+     *
+     * @param assignmentId Id of the assignment
+     * @param submissionId Id of the submission
+     * @param attemptId    Id of the attempt
+     * @return Details of the specified submission attempt.
+     */
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
+    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                                     @PathVariable ObjectId attemptId) {
+
+        return attemptService.getById(attemptId);
+    }
+
+    /**
+     * Creates/{@code POST} a feedback for the given submission attempt
+     *
+     * @param assignmentId Id of the assignment
+     * @param submissionId Id of the submission
+     * @param attemptId    Id of the attempt
+     * @param feedback     Feedback which is going to be added to the attempt
+     */
+    @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
+    public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                                      @PathVariable ObjectId attemptId, @RequestBody Feedback feedback) {
+        if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
+            throw new RuntimeException(
+                    "The grade in the feedback is bigger than maximum allowed grade " + assignmentService.getById(assignmentId)
+                            .getMaxGrade());
+        } else if (feedback.getGrade() < 0) {
+            throw new RuntimeException("The grade in the feedback cannot be less than 0");
+        }
+
+        attemptService.getById(attemptId).giveFeedback(feedback);
     }
 
     /**
@@ -232,14 +291,14 @@ public class AssignmentController {
      *
      * @param assignmentId Id of the assignment
      * @param submissionId Id of the submission
-     * @param attemptId Id of the attempt
+     * @param attemptId    Id of the attempt
      * @return Ready to download archive file of attempts
      * @throws IOException If archiving the attempt fails
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
-    @Secured({ "ROLE_TEACHING_ASSISTANT" })
+    @Secured({"ROLE_TEACHING_ASSISTANT"})
     public Resource getAttemptArchive(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
-            @PathVariable ObjectId attemptId) throws IOException {
+                                      @PathVariable ObjectId attemptId) throws IOException {
         Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
 
         if (assignmentService.getById(assignmentId).getSubmissions().stream().noneMatch(submissionId::equals)) {
@@ -253,7 +312,7 @@ public class AssignmentController {
      * Gets the note written for specific attempt
      *
      * @param authentication Token for authentication request
-     * @param attemptId Id of the attempt
+     * @param attemptId      Id of the attempt
      * @return Note content
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
@@ -265,11 +324,11 @@ public class AssignmentController {
     }
 
     /**
-     * Adds/{@code POST} note to the specificied attempt
+     * Adds/{@code POST} note to the specified attempt
      *
      * @param authentication Token for authentication request
-     * @param attemptId Id of the attempt
-     * @param note Note which is going to be added to the attempt
+     * @param attemptId      Id of the attempt
+     * @param note           Note which is going to be added to the attempt
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")

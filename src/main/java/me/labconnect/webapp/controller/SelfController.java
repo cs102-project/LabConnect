@@ -20,6 +20,7 @@ import java.util.List;
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
+ * @author Berk Çakar
  * @version 02.05.2021
  */
 @RestController
@@ -36,18 +37,29 @@ public class SelfController {
 
     // The below example demonstrates the usage of sessions
 
+    /**
+     * Gets the existing note entries for the user
+     *
+     * @param authentication Token for authentication request
+     * @return Available notes for the user
+     */
     @GetMapping("/api/self/notes")
     public List<?> getNotes(Authentication authentication) {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        if ( ( user.getRoleType() != LCUserRoleTypes.STUDENT ) && ( authentication == null || !authentication.isAuthenticated() ) ) {
+        if (user.getRoleType() != LCUserRoleTypes.STUDENT && !authentication.isAuthenticated()) {
             return null;
         }
 
         return userService.getNotesForStudent(userService.getStudentDocumentOf(user), Note.class);
     }
 
+    /**
+     * Gets the detailed data of the user
+     * @param authentication Token for authentication request
+     * @return Data belonging to the user
+     */
     @GetMapping("/api/self")
     public User selfData(Authentication authentication) {
 
@@ -56,12 +68,17 @@ public class SelfController {
         }
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
-        User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
-        return user;
+        return userRepository.findById(userDetails.getId()).orElseThrow();
 
     }
 
+    /**
+     * Gets the existing announcement entries for the user
+     *
+     * @param authentication Token for authentication request
+     * @return Available announcements for the user
+     */
     @GetMapping("/api/self/announcements")
     public List<Announcement> getAnnouncements(Authentication authentication) {
 

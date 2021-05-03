@@ -19,9 +19,9 @@ public class TutoringSession extends LiveSession {
     /**
      * Create a new Tutoring session
      * 
-     * @param sessionID
-     * @param sessionLab
-     * @param sessionTutors
+     * @param sessionID The unique ID of the Tutoring session
+     * @param sessionLab The assignment this session is for
+     * @param sessionTutors The tutors participating in the session
      */
     public TutoringSession(String sessionID, Assignment sessionLab, List<Tutor> sessionTutors) {
         super(sessionID, sessionLab);

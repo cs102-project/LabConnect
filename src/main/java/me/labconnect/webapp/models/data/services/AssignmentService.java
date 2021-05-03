@@ -71,6 +71,7 @@ public class AssignmentService {
      *
      * @param assignment The assignment to retrieve instructions from
      * @return The absolute path to the instructions for the given assignment
+     * @throws IOException If retrieving/creating the instructions path fails
      */
     public Path getInstructionsPath(Assignment assignment) throws IOException {
 
@@ -105,77 +106,84 @@ public class AssignmentService {
      * Creates a new assignment and assigns it to students taking the specified
      * course in the specified sections
      *
-     * @param assignmentName  The name or title of the assignment
-     * @param institution     The institution offering the course this assignment is
-     *                        a part of
-     * @param instructionFile The instruction file
-     * @param dueDate         The due date for the assignment
-     * @param sections        The sections this assignment is for
-     * @param courseName      The name of the course this assignment is a part of
-     * @param homeworkType    The type of the assignment
-     * @param maxGrade        The maximum grade for this assignment
-     * @param maxAttempts     The maximum attempts allowed for this assignment
-     * @param styleTests      A list of the unit style checks applied to the
-     *                        submissions
+     * @param assignmentName        The name or title of the assignment
+     * @param shortDescription      A short description of the assignment
+     * @param institution           The institution offering the course this assignment is
+     *                              a part of
+     * @param instructionFile       The instruction file
+     * @param dueDate               The due date for the assignment
+     * @param sections              The sections this assignment is for
+     * @param courseName            The name of the course this assignment is a part of
+     * @param homeworkType          The type of the assignment
+     * @param maxGrade              The maximum grade for this assignment
+     * @param maxAttempts           The maximum attempts allowed for this assignment
+     * @param testNames             A list of the tests applied to the
+     *                              submissions
+     * @param unitTestName          The name of the unit test, if it is applied
+     * @param unitTestTimeLimit     The time limit for the unit test in milliseconds. A value of 0 indicates no time limit
+     * @param testerClass           The tester class for the unit test, if there's any
+     * @param exampleImplementation The example implementation from which the correct unit test output is generated
+     * @param forbiddenStatements   The statements to check for in the {@link me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker}
+     *                              if applicable
      * @return The newly created assignment instance
-     * @throws IOException If processing the instructions fails
+     * @throws IOException         If processing the instructions fails
+     * @throws BadExampleException If the example implementation or the tester do not compile
+     *                             or generate a runtime error (Determined by a non-zero exit code)
      */
     public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile,
                                        Date dueDate,
                                        int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts,
-                                       List<Tests> styleTests, String unitTestName, Long unitTestTimeLimit, Path exampleImplementation,
+                                       List<Tests> testNames, String unitTestName, Long unitTestTimeLimit, Path exampleImplementation,
                                        Path testerClass, ArrayList<String> forbiddenStatements)
             throws IOException, BadExampleException {
 
         Assignment assignment;
         ArrayList<Course> courses;
-        ArrayList<Tester> testers;
-        UnitTest unitTest;
-        Set<Tester> styleCheckers = new HashSet<>();
+        Set<Tester> testers = new HashSet<>();
 
-        for (Tests testName : styleTests ) {
+        for (Tests testName : testNames) {
             switch (testName) {
                 case INDENTATION:
-                    styleCheckers.add(new IndentationChecker());
+                    testers.add(new IndentationChecker());
                     break;
                 case METHOD_NAMING:
-                    styleCheckers.add(new MethodNamingChecker());
+                    testers.add(new MethodNamingChecker());
                     break;
                 case CONSTANT_NAMING:
-                    styleCheckers.add(new ConstantNamingChecker());
+                    testers.add(new ConstantNamingChecker());
                     break;
                 case OPERATORS_SPACE:
-                    styleCheckers.add(new OperatorsSpaceChecker());
+                    testers.add(new OperatorsSpaceChecker());
                     break;
                 case UNIT_TEST:
-                    styleCheckers.add(new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
+                    testers.add(new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
                     break;
                 case PARENTHESIS_SPACE:
-                    styleCheckers.add(new ParenthesisSpaceChecker());
+                    testers.add(new ParenthesisSpaceChecker());
                     break;
                 case FOR_LOOP_SEMICOLON:
-                    styleCheckers.add(new ForLoopSemicolonChecker());
+                    testers.add(new ForLoopSemicolonChecker());
                     break;
                 case LOOP_CURLY_BRACKETS:
-                    styleCheckers.add(new LoopCurlyBracketsChecker());
+                    testers.add(new LoopCurlyBracketsChecker());
                     break;
                 case FORBIDDEN_STATEMENTS:
-                    styleCheckers.add(new ForbiddenStatementChecker(forbiddenStatements));
+                    testers.add(new ForbiddenStatementChecker(forbiddenStatements));
                     break;
                 case CLASS_INTERFACE_NAMING:
-                    styleCheckers.add(new ClassNInterfaceNamingChecker());
+                    testers.add(new ClassNInterfaceNamingChecker());
                     break;
                 case PROGRAM_HEADER_JAVADOC:
-                    styleCheckers.add(new ProgramHeaderJavadocChecker());
+                    testers.add(new ProgramHeaderJavadocChecker());
                     break;
                 case DECISION_CURLY_BRACKETS:
-                    styleCheckers.add(new DecisionCurlyBracketsChecker());
+                    testers.add(new DecisionCurlyBracketsChecker());
                     break;
                 case METHOD_PARENTHESIS_SPACE:
-                    styleCheckers.add(new MethodParenthesisSpaceChecker());
+                    testers.add(new MethodParenthesisSpaceChecker());
                     break;
                 case BLANK_LINE_AFTER_CLASS_DECLARATION:
-                    styleCheckers.add(new BlankLineAfterClassDeclarationChecker());
+                    testers.add(new BlankLineAfterClassDeclarationChecker());
             }
         }
 
@@ -185,7 +193,7 @@ public class AssignmentService {
         }
 
         assignment = assignmentRepository.save(new Assignment(assignmentName, shortDescription, courses, homeworkType, dueDate, maxGrade,
-                maxAttempts, instructionFile.getFileName().toString(), new ArrayList<>(styleCheckers), new ArrayList<>()));
+                maxAttempts, instructionFile.getFileName().toString(), new ArrayList<>(testers), new ArrayList<>()));
 
         moveInstructionsFile(assignment, instructionFile);
 

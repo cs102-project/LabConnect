@@ -26,19 +26,15 @@ public class TeachingAssistant implements Meetable {
     private ObjectId id;
     private String meetingLink;
     @JsonSerialize(using = ToStringSerializer.class)
-    private List<ObjectId> students; // not sure whether to point to a user ref or a student ref. 
+    private List<ObjectId> students;
 
     // Constructors
-    
+
     /**
-     * Initializes all properties of the TA object.
-     * 
-     * @param name             Name of the TA.
-     * @param institutionId    Unique institution id of the TA.
-     * @param department       TA's department.
-     * @param meetingLink      The URL of the online meeting hosted by the TA
-     * @param assignedStudents The students this TA is assigned to
-     * @param section          The section this TA is assgined to
+     * Initializes the Teaching assistant object
+     *
+     * @param meetingLink The link to the personal meeting room of the TA
+     * @param students The Object IDs of the students assigned to the TAs
      */
     public TeachingAssistant(String meetingLink, List<ObjectId> students) {
         this.meetingLink = meetingLink;

@@ -9,7 +9,6 @@ import java.nio.file.Path;
  * 
  * @author Borga Haktan Bilen
  * @version 21.04.2021
- * @throws IOException If an I/O error occurs while processing the submission
  */
 public interface Tester {
     /**
@@ -18,13 +17,14 @@ public interface Tester {
      * @param submission The <b>absolute</b> path of the submission directory
      *                   (usually src/)
      * @return TestResult object
+     * @throws IOException If processing the attempt fails
      */
-    public TestResult runTest(Path submission) throws IOException;
+    TestResult runTest(Path submission) throws IOException;
 
     /**
      * Returns the name of the test
      * 
      * @return the name of the test
      */
-    public String getName();
+    String getName();
 }

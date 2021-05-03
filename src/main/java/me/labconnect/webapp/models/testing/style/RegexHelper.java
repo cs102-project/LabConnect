@@ -20,7 +20,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean methodRegexMatcher(String str) {
         String regex;
@@ -47,7 +47,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean constructorRegexMatcher(String str) {
         String regex;
@@ -66,7 +66,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean methodCallRegexMatcher(String str) {
         String regex;
@@ -87,9 +87,9 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      * @apiNote Do not try to match the file line by line. Comments should be in a
-     *          continous state.
+     * continuous state.
      */
     public static boolean commentBlockRegexMatcher(String str) {
         String regex;
@@ -109,9 +109,9 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      * @apiNote Do not try to match the file line by line. Comments should be in a
-     *          continous state.
+     * continuous state.
      */
     public static boolean generalCommentRegexMatcher(String str) {
         String regex;
@@ -127,8 +127,9 @@ public class RegexHelper {
     /**
      * Removes comments.
      *
-     * @param str The string that is going to be processed.
-     * @return String with inline comments removed
+     * @param str         The string that is going to be processed.
+     * @param replacement The string to replace the comments with
+     * @return String with inline comments replaced
      */
     public static String generalCommentRegexReplacer(String str, String replacement) {
         String regex;
@@ -144,8 +145,9 @@ public class RegexHelper {
     /**
      * Removes inline comments.
      *
-     * @param str The string that is going to be processed.
-     * @return String with inline comments removed
+     * @param str         The string that is going to be processed.
+     * @param replacement The string to replace the comments with
+     * @return String with inline comments replaced
      */
     public static String inlineCommentRegexReplacer(String str, String replacement) {
         String regex;
@@ -163,7 +165,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean methodLowerCaseRegexMatcher(String str) {
         String regex;
@@ -181,7 +183,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean classRegexMatcher(String str) {
         String regex;
@@ -199,7 +201,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean interfaceRegexMatcher(String str) {
         String regex;
@@ -217,7 +219,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean constantRegexMatcher(String str) {
         String regex;
@@ -236,7 +238,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean ifRegexMatcher(String str) {
         String regex;
@@ -255,7 +257,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean elseifRegexMatcher(String str) {
         String regex;
@@ -274,7 +276,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean elseRegexMatcher(String str) {
         String regex;
@@ -293,7 +295,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean switchRegexMatcher(String str) {
         String regex;
@@ -312,7 +314,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean forRegexMatcher(String str) {
         String regex;
@@ -331,7 +333,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean whileRegexMatcher(String str) {
         String regex;
@@ -350,7 +352,7 @@ public class RegexHelper {
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the style of the statement complies to the Java
-     *         conventions, {@code false} otherwise.
+     * conventions, {@code false} otherwise.
      */
     public static boolean doRegexMatcher(String str) {
         String regex;
@@ -364,11 +366,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the line containes bitwise ampersand operator or not
+     * Checks if the line contains bitwise ampersand operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise ampersand operator ,
-     *         {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise ampersand operator ,
+     * {@code false} otherwise.
      */
     public static boolean ifBitwiseAmpersandMatcher(String str) {
         String regex;
@@ -382,11 +384,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the line containes bitwise ampersand operator or not
+     * Checks if the line contains bitwise ampersand operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise ampersand operator ,
-     *         {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise ampersand operator ,
+     * {@code false} otherwise.
      */
     public static boolean generalBitwiseAmpersandMatcher(String str) {
         String regex;
@@ -400,11 +402,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the line containes bitwise or operator or not
+     * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise or operator ,
-     *         {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise or operator ,
+     * {@code false} otherwise.
      */
     public static boolean ifBitwiseOrMatcher(String str) {
         String regex;
@@ -418,11 +420,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the line containes bitwise or operator or not
+     * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
      * @return {@code true} if the line containes bitwise or operator ,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public static boolean generalBitwiseOrMatcher(String str) {
         String regex;
@@ -436,11 +438,11 @@ public class RegexHelper {
     }
 
     /**
-     * Checks if the line containes bitwise or operator or not
+     * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise or operator ,
-     *         {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise or operator ,
+     * {@code false} otherwise.
      */
     public static boolean operatorsSpaceRegexMatcher(String str) {
         String regex;

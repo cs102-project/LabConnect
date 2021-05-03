@@ -3,7 +3,7 @@ package me.labconnect.webapp.models.testing;
 /**
  * An enumeration of possible states for a UnitTest
  * 
- * @see me.labconnect.webapp.models.Tester
+ * @see me.labconnect.webapp.models.testing.Tester
  * @see TestResult
  * @author Berkan Şahin
  * @version 21.04.2021

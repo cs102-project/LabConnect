@@ -14,7 +14,7 @@ import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleT
 
 /**
  * A generic User of LabConnect
- * 
+ *
  * @author Borga Haktan Bilen
  * @author Berkan Şahin
  * @author Vedat Eren Arican
@@ -29,26 +29,32 @@ public class User {
     protected ObjectId id;
     protected ObjectId roleDocumentId;
     protected LCUserRoleTypes roleType;
-    
+
     protected String institution;
     protected String institutionId;
     protected List<Course> courses;
-    
+
     protected String name;
-    
+
     protected String email;
     protected String password;
 
     // Constructor
+
     /**
      * A constructor for retrieving User entries from the database
-     * 
-     * @param roleDocumentId      The unique objectID assigned by the database
-     * @param institutionId The unique ID number assigned by the institution
-     * @param name          The name of the user
-     * @param email    The department of the user
+     *
+     * @param roleDocumentId The unique objectID assigned by the database
+     * @param roleType       The role type for this user (student, instructor etc.)
+     * @param institution    The institution this user belongs to
+     * @param institutionId  The unique ID number assigned by the institution
+     * @param courses        The list of courses this user is associated with
+     * @param name           The name of the user
+     * @param email          The department of the user
+     * @param password       The <b>encrypted</b> password of the user
      */
-    public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses, String name, String email, String password) {
+    public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses,
+                String name, String email, String password) {
         this.roleDocumentId = roleDocumentId;
         this.roleType = roleType;
         this.name = name;
@@ -60,30 +66,30 @@ public class User {
     }
 
     // Methods
-    
+
     public ObjectId getId() {
         return id;
     }
-    
+
     public LCUserRoleTypes getRoleType() {
         return roleType;
     }
-    
+
     public ObjectId getRoleDocumentId() {
         return roleDocumentId;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     /**
      * Gets the user id
-     * 
+     *
      * @return The user id as long type
      */
     public String getInstitutionId() {
@@ -92,7 +98,7 @@ public class User {
 
     /**
      * Gets the name of the user
-     * 
+     *
      * @return Name of the user
      */
     public String getName() {
@@ -101,7 +107,7 @@ public class User {
 
     /**
      * Gets the department of the user.
-     * 
+     *
      * @return Department of the user.
      */
     public String getInstitution() {
@@ -114,10 +120,10 @@ public class User {
 
     /**
      * Check if the given user is this user
-     * 
+     *
      * @param other The object to check for equality
      * @return {@code true} if the institution IDs are equal, otherwise
-     *         {@code false}
+     * {@code false}
      */
     @Override
     public boolean equals(Object other) {
@@ -132,12 +138,12 @@ public class User {
 
     /**
      * Returns the hash code of the institution ID, for usage in hashmaps
-     * 
+     *
      * @return The hash code of the institution ID
      */
     @Override
     public int hashCode() {
         return institutionId.hashCode();
     }
-    
+
 }

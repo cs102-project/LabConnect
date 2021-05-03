@@ -29,15 +29,9 @@ public class Tutor implements Meetable {
     // Constructors
     
     /**
-     * Initialize all properties of a Tutor object, including Object ID. Intended to
-     * be used while retrieving entries from the database
+     * Initialize all properties of a Tutor object
      * 
-     * @param name          Name of the tutor
-     * @param institutionId Unique institution ID of the tutor
-     * @param department    Tutor's department
      * @param meetingLink   The URL of the online meeting.
-     * @param isOnline      The online status of the tutor
-     * @param objectID      The unique object ID assigned to the database entry
      */
     public Tutor(String meetingLink) {
         this.meetingLink = meetingLink;

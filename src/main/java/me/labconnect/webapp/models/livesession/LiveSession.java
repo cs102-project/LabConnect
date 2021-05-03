@@ -61,7 +61,7 @@ public abstract class LiveSession {
     }
 
     /**
-     * Procceds the student queue by removing the leftmost student, i.e, the student
+     * Proceeds the student queue by removing the leftmost student, i.e, the student
      * at the beginning of the underlying list
      * 
      * @return The student that was removed
