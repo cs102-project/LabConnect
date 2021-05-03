@@ -1,0 +1,1580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/Haktan/Desktop/LabConnect/src/main/java</OriginalElement>
+  <nodes>
+    <node x="3589.419902637509" y="1973.9886363636424">me.labconnect.webapp.models.testing.Tester</node>
+    <node x="3163.746532468852" y="3785.9659090909227">me.labconnect.webapp.repository.AssignmentRepository</node>
+    <node x="2403.783539001145" y="3357.977272727282">me.labconnect.webapp.models.data.services.SubmissionService</node>
+    <node x="1893.1246721628609" y="2863.988636363641">me.labconnect.webapp.controller.InstructorController</node>
+    <node x="752.885977928204" y="3357.977272727282">me.labconnect.webapp.models.users.services.UserService</node>
+    <node x="4271.640431207159" y="2640.909090909107">me.labconnect.webapp.models.testing.style.IndentationChecker</node>
+    <node x="2021.8436765683" y="3794.5909090909227">me.labconnect.webapp.repository.TutorRepository</node>
+    <node x="2317.3477564102573" y="2646.5000000000077">me.labconnect.webapp.models.users.Tutor</node>
+    <node x="2921.597230113057" y="2863.988636363641">me.labconnect.webapp.controller.SelfController</node>
+    <node x="1471.9692004616795" y="3794.5909090909227">me.labconnect.webapp.repository.UserRepository</node>
+    <node x="393.34436666146644" y="3357.977272727282">me.labconnect.webapp.models.users.services.UserCreatorService</node>
+    <node x="970.960219127355" y="2861.5525210083983">me.labconnect.webapp.models.data.Submission</node>
+    <node x="4271.640431207159" y="1946.4090909091042">me.labconnect.webapp.models.testing.style.OperatorsSpaceChecker</node>
+    <node x="2511.71815267492" y="3785.9659090909227">me.labconnect.webapp.repository.StudentRepository</node>
+    <node x="1847.5108117284171" y="3357.977272727282">me.labconnect.webapp.models.users.services.TeachingAssistantService</node>
+    <node x="3186.291238219811" y="2383.3863636363753">me.labconnect.webapp.models.data.Feedback</node>
+    <node x="1672.6104538149684" y="2863.988636363641">me.labconnect.webapp.controller.LiveSessionController</node>
+    <node x="2835.65539072823" y="3785.9659090909227">me.labconnect.webapp.repository.SubmissionRepository</node>
+    <node x="3186.291238219811" y="2579.204545454558">me.labconnect.webapp.controller.httpmodels.Note</node>
+    <node x="1628.9159502684674" y="2492.5000000000077">me.labconnect.webapp.models.users.LCUserDetails</node>
+    <node x="4271.640431207159" y="2099.409090909103">me.labconnect.webapp.models.testing.style.ConstantNamingChecker</node>
+    <node x="2410.78842871807" y="2011.0454545454622">me.labconnect.webapp.models.users.User</node>
+    <node x="3530.419902637509" y="2973.9886363636415">me.labconnect.webapp.models.testing.UnitTest</node>
+    <node x="1272.6459699504892" y="2506.552521008401">me.labconnect.webapp.models.data.Assignment</node>
+    <node x="2824.887358759424" y="2646.5000000000077">me.labconnect.webapp.models.users.Student</node>
+    <node x="2198.78091462161" y="3794.5909090909227">me.labconnect.webapp.repository.TARepository</node>
+    <node x="4265.140431207159" y="3028.159090909106">me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker</node>
+    <node x="1817.90643851499" y="3794.5909090909227">me.labconnect.webapp.repository.InstructorRepository</node>
+    <node x="3478.419902637509" y="2341.9886363636388">me.labconnect.webapp.models.testing.style.StyleChecker</node>
+    <node x="1088.803094538922" y="2146.8760504201714">me.labconnect.webapp.WebappApplication</node>
+    <node x="2176.147175364781" y="3357.977272727282">me.labconnect.webapp.models.livesession.TutoringSession</node>
+    <node x="2271.6388905107533" y="2863.9886363636415">me.labconnect.webapp.controller.AssignmentController</node>
+    <node x="4271.640431207159" y="2799.4090909091083">me.labconnect.webapp.models.testing.style.MethodNamingChecker</node>
+    <node x="2603.608785822022" y="2646.5000000000077">me.labconnect.webapp.models.users.TeachingAssistant</node>
+    <node x="1386.5958715586582" y="2146.8760504201714">me.labconnect.webapp.WebappConfiguration</node>
+    <node x="4293.640247157831" y="3742.159090909099">me.labconnect.webapp.models.testing.style.ProgramHeaderJavadocChecker</node>
+    <node x="4271.640431207159" y="2482.4090909091055">me.labconnect.webapp.models.testing.style.LoopCurlyBracketsChecker</node>
+    <node x="3577.419902637509" y="2863.988636363646">me.labconnect.webapp.models.testing.BadExampleException</node>
+    <node x="771.2614832721845" y="2146.8760504201714">me.labconnect.webapp.WebappSecurity</node>
+    <node x="4293.640247157831" y="4087.6590909090955">me.labconnect.webapp.models.testing.style.ForLoopSemicolonChecker</node>
+    <node x="3132.791238219811" y="2099.5681818181934">me.labconnect.webapp.models.livesession.LiveSession</node>
+    <node x="4278.640431207159" y="3234.909090909104">me.labconnect.webapp.models.testing.style.ClassNInterfaceNamingChecker</node>
+    <node x="2936.419902637509" y="3357.977272727282">me.labconnect.webapp.models.data.services.AssignmentService</node>
+    <node x="3519.419902637509" y="2492.488636363637">me.labconnect.webapp.models.testing.CompilationException</node>
+    <node x="3879.3024812455606" y="1778.909090909082">me.labconnect.webapp.models.testing.Tests</node>
+    <node x="2438.78842871807" y="2527.0000000000077">me.labconnect.webapp.models.livesession.Meetable</node>
+    <node x="3186.291238219811" y="2687.02272727274">me.labconnect.webapp.models.data.Announcement</node>
+    <node x="4293.640247157831" y="3418.6590909091024">me.labconnect.webapp.models.testing.style.DecisionCurlyBracketsChecker</node>
+    <node x="4293.640247157831" y="3925.909090909097">me.labconnect.webapp.models.testing.style.ParenthesisSpaceChecker</node>
+    <node x="1676.1104538149684" y="2904.845779220784">me.labconnect.webapp.models.livesession.LiveSessionManager</node>
+    <node x="3860.8024812455606" y="2799.4090909091083">me.labconnect.webapp.models.testing.style.RegexHelper</node>
+    <node x="1302.1459699504892" y="2315.7142857142862">me.labconnect.webapp.models.data.Course</node>
+    <node x="940.960219127355" y="2506.552521008401">me.labconnect.webapp.models.data.Attempt</node>
+    <node x="4264.640431207159" y="2323.909090909104">me.labconnect.webapp.models.testing.style.BlankLineAfterClassDeclarationChecker</node>
+    <node x="3590.419902637509" y="2630.4886363636388">me.labconnect.webapp.models.testing.TestState</node>
+    <node x="3570.419902637509" y="2080.4886363636406">me.labconnect.webapp.models.testing.TestResult</node>
+    <node x="1148.427589194942" y="3357.977272727282">me.labconnect.webapp.models.data.services.AttemptService</node>
+    <node x="1471.9692004616795" y="3357.977272727282">me.labconnect.webapp.models.users.services.InstructorService</node>
+    <node x="2006.1318533393624" y="2646.5000000000077">me.labconnect.webapp.models.users.Instructor</node>
+    <node x="3888.3024812455606" y="2201.159090909095">me.labconnect.webapp.controller.httpmodels.NewAssignment</node>
+    <node x="91.80275539472882" y="3357.977272727282">me.labconnect.webapp.models.users.services.LCUserDetailsService</node>
+    <node x="4293.640247157831" y="3580.409090909101">me.labconnect.webapp.models.testing.style.MethodParenthesisSpaceChecker</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="me.labconnect.webapp.models.users.Tutor" target="me.labconnect.webapp.models.livesession.Meetable" relationship="REALIZATION">
+      <point x="87.5" y="-7.73070496506989E-12" />
+      <point x="2524.0" y="2707.5" />
+      <point x="2524.0" y="2599.5" />
+      <point x="2554.848" y="2599.5" />
+      <point x="28.559571281929948" y="27.49999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.users.services.UserService" relationship="TO_ONE">
+      <point x="15.000097362491033" y="-182.0" />
+      <point x="3371.42" y="3247.0" />
+      <point x="3459.0" y="3247.0" />
+      <point x="3459.0" y="1910.5" />
+      <point x="-15.697" y="1910.5" />
+      <point x="-15.697" y="3964.409" />
+      <point x="910.386" y="3964.409" />
+      <point x="-29.99997792820409" y="170.9997272727178" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.models.data.Submission" relationship="CREATE">
+      <point x="249.5" y="-2.7272728220850695E-4" />
+      <point x="2920.0" y="3506.977" />
+      <point x="2920.0" y="3700.0" />
+      <point x="930.0" y="3700.0" />
+      <point x="930.0" y="3237.0" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.users.Instructor" relationship="DEPENDENCY">
+      <point x="15.000022071795911" y="-171.0" />
+      <point x="955.386" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.LCUserDetails" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="-174.9999502684675" y="-7.73070496506989E-12" />
+      <point x="1570.0" y="2652.5" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.users.Instructor" relationship="DEPENDENCY">
+      <point x="116.3863278371391" y="61.0" />
+      <point x="2185.511" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.users.LCUserDetails" relationship="DEPENDENCY">
+      <point x="3.278371391388646E-4" y="61.0" />
+      <point x="2069.125" y="3025.0" />
+      <point x="1611.416" y="3025.0" />
+      <point x="1611.416" y="2667.5" />
+      <point x="-174.9999502684675" y="14.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.AssignmentRepository" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="163.0" y="-1.8069090909225451" />
+      <point x="3793.92" y="3833.659" />
+      <point x="3793.92" y="3342.0" />
+      <point x="2447.5" y="3342.0" />
+      <point x="2447.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.users.services.InstructorService" relationship="TO_ONE">
+      <point x="-176.0" y="42.35736363635897" />
+      <point x="1683.6104538149684" y="2967.346" />
+      <point x="34.1412533532889" y="-39.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.repository.StudentRepository" relationship="TO_ONE">
+      <point x="-419.99990263750897" y="149.52272727271793" />
+      <point x="2457.0" y="3689.5" />
+      <point x="2457.0" y="3766.5" />
+      <point x="2652.718" y="3766.5" />
+      <point x="-10.500152674920173" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ClassNInterfaceNamingChecker" relationship="CREATE">
+      <point x="420.0" y="-155.3181818181797" />
+      <point x="4427.640431207159" y="3384.6590909091024" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="-307.9998905107532" y="3.636363585428626E-4" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.WebappApplication" target="me.labconnect.webapp.models.data.Course" relationship="CREATE">
+      <point x="132.99990546107801" y="49.623949579828604" />
+      <point x="1540.0" y="2268.5" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.MethodParenthesisSpaceChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.99990909089911" />
+      <point x="4251.0" y="3633.909" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.repository.TARepository" relationship="TO_ONE">
+      <point x="169.4996333385336" y="195.61372727271782" />
+      <point x="1394.428" y="3812.591" />
+      <point x="1394.428" y="3685.0" />
+      <point x="1628.469" y="3685.0" />
+      <point x="1628.469" y="3583.0" />
+      <point x="2329.781" y="3583.0" />
+      <point x="-14.99991462161006" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="-2.3011305665932014E-4" y="72.0" />
+      <point x="3102.097" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.MethodParenthesisSpaceChecker" relationship="CREATE">
+      <point x="420.0" y="63.931727272718035" />
+      <point x="-149.0" y="-15.00009090910089" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.models.users.LCUserDetails" relationship="DEPENDENCY">
+      <point x="38.1937698869433" y="-71.999636363641" />
+      <point x="3140.291" y="2502.545" />
+      <point x="2148.632" y="2502.545" />
+      <point x="2148.632" y="2474.214" />
+      <point x="1611.416" y="2474.214" />
+      <point x="1611.416" y="2667.5" />
+      <point x="-174.9999502684675" y="14.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.data.Announcement" relationship="DEPENDENCY">
+      <point x="3.278371391388646E-4" y="-60.999636363641" />
+      <point x="2069.125" y="2847.0" />
+      <point x="3262.291" y="2847.0" />
+      <point x="-2.3821981085347943E-4" y="61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.DecisionCurlyBracketsChecker" relationship="CREATE">
+      <point x="420.0" y="-97.81827272728196" />
+      <point x="-149.0" y="-15.000090909102255" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="29.999633338533613" y="-259.0" />
+      <point x="592.844" y="3261.0" />
+      <point x="2170.511" y="3261.0" />
+      <point x="2170.511" y="3078.989" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.users.TeachingAssistant" relationship="DEPENDENCY">
+      <point x="9.736249103298178E-5" y="181.9997272727178" />
+      <point x="3356.42" y="3756.0" />
+      <point x="3838.92" y="3756.0" />
+      <point x="3838.92" y="1941.489" />
+      <point x="2706.109" y="1941.489" />
+      <point x="2.1417797779577086E-4" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.users.services.UserService" relationship="TO_ONE">
+      <point x="308.0" y="118.51136363635851" />
+      <point x="3009.0" y="3197.5" />
+      <point x="3009.0" y="3247.0" />
+      <point x="3459.0" y="3247.0" />
+      <point x="3459.0" y="1910.5" />
+      <point x="-15.697" y="1910.5" />
+      <point x="-15.697" y="3964.409" />
+      <point x="910.386" y="3964.409" />
+      <point x="-29.99997792820409" y="170.9997272727178" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.services.SubmissionService" relationship="TO_ONE">
+      <point x="-249.81989051075334" y="215.0" />
+      <point x="2329.819" y="3526.0" />
+      <point x="-249.49953900114497" y="19.02272727271793" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.Tester" relationship="TO_ONE">
+      <point x="-102.99990263750897" y="-61.98863636364058" />
+      <point x="3515.0" y="2134.5" />
+      <point x="3515.0" y="1997.489" />
+      <point x="-93.49990263750897" y="-14.999636363642367" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.Attempt" relationship="DEPENDENCY">
+      <point x="1.0948924682452343E-4" y="-214.99963636364146" />
+      <point x="2579.639" y="2599.5" />
+      <point x="2659.288" y="2599.5" />
+      <point x="2659.288" y="1993.545" />
+      <point x="29.303" y="1993.545" />
+      <point x="29.303" y="2692.553" />
+      <point x="-130.0" y="15.000478991598811" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.services.AttemptService" relationship="TO_ONE">
+      <point x="-308.0" y="168.5113636363585" />
+      <point x="1401.646" y="3247.5" />
+      <point x="101.71841080505806" y="-138.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ConstantNamingChecker" relationship="CREATE">
+      <point x="420.0" y="10.5" />
+      <point x="4636.140247157831" y="3550.477272727282" />
+      <point x="4636.140247157831" y="2170.909090909103" />
+      <point x="149.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.LiveSession" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="93.49976178018915" y="126.99981818180686" />
+      <point x="3355.791" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.UserRepository" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="-2.0046167946929927E-4" y="-60.499909090922756" />
+      <point x="1634.469" y="3726.0" />
+      <point x="1454.469" y="3726.0" />
+      <point x="1454.469" y="4020.409" />
+      <point x="74.303" y="4020.409" />
+      <point x="74.303" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.Instructor" target="me.labconnect.webapp.models.data.Announcement" relationship="TO_MANY">
+      <point x="90.50014666063771" y="-83.0" />
+      <point x="2238.632" y="1835.5" />
+      <point x="2935.0" y="1835.5" />
+      <point x="2935.0" y="2589.5000000000077" />
+      <point x="3121.597" y="2589.5000000000077" />
+      <point x="3121.597" y="2748.02272727274" />
+      <point x="-76.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="-175.99967216286086" y="27.35736363635897" />
+      <point x="1570.0" y="2952.346" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.InstructorRepository" target="me.labconnect.webapp.models.users.Instructor" relationship="DEPENDENCY">
+      <point x="-4.3851499003721983E-4" y="-14.999909090922756" />
+      <point x="1909.406" y="3776.0" />
+      <point x="1439.469" y="3776.0" />
+      <point x="1439.469" y="3893.477" />
+      <point x="44.303" y="3893.477" />
+      <point x="44.303" y="3310.0" />
+      <point x="517.844" y="3310.0" />
+      <point x="517.844" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ProgramHeaderJavadocChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090909907172318E-5" />
+      <point x="4235.0" y="3791.659" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.TutoringSession" target="me.labconnect.webapp.models.users.Tutor" relationship="TO_MANY">
+      <point x="-35.147175364781106" y="-61.0" />
+      <point x="2238.0" y="3041.5" />
+      <point x="1600.916" y="3041.5" />
+      <point x="1600.916" y="2418.214" />
+      <point x="2335.5" y="2418.214" />
+      <point x="-69.34775641025726" y="-61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.data.Submission" relationship="DEPENDENCY">
+      <point x="4.1080505820900726E-4" y="137.9997272727178" />
+      <point x="1299.928" y="3700.0" />
+      <point x="930.0" y="3700.0" />
+      <point x="930.0" y="3237.0" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Assignment" target="me.labconnect.webapp.models.testing.Tester" relationship="TO_MANY">
+      <point x="118.5" y="20.447478991598928" />
+      <point x="1555.0" y="2830.0" />
+      <point x="1555.0" y="2353.214" />
+      <point x="2223.632" y="2353.214" />
+      <point x="2223.632" y="1880.5" />
+      <point x="3485.92" y="1880.5" />
+      <point x="3485.92" y="1976.0" />
+      <point x="3515.0" y="1976.0" />
+      <point x="3515.0" y="1997.489" />
+      <point x="-93.49990263750897" y="-14.999636363642367" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.users.Tutor" relationship="DEPENDENCY">
+      <point x="-29.99997792820409" y="-171.0" />
+      <point x="910.386" y="3129.0" />
+      <point x="1585.0" y="3129.0" />
+      <point x="1585.0" y="2459.214" />
+      <point x="2393.288" y="2459.214" />
+      <point x="-11.55975641025725" y="-61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ForLoopSemicolonChecker" relationship="CREATE">
+      <point x="330.58009736249096" y="182.0" />
+      <point x="3687.0" y="4156.159" />
+      <point x="-149.0" y="29.99990909090411" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.DecisionCurlyBracketsChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090897745" />
+      <point x="4251.0" y="3472.159" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Attempt" target="me.labconnect.webapp.models.data.Feedback" relationship="DEPENDENCY">
+      <point x="129.99978087264503" y="4.789915988112625E-4" />
+      <point x="1229.0" y="2677.553" />
+      <point x="1229.0" y="2470.871181818182" />
+      <point x="709.844" y="2470.871181818182" />
+      <point x="709.844" y="1895.5" />
+      <point x="3078.387" y="1895.5" />
+      <point x="3078.387" y="2466.386" />
+      <point x="-76.0" y="-3.6363637536851456E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.UnitTest" target="me.labconnect.webapp.models.testing.TestState" relationship="DEPENDENCY">
+      <point x="-122.99990263750897" y="10.500363636358543" />
+      <point x="3473.5" y="3144.489" />
+      <point x="3473.5" y="2848.0" />
+      <point x="3575.0" y="2848.0" />
+      <point x="3575.0" y="2735.489" />
+      <point x="-92.99990263750897" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.models.data.Announcement" relationship="DEPENDENCY">
+      <point x="14.99976988694334" y="-71.999636363641" />
+      <point x="3117.097" y="2847.0" />
+      <point x="3262.291" y="2847.0" />
+      <point x="-2.3821981085347943E-4" y="61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.Tester" relationship="DEPENDENCY">
+      <point x="67.87109736249113" y="-182.0" />
+      <point x="3424.291" y="2642.5" />
+      <point x="3444.0" y="2642.5" />
+      <point x="3444.0" y="2012.489" />
+      <point x="-93.49990263750897" y="3.636363576333679E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.models.data.services.AssignmentService" relationship="TO_ONE">
+      <point x="249.5" y="-76.47727272728207" />
+      <point x="-419.99990263750897" y="-109.47727272728207" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.data.services.SubmissionService" relationship="TO_ONE">
+      <point x="-419.99990263750897" y="169.52272727271793" />
+      <point x="2339.281" y="3709.5" />
+      <point x="2339.281" y="3526.0" />
+      <point x="-249.49953900114497" y="19.02272727271793" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.data.services.AssignmentService" relationship="TO_ONE">
+      <point x="4.1080505820900726E-4" y="-138.0" />
+      <point x="1299.928" y="3347.977" />
+      <point x="2920.0" y="3347.977" />
+      <point x="2920.0" y="3430.5" />
+      <point x="-419.99990263750897" y="-109.47727272728207" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.controller.httpmodels.Note" relationship="DEPENDENCY">
+      <point x="-275.29089051075334" y="-214.99963636364146" />
+      <point x="2304.348" y="2514.0" />
+      <point x="3164.0" y="2514.0" />
+      <point x="3164.0" y="2618.205" />
+      <point x="-76.0" y="4.5454544215317583E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Assignment" target="me.labconnect.webapp.models.data.Course" relationship="TO_MANY">
+      <point x="118.5" y="-14.999521008401189" />
+      <point x="1525.0" y="2794.553" />
+      <point x="1525.0" y="2413.714" />
+      <point x="89.0" y="14.999714285713708" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.MethodNamingChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.09091081666702E-5" />
+      <point x="4235.0" y="2871.409" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-155.5" y="-9.090910589293344E-5" />
+      <point x="4235.0" y="3089.159" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.BadExampleException" target="me.labconnect.webapp.models.testing.TestResult" relationship="TO_ONE">
+      <point x="-99.49990263750897" y="-14.999636363646005" />
+      <point x="3539.0" y="2887.989" />
+      <point x="3539.0" y="2633.0" />
+      <point x="3429.791" y="2633.0" />
+      <point x="3429.791" y="2186.989" />
+      <point x="-102.99990263750897" y="-9.499636363640548" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.repository.InstructorRepository" relationship="TO_ONE">
+      <point x="187.5" y="156.02272727271793" />
+      <point x="1199.0" y="3685.0" />
+      <point x="1199.0" y="3791.0" />
+      <point x="1120.386" y="3791.0" />
+      <point x="1120.386" y="4035.409" />
+      <point x="1909.406" y="4035.409" />
+      <point x="-4.3851499003721983E-4" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.TeachingAssistant" target="me.labconnect.webapp.models.livesession.Meetable" relationship="REALIZATION">
+      <point x="-102.4997858220222" y="-7.73070496506989E-12" />
+      <point x="2524.0" y="2729.5" />
+      <point x="2524.0" y="2599.5" />
+      <point x="2554.848" y="2599.5" />
+      <point x="28.559571281929948" y="27.49999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ParenthesisSpaceChecker" relationship="CREATE">
+      <point x="345.58009736249096" y="182.0" />
+      <point x="3702.0" y="3948.409" />
+      <point x="-149.0" y="-16.000090909096798" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ParenthesisSpaceChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090909679798642E-5" />
+      <point x="4235.0" y="3964.409" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Assignment" target="me.labconnect.webapp.models.data.Course" relationship="DEPENDENCY">
+      <point x="118.5" y="4.789915988112625E-4" />
+      <point x="1540.0" y="2809.553" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.TutoringSession" target="me.labconnect.webapp.models.users.Tutor" relationship="DEPENDENCY">
+      <point x="-24.647175364781106" y="-61.0" />
+      <point x="2248.5" y="3129.0" />
+      <point x="1585.0" y="3129.0" />
+      <point x="1585.0" y="2459.214" />
+      <point x="2393.288" y="2459.214" />
+      <point x="-11.55975641025725" y="-61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.WebappApplication" target="me.labconnect.webapp.models.users.services.UserCreatorService" relationship="TO_ONE">
+      <point x="7.196905461077904" y="72.0" />
+      <point x="1229.0" y="2353.2142857142862" />
+      <point x="487.844" y="2353.2142857142862" />
+      <point x="-75.00036666146644" y="-259.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.MethodNamingChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090891833" />
+      <point x="4251.0" y="2886.409" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.data.Course" relationship="DEPENDENCY">
+      <point x="2.2071795910960645E-5" y="-171.0" />
+      <point x="940.386" y="3163.0" />
+      <point x="1540.0" y="3163.0" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.data.Submission" relationship="DEPENDENCY">
+      <point x="-419.99990263750897" y="-2.7272728220850695E-4" />
+      <point x="2920.0" y="3539.977" />
+      <point x="2920.0" y="3700.0" />
+      <point x="930.0" y="3700.0" />
+      <point x="930.0" y="3237.0" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.UnitTest" relationship="DEPENDENCY">
+      <point x="-102.99990263750897" y="-109.92063636364037" />
+      <point x="3106.597" y="2086.568" />
+      <point x="3106.597" y="2366.568" />
+      <point x="3394.791" y="2366.568" />
+      <point x="3394.791" y="2664.205" />
+      <point x="3442.0" y="2664.205" />
+      <point x="3442.0" y="3159.489" />
+      <point x="-122.99990263750897" y="25.500363636358543" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.User" target="me.labconnect.webapp.models.data.Course" relationship="TO_MANY">
+      <point x="-115.5" y="195.6685454545377" />
+      <point x="1525.0" y="2443.714" />
+      <point x="1525.0" y="2413.714" />
+      <point x="89.0" y="14.999714285713708" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.BlankLineAfterClassDeclarationChecker" relationship="CREATE">
+      <point x="305.08009736249096" y="182.0" />
+      <point x="3661.5" y="4207.659" />
+      <point x="4649.640247157831" y="4207.659" />
+      <point x="4649.640247157831" y="2362.409090909104" />
+      <point x="156.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.TestState" relationship="DEPENDENCY">
+      <point x="103.0" y="3.636363594523573E-4" />
+      <point x="3786.42" y="2196.489" />
+      <point x="3786.42" y="2598.0" />
+      <point x="3575.0" y="2598.0" />
+      <point x="3575.0" y="2735.489" />
+      <point x="-92.99990263750897" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.LiveSession" target="me.labconnect.webapp.models.data.Assignment" relationship="TO_ONE">
+      <point x="0.0" y="-127.0" />
+      <point x="3262.291238219811" y="1865.5" />
+      <point x="694.844" y="1865.5" />
+      <point x="694.844" y="2323.2142857142862" />
+      <point x="1284.6459699504892" y="2323.2142857142862" />
+      <point x="-106.5" y="-303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.StyleChecker" target="me.labconnect.webapp.models.testing.Tester" relationship="REALIZATION">
+      <point x="-125.41990263750904" y="60.5" />
+      <point x="3502.0" y="2479.489" />
+      <point x="3809.5" y="2479.489" />
+      <point x="3809.5" y="2001.989" />
+      <point x="93.5" y="-10.499636363642367" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.OperatorsSpaceChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910407394404E-5" />
+      <point x="4235.0" y="1984.909" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ParenthesisSpaceChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090903202" />
+      <point x="4251.0" y="3979.409" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Attempt" target="me.labconnect.webapp.models.testing.TestResult" relationship="DEPENDENCY">
+      <point x="-130.0" y="4.789915988112625E-4" />
+      <point x="547.844" y="2677.553" />
+      <point x="547.844" y="1925.5" />
+      <point x="3799.0" y="1925.5" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.BlankLineAfterClassDeclarationChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-156.0" y="14.999909090895926" />
+      <point x="4220.0" y="2377.409" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.UnitTest" target="me.labconnect.webapp.models.testing.TestResult" relationship="CREATE">
+      <point x="-122.99990263750897" y="3.636363585428626E-4" />
+      <point x="3484.0" y="3133.989" />
+      <point x="3484.0" y="2612.989" />
+      <point x="3799.0" y="2612.989" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Attempt" target="me.labconnect.webapp.models.testing.TestResult" relationship="TO_MANY">
+      <point x="-2.1912735496698588E-4" y="171.0" />
+      <point x="1070.96" y="2858.553" />
+      <point x="3527.0" y="2858.553" />
+      <point x="3527.0" y="2783.0" />
+      <point x="3539.0" y="2783.0" />
+      <point x="3539.0" y="2633.0" />
+      <point x="3429.791" y="2633.0" />
+      <point x="3429.791" y="2186.989" />
+      <point x="-102.99990263750897" y="-9.499636363640548" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.LoopCurlyBracketsChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090894562" />
+      <point x="4251.0" y="2535.909" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.IndentationChecker" relationship="CREATE">
+      <point x="420.0" y="-140.3181818181797" />
+      <point x="4589.640431207159" y="3399.6590909091024" />
+      <point x="4589.640431207159" y="2679.409090909107" />
+      <point x="149.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.UnitTest" relationship="CREATE">
+      <point x="85.58009736249096" y="-182.0" />
+      <point x="3442.0" y="3159.489" />
+      <point x="-122.99990263750897" y="25.500363636358543" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.repository.SubmissionRepository" relationship="TO_ONE">
+      <point x="151.5" y="134.02272727271793" />
+      <point x="1927.5" y="3630.0" />
+      <point x="1927.5" y="3775.966" />
+      <point x="2986.655" y="3775.966" />
+      <point x="-3.907282298314385E-4" y="-38.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.OperatorsSpaceChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090895926" />
+      <point x="4220.0" y="1999.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.LCUserDetailsService" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="-14.999755394728822" y="-39.0" />
+      <point x="217.303" y="3261.0" />
+      <point x="2170.511" y="3261.0" />
+      <point x="2170.511" y="3078.989" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.services.AssignmentService" relationship="TO_ONE">
+      <point x="308.0" y="3.636363585428626E-4" />
+      <point x="2920.0" y="3078.989" />
+      <point x="2920.0" y="3430.5" />
+      <point x="-419.99990263750897" y="-109.47727272728207" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.LoopCurlyBracketsChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910543818609E-5" />
+      <point x="4235.0" y="2520.909" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.data.Assignment" relationship="CREATE">
+      <point x="9.736249103298178E-5" y="-182.0" />
+      <point x="3356.42" y="3342.0" />
+      <point x="2447.5" y="3342.0" />
+      <point x="2447.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="-117.1388905107533" y="215.0" />
+      <point x="2462.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="-14.999977928204089" y="170.9997272727178" />
+      <point x="925.386" y="3756.0" />
+      <point x="2387.0" y="3756.0" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.repository.TutorRepository" relationship="TO_ONE">
+      <point x="169.4996333385336" y="237.02272727271793" />
+      <point x="1130.886" y="3854.0" />
+      <point x="1130.886" y="3909.977" />
+      <point x="1440.969" y="3909.977" />
+      <point x="1440.969" y="3928.909" />
+      <point x="2089.344" y="3928.909" />
+      <point x="-10.499676568299947" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.Tests" relationship="DEPENDENCY">
+      <point x="177.00009736249103" y="-182.0" />
+      <point x="3533.42" y="3327.5" />
+      <point x="3789.42" y="3327.5" />
+      <point x="3789.42" y="2699.489" />
+      <point x="3857.802" y="2699.489" />
+      <point x="3857.802" y="2181.0" />
+      <point x="4032.802" y="2181.0" />
+      <point x="-4.812455604223942E-4" y="192.9999090909182" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.models.data.Attempt" relationship="CREATE">
+      <point x="-249.49953900114497" y="52.02272727271793" />
+      <point x="2114.844" y="3559.0" />
+      <point x="2114.844" y="3653.0" />
+      <point x="1424.469" y="3653.0" />
+      <point x="1424.469" y="3933.409" />
+      <point x="29.303" y="3933.409" />
+      <point x="29.303" y="2692.553" />
+      <point x="-130.0" y="15.000478991598811" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="-249.49953900114497" y="-2.7272728220850695E-4" />
+      <point x="2387.0" y="3506.977" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.Student" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="-28.790358759423725" y="82.99999999999227" />
+      <point x="2914.097" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ForLoopSemicolonChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090904112" />
+      <point x="4251.0" y="4141.159" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.WebappApplication" target="me.labconnect.webapp.models.data.services.AssignmentService" relationship="TO_ONE">
+      <point x="-9.453892198507674E-5" y="-72.0" />
+      <point x="1221.803" y="2136.876" />
+      <point x="2920.0" y="2136.876" />
+      <point x="2920.0" y="3430.5" />
+      <point x="-419.99990263750897" y="-109.47727272728207" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.BlankLineAfterClassDeclarationChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-156.0" y="-9.090910407394404E-5" />
+      <point x="4235.0" y="2362.409" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ClassNInterfaceNamingChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="21.09090909089582" />
+      <point x="4251.0" y="3305.5" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.repository.StudentRepository" relationship="TO_ONE">
+      <point x="169.4996333385336" y="97.52272727271793" />
+      <point x="1638.969" y="3714.5" />
+      <point x="1638.969" y="3606.0" />
+      <point x="1927.5" y="3606.0" />
+      <point x="1927.5" y="3661.0" />
+      <point x="2457.0" y="3661.0" />
+      <point x="2457.0" y="3766.5" />
+      <point x="2652.718" y="3766.5" />
+      <point x="-10.500152674920173" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Assignment" target="me.labconnect.webapp.models.testing.Tester" relationship="DEPENDENCY">
+      <point x="106.50003004951077" y="-302.9995210084012" />
+      <point x="1497.646" y="2428.714" />
+      <point x="2346.0" y="2428.714" />
+      <point x="2346.0" y="1976.0" />
+      <point x="3444.0" y="1976.0" />
+      <point x="3444.0" y="2012.489" />
+      <point x="-93.49990263750897" y="3.636363576333679E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.repository.AssignmentRepository" relationship="TO_ONE">
+      <point x="35.434460998854775" y="148.9997272727178" />
+      <point x="2688.718" y="3771.0" />
+      <point x="3651.0" y="3771.0" />
+      <point x="3651.0" y="3848.659" />
+      <point x="163.0" y="13.193090909077455" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ForLoopSemicolonChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090909588849172E-5" />
+      <point x="4235.0" y="4126.159" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Attempt" target="me.labconnect.webapp.models.data.Feedback" relationship="TO_ONE">
+      <point x="-130.0" y="-14.999521008401189" />
+      <point x="679.844" y="2662.553" />
+      <point x="679.844" y="1850.5" />
+      <point x="3026.5" y="1850.5" />
+      <point x="3026.5" y="2451.386" />
+      <point x="-76.0" y="-15.000363636375369" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.LCUserDetailsService" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="2.446052711775337E-4" y="-39.0" />
+      <point x="232.303" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker" relationship="CREATE">
+      <point x="420.0" y="-112.81827272728196" />
+      <point x="4220.0" y="3427.159" />
+      <point x="4220.0" y="3119.159" />
+      <point x="-155.5" y="29.999909090894107" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Submission" target="me.labconnect.webapp.models.data.Attempt" relationship="TO_MANY">
+      <point x="14.999780872645033" y="-94.0" />
+      <point x="14.999780872645033" y="171.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.StyleChecker" target="me.labconnect.webapp.models.testing.TestResult" relationship="CREATE">
+      <point x="149.0" y="-14.999636363638729" />
+      <point x="3799.0" y="2387.489" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.LiveSession" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="109.12876178018905" y="126.99981818180686" />
+      <point x="3371.42" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.repository.AssignmentRepository" relationship="TO_ONE">
+      <point x="165.8270973624908" y="181.9997272727178" />
+      <point x="3522.247" y="3771.0" />
+      <point x="3651.0" y="3771.0" />
+      <point x="3651.0" y="3848.659" />
+      <point x="163.0" y="13.193090909077455" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.SubmissionRepository" target="me.labconnect.webapp.models.data.Submission" relationship="DEPENDENCY">
+      <point x="-73.15539072823003" y="-38.499909090922756" />
+      <point x="2913.5" y="3700.0" />
+      <point x="930.0" y="3700.0" />
+      <point x="930.0" y="3237.0" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.users.Instructor" relationship="CREATE">
+      <point x="-30.000366661466387" y="-259.0" />
+      <point x="532.844" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Submission" target="me.labconnect.webapp.models.data.Attempt" relationship="DEPENDENCY">
+      <point x="-100.0" y="4.789916015397466E-4" />
+      <point x="29.303" y="2955.553" />
+      <point x="29.303" y="2692.553" />
+      <point x="-130.0" y="15.000478991598811" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.LiveSession" target="me.labconnect.webapp.models.users.Student" relationship="TO_MANY">
+      <point x="-129.5" y="0.0" />
+      <point x="2950.0" y="2226.5681818181934" />
+      <point x="7.1126412405760675" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ClassNInterfaceNamingChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910407394404E-5" />
+      <point x="4235.0" y="3284.409" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.TeachingAssistantService" target="me.labconnect.webapp.repository.TARepository" relationship="TO_ONE">
+      <point x="1.8827158282874734E-4" y="38.99972727271779" />
+      <point x="1995.011" y="3583.0" />
+      <point x="2329.781" y="3583.0" />
+      <point x="-14.99991462161006" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.Assignment" target="me.labconnect.webapp.models.data.Submission" relationship="DEPENDENCY">
+      <point x="-14.99996995048923" y="303.0" />
+      <point x="1376.146" y="3237.0" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.DecisionCurlyBracketsChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910225495463E-5" />
+      <point x="4235.0" y="3457.159" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.data.Attempt" relationship="DEPENDENCY">
+      <point x="-14.999589194941791" y="137.9997272727178" />
+      <point x="1284.928" y="3653.0" />
+      <point x="1424.469" y="3653.0" />
+      <point x="1424.469" y="3933.409" />
+      <point x="29.303" y="3933.409" />
+      <point x="29.303" y="2692.553" />
+      <point x="-130.0" y="15.000478991598811" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.InstructorService" target="me.labconnect.webapp.models.data.Announcement" relationship="DEPENDENCY">
+      <point x="-94.46920046167952" y="-39.0" />
+      <point x="1555.0" y="2847.0" />
+      <point x="3262.291" y="2847.0" />
+      <point x="-2.3821981085347943E-4" y="61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.controller.httpmodels.NewAssignment" relationship="DEPENDENCY">
+      <point x="308.0" y="177.5113636363585" />
+      <point x="3457.5" y="3256.5" />
+      <point x="3457.5" y="3305.9886363636415" />
+      <point x="3848.42" y="3305.9886363636415" />
+      <point x="3848.42" y="2708.989" />
+      <point x="-144.5" y="226.82990909090495" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.users.User" relationship="CREATE">
+      <point x="-3.6666146638708597E-4" y="-259.0" />
+      <point x="562.844" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.users.Tutor" relationship="CREATE">
+      <point x="-60.000366661466444" y="-259.0" />
+      <point x="502.844" y="3129.0" />
+      <point x="1585.0" y="3129.0" />
+      <point x="1585.0" y="2459.214" />
+      <point x="2393.288" y="2459.214" />
+      <point x="-11.55975641025725" y="-61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.MethodParenthesisSpaceChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910089071258E-5" />
+      <point x="4235.0" y="3618.909" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ProgramHeaderJavadocChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090900928" />
+      <point x="4251.0" y="3806.659" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.TestState" relationship="TO_ONE">
+      <point x="103.0" y="10.500363636359452" />
+      <point x="3872.3024812455606" y="2206.989" />
+      <point x="3872.3024812455606" y="2735.4886363636388" />
+      <point x="93.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.controller.httpmodels.Note" relationship="DEPENDENCY">
+      <point x="61.90276988694313" y="-71.999636363641" />
+      <point x="3164.0" y="2618.205" />
+      <point x="-76.0" y="4.5454544215317583E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.repository.TARepository" relationship="TO_ONE">
+      <point x="187.5" y="119.52272727271793" />
+      <point x="1233.5" y="3648.5" />
+      <point x="1233.5" y="3685.0" />
+      <point x="1628.469" y="3685.0" />
+      <point x="1628.469" y="3583.0" />
+      <point x="2329.781" y="3583.0" />
+      <point x="-14.99991462161006" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="-2.3011305665932014E-4" y="-71.999636363641" />
+      <point x="3102.097" y="2629.0" />
+      <point x="2554.848" y="2629.0" />
+      <point x="2554.848" y="2830.0" />
+      <point x="2252.625" y="2830.0" />
+      <point x="2252.625" y="3063.989" />
+      <point x="2170.511" y="3063.989" />
+      <point x="2170.511" y="3078.989" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.IndentationChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910680242814E-5" />
+      <point x="4235.0" y="2679.409" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="4.1080505820900726E-4" y="-138.0" />
+      <point x="1299.928" y="3342.0" />
+      <point x="2447.5" y="3342.0" />
+      <point x="2447.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.LoopCurlyBracketsChecker" relationship="CREATE">
+      <point x="420.0" y="-134.3181818181797" />
+      <point x="4594.640247157831" y="3405.6590909091024" />
+      <point x="4594.640247157831" y="2520.9090909091055" />
+      <point x="149.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.users.Student" relationship="CREATE">
+      <point x="14.999633338533613" y="-259.0" />
+      <point x="577.844" y="3212.0" />
+      <point x="2155.511" y="3212.0" />
+      <point x="2155.511" y="3544.0" />
+      <point x="2387.0" y="3544.0" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.models.users.services.UserService" relationship="TO_ONE">
+      <point x="-75.9926721628608" y="-60.999636363641" />
+      <point x="1993.132" y="2616.0" />
+      <point x="2996.5" y="2616.0" />
+      <point x="2996.5" y="2566.205" />
+      <point x="3381.92" y="2566.205" />
+      <point x="3381.92" y="3247.0" />
+      <point x="3459.0" y="3247.0" />
+      <point x="3459.0" y="1910.5" />
+      <point x="-15.697" y="1910.5" />
+      <point x="-15.697" y="3964.409" />
+      <point x="910.386" y="3964.409" />
+      <point x="-29.99997792820409" y="170.9997272727178" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.InstructorController" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="101.3863278371391" y="61.0" />
+      <point x="2170.511" y="3078.989" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.data.services.SubmissionService" relationship="TO_ONE">
+      <point x="2.2071795910960645E-5" y="-171.0" />
+      <point x="940.386" y="3347.977" />
+      <point x="1457.0" y="3347.977" />
+      <point x="1457.0" y="3526.0" />
+      <point x="-249.49953900114497" y="19.02272727271793" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.testing.Tester" relationship="DEPENDENCY">
+      <point x="-44.781589194941944" y="-138.0" />
+      <point x="1255.146" y="2398.214" />
+      <point x="724.844" y="2398.214" />
+      <point x="724.844" y="2063.545" />
+      <point x="2346.0" y="2063.545" />
+      <point x="2346.0" y="1976.0" />
+      <point x="3444.0" y="1976.0" />
+      <point x="3444.0" y="2012.489" />
+      <point x="-93.49990263750897" y="3.636363576333679E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.TutorRepository" target="me.labconnect.webapp.models.users.Tutor" relationship="DEPENDENCY">
+      <point x="3.2343170005333377E-4" y="15.0" />
+      <point x="2099.844" y="4197.159" />
+      <point x="-0.6970000000000001" y="4197.159" />
+      <point x="-0.6970000000000001" y="3042.053" />
+      <point x="547.844" y="3042.053" />
+      <point x="547.844" y="3129.0" />
+      <point x="1585.0" y="3129.0" />
+      <point x="1585.0" y="2459.214" />
+      <point x="2393.288" y="2459.214" />
+      <point x="-11.55975641025725" y="-61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.testing.TestResult" relationship="DEPENDENCY">
+      <point x="151.5" y="-2.7272728220850695E-4" />
+      <point x="2084.844" y="3495.977" />
+      <point x="2084.844" y="3736.5" />
+      <point x="3804.42" y="3736.5" />
+      <point x="3804.42" y="2954.989" />
+      <point x="3484.0" y="2954.989" />
+      <point x="3484.0" y="2612.989" />
+      <point x="3799.0" y="2612.989" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.LCUserDetailsService" target="me.labconnect.webapp.models.users.LCUserDetails" relationship="CREATE">
+      <point x="-140.49975539472882" y="-2.7272728220850695E-4" />
+      <point x="14.303" y="3396.977" />
+      <point x="14.303" y="3145.053" />
+      <point x="1621.416" y="3145.053" />
+      <point x="1621.416" y="3025.0" />
+      <point x="1611.416" y="3025.0" />
+      <point x="1611.416" y="2667.5" />
+      <point x="-174.9999502684675" y="14.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.users.LCUserDetails" relationship="DEPENDENCY">
+      <point x="-307.9998905107532" y="133.0113636363585" />
+      <point x="2200.511" y="3212.0" />
+      <point x="2200.511" y="3025.0" />
+      <point x="1611.416" y="3025.0" />
+      <point x="1611.416" y="2667.5" />
+      <point x="-174.9999502684675" y="14.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.users.TeachingAssistant" relationship="DEPENDENCY">
+      <point x="15.000022071795911" y="170.9997272727178" />
+      <point x="955.386" y="3741.0" />
+      <point x="1269.928" y="3741.0" />
+      <point x="1269.928" y="3672.0" />
+      <point x="1765.0" y="3672.0" />
+      <point x="1765.0" y="3719.0" />
+      <point x="2678.218" y="3719.0" />
+      <point x="2678.218" y="3756.0" />
+      <point x="3838.92" y="3756.0" />
+      <point x="3838.92" y="1941.489" />
+      <point x="2706.109" y="1941.489" />
+      <point x="2.1417797779577086E-4" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.CompilationException" relationship="DEPENDENCY">
+      <point x="9.736249103298178E-5" y="116.0" />
+      <point x="3673.42" y="2322.489" />
+      <point x="3559.0" y="2322.489" />
+      <point x="-88.91990263750904" y="50.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="1.0948924682452343E-4" y="215.0" />
+      <point x="2579.639" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.data.Course" relationship="CREATE">
+      <point x="52.87109736249113" y="-182.0" />
+      <point x="3409.291" y="1956.489" />
+      <point x="753.761" y="1956.489" />
+      <point x="753.761" y="3163.0" />
+      <point x="1540.0" y="3163.0" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.models.data.Feedback" relationship="DEPENDENCY">
+      <point x="-70.9275891949419" y="-138.0" />
+      <point x="1229.0" y="2470.871181818182" />
+      <point x="709.844" y="2470.871181818182" />
+      <point x="709.844" y="1895.5" />
+      <point x="3078.387" y="1895.5" />
+      <point x="3078.387" y="2466.386" />
+      <point x="-76.0" y="-3.6363637536851456E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.UnitTest" target="me.labconnect.webapp.models.testing.CompilationException" relationship="CREATE">
+      <point x="-114.41990263750904" y="-159.99963636364146" />
+      <point x="3539.0" y="2917.989" />
+      <point x="3559.0" y="2917.989" />
+      <point x="-88.91990263750904" y="50.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="4.6099885503281257E-4" y="-149.0" />
+      <point x="2653.284" y="3342.0" />
+      <point x="2447.5" y="3342.0" />
+      <point x="2447.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.Tester" relationship="DEPENDENCY">
+      <point x="-102.99990263750897" y="3.636363594523573E-4" />
+      <point x="3444.0" y="2196.489" />
+      <point x="3444.0" y="2012.489" />
+      <point x="-93.49990263750897" y="3.636363576333679E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.Tester" target="me.labconnect.webapp.models.testing.TestResult" relationship="DEPENDENCY">
+      <point x="93.5" y="3.636363576333679E-4" />
+      <point x="3799.0" y="2012.489" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.httpmodels.NewAssignment" target="me.labconnect.webapp.models.testing.Tests" relationship="TO_MANY">
+      <point x="14.999518754439578" y="-281.0" />
+      <point x="14.999518754439578" y="193.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.MethodNamingChecker" relationship="CREATE">
+      <point x="420.0" y="-16.5" />
+      <point x="4610.640247157831" y="3523.477272727282" />
+      <point x="4610.640247157831" y="2862.4090909091083" />
+      <point x="149.0" y="-9.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.User" target="me.labconnect.webapp.models.data.Course" relationship="DEPENDENCY">
+      <point x="-115.5" y="35.454545454537765" />
+      <point x="1540.0" y="2283.5" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.TutoringSession" target="me.labconnect.webapp.models.data.Assignment" relationship="DEPENDENCY">
+      <point x="-1.7536478117108345E-4" y="-61.0" />
+      <point x="2273.147" y="3342.0" />
+      <point x="2447.5" y="3342.0" />
+      <point x="2447.5" y="3310.0" />
+      <point x="1391.146" y="3310.0" />
+      <point x="3.004951076945872E-5" y="303.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.repository.SubmissionRepository" relationship="TO_ONE">
+      <point x="-249.49953900114497" y="76.02272727271793" />
+      <point x="2354.281" y="3583.0" />
+      <point x="2354.281" y="3630.0" />
+      <point x="1927.5" y="3630.0" />
+      <point x="1927.5" y="3775.966" />
+      <point x="2986.655" y="3775.966" />
+      <point x="-3.907282298314385E-4" y="-38.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.httpmodels.NewAssignment" target="me.labconnect.webapp.models.testing.Tests" relationship="DEPENDENCY">
+      <point x="-4.812455604223942E-4" y="-281.0" />
+      <point x="-4.812455604223942E-4" y="192.9999090909182" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.Feedback" relationship="DEPENDENCY">
+      <point x="-307.9998905107532" y="-215.0" />
+      <point x="2181.9285714285725" y="2863.9886363636415" />
+      <point x="2181.9285714285725" y="2474.214" />
+      <point x="1229.0" y="2474.214" />
+      <point x="1229.0" y="2470.871181818182" />
+      <point x="709.844" y="2470.871181818182" />
+      <point x="709.844" y="1895.5" />
+      <point x="3078.387" y="1895.5" />
+      <point x="3078.387" y="2466.386" />
+      <point x="-76.0" y="-3.6363637536851456E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-155.5" y="14.999909090894107" />
+      <point x="4251.0" y="3104.159" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="-192.6388905107533" y="215.0" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.data.Course" relationship="TO_MANY">
+      <point x="40.49963333853361" y="-259.0" />
+      <point x="603.344" y="3296.5" />
+      <point x="1525.0" y="3296.5" />
+      <point x="1525.0" y="2413.714" />
+      <point x="89.0" y="14.999714285713708" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.AssignmentController" target="me.labconnect.webapp.models.data.Submission" relationship="DEPENDENCY">
+      <point x="-307.9998905107532" y="158.0113636363585" />
+      <point x="1070.96" y="3237.0" />
+      <point x="-2.1912735496698588E-4" y="94.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.repository.InstructorRepository" relationship="TO_ONE">
+      <point x="169.4996333385336" y="174.02272727271793" />
+      <point x="1120.386" y="3791.0" />
+      <point x="1120.386" y="4035.409" />
+      <point x="1909.406" y="4035.409" />
+      <point x="-4.3851499003721983E-4" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.UnitTest" target="me.labconnect.webapp.models.testing.BadExampleException" relationship="CREATE">
+      <point x="23.5" y="-160.0" />
+      <point x="0.0" y="39.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.data.Course" relationship="DEPENDENCY">
+      <point x="-15.000366661466387" y="-259.0" />
+      <point x="547.844" y="3163.0" />
+      <point x="1540.0" y="3163.0" />
+      <point x="1540.0" y="2398.714" />
+      <point x="89.0" y="-2.8571428629220463E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.TeachingAssistantService" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="1.8827158282874734E-4" y="-39.0" />
+      <point x="1995.011" y="3212.0" />
+      <point x="2155.511" y="3212.0" />
+      <point x="2155.511" y="3544.0" />
+      <point x="2387.0" y="3544.0" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.OperatorsSpaceChecker" relationship="CREATE">
+      <point x="420.0" y="0.0" />
+      <point x="4625.640247157831" y="3539.977272727282" />
+      <point x="4625.640247157831" y="1984.9090909091042" />
+      <point x="149.0" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserCreatorService" target="me.labconnect.webapp.models.users.TeachingAssistant" relationship="CREATE">
+      <point x="169.4996333385336" y="159.02272727271793" />
+      <point x="1269.928" y="3776.0" />
+      <point x="1269.928" y="3672.0" />
+      <point x="1765.0" y="3672.0" />
+      <point x="1765.0" y="3719.0" />
+      <point x="2678.218" y="3719.0" />
+      <point x="2678.218" y="3756.0" />
+      <point x="3838.92" y="3756.0" />
+      <point x="3838.92" y="1941.489" />
+      <point x="2706.109" y="1941.489" />
+      <point x="2.1417797779577086E-4" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.InstructorService" target="me.labconnect.webapp.models.users.Instructor" relationship="DEPENDENCY">
+      <point x="-2.0046167946929927E-4" y="-39.0" />
+      <point x="1649.469" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.Instructor" target="me.labconnect.webapp.models.data.Announcement" relationship="DEPENDENCY">
+      <point x="-14.99985333936229" y="82.99999999999227" />
+      <point x="2133.132" y="2847.0" />
+      <point x="3262.291" y="2847.0" />
+      <point x="-2.3821981085347943E-4" y="61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ConstantNamingChecker" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="GENERALIZATION">
+      <point x="-149.0" y="-9.090910270970198E-5" />
+      <point x="4235.0" y="2170.909" />
+      <point x="4235.0" y="3365.477" />
+      <point x="3823.92" y="3365.477" />
+      <point x="3823.92" y="2402.489" />
+      <point x="149.0" y="3.636363612713467E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.repository.TutorRepository" relationship="TO_ONE">
+      <point x="161.61402207179594" y="170.9997272727178" />
+      <point x="1102.0" y="3854.0" />
+      <point x="1130.886" y="3854.0" />
+      <point x="1130.886" y="3909.977" />
+      <point x="1440.969" y="3909.977" />
+      <point x="1440.969" y="3928.909" />
+      <point x="2089.344" y="3928.909" />
+      <point x="-10.499676568299947" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.repository.StudentRepository" relationship="TO_ONE">
+      <point x="25.50002207179591" y="170.9997272727178" />
+      <point x="965.886" y="3714.5" />
+      <point x="1638.969" y="3714.5" />
+      <point x="1638.969" y="3606.0" />
+      <point x="1927.5" y="3606.0" />
+      <point x="1927.5" y="3661.0" />
+      <point x="2457.0" y="3661.0" />
+      <point x="2457.0" y="3766.5" />
+      <point x="2652.718" y="3766.5" />
+      <point x="-10.500152674920173" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.livesession.TutoringSession" target="me.labconnect.webapp.models.livesession.LiveSession" relationship="GENERALIZATION">
+      <point x="0.0" y="-61.0" />
+      <point x="2273.147175364781" y="3347.977272727282" />
+      <point x="3401.791238219811" y="3347.977272727282" />
+      <point x="3401.791238219811" y="2226.5681818181934" />
+      <point x="129.5" y="0.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.WebappSecurity" target="me.labconnect.webapp.models.users.services.LCUserDetailsService" relationship="CREATE">
+      <point x="-148.5" y="0.0" />
+      <point x="202.303" y="2207.3760504201714" />
+      <point x="-29.999755394728822" y="-39.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.repository.UserRepository" relationship="TO_ONE">
+      <point x="-14.999977928204089" y="-171.0" />
+      <point x="925.386" y="3261.0" />
+      <point x="2170.511" y="3261.0" />
+      <point x="2170.511" y="3078.989" />
+      <point x="1930.0" y="3078.989" />
+      <point x="1930.0" y="3178.0" />
+      <point x="59.303" y="3178.0" />
+      <point x="59.303" y="4182.159" />
+      <point x="1634.469" y="4182.159" />
+      <point x="-2.0046167946929927E-4" y="60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.ConstantNamingChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.99990909089729" />
+      <point x="4220.0" y="2185.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.data.Announcement" relationship="DEPENDENCY">
+      <point x="145.57402207179598" y="-171.0" />
+      <point x="1085.96" y="3193.0" />
+      <point x="1555.0" y="3193.0" />
+      <point x="1555.0" y="2847.0" />
+      <point x="3262.291" y="2847.0" />
+      <point x="-2.3821981085347943E-4" y="61.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.repository.InstructorRepository" relationship="TO_ONE">
+      <point x="150.8270973624908" y="181.9997272727178" />
+      <point x="3507.247" y="4212.159" />
+      <point x="1120.386" y="4212.159" />
+      <point x="1120.386" y="4035.409" />
+      <point x="1909.406" y="4035.409" />
+      <point x="-4.3851499003721983E-4" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.style.IndentationChecker" target="me.labconnect.webapp.models.testing.style.RegexHelper" relationship="DEPENDENCY">
+      <point x="-149.0" y="14.999909090893198" />
+      <point x="4251.0" y="2694.409" />
+      <point x="4251.0" y="3053.909" />
+      <point x="4220.0" y="3053.909" />
+      <point x="4220.0" y="3068.909" />
+      <point x="171.99951875443912" y="-9.09091081666702E-5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.testing.style.ProgramHeaderJavadocChecker" relationship="CREATE">
+      <point x="420.0" y="134.93181818181893" />
+      <point x="4442.640247157831" y="3674.909090909101" />
+      <point x="0.0" y="-49.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.SubmissionService" target="me.labconnect.webapp.repository.StudentRepository" relationship="TO_ONE">
+      <point x="-196.28353900114507" y="148.9997272727178" />
+      <point x="2457.0" y="3766.5" />
+      <point x="2652.718" y="3766.5" />
+      <point x="-10.500152674920173" y="-27.499909090922756" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.InstructorService" target="me.labconnect.webapp.repository.InstructorRepository" relationship="TO_ONE">
+      <point x="-2.0046167946929927E-4" y="38.99972727271779" />
+      <point x="1649.469" y="3741.0" />
+      <point x="1359.928" y="3741.0" />
+      <point x="1359.928" y="3802.091" />
+      <point x="1199.0" y="3802.091" />
+      <point x="1199.0" y="3791.0" />
+      <point x="1120.386" y="3791.0" />
+      <point x="1120.386" y="4035.409" />
+      <point x="1909.406" y="4035.409" />
+      <point x="-4.3851499003721983E-4" y="15.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.TeachingAssistantService" target="me.labconnect.webapp.models.users.TeachingAssistant" relationship="DEPENDENCY">
+      <point x="104.83318827158291" y="38.99972727271779" />
+      <point x="2099.844" y="3672.0" />
+      <point x="1765.0" y="3672.0" />
+      <point x="1765.0" y="3719.0" />
+      <point x="2678.218" y="3719.0" />
+      <point x="2678.218" y="3756.0" />
+      <point x="3838.92" y="3756.0" />
+      <point x="3838.92" y="1941.489" />
+      <point x="2706.109" y="1941.489" />
+      <point x="2.1417797779577086E-4" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.BadExampleException" target="me.labconnect.webapp.models.testing.TestResult" relationship="DEPENDENCY">
+      <point x="-99.49990263750897" y="3.6363635399538907E-4" />
+      <point x="3484.0" y="2902.989" />
+      <point x="3484.0" y="2612.989" />
+      <point x="3799.0" y="2612.989" />
+      <point x="3799.0" y="2196.489" />
+      <point x="103.0" y="3.636363594523573E-4" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.users.services.UserService" target="me.labconnect.webapp.models.users.User" relationship="DEPENDENCY">
+      <point x="2.2071795910960645E-5" y="170.9997272727178" />
+      <point x="940.386" y="3726.0" />
+      <point x="1454.469" y="3726.0" />
+      <point x="1454.469" y="4020.409" />
+      <point x="74.303" y="4020.409" />
+      <point x="74.303" y="3326.0" />
+      <point x="1570.0" y="3326.0" />
+      <point x="1570.0" y="2268.5" />
+      <point x="-115.5" y="20.454545454537765" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.TARepository" target="me.labconnect.webapp.models.users.TeachingAssistant" relationship="DEPENDENCY">
+      <point x="8.537838994016056E-5" y="-27.499909090922756" />
+      <point x="2344.781" y="3719.0" />
+      <point x="2678.218" y="3719.0" />
+      <point x="2678.218" y="3756.0" />
+      <point x="3838.92" y="3756.0" />
+      <point x="3838.92" y="1941.489" />
+      <point x="2706.109" y="1941.489" />
+      <point x="2.1417797779577086E-4" y="-83.0" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AttemptService" target="me.labconnect.webapp.repository.AssignmentRepository" relationship="TO_ONE">
+      <point x="109.50041080505821" y="137.9997272727178" />
+      <point x="1409.428" y="3948.409" />
+      <point x="3651.0" y="3948.409" />
+      <point x="3651.0" y="3848.659" />
+      <point x="163.0" y="13.193090909077455" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.TestResult" target="me.labconnect.webapp.models.testing.style.StyleChecker" relationship="DEPENDENCY">
+      <point x="-46.0" y="116.0" />
+      <point x="0.0" y="-60.5" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.testing.UnitTest" target="me.labconnect.webapp.models.testing.Tester" relationship="REALIZATION">
+      <point x="-122.99990263750897" y="-14.999636363641457" />
+      <point x="3502.0" y="3118.989" />
+      <point x="3502.0" y="2479.489" />
+      <point x="3809.5" y="2479.489" />
+      <point x="3809.5" y="2001.989" />
+      <point x="93.5" y="-10.499636363642367" />
+    </edge>
+    <edge source="me.labconnect.webapp.repository.StudentRepository" target="me.labconnect.webapp.models.users.Student" relationship="DEPENDENCY">
+      <point x="-1.5267492017301265E-4" y="-27.499909090922756" />
+      <point x="2663.218" y="3756.0" />
+      <point x="2387.0" y="3756.0" />
+      <point x="2387.0" y="3354.977" />
+      <point x="2924.597" y="3354.977" />
+      <point x="2924.597" y="3172.0" />
+      <point x="3009.0" y="3172.0" />
+      <point x="3009.0" y="3182.5" />
+      <point x="3290.097" y="3182.5" />
+      <point x="3290.097" y="2830.0" />
+      <point x="2942.887" y="2830.0" />
+      <point x="-3.5875942376151215E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.models.data.services.AssignmentService" target="me.labconnect.webapp.models.users.Instructor" relationship="DEPENDENCY">
+      <point x="-419.99990263750897" y="133.4997272727178" />
+      <point x="2402.0" y="3673.477" />
+      <point x="2402.0" y="3776.0" />
+      <point x="1439.469" y="3776.0" />
+      <point x="1439.469" y="3893.477" />
+      <point x="44.303" y="3893.477" />
+      <point x="44.303" y="3310.0" />
+      <point x="517.844" y="3310.0" />
+      <point x="517.844" y="3286.0" />
+      <point x="1636.416" y="3286.0" />
+      <point x="1636.416" y="2830.0" />
+      <point x="2148.132" y="2830.0" />
+      <point x="1.4666063771073823E-4" y="82.99999999999227" />
+    </edge>
+    <edge source="me.labconnect.webapp.controller.SelfController" target="me.labconnect.webapp.models.users.services.UserService" relationship="TO_ONE">
+      <point x="106.90276988694313" y="72.0" />
+      <point x="3209.0" y="3247.0" />
+      <point x="3459.0" y="3247.0" />
+      <point x="3459.0" y="1910.5" />
+      <point x="-15.697" y="1910.5" />
+      <point x="-15.697" y="3964.409" />
+      <point x="910.386" y="3964.409" />
+      <point x="-29.99997792820409" y="170.9997272727178" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.10000000000000034" showDependencies="true" x="3341.9999999999764" y="2738.785714285716" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
