@@ -1,0 +1,38 @@
+@import "common";
+
+#announcements-list {
+    
+    background-color: $fg-color;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin-top: 50px;
+    
+    article {
+        
+        border-radius: 10px;
+        background-color: lighten($bg-color, 10);
+        padding: 10px;
+        margin-bottom: 15px;
+        
+        span {
+            float: left;
+            font-size: 1.8em;
+            margin-right: 10px;
+        }
+        
+        h5 {
+            float: left;
+            margin: 5px 0 15px 0;
+        }
+        
+        p {
+            clear: both;
+        }
+        
+    }
+    
+}
+

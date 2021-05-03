@@ -85,29 +85,29 @@ public class SubmissionService {
 
         Attempt attempt;
 
-        attempt = new Attempt(new ObjectId(), attemptArchive.getFileName().toString(), "", null, new ArrayList<>());
+        attempt = new Attempt(submission.getAttempts().size(), attemptArchive.getFileName().toString(), "", null, new ArrayList<>());
 
         submission.addAttempt(attempt);
         submissionRepository.save(submission);
 
         // Move the user's zip archive to storage
         Path assignmentDir = assignmentService.getInstructionsPath(assignment).getParent();
-        Path attemptDir = Files.createDirectories(assignmentDir.resolve(submission.getId().toString()).resolve(attempt.getId().toString()));
+        Path attemptDir = Files.createDirectories(assignmentDir.resolve(submission.getId().toString()).resolve(String.valueOf(attempt.getId())));
         Files.move(attemptArchive, attemptDir.resolve(attempt.getAttemptFilename()));
 
         return attempt;
 
     }
-
+    
     /**
      * Retrieve the submission attempt with the given unique ID
      *
      * @param attemptId The unique submission attempt ID
      * @return The submission attempt with the given ID if it exists
      */
-    public Attempt getAttemptById(ObjectId attemptId) {
+    public Attempt getAttemptById(int attemptId) {
 
-        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId().equals(attemptId))
+        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream().filter(attempt -> attempt.getId() == attemptId)
                 .findAny().orElseThrow();
 
     }

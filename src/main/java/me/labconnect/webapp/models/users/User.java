@@ -2,9 +2,6 @@ package me.labconnect.webapp.models.users;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -67,22 +64,47 @@ public class User {
 
     // Methods
 
+    /**
+     * Gets the object ID of the user
+     *
+     * @return Object ID of the user
+     */
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     * Gets the role type of the user
+     *
+     * @return Role type of the user
+     */
     public LCUserRoleTypes getRoleType() {
         return roleType;
     }
 
+    /**
+     * Gets the role document ID of the user
+     *
+     * @return Role document ID of the user
+     */
     public ObjectId getRoleDocumentId() {
         return roleDocumentId;
     }
 
+    /**
+     * Gets the e-mail of the user
+     *
+     * @return E-mail of the user
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Gets the password of the user (crypted)
+     *
+     * @return Password of the user (crypted)
+     */
     public String getPassword() {
         return password;
     }

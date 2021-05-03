@@ -4,10 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 import me.labconnect.webapp.models.testing.TestResult;
@@ -25,7 +21,7 @@ public class Attempt {
     // Variables
     @Id
     //@JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
+    private int id;
     private String attemptFilename;
     private String note;
     private List<TestResult> testResults;
@@ -33,7 +29,7 @@ public class Attempt {
 
     // Constructors
 
-    public Attempt(ObjectId id, String attemptFilename, String note, Feedback feedback, List<TestResult> testResults) {
+    public Attempt(int id, String attemptFilename, String note, Feedback feedback, List<TestResult> testResults) {
         this.id = id;
         this.attemptFilename = attemptFilename;
         this.note = note;
@@ -94,13 +90,13 @@ public class Attempt {
      *
      * @return the unique object identifier
      */
-    public ObjectId getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * Returns the string representation of the Note
-     * 
+     *
      * @return The string representation of the Note
      */
     public String getNote() {
@@ -109,20 +105,27 @@ public class Attempt {
 
     /**
      * Sets the notes content with specified parameter
-     * 
+     *
      * @param note The content of the note
      */
     public void setNote(String note) {
         this.note = note;
     }
 
+    /**
+     * Checks whether two attempt objects are the same or not
+     *
+     * @param o The attempt object to compare with
+     * @return {code true} if two attempt objects are the same, {@code false}
+     *         otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         Attempt tmp;
 
         if (obj instanceof Attempt) {
             tmp = (Attempt) obj;
-            return id.equals(tmp.getId());
+            return id == tmp.getId();
         }
 
         return false;

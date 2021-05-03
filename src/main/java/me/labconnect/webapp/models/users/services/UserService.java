@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import me.labconnect.webapp.controller.httpmodels.AssignmentNotes;
+import me.labconnect.webapp.controller.httpmodels.AssignmentNotes.AttemptNote;
 import me.labconnect.webapp.models.data.Announcement;
+import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.users.Instructor;
@@ -17,6 +21,7 @@ import me.labconnect.webapp.models.users.TeachingAssistant;
 import me.labconnect.webapp.models.users.Tutor;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import me.labconnect.webapp.repository.AssignmentRepository;
 import me.labconnect.webapp.repository.InstructorRepository;
 import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.TARepository;
@@ -46,6 +51,8 @@ public class UserService {
     private InstructorRepository instructorRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AssignmentRepository assignmentRepository;
 
     public TeachingAssistant getTADocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.TEACHING_ASSISTANT) {
@@ -102,24 +109,24 @@ public class UserService {
 
     }
 
-    public List<?> getNotesForStudent(Student student, Class<?> clazz) {
+    public List<AssignmentNotes> getNotesForStudent(Student student) {
         
-        return student.getAssignments().stream()
-            .map(assignmentId -> 
-                submissionService.getAssignmentSubmissionBySubmitter(assignmentId, student.getId())
-                .orElseThrow()
-                .getAttempts()
-            )
-            .flatMap(attempts -> attempts.stream())
-            .map(attempt -> {
-                try {
-                    return clazz.getConstructor(String.class).newInstance(attempt.getNote());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            })
-            .collect(Collectors.toList());
+        List<AssignmentNotes> result = new ArrayList<>();
+        List<ObjectId> assignmentIds = student.getAssignments();
+        
+        for (ObjectId assignmentId : assignmentIds) {
+            
+            List<AttemptNote> attemptNotes = new ArrayList<>();
+            
+            for (Attempt attempt : submissionService.getAssignmentSubmissionBySubmitter(assignmentId, student.getId()).orElseThrow().getAttempts()) {
+                attemptNotes.add(new AttemptNote(attempt.getNote(), attempt.getId()));
+            }
+            
+            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).get().getTitle(), assignmentId, attemptNotes));
+            
+        }
+        
+        return result;
         
     }
     

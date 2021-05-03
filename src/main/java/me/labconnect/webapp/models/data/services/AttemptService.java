@@ -132,7 +132,7 @@ public class AttemptService {
         return new UrlResource(
             assignmentDir
             .resolve(submission.getId().toString())
-            .resolve(attempt.getId().toString())
+            .resolve(String.valueOf(attempt.getId()))
             .resolve(attempt.getAttemptFilename()).toUri()
         );
         
@@ -153,6 +153,7 @@ public class AttemptService {
     
     public void setNoteOfAttempt(Attempt attempt, String note) {
         attempt.setNote(note);
+        updateSubmissionOf(attempt);
     }
 
     /**
@@ -171,9 +172,9 @@ public class AttemptService {
      * @param attemptId The unique ID of the attempt
      * @return The corresponding attempt if it exists
      */
-    public Attempt getById(ObjectId attemptId) {
+    public Attempt getById(int attemptId) {
         return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
-                .filter(a -> a.getId().equals(attemptId)).findAny().orElseThrow();
+                .filter(a -> a.getId() == attemptId).findAny().orElseThrow();
     }
 
     /**

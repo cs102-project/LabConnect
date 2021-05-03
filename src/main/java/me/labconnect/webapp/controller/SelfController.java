@@ -1,6 +1,6 @@
 package me.labconnect.webapp.controller;
 
-import me.labconnect.webapp.controller.httpmodels.Note;
+import me.labconnect.webapp.controller.httpmodels.AssignmentNotes;
 import me.labconnect.webapp.models.data.Announcement;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
@@ -44,7 +44,7 @@ public class SelfController {
      * @return Available notes for the user
      */
     @GetMapping("/api/self/notes")
-    public List<?> getNotes(Authentication authentication) {
+    public List<AssignmentNotes> getNotes(Authentication authentication) {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
@@ -52,7 +52,7 @@ public class SelfController {
             return null;
         }
 
-        return userService.getNotesForStudent(userService.getStudentDocumentOf(user), Note.class);
+        return userService.getNotesForStudent(userService.getStudentDocumentOf(user));
     }
 
     /**
