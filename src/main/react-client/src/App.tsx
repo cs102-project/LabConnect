@@ -79,6 +79,43 @@ const userData = {
             isComplete: true,
             assignmentId: "98ba8926bdea23498dbf89a2366s98"
         }
+    ],
+    announcements: [
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        },
+        {
+            author: "Aynur Dayanık",
+            date: "Some Time in the Past",
+            content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        }
     ]
 };
 

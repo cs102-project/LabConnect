@@ -1,7 +1,7 @@
 package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.controller.httpmodels.NewAssignment;
-import me.labconnect.webapp.controller.httpmodels.Note;
+import me.labconnect.webapp.controller.httpmodels.NewNote;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Submission;
@@ -258,7 +258,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
-                                     @PathVariable ObjectId attemptId) {
+                                     @PathVariable int attemptId) {
 
         return attemptService.getById(attemptId);
     }
@@ -273,7 +273,7 @@ public class AssignmentController {
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
-                                      @PathVariable ObjectId attemptId, @RequestBody Feedback feedback) {
+                                      @PathVariable int attemptId, @RequestBody Feedback feedback) {
         if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
             throw new RuntimeException(
                     "The grade in the feedback is bigger than maximum allowed grade " + assignmentService.getById(assignmentId)
@@ -297,7 +297,7 @@ public class AssignmentController {
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
     @Secured({"ROLE_TEACHING_ASSISTANT"})
     public Resource getAttemptArchive(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
-                                      @PathVariable ObjectId attemptId) throws IOException {
+                                      @PathVariable int attemptId) throws IOException {
         Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
 
         if (assignmentService.getById(assignmentId).getSubmissions().stream().noneMatch(submissionId::equals)) {
@@ -328,7 +328,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public String getNote(Authentication authentication, @PathVariable ObjectId attemptId) {
+    public String getNote(Authentication authentication, @PathVariable int attemptId) {
 
         return attemptService.getById(attemptId).getNote();
 
@@ -343,7 +343,7 @@ public class AssignmentController {
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public void addNote(Authentication authentication, @PathVariable ObjectId attemptId, @RequestBody Note note) {
+    public void addNote(Authentication authentication, @PathVariable int attemptId, @RequestBody NewNote note) {
 
         attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
 

@@ -4,10 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 import me.labconnect.webapp.models.testing.TestResult;
@@ -25,7 +21,7 @@ public class Attempt {
     // Variables
     @Id
     //@JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
+    private int id;
     private String attemptFilename;
     private String note;
     private List<TestResult> testResults;
@@ -33,7 +29,7 @@ public class Attempt {
 
     // Constructors
 
-    public Attempt(ObjectId id, String attemptFilename, String note, Feedback feedback, List<TestResult> testResults) {
+    public Attempt(int id, String attemptFilename, String note, Feedback feedback, List<TestResult> testResults) {
         this.id = id;
         this.attemptFilename = attemptFilename;
         this.note = note;
@@ -94,7 +90,7 @@ public class Attempt {
      *
      * @return the unique object identifier
      */
-    public ObjectId getId() {
+    public int getId() {
         return id;
     }
 
@@ -122,7 +118,7 @@ public class Attempt {
 
         if (obj instanceof Attempt) {
             tmp = (Attempt) obj;
-            return id.equals(tmp.getId());
+            return id == tmp.getId();
         }
 
         return false;
