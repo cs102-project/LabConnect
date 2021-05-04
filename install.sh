@@ -14,6 +14,7 @@ cd src/main/react-client && npm install && npm run build && cd ../../..
 echo "Now building the backend, might take some time during the first run because of dependencies"
 ./mvnw package -Dmaven.test.skip=true
 echo "Now deploying the container composition, this takes some time and bandwidth the first time"
+sudo systemctl start docker
 sudo docker-compose up --force-recreate --build -V -d
 echo "You're all set!"
 echo "Now visit localhost:8080 from your browser of choice"
