@@ -17,6 +17,9 @@
 % Setting margins
 \usepackage[a4paper, left=2cm, right=2cm, top=1.75cm, bottom=1.75cm, includefoot]{geometry}
 
+% lscape.sty Produce landscape pages in a (mainly) portrait document.
+\usepackage{pdflscape}
+
 % Table helper packages
 \usepackage{multirow, multicol}
 \usepackage{makecell}
@@ -177,18 +180,24 @@
     perform the necessary queries and subsequent actions to the data as necessary,
     essentially grouping database queries logically. Additionally, model classes are also responsible for serving
     functionallity (service layer) to the controller layer which then controller layer handles HTTP requests (GET, POST, DELETE, PUT) in order
-    to create a REST API. In the class diagram below [\ref{fig:class-diagram}], all the Java classes,
+    to create a REST API. In the class diagrams below [\ref{fig:class-diagram}], all the Java classes,
     interfaces and enums are showed with their relations. However, because of the magnitude of the project
-    the diagram below might not be clear enough to examine. Thus, we uploaded the UML diagram
+    the diagrams below might not be clear enough to examine. Thus, we uploaded the UML diagrams
     (with magnification script) and Javadocs to the \href{http://www.labconnect.me}{LabConnect} website under a new distinct subdomain for convience.
     Links for these are respectively: \href{http://docs.labconnect.me/uml/}{http://docs.labconnect.me/uml/}
     and \href{http://docs.labconnect.me/}{http://docs.labconnect.me/}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{UML.jpg}
-        \caption{UML Class Diagram for LabConnect}~\label{fig:class-diagram}
-    \end{figure}
+    \pagebreak
+
+    \begin{landscape}
+        \begin{center}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.48\textwidth]{UML.jpg}
+                \caption{UML Class Diagram with Relations for LabConnect}~\label{fig:class-diagram}
+            \end{figure}
+        \end{center}
+    \end{landscape}
 
     \pagebreak
 
