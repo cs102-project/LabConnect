@@ -169,7 +169,7 @@ public class UserService {
                 attemptNotes.add(new AttemptNote(attempt.getNote(), attempt.getId()));
             }
 
-            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).get().getTitle(),
+            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).orElseThrow().getTitle(),
                     assignmentId, attemptNotes));
 
         }

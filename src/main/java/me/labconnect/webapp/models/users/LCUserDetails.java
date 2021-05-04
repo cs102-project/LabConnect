@@ -58,9 +58,9 @@ public class LCUserDetails implements UserDetails {
     }
 
     /**
-     * Gets the password of the LabConnect user (crypted)
+     * Gets the encrypted password of the LabConnect user
      *
-     * @return Password of the LabConnect user (crypted)
+     * @return The encrypted password of the LabConnect user
      */
     @Override
     public String getPassword() {

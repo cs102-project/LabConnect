@@ -27,7 +27,7 @@ public class IndentationChecker extends StyleChecker {
         boolean casePresent = false;
         boolean defaultPresent = false;
         boolean lineWrapped = false;
-        boolean sameLineAdded = false;
+        boolean sameLineAdded;
         for (int i = 0; i < codeFile.size(); i++) {
             sameLineAdded = false;
             String line = codeFile.get(i);

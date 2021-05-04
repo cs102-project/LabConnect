@@ -161,13 +161,12 @@ public class AttemptService {
         );
 
     }
-    // TODO fix javadoc for feedbacks
 
     /**
      * Give an attempt feedback and update its database entry accordingly
      *
      * @param attempt  The attempt to give feedback to
-     * @param feedback The feedback as a string
+     * @param feedback The feedback to give
      * @return The attempt with the feedback added
      */
     public Attempt giveFeedback(Attempt attempt, Feedback feedback) {
@@ -176,6 +175,12 @@ public class AttemptService {
         return attempt;
     }
 
+    /**
+     * Set the note for the attempt
+     *
+     * @param attempt The attempt to add a note to
+     * @param note The note to add
+     */
     public void setNoteOfAttempt(Attempt attempt, String note) {
         attempt.setNote(note);
         updateSubmissionOf(attempt);

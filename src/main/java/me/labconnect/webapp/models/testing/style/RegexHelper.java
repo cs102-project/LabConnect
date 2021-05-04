@@ -408,7 +408,7 @@ public class RegexHelper {
      * Checks if the line contains bitwise or operator or not
      *
      * @param str The string that is going to be checked.
-     * @return {@code true} if the line containes bitwise or operator , {@code false} otherwise.
+     * @return {@code true} if the line contains bitwise or operator , {@code false} otherwise.
      */
     public static boolean generalBitwiseOrMatcher(String str) {
         String regex;

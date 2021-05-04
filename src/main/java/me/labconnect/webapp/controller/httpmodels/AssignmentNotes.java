@@ -44,7 +44,7 @@ public class AssignmentNotes {
     /**
      * Get the list of notes for individual attempts
      *
-     * @return The list of attemot notes
+     * @return The list of attempt notes
      */
     public List<AttemptNote> getAttemptNotes() {
         return attemptNotes;
