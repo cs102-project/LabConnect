@@ -1,0 +1,43 @@
+name: docs
+
+on:
+  push:
+    paths: [ '**.java' ]
+
+jobs:
+  api-website:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v2
+
+    - name: Set up the Java JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Build docs with Maven
+      run: |
+        rm -rf doc/javadoc
+        mvn javadoc:javadoc
+
+    - name: Tidy up the javadocs
+      id: tidy
+      uses: cicirello/javadoc-cleanup@v1.2.0
+      with:
+        path-to-root: doc/javadoc
+    
+    - name: Log javadoc-cleanup output
+      run: |
+        echo "modified-count = ${{ steps.tidy.outputs.modified-count }}"
+    
+    - name: Upload ftp
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "doc/javadoc"
+        remoteDir: "/opt/LabConnect/doc/javadoc"
+        options: "--delete --asci"
