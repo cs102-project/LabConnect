@@ -62,15 +62,8 @@ function InstructorPanel(): JSX.Element {
         formData.append("exampleImplementation", document.getElementById("ip-example")["files"][0]);
         formData.append("testerClass", document.getElementById("ip-unittest")["files"][0]);
         
-        fetch("/api/instructor/announcements", {
+        fetch("/api/assignments/", {
             method: "POST",
-            headers: {
-                'X-XSRF-TOKEN':
-                    document.cookie
-                        .split('; ')
-                        .find((row) => row.startsWith('XSRF-TOKEN='))
-                        ?.split('=')[1] || ''
-            },
             body: formData
         });
         
