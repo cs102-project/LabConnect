@@ -34,6 +34,7 @@ Also it might be benefical to being cognizant about the fact that LabConnect's d
 for the maintainer of the project rather than end-user. For the deployment from the operating systems
 Fedora 33 or later, Ubuntu 20.04 or later (as these OS's are tested) and MacOS, the script called "install.sh" 
 in the root folder of the project, should be used. For manuel (Windows) deployment:
+
 Following dependencies should be installed:
 - NodeJS and npm = https://nodejs.org/en/download/
 - Maven (optionally the maven wrapper scripts can be used: "mvnw.cmd" and "mvnw"): https://maven.apache.org/download.cgi (installation guide: https://maven.apache.org/install.html)
@@ -46,10 +47,12 @@ Commands for deployment:
 - (while all dependencies installed and docker back-end is working) "mvn package -Dmaven.test.skip=true && docker-compose up --build --force-recreate" => for deploying the project
 - "sudo docker-compose down -v" => for removing the docker components (in case of full redeployment)
 
-After the deployment project can be accessed from the browser on localhost, port: 80
+After the deployment project can be accessed from the browser on localhost, port: 8080
 
 Current Status:
-TODO
+Back-end works, REST API is 90% done, but controllers are in need of testing and debugging (due to time limitation). 
+Thus, some of the functions on the front-end are not implemented. However, previously promised core features can 
+be experienced as expected.
 
 Main Tools Used:
 Visual Studio Code, IntelliJ Idea, Drawio, Git and GitHub, MongoDB, Redis, Docker and docker-compose (v3.7), NodeJs (v14.16.1), npm (v6.14.12), 
@@ -57,7 +60,12 @@ Spring Boot Framework (v2.4.4 [starter parent's version]), React (v17.0.4). All 
 dependencies can be found in pom.xml and /src/main/react-client/package.json.
 
 Code organization:
-TODO
+Project code is organized based on main parts of the project: Back End(Data Layer, Service Layer, Controller Layer) -> REST API -> Front End (React).
+Briefly, in the root all the configuration files (that are configuring project or a tool we used), in the "/doc" folder all the required and assessed documentation can be found
+in the "src/main" folder all the code can be seen (front-end and back-end), further down the "src/main" folder specific part of the project can be seen. 
+In "src/main/resource" folder all the static sources can be found. In the "src/main/react-native" folder all the dynamically on demand front-end 
+sources can be found. Finally, in the "src/main/java/me/labconnect" folder all the back-end can be found. Back-end files are organized in a 
+layer pattern (as they are all indicated by folder names).
 
 Contributions:
 Berkan Şahin -> Back-end development + REST API development + Testing + Documentation + Scripting for deployment of project
