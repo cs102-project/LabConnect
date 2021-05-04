@@ -7,7 +7,7 @@
 # Since this program relies on node.js and Docker, it is not recommended to run it on Windows
 # Please use a virtual machine or any other means of running GNU/Linux or macOS if that is the case
 
-if which apt >/dev/null 2>&1
+if which apt-get >/dev/null 2>&1
 then PKGMAN=apt
 elif which dnf >/dev/null 2>&1
 then PKGMAN=dnf
@@ -29,7 +29,7 @@ printf "OpenJDK 11\t\tFor building the backend\n"
 printf "\n\n"
 [ $PKGMAN = "apt" ] && sudo apt -y install docker docker-compose npm nodejs openjdk-11-jdk
 [ $PKGMAN = "dnf" ] && sudo dnf -y in docker docker-compose nodejs npm java-11-openjdk-devel
-[ $PKGMAN = "brew" ] && brew install docker docker-compose npm nodejs openjdk-11-jdk
+[ $PKGMAN = "brew" ] && brew install docker docker-compose node openjdk@11
 printf "\n\n"
 echo "Now building the frontend, might take some time during the first run because of dependencies"
 printf "\n\n"
