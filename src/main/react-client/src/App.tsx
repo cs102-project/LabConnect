@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import LoginPage from "./components/LoginPage";
 import Logout from "./components/Logout";
 import Dashboard from "./components/Dashboard";
@@ -14,18 +14,19 @@ import SubmissionDetails from "./components/SubmissionDetails";
 import AttemptDetails from "./components/AttemptDetails";
 import Sidebar from './components/Sidebar';
 import Settings from './components/Settings';
+import NotFoundPage from './components/NotFoundPage';
 
 function App(): JSX.Element {
     return (
-        <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/logout" component={Logout} />
-            <>
-                <Sidebar />
+        <>
+            { useLocation().pathname !== "/login" && useLocation().pathname !== "/logout" && <Sidebar /> }
+            <Switch>
                 <Route exact path="/index.html">
                     <Redirect to="/" />
                 </Route>
                 <Route exact path="/" component={Dashboard} />
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/logout" component={Logout} />
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/my-notes" component={MyNotes} />
                 <Route exact path="/messages" component={Messages} />
@@ -36,11 +37,9 @@ function App(): JSX.Element {
                 <Route exact path="/assignments/:assignmentid" component={AssignmentDetails} />
                 <Route exact path="/assignments/:assignmentid/submissions/:submissionid" component={SubmissionDetails} />
                 <Route exact path="/assignments/:assignmentid/submissions/:submissionid/attempts/:attemptid" component={AttemptDetails} />
-                <Route path="*">
-                    <Redirect to="/" />
-                </Route>
-            </>
-        </Switch>
+                <Route component={NotFoundPage} />
+            </Switch>
+        </>
     );
 }
 
@@ -115,6 +114,40 @@ const userData = {
             author: "Aynur Dayanık",
             date: "Some Time in the Past",
             content: "There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla There was a typo in our instruction document bla bla bla balbalbal bla"
+        }
+    ],
+    notes: [
+        {
+            assignmentTitle: "Lab 03 | something something",
+            assignmentId: "923498294",
+            attemptNotes: [
+                {
+                    attempt: 1,
+                    note: "hello its a note"
+                },
+                {
+                    attempt: 2,
+                    note: "its a note again"
+                }
+            ]
+        },
+        {
+            assignmentTitle: "Lab 04 | something",
+            assignmentId: "74543346",
+            attemptNotes: [
+                {
+                    attempt: 1,
+                    note: "its a note"
+                },
+                {
+                    attempt: 2,
+                    note: "a note again"
+                },
+                {
+                    attempt: 3,
+                    note: "a note once more"
+                }
+            ]
         }
     ]
 };
