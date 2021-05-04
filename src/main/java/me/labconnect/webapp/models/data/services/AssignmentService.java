@@ -85,7 +85,7 @@ public class AssignmentService {
      * @throws IOException If retrieving the instructions fails
      */
     public Resource getInstructions(Assignment assignment) throws IOException {
-        return new UrlResource(getInstructionsPath(assignment).toUri());
+        return new UrlResource(getInstructionsPath(assignment).resolve(assignment.getInstructionFilename()).toUri());
     }
 
     /**
@@ -144,50 +144,52 @@ public class AssignmentService {
         ArrayList<Course> courses;
         Set<Tester> testers = new HashSet<>();
 
-        for (Tests testName : testNames) {
-            switch (testName) {
-                case INDENTATION:
-                    testers.add(new IndentationChecker());
-                    break;
-                case METHOD_NAMING:
-                    testers.add(new MethodNamingChecker());
-                    break;
-                case CONSTANT_NAMING:
-                    testers.add(new ConstantNamingChecker());
-                    break;
-                case OPERATORS_SPACE:
-                    testers.add(new OperatorsSpaceChecker());
-                    break;
-                case UNIT_TEST:
-                    testers.add(
-                            new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
-                    break;
-                case PARENTHESIS_SPACE:
-                    testers.add(new ParenthesisSpaceChecker());
-                    break;
-                case FOR_LOOP_SEMICOLON:
-                    testers.add(new ForLoopSemicolonChecker());
-                    break;
-                case LOOP_CURLY_BRACKETS:
-                    testers.add(new LoopCurlyBracketsChecker());
-                    break;
-                case FORBIDDEN_STATEMENTS:
-                    testers.add(new ForbiddenStatementChecker(forbiddenStatements));
-                    break;
-                case CLASS_INTERFACE_NAMING:
-                    testers.add(new ClassNInterfaceNamingChecker());
-                    break;
-                case PROGRAM_HEADER_JAVADOC:
-                    testers.add(new ProgramHeaderJavadocChecker());
-                    break;
-                case DECISION_CURLY_BRACKETS:
-                    testers.add(new DecisionCurlyBracketsChecker());
-                    break;
-                case METHOD_PARENTHESIS_SPACE:
-                    testers.add(new MethodParenthesisSpaceChecker());
-                    break;
-                case BLANK_LINE_AFTER_CLASS_DECLARATION:
-                    testers.add(new BlankLineAfterClassDeclarationChecker());
+        if (testNames != null) {
+            for (Tests testName : testNames) {
+                switch (testName) {
+                    case INDENTATION:
+                        testers.add(new IndentationChecker());
+                        break;
+                    case METHOD_NAMING:
+                        testers.add(new MethodNamingChecker());
+                        break;
+                    case CONSTANT_NAMING:
+                        testers.add(new ConstantNamingChecker());
+                        break;
+                    case OPERATORS_SPACE:
+                        testers.add(new OperatorsSpaceChecker());
+                        break;
+                    case UNIT_TEST:
+                        testers.add(
+                                new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
+                        break;
+                    case PARENTHESIS_SPACE:
+                        testers.add(new ParenthesisSpaceChecker());
+                        break;
+                    case FOR_LOOP_SEMICOLON:
+                        testers.add(new ForLoopSemicolonChecker());
+                        break;
+                    case LOOP_CURLY_BRACKETS:
+                        testers.add(new LoopCurlyBracketsChecker());
+                        break;
+                    case FORBIDDEN_STATEMENTS:
+                        testers.add(new ForbiddenStatementChecker(forbiddenStatements));
+                        break;
+                    case CLASS_INTERFACE_NAMING:
+                        testers.add(new ClassNInterfaceNamingChecker());
+                        break;
+                    case PROGRAM_HEADER_JAVADOC:
+                        testers.add(new ProgramHeaderJavadocChecker());
+                        break;
+                    case DECISION_CURLY_BRACKETS:
+                        testers.add(new DecisionCurlyBracketsChecker());
+                        break;
+                    case METHOD_PARENTHESIS_SPACE:
+                        testers.add(new MethodParenthesisSpaceChecker());
+                        break;
+                    case BLANK_LINE_AFTER_CLASS_DECLARATION:
+                        testers.add(new BlankLineAfterClassDeclarationChecker());
+                }
             }
         }
 

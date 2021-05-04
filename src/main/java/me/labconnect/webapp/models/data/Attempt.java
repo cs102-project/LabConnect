@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.data;
 
 import me.labconnect.webapp.models.testing.TestResult;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 import java.nio.file.Path;
@@ -18,8 +19,8 @@ public class Attempt {
 
     // Variables
     @Id
-    //@JsonSerialize(using = ToStringSerializer.class)
     private int id;
+    private ObjectId parentId;
     private String attemptFilename;
     private String note;
     private List<TestResult> testResults;
@@ -27,9 +28,10 @@ public class Attempt {
 
     // Constructors
 
-    public Attempt(int id, String attemptFilename, String note, Feedback feedback,
+    public Attempt(int id, ObjectId parentId, String attemptFilename, String note, Feedback feedback,
                    List<TestResult> testResults) {
         this.id = id;
+        this.parentId = parentId;
         this.attemptFilename = attemptFilename;
         this.note = note;
         this.feedback = feedback;
@@ -94,6 +96,14 @@ public class Attempt {
     }
 
     /**
+     * Return the Object ID of the parent submission
+     * @return The object ID of the parent submission
+     */
+    public ObjectId getParentId() {
+        return parentId;
+    }
+
+    /**
      * Returns the string representation of the Note
      *
      * @return The string representation of the Note
@@ -123,7 +133,7 @@ public class Attempt {
 
         if (obj instanceof Attempt) {
             tmp = (Attempt) obj;
-            return id == tmp.getId();
+            return id == tmp.getId() && parentId.equals(tmp.getParentId());
         }
 
         return false;

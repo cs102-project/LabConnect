@@ -42,7 +42,7 @@ public class InstructorController {
      * Adds/{@code POST} announcement
      *
      * @param authentication Token for authentication request
-     * @param announcement   The announcement which is going to be added
+     * @param content   The announcement which is going to be added
      */
     @PostMapping("/api/instructor/announcements")
     @Secured({ "ROLE_INSTRUCTOR" })

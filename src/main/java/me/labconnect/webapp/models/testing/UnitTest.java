@@ -298,7 +298,7 @@ public class UnitTest implements Tester {
             endState = TestState.TIMEOUT;
         } else if (runtimeProcess.exitValue() != 0) {
             endState = TestState.RUNTIME_ERROR;
-        } else if (correctOutput == null) { // Check if this is the example run
+        } else if (correctOutput == null || correctOutput.size() == 0) { // Check if this is the example run
             endState = TestState.SUCCESS;
         } else {
 
