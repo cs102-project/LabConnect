@@ -63,7 +63,7 @@ public class WebappApplication implements CommandLineRunner {
                         new Course("CS102", 1),
                         new Course("CS102", 3),
                         new Course("CS101", 3))
-                .setEmail("david@cs.bilkent.edu.tr").setPassword("verystrongpasswd").create();
+                .setEmail("adayanik@cs.bilkent.edu.tr").setPassword("verystrongpasswd").create();
 
         teachingAssistant = userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Haya Shamim Khan Khattak")
                 .setInstitution("Bilkent University")

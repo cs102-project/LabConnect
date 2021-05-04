@@ -54,7 +54,7 @@ function InstructorPanel(): JSX.Element {
         sections.split(" ").forEach(section => formData.append("sections", section));
         formData.append("maxGrade", JSON.stringify(parseInt(maxGrade)));
         formData.append("maxAttempts", JSON.stringify(parseInt(maxAttempts)));
-        styleTests.forEach(test => formData.append("sections", test));
+        styleTests.forEach(test => formData.append("styleTests", test));
         formData.append("unitTestName", unitTestName);
         formData.append("unitTestTimeLimit", unitTestTimeLimit);
         formData.append("forbiddenStatements", JSON.stringify(forbiddenStatements.split("|")));
