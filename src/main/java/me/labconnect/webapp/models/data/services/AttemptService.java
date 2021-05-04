@@ -98,7 +98,7 @@ public class AttemptService {
      * @throws IOException If extracting the attempt archive fails
      */
     public Attempt runTests(Attempt attempt) throws IOException {
-        List<Tester> tests = assignmentRepository.findByAttemptId(attempt.getId()).getTests();
+        List<Tester> tests = assignmentRepository.findBySubmissionId(attempt.getParentId()).getTests();
         Path extractedAttempt = extractAttempt(getAttemptArchive(attempt).getFile().toPath());
 
         List<TestResult> results = new ArrayList<>();
@@ -149,8 +149,8 @@ public class AttemptService {
      */
     public Resource getAttemptArchive(Attempt attempt) throws IOException {
 
-        Assignment assignment = assignmentRepository.findByAttemptId(attempt.getId());
-        Submission submission = submissionRepository.findByAttemptId(attempt.getId());
+        Assignment assignment = assignmentRepository.findBySubmissionId(attempt.getParentId());
+        Submission submission = submissionRepository.findById(attempt.getParentId()).orElseThrow();
         Path assignmentDir = assignmentService.getInstructionsPath(assignment).getParent();
 
         return new UrlResource(
@@ -192,7 +192,14 @@ public class AttemptService {
      * @param attempt The attempt to update
      */
     private void updateSubmissionOf(Attempt attempt) {
-        submissionRepository.save(submissionRepository.findByAttemptId(attempt.getId()));
+        Submission parent;
+        int index;
+        parent = submissionRepository.findById(attempt.getParentId()).orElseThrow();
+
+        index = parent.getAttempts().indexOf(attempt);
+        parent.getAttempts().set(index, attempt);
+
+        submissionRepository.save(parent);
     }
 
     /**
@@ -201,8 +208,8 @@ public class AttemptService {
      * @param attemptId The unique ID of the attempt
      * @return The corresponding attempt if it exists
      */
-    public Attempt getById(int attemptId) {
-        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
+    public Attempt getById(ObjectId submissionId, int attemptId) {
+        return submissionRepository.findById(submissionId).orElseThrow().getAttempts().stream()
                 .filter(a -> a.getId() == attemptId).findAny().orElseThrow();
     }
 

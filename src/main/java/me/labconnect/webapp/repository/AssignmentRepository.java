@@ -21,9 +21,6 @@ public interface AssignmentRepository extends MongoRepository<Assignment, Object
     @Query("{ submissions: ?0  }")
     Assignment findBySubmissionId(ObjectId submissionId);
 
-    @Query(" { submissions: { $elemMatch : { attempts : { $elemMatch : { _id : ?0} } } } }")
-    Assignment findByAttemptId(int attemptId);
-
     @Query(" { courses: { $elemMatch: { course: ?0, section: ?1 } } }")
     List<Assignment> findByCourseSection(String course, int section);
 }

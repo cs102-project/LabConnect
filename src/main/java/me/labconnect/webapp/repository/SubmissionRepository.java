@@ -20,7 +20,4 @@ public interface SubmissionRepository extends MongoRepository<Submission, Object
 
     List<Submission> findBySubmitterId(ObjectId submitterId);
 
-    @Query("{ attempts : { $elemMatch : { _id: ?0 } } }")
-    Submission findByAttemptId(int attemptId);
-
 }

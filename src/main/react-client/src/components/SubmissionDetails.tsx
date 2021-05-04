@@ -17,7 +17,7 @@ function SubmissionDetails(): JSX.Element {
         const formData = new FormData();
         formData.append("attemptArchive", e.target.files[0]);
         
-        fetch(`/assignments/${params.assignmentid}/submissions`, {
+        fetch(`/api/assignments/${params.assignmentid}/submissions`, {
             method: "POST",
             headers: {
                 'X-XSRF-TOKEN':

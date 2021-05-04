@@ -133,8 +133,8 @@ public class AssignmentController {
     /**
      * Creates/{@code POST} an assignment with given parameters
      *
-     * @param authentication        Token for authentication request
-     * @param newAssignment         New assignment object
+     * @param authentication Token for authentication request
+     * @param newAssignment  New assignment object
      * @return Constructed assignment object
      * @throws IOException         If processing the instructions fails
      * @throws BadExampleException If the example implementation or the tester do not compile or
@@ -189,6 +189,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/download")
     public ResponseEntity<Resource> getInstructionsFile(@PathVariable ObjectId assignmentId) throws IOException {
+        final String RESPONSE_TEMPLATE = "attachment; filename=\"%s\"";
         Resource instructionsFile = assignmentService
                 .getInstructions(assignmentService.getById(assignmentId));
 
@@ -196,7 +197,9 @@ public class AssignmentController {
             throw new RuntimeException("An assignment with specified assignment ID does not exist");
         }
 
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).header(HttpHeaders.CONTENT_DISPOSITION).body(instructionsFile);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION, String.format(RESPONSE_TEMPLATE, instructionsFile.getFilename()))
+                .body(instructionsFile);
     }
 
     /**
@@ -255,6 +258,7 @@ public class AssignmentController {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
+        Attempt attempt;
 
         Path tmp = Files.createTempDirectory("");
         Path attemptFile = Files.createFile(Paths.get(tmp.toString(), attemptArchive.getOriginalFilename()));
@@ -262,8 +266,9 @@ public class AssignmentController {
 
         Student student = userService.getStudentDocumentOf(user);
 
-        return submissionService
-                .addAttempt(assignmentId, student.getId(), attemptFile);
+
+        attempt = submissionService.addAttempt(assignmentId, student.getId(), attemptFile);
+        return attemptService.runTests(attempt);
 
     }
 
@@ -297,7 +302,7 @@ public class AssignmentController {
                                      @PathVariable ObjectId submissionId,
                                      @PathVariable int attemptId) {
 
-        return attemptService.getById(attemptId);
+        return attemptService.getById(submissionId, attemptId);
     }
 
     /**
@@ -321,7 +326,7 @@ public class AssignmentController {
             throw new RuntimeException("The grade in the feedback cannot be less than 0");
         }
 
-        attemptService.getById(attemptId).giveFeedback(feedback);
+        attemptService.getById(submissionId, attemptId).giveFeedback(feedback);
     }
 
     /**
@@ -336,16 +341,20 @@ public class AssignmentController {
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
     @Secured({"ROLE_TEACHING_ASSISTANT"})
     public ResponseEntity<Resource> getAttemptArchive(@PathVariable ObjectId assignmentId,
-                                      @PathVariable ObjectId submissionId,
-                                      @PathVariable int attemptId) throws IOException {
-        Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
+                                                      @PathVariable ObjectId submissionId,
+                                                      @PathVariable int attemptId) throws IOException {
+        final String RESPONSE_TEMPLATE = "attachment; filename=\"%s\"";
+        Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(submissionId, attemptId));
+
 
         if (assignmentService.getById(assignmentId).getSubmissions().stream()
                 .noneMatch(submissionId::equals)) {
             throw new RuntimeException("The submission and the assignment do not match");
         }
 
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip")).header(HttpHeaders.CONTENT_DISPOSITION).body(attemptArchive);
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, String.format(RESPONSE_TEMPLATE, attemptArchive.getFilename()))
+                .body(attemptArchive);
     }
 
 
@@ -358,9 +367,10 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public String getNote(Authentication authentication, @PathVariable int attemptId) {
+    public String getNote(Authentication authentication, @PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+                          @PathVariable int attemptId) {
 
-        return attemptService.getById(attemptId).getNote();
+        return attemptService.getById(submissionId, attemptId).getNote();
 
     }
 
@@ -373,10 +383,10 @@ public class AssignmentController {
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public void addNote(Authentication authentication, @PathVariable int attemptId,
+    public void addNote(Authentication authentication, @PathVariable ObjectId submissionId, @PathVariable int attemptId,
                         @RequestBody NewNote note) {
 
-        attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
+        attemptService.setNoteOfAttempt(attemptService.getById(submissionId, attemptId), note.getContent());
 
     }
 
