@@ -3,6 +3,8 @@ package me.labconnect.webapp;
 import com.mongodb.client.MongoClient;
 import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.data.services.AssignmentService;
+import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.TeachingAssistantService;
 import me.labconnect.webapp.models.users.services.UserCreatorService;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
@@ -40,9 +42,12 @@ public class WebappApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        User student;
+        User teachingAssistant;
+
         mongoClient.getDatabase("labconnect").drop();
-        userCreatorService
-                .setRoleType(LCUserRoleTypes.STUDENT)
+
+        student = userCreatorService.setRoleType(LCUserRoleTypes.STUDENT)
                 .setName("Vedat Eren Arican")
                 .setInstitution("Bilkent University")
                 .setInstitutionId("22002643")
@@ -51,23 +56,22 @@ public class WebappApplication implements CommandLineRunner {
                 .setPassword("myPasswd")
                 .create();
 
-        userCreatorService.setRoleType(LCUserRoleTypes.INSTRUCTOR).setName("David Davenport")
+        userCreatorService.setRoleType(LCUserRoleTypes.INSTRUCTOR).setName("Aynur Dayanık")
                 .setInstitution("Bilkent University")
                 .setInstitutionId("1234")
                 .setCourses(new Course("CS102", 2),
                         new Course("CS102", 1),
                         new Course("CS102", 3),
                         new Course("CS101", 3))
-                .setEmail("david@cs.bilkent.edu.tr").setPassword("DBRefsBadRoboGood").create();
+                .setEmail("david@cs.bilkent.edu.tr").setPassword("verystrongpasswd").create();
 
-        userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Teaching Assistant")
+        teachingAssistant = userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Haya Shamim Khan Khattak")
                 .setInstitution("Bilkent University")
-                .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("ta@bilkent.edu.tr")
-                .setPassword("passwd").create();
+                .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("haya.khattak@bilkent.edu.tr")
+                .setPassword("3venStr0ngerpasswd").create();
 
-        teachingAssistantService
-                .addStudent(userService.getTADocumentOf(userRepository.findByEmail("ta@bilkent.edu.tr")),
-                        userService.getStudentDocumentOf(userRepository.findByEmail("dev@vedat.xyz")));
+        teachingAssistantService.addStudent(userService.getTADocumentOf(teachingAssistant),
+                userService.getStudentDocumentOf(student));
 
         assignmentService.createAssignment("Lab03", "Dummy Lab", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
