@@ -56,7 +56,7 @@ public class SubmissionService {
 
         assignment = assignmentRepository.findById(assignmentId).orElseThrow();
 
-        submission = new Submission(new ArrayList<>(), submitterId);
+        submission = submissionRepository.save(new Submission(new ArrayList<>(), submitterId));
 
         assignment.addSubmission(submission);
         assignmentRepository.save(assignment);
@@ -83,7 +83,7 @@ public class SubmissionService {
 
         Attempt attempt;
 
-        attempt = new Attempt(submission.getAttempts().size(), attemptArchive.getFileName().toString(),
+        attempt = new Attempt(submission.getAttempts().size(), submission.getId(), attemptArchive.getFileName().toString(),
                 "", null, new ArrayList<>());
 
         submission.addAttempt(attempt);
@@ -96,20 +96,6 @@ public class SubmissionService {
         Files.move(attemptArchive, attemptDir.resolve(attempt.getAttemptFilename()));
 
         return attempt;
-
-    }
-
-    /**
-     * Retrieve the submission attempt with the given unique ID
-     *
-     * @param attemptId The unique submission attempt ID
-     * @return The submission attempt with the given ID if it exists
-     */
-    public Attempt getAttemptById(int attemptId) {
-
-        return submissionRepository.findByAttemptId(attemptId).getAttempts().stream()
-                .filter(attempt -> attempt.getId() == attemptId)
-                .findAny().orElseThrow();
 
     }
 
