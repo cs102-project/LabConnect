@@ -26,7 +26,7 @@
 \usepackage{array}
 \usepackage{nicematrix}
 \usepackage{adjustbox}
-\usepackage{caption}
+\usepackage[justification=centering]{caption}
 %\usepackage{tabularx} % Not needed currently, but has a few nice options
 %\usepackage{wrapfig} % Floating figures/tables
 
@@ -187,16 +187,55 @@
     Links for these are respectively: \href{http://docs.labconnect.me/uml/}{http://docs.labconnect.me/uml/}
     and \href{http://docs.labconnect.me/}{http://docs.labconnect.me/}.
 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{uml-straight.png}
+        \caption{lorem ipsum}~\label{fig:straight-class-diagram}
+    \end{figure}
+
+\begin{figure}[H]
+    \resizebox{0.12\textwidth}{!}{\minipage{0.20\textwidth}
+  \includegraphics[width=\linewidth]{small-groups/app-config.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image1}
+\endminipage}\hfill
+\resizebox{0.12\textwidth}{!}{\minipage{0.20\textwidth}
+  \includegraphics[width=\linewidth]{small-groups/assignment.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image2}
+\endminipage}\hfill
+\resizebox{0.12\textwidth}{!}{\minipage{0.20\textwidth}
+  \includegraphics[width=\linewidth]{small-groups/controllers.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image3}
+\endminipage}\hfill
+\resizebox{0.12\textwidth}{!}{\minipage{0.20\textwidth}%
+  \includegraphics[width=\linewidth]{small-groups/live-session.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image3}
+\endminipage}
+\end{figure}
+
+\begin{figure}[H]
+    \resizebox{0.12\textwidth}{!}{\minipage{0.24\textwidth}
+  \includegraphics[width=\linewidth]{small-groups/repositories.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image1}
+\endminipage}\hfill
+\resizebox{0.1175\textwidth}{!}{\minipage{0.24\textwidth}
+  \includegraphics[width=\linewidth]{small-groups/service-layer.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image2}
+\endminipage}\hfill
+\resizebox{0.12\textwidth}{!}{\minipage{0.24\textwidth}%
+  \includegraphics[width=\linewidth]{small-groups/users.jpg}
+  \caption{A really Awesome Image}\label{fig:awesome_image3}
+\endminipage}
+\end{figure}
+
+
     \pagebreak
 
     \begin{landscape}
-        \begin{center}
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=1.48\textwidth]{UML.jpg}
-                \caption{UML Class Diagram with Relations for LabConnect}~\label{fig:class-diagram}
-            \end{figure}
-        \end{center}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\dimexpr\paperheight-6cm\relax]{UML.jpg}
+            \caption{UML Class Diagram with Relations for LabConnect}~\label{fig:class-diagram}
+        \end{figure}
     \end{landscape}
 
     \pagebreak
