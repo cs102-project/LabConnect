@@ -31,7 +31,7 @@ echo
 echo "Default credentials"
 printf "Student:\tdev@vedat.xyz\t\t\tmyPasswd\n"
 printf "Instructor:\tdavid@cs.bilkent.edu.tr\t\tDBRefsBadRoboGood\n"
-printf "TA:\t\tta@bilkent.edu.tr\t\t\tpasswd\n"
+printf "TA:\t\tta@bilkent.edu.tr\t\tpasswd\n"
 echo "***************************************"
 echo
 echo "Once you are done with the demo, run:"
