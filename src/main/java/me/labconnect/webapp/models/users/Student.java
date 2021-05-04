@@ -20,19 +20,27 @@ public class Student {
 
     // Properties
     @Id
-    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
-    //@JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> assignments;
 
     // Constructor
 
+    /**
+     * Initialize a Student object with a list of assignments supplied by the caller
+     *
+     * @param assignments The list of unique IDs for the assignments this student is responsible for
+     */
     public Student(List<ObjectId> assignments) {
         this.assignments = assignments;
     }
 
     // Methods
 
+    /**
+     * Return the unique object ID of this Student
+     *
+     * @return The unique object ID of this Student
+     */
     public ObjectId getId() {
         return id;
     }
@@ -40,17 +48,26 @@ public class Student {
     /**
      * Gets the assignments list of a specific Student.
      *
-     * @return ArrayList of assigned Assignments.
+     * @return The unique IDs of the assignments assigned to this student
      */
-    //@JsonSerialize(using = ToStringSerializer.class)
     public List<ObjectId> getAssignments() {
         return assignments;
     }
 
+    /**
+     * Add an assignment to the list of assignments this student is responsible for
+     *
+     * @param assignment The assignment to add
+     */
     public void giveAssignment(Assignment assignment) {
         giveAssignment(assignment.getId());
     }
 
+    /**
+     * Private helper method that actually adds the ID of the assignment this student is responsible for
+     *
+     * @param assignmentId The unique ID of the new assignment
+     */
     private void giveAssignment(ObjectId assignmentId) {
         assignments.add(assignmentId);
     }

@@ -115,7 +115,7 @@ public class Attempt {
     /**
      * Checks whether two attempt objects are the same or not
      *
-     * @param o The attempt object to compare with
+     * @param obj The attempt object to compare with
      * @return {code true} if two attempt objects are the same, {@code false} otherwise
      */
     @Override

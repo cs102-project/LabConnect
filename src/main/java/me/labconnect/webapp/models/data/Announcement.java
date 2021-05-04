@@ -21,6 +21,7 @@ public class Announcement {
      *
      * @param content String content of the {@code Announcement} object
      * @param date    Date of the {@code Announcement} object
+     * @param author  The author of the announcement
      */
     public Announcement(String content, Date date, String author) {
         this.content = content;
