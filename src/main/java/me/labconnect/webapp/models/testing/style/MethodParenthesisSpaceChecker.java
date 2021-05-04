@@ -39,7 +39,7 @@ public class MethodParenthesisSpaceChecker extends StyleChecker {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '('
                                 && !(codeFile.get(lineIndex).charAt(charIndex + 1) == ')')) {
                             if (codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
-                                errorList.add(codeFile.get(lineIndex));
+                                errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                             }
                         }
                     }

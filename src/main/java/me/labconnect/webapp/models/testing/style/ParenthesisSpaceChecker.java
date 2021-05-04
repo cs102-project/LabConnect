@@ -42,18 +42,18 @@ public class ParenthesisSpaceChecker extends StyleChecker {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '('
                                 && codeFile.get(lineIndex).charAt(charIndex - 1) != ' '
                                 && codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex));
+                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
                                 && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex));
+                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                         }
                     } else {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '('
                                 && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex));
+                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
                                 && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex));
+                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                         }
                     }
                 }
