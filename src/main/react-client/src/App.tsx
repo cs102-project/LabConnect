@@ -58,6 +58,10 @@ const userData = {
             title: "Lab03 | Introduction to GUI in Java",
             shortDescription: "In this lab assignment, you are given a simple console application, for which you must create a GUI. Make sure to reuse existing methods as much as possible.",
             deadline: "25 March 2021 18:00",
+            homeworkType: "Lab",
+            maxAttempts: 7,
+            maxGrade: 100,
+            tests: ["Test A", "Test B", "Some Test C or D"],
             grade: "N/A",
             isComplete: false,
             assignmentId: "98ba8926bdea23498dbf89a2366s98"
@@ -66,6 +70,10 @@ const userData = {
             title: "Lab03 | Introduction to GUI in Java",
             shortDescription: "In this lab assignment, you are given a simple console application, for which you must create a GUI. Make sure to reuse existing methods as much as possible.",
             deadline: "25 March 2021 18:00",
+            homeworkType: "Lab",
+            maxAttempts: 7,
+            maxGrade: 100,
+            tests: ["Test A", "Test B", "Some Test C or D"],
             grade: "80",
             isComplete: false,
             assignmentId: "98ba8926bdea23498dbf89a2366s98"
@@ -74,6 +82,10 @@ const userData = {
             title: "Lab03 | Introduction to GUI in Java",
             shortDescription: "In this lab assignment, you are given a simple console application, for which you must create a GUI. Make sure to reuse existing methods as much as possible.",
             deadline: "25 March 2021 18:00",
+            homeworkType: "Lab",
+            maxAttempts: 7,
+            maxGrade: 100,
+            tests: ["Test A", "Test B", "Some Test C or D"],
             grade: "100",
             isComplete: true,
             assignmentId: "98ba8926bdea23498dbf89a2366s98"
