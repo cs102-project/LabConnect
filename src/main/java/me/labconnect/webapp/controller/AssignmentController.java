@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -145,13 +148,22 @@ public class AssignmentController {
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
 
+        Path tmp = Files.createTempDirectory("");
+        Path instructions = Files.createFile(Paths.get(tmp.toString(), newAssignment.getInstructionsFile().getOriginalFilename()));
+        newAssignment.getInstructionsFile().transferTo(instructions);
+        Path exampleImpl = Files.createFile(Paths.get(tmp.toString(), newAssignment.getExampleImplementation().getOriginalFilename()));
+        newAssignment.getExampleImplementation().transferTo(exampleImpl);
+        Path testerClass = Files.createFile(Paths.get(tmp.toString(), newAssignment.getTesterClass().getOriginalFilename()));
+        newAssignment.getTesterClass().transferTo(testerClass);
+
+
         // TODO Handle BadExampleException
 
         return assignmentService.createAssignment(
                 newAssignment.getAssignmentTitle(),
                 newAssignment.getShortDescription(),
                 user.getInstitution(),
-                newAssignment.getInstructionsFile().getResource().getFile().toPath(),
+                instructions,
                 newAssignment.getDueDate(),
                 newAssignment.getSections(),
                 newAssignment.getCourseName(),
@@ -161,8 +173,8 @@ public class AssignmentController {
                 newAssignment.getStyleTests(),
                 newAssignment.getUnitTestName(),
                 newAssignment.getUnitTestTimeLimit(),
-                newAssignment.getExampleImplementation().getResource().getFile().toPath(),
-                newAssignment.getTesterClass().getResource().getFile().toPath(),
+                exampleImpl,
+                testerClass,
                 newAssignment.getForbiddenStatements()
         );
 
@@ -244,10 +256,14 @@ public class AssignmentController {
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
 
+        Path tmp = Files.createTempDirectory("");
+        Path attemptFile = Files.createFile(Paths.get(tmp.toString(), attemptArchive.getOriginalFilename()));
+        attemptArchive.transferTo(attemptFile);
+
         Student student = userService.getStudentDocumentOf(user);
 
         return submissionService
-                .addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
+                .addAttempt(assignmentId, student.getId(), attemptFile);
 
     }
 
