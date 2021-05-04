@@ -51,10 +51,10 @@ function InstructorPanel(): JSX.Element {
         formData.append("homeworkType", document.querySelector("input[name='homeworkType']:checked")["value"]);
         formData.append("dueDate", document.querySelector("input[type='date']")["value"]);
         formData.append("courseName", courseName);
-        formData.append("sections", JSON.stringify(sections.split(" ")));
+        sections.split(" ").forEach(section => formData.append("sections", section));
         formData.append("maxGrade", JSON.stringify(parseInt(maxGrade)));
         formData.append("maxAttempts", JSON.stringify(parseInt(maxAttempts)));
-        formData.append("styleTests", JSON.stringify(styleTests));
+        styleTests.forEach(test => formData.append("sections", test));
         formData.append("unitTestName", unitTestName);
         formData.append("unitTestTimeLimit", unitTestTimeLimit);
         formData.append("forbiddenStatements", JSON.stringify(forbiddenStatements.split("|")));
