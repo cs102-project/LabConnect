@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -20,6 +21,7 @@ public class NewAssignment {
     private String assignmentTitle;
     private String shortDescription;
     private String homeworkType;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
     private String courseName;
     private int[] sections;
