@@ -37,6 +37,7 @@ cd src/main/react-client && npm install && npm rebuild node-sass && npm run buil
 printf "\n\n"
 echo "Now building the backend, might take some time during the first run because of dependencies"
 printf "\n\n"
+rm "target/*.jar" 2>/dev/null
 ./mvnw package -Dmaven.test.skip=true
 printf "\n\n"
 echo "Now deploying the container composition, this takes some time and bandwidth the first time"
