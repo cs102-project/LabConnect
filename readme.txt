@@ -32,8 +32,8 @@ Deployment of the Project:
 Because LabConnect designed and implemented as a web application, its deployment cycle might be hard.
 Also it might be benefical to being cognizant about the fact that LabConnect's deployment process is designed
 for the maintainer of the project rather than end-user. For the deployment from the operating systems
-Fedora 33 or later and Ubuntu 20.04 or later (as it is tested), the script called "install.sh" 
-in the root folder of the project, should be used. For manuel and Windows deployment:
+Fedora 33 or later, Ubuntu 20.04 or later (as these OS's are tested) and MacOS, the script called "install.sh" 
+in the root folder of the project, should be used. For manuel (Windows) deployment:
 Following dependencies should be installed:
 - NodeJS and npm = https://nodejs.org/en/download/
 - Maven (optionally the maven wrapper scripts can be used: "mvnw.cmd" and "mvnw"): https://maven.apache.org/download.cgi (installation guide: https://maven.apache.org/install.html)
@@ -46,14 +46,15 @@ Commands for deployment:
 - (while all dependencies installed and docker back-end is working) "mvn package -Dmaven.test.skip=true && docker-compose up --build --force-recreate" => for deploying the project
 - "sudo docker-compose down -v" => for removing the docker components (in case of full redeployment)
 
-After the deployment project can be accessed from the browser on localhost port: 80
+After the deployment project can be accessed from the browser on localhost, port: 80
 
 Current Status:
 TODO
 
 Main Tools Used:
-Visual Studio Code, IntelliJ Idea, Drawio, LaTex, Docker and docker-compose (v3.7), NodeJs (v14.16.1), npm (v6.14.12), Spring Boot Framework (v2.4.4 [starter parent's version])
-React (v17.0.4). All other packages, libraries and different dependencies can be found in pom.xml and /src/main/react-client/package.json.
+Visual Studio Code, IntelliJ Idea, Drawio, Git and GitHub, MongoDB, Redis, Docker and docker-compose (v3.7), NodeJs (v14.16.1), npm (v6.14.12), 
+Spring Boot Framework (v2.4.4 [starter parent's version]), React (v17.0.4). All other packages, libraries and different 
+dependencies can be found in pom.xml and /src/main/react-client/package.json.
 
 Code organization:
 TODO
