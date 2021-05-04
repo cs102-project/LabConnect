@@ -32,7 +32,7 @@ Deployment of the Project:
 Because LabConnect designed and implemented as a web application, its deployment cycle might be hard.
 Also it might be benefical to being cognizant about the fact that LabConnect's deployment process is designed
 for the maintainer of the project rather than end-user. For the deployment from the operating systems
-Fedora 33 or later, Ubuntu 20.04 or later (as these OS's are tested) and MacOS, the script called "install.sh" 
+Fedora 33 or later, Ubuntu 20.04 or later and MacOS (as these OS's are tested), the script called "install.sh" 
 in the root folder of the project, should be used. For manuel (Windows) deployment:
 
 Following dependencies should be installed:
