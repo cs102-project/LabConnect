@@ -19,6 +19,9 @@ import me.labconnect.webapp.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -131,9 +134,6 @@ public class AssignmentController {
      * Creates/{@code POST} an assignment with given parameters
      *
      * @param authentication        Token for authentication request
-     * @param instructions          Instructions file for the assignment
-     * @param exampleImplementation The example implementation for the unit test
-     * @param testerClass           The tester class for the unit test
      * @param newAssignment         New assignment object
      * @return Constructed assignment object
      * @throws IOException         If processing the instructions fails
@@ -183,12 +183,12 @@ public class AssignmentController {
     /**
      * Gets the instructions file of the given assignment
      *
-     * @param assignmentId   Id of the assignment
+     * @param assignmentId Id of the assignment
      * @return Instruction file of the assignment
      * @throws IOException If there is not such assignment
      */
     @GetMapping("/api/assignments/{assignmentId}/download")
-    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId) throws IOException {
+    public ResponseEntity<Resource> getInstructionsFile(@PathVariable ObjectId assignmentId) throws IOException {
         Resource instructionsFile = assignmentService
                 .getInstructions(assignmentService.getById(assignmentId));
 
@@ -196,7 +196,7 @@ public class AssignmentController {
             throw new RuntimeException("An assignment with specified assignment ID does not exist");
         }
 
-        return instructionsFile;
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).header(HttpHeaders.CONTENT_DISPOSITION).body(instructionsFile);
     }
 
     /**
@@ -335,7 +335,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
     @Secured({"ROLE_TEACHING_ASSISTANT"})
-    public Resource getAttemptArchive(@PathVariable ObjectId assignmentId,
+    public ResponseEntity<Resource> getAttemptArchive(@PathVariable ObjectId assignmentId,
                                       @PathVariable ObjectId submissionId,
                                       @PathVariable int attemptId) throws IOException {
         Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
@@ -345,7 +345,7 @@ public class AssignmentController {
             throw new RuntimeException("The submission and the assignment do not match");
         }
 
-        return attemptArchive;
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip")).header(HttpHeaders.CONTENT_DISPOSITION).body(attemptArchive);
     }
 
 

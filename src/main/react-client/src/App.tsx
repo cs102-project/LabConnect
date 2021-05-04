@@ -56,7 +56,8 @@ const userData = {
     tests: [
         "TEST_A",
         "TEST_B",
-        "TEST_C"
+        "TEST_C",
+        "UNIT_TEST"
     ],
     submission: {
         attempts: [

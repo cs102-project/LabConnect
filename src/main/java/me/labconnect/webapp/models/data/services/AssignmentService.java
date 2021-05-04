@@ -85,7 +85,7 @@ public class AssignmentService {
      * @throws IOException If retrieving the instructions fails
      */
     public Resource getInstructions(Assignment assignment) throws IOException {
-        return new UrlResource(getInstructionsPath(assignment).toUri());
+        return new UrlResource(getInstructionsPath(assignment).resolve(assignment.getInstructionFilename()).toUri());
     }
 
     /**
