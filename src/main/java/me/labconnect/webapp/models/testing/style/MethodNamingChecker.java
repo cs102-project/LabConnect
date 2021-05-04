@@ -10,12 +10,14 @@ import java.util.regex.Pattern;
  * @author Berk Çakar
  * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
+ * @author Alp Ertan
  * @version 22.04.2021
  */
 public class MethodNamingChecker extends StyleChecker {
 
-    String[] identifiers = { "void", "int", "Integer", "double", "Double", "float", "Float", "long", "Long", "short",
-            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte", "String" };
+    String[] identifiers = {"void", "int", "Integer", "double", "Double", "float", "Float", "long",
+            "Long", "short",
+            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte", "String"};
 
     /**
      * Checks whether method names are conventional or not.
@@ -41,7 +43,7 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method extracts the method name from the given line.
-     * 
+     *
      * @param line is the line to be processed.
      * @return Name of the method.
      */
@@ -55,9 +57,7 @@ public class MethodNamingChecker extends StyleChecker {
         for (int charIndex = 0; charIndex < line.length(); charIndex++) {
             if (line.indexOf(identifiers[charIndex]) == 0) {
                 continue;
-            }
-
-            else if (line.indexOf(identifiers[charIndex]) > 0) {
+            } else if (line.indexOf(identifiers[charIndex]) > 0) {
                 returnTypeStartIndex = line.indexOf(identifiers[charIndex]);
                 break;
             }
@@ -67,9 +67,7 @@ public class MethodNamingChecker extends StyleChecker {
             currentChar = line.charAt(charIndex);
             if (!currentChar.equals(' ')) {
                 continue;
-            }
-
-            else {
+            } else {
                 returnTypeEndIndex = charIndex;
                 break;
             }
@@ -80,9 +78,7 @@ public class MethodNamingChecker extends StyleChecker {
 
             if (currentChar == ' ') {
                 continue;
-            }
-
-            else {
+            } else {
                 methodNameStartIndex = charIndex;
                 break;
             }
@@ -93,9 +89,7 @@ public class MethodNamingChecker extends StyleChecker {
 
             if (currentChar.equals(' ') || currentChar.equals('(')) {
                 break;
-            }
-
-            else {
+            } else {
                 sB += currentChar;
             }
         }
@@ -105,7 +99,7 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method checks whether the method name has a valid casing style or not.
-     * 
+     *
      * @param methodName is the methodName to be checked.
      * @return {@code true} if the naming is valid, otherwise {@code false}
      */
@@ -114,7 +108,8 @@ public class MethodNamingChecker extends StyleChecker {
         Matcher methodNamingMatcher;
         methodNamingPattern = Pattern.compile("^[a-z][a-zA-Z0-9].*");
         methodNamingMatcher = methodNamingPattern.matcher(methodName);
-        if (methodName.contains("|") || methodName.contains("&") || methodName.contains("+") || methodName.contains("-")
+        if (methodName.contains("|") || methodName.contains("&") || methodName.contains("+")
+                || methodName.contains("-")
                 || methodName.contains("*") || methodName.charAt(0) == '_' || methodName.charAt(0) == '$') {
             return false;
         } else {

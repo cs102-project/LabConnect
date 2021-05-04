@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 /**
  * Check if the header javadoc comment is written correctly.
- * 
+ *
  * @author Borga Haktan Bilen
+ * @author Alp Ertan
  * @version 27.04.2021
  */
 public class ProgramHeaderJavadocChecker extends StyleChecker {
 
     /**
      * Checks if the header javadoc comment is written correctly.
-     * 
+     *
      * @param codeFile The file. List of every line.
      * @return List of warning messages about the header.
      */
@@ -37,14 +38,15 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
                 errorList.add("Missing or incorrect version (@version) information in the header");
             }
         } else {
-            errorList.add("Header javadoc comment block is missing or incorrect in the beginning of the program");
+            errorList.add(
+                    "Header javadoc comment block is missing or incorrect in the beginning of the program");
         }
         return errorList;
     }
 
     /**
      * Finds the indices of the header javadoc comment block.
-     * 
+     *
      * @param codeFile The file. List of every line.
      * @return The indices of the header javadoc comment block.
      */
@@ -60,7 +62,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
                 endIndex = classIndex;
             }
         }
-        return new int[]{ startIndex, endIndex };
+        return new int[]{startIndex, endIndex};
     }
 
     /**

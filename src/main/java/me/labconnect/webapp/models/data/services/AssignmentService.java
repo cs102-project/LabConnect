@@ -1,5 +1,25 @@
 package me.labconnect.webapp.models.data.services;
 
+import me.labconnect.webapp.models.data.Assignment;
+import me.labconnect.webapp.models.data.Course;
+import me.labconnect.webapp.models.data.Submission;
+import me.labconnect.webapp.models.testing.BadExampleException;
+import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.testing.Tests;
+import me.labconnect.webapp.models.testing.UnitTest;
+import me.labconnect.webapp.models.testing.style.*;
+import me.labconnect.webapp.models.users.Instructor;
+import me.labconnect.webapp.models.users.TeachingAssistant;
+import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.repository.AssignmentRepository;
+import me.labconnect.webapp.repository.InstructorRepository;
+import me.labconnect.webapp.repository.StudentRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,27 +28,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import me.labconnect.webapp.models.testing.BadExampleException;
-import me.labconnect.webapp.models.testing.Tests;
-import me.labconnect.webapp.models.testing.UnitTest;
-import me.labconnect.webapp.models.testing.style.*;
-import me.labconnect.webapp.models.users.Instructor;
-import me.labconnect.webapp.models.users.TeachingAssistant;
-import me.labconnect.webapp.repository.InstructorRepository;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-
-import me.labconnect.webapp.models.data.Assignment;
-import me.labconnect.webapp.models.data.Course;
-import me.labconnect.webapp.models.data.Submission;
-import me.labconnect.webapp.models.testing.Tester;
-import me.labconnect.webapp.models.users.services.UserService;
-import me.labconnect.webapp.repository.AssignmentRepository;
-import me.labconnect.webapp.repository.StudentRepository;
 
 /**
  * A service that provides assignment creation and retrieval operations
@@ -58,16 +57,16 @@ public class AssignmentService {
      * Check if the given assignment is overdue
      *
      * @param assignment The assignment to check
-     * @return {@code true} if the given assignment's due date was before the
-     * current date, otherwise {@code false}
+     * @return {@code true} if the given assignment's due date was before the current date, otherwise
+     * {@code false}
      */
     public boolean isOverdue(Assignment assignment) {
         return assignment.getDueDate().after(new Date());
     }
 
     /**
-     * Return the absolute path to the instructions for the given assignment, creating
-     * the parent directory if it doesn't exist
+     * Return the absolute path to the instructions for the given assignment, creating the parent
+     * directory if it doesn't exist
      *
      * @param assignment The assignment to retrieve instructions from
      * @return The absolute path to the instructions for the given assignment
@@ -96,20 +95,21 @@ public class AssignmentService {
      * @param instructionPath The absolute path of the instruction file
      * @throws IOException If the instructions cannot be retrieved
      */
-    private void moveInstructionsFile(Assignment assignment, Path instructionPath) throws IOException {
+    private void moveInstructionsFile(Assignment assignment, Path instructionPath)
+            throws IOException {
 
-        Files.move(instructionPath, getInstructionsPath(assignment).resolve(instructionPath.getFileName()),
+        Files.move(instructionPath,
+                getInstructionsPath(assignment).resolve(instructionPath.getFileName()),
                 StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
-     * Creates a new assignment and assigns it to students taking the specified
-     * course in the specified sections
+     * Creates a new assignment and assigns it to students taking the specified course in the
+     * specified sections
      *
      * @param assignmentName        The name or title of the assignment
      * @param shortDescription      A short description of the assignment
-     * @param institution           The institution offering the course this assignment is
-     *                              a part of
+     * @param institution           The institution offering the course this assignment is a part of
      * @param instructionFile       The instruction file
      * @param dueDate               The due date for the assignment
      * @param sections              The sections this assignment is for
@@ -117,23 +117,26 @@ public class AssignmentService {
      * @param homeworkType          The type of the assignment
      * @param maxGrade              The maximum grade for this assignment
      * @param maxAttempts           The maximum attempts allowed for this assignment
-     * @param testNames             A list of the tests applied to the
-     *                              submissions
+     * @param testNames             A list of the tests applied to the submissions
      * @param unitTestName          The name of the unit test, if it is applied
-     * @param unitTestTimeLimit     The time limit for the unit test in milliseconds. A value of 0 indicates no time limit
+     * @param unitTestTimeLimit     The time limit for the unit test in milliseconds. A value of 0
+     *                              indicates no time limit
      * @param testerClass           The tester class for the unit test, if there's any
-     * @param exampleImplementation The example implementation from which the correct unit test output is generated
+     * @param exampleImplementation The example implementation from which the correct unit test output
+     *                              is generated
      * @param forbiddenStatements   The statements to check for in the {@link me.labconnect.webapp.models.testing.style.ForbiddenStatementChecker}
      *                              if applicable
      * @return The newly created assignment instance
      * @throws IOException         If processing the instructions fails
-     * @throws BadExampleException If the example implementation or the tester do not compile
-     *                             or generate a runtime error (Determined by a non-zero exit code)
+     * @throws BadExampleException If the example implementation or the tester do not compile or
+     *                             generate a runtime error (Determined by a non-zero exit code)
      */
-    public Assignment createAssignment(String assignmentName, String shortDescription, String institution, Path instructionFile,
+    public Assignment createAssignment(String assignmentName, String shortDescription,
+                                       String institution, Path instructionFile,
                                        Date dueDate,
                                        int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts,
-                                       List<Tests> testNames, String unitTestName, Long unitTestTimeLimit, Path exampleImplementation,
+                                       List<Tests> testNames, String unitTestName, Long unitTestTimeLimit,
+                                       Path exampleImplementation,
                                        Path testerClass, ArrayList<String> forbiddenStatements)
             throws IOException, BadExampleException {
 
@@ -156,7 +159,8 @@ public class AssignmentService {
                     testers.add(new OperatorsSpaceChecker());
                     break;
                 case UNIT_TEST:
-                    testers.add(new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
+                    testers.add(
+                            new UnitTest(unitTestName, testerClass, exampleImplementation, unitTestTimeLimit));
                     break;
                 case PARENTHESIS_SPACE:
                     testers.add(new ParenthesisSpaceChecker());
@@ -192,8 +196,10 @@ public class AssignmentService {
             courses.add(new Course(courseName, section));
         }
 
-        assignment = assignmentRepository.save(new Assignment(assignmentName, shortDescription, courses, homeworkType, dueDate, maxGrade,
-                maxAttempts, instructionFile.getFileName().toString(), new ArrayList<>(testers), new ArrayList<>()));
+        assignment = assignmentRepository.save(
+                new Assignment(assignmentName, shortDescription, courses, homeworkType, dueDate, maxGrade,
+                        maxAttempts, instructionFile.getFileName().toString(), new ArrayList<>(testers),
+                        new ArrayList<>()));
 
         moveInstructionsFile(assignment, instructionFile);
 
@@ -229,36 +235,41 @@ public class AssignmentService {
      * @return Assignments belonging to the given course
      */
     public Stream<Assignment> findByCourse(Course course) {
-        return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection()).stream();
+        return assignmentRepository.findByCourseSection(course.getCourse(), course.getSection())
+                .stream();
     }
 
     /**
      * Finds the assignment submissions of the assignment given by a specific instructor
      *
-     * @param instructor The instructor who gave the specified assignment
+     * @param instructor   The instructor who gave the specified assignment
      * @param assignmentId Id of the assignment
      * @return Submissions of the assignment given by the instructor
      */
-    public List<Submission> getAssignmentSubmissionsForInstructor(Instructor instructor, ObjectId assignmentId) {
+    public List<Submission> getAssignmentSubmissionsForInstructor(Instructor instructor,
+                                                                  ObjectId assignmentId) {
 
         Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow();
         List<ObjectId> submissionIds = assignment.getSubmissions();
 
-        return submissionIds.stream().flatMap(submissionService::getStreamById).distinct().collect(Collectors.toList());
+        return submissionIds.stream().flatMap(submissionService::getStreamById).distinct()
+                .collect(Collectors.toList());
 
     }
 
     /**
      * Finds the assignment submissions assigned to the given teaching assistant
      *
-     * @param assistant The teaching assistant who assigned to the specified assignment
+     * @param assistant    The teaching assistant who assigned to the specified assignment
      * @param assignmentId Id of the assignment
      * @return Assignment submissions assigned to the given teaching assistant
      */
-    public List<Submission> getAssignmentSubmissionsForTA(TeachingAssistant assistant, ObjectId assignmentId) {
+    public List<Submission> getAssignmentSubmissionsForTA(TeachingAssistant assistant,
+                                                          ObjectId assignmentId) {
 
         return assistant.getStudents().stream()
-                .map(studentId -> submissionService.getAssignmentSubmissionBySubmitter(assignmentId, studentId))
+                .map(studentId -> submissionService
+                        .getAssignmentSubmissionBySubmitter(assignmentId, studentId))
                 .filter(Optional::isPresent).map(Optional::orElseThrow).collect(Collectors.toList());
 
     }

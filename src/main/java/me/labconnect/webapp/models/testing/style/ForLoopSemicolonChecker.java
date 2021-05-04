@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * This class is for checking if there is a space after the semicolons in for loops.
  *
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 01.05.2021
  */
 public class ForLoopSemicolonChecker extends StyleChecker {
@@ -32,9 +33,10 @@ public class ForLoopSemicolonChecker extends StyleChecker {
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
-                for (int j = 0; j < codeFile.get(lineIndex).length(); j ++) {
-                    if( codeFile.get(lineIndex).charAt(j) == ';' && codeFile.get(lineIndex).charAt(j+1) != ' ' ) {
-                        errorList.add( codeFile.get(lineIndex) );
+                for (int j = 0; j < codeFile.get(lineIndex).length(); j++) {
+                    if (codeFile.get(lineIndex).charAt(j) == ';'
+                            && codeFile.get(lineIndex).charAt(j + 1) != ' ') {
+                        errorList.add(codeFile.get(lineIndex));
                     }
                 }
             }

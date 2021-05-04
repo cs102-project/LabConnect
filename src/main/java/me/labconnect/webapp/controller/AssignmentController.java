@@ -4,8 +4,8 @@ import me.labconnect.webapp.controller.httpmodels.NewAssignment;
 import me.labconnect.webapp.controller.httpmodels.NewNote;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
-import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.Feedback;
+import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
  * @author Borga Haktan Bilen
  * @author Berk Çakar
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @RestController
@@ -86,7 +87,8 @@ public class AssignmentController {
      * @return The requested assignment
      */
     @GetMapping("/api/assignments/{assignmentId}")
-    public Assignment getAssignment(@PathVariable ObjectId assignmentId, Authentication authentication) {
+    public Assignment getAssignment(@PathVariable ObjectId assignmentId,
+                                    Authentication authentication) {
 
         return assignmentService.getById(assignmentId);
 
@@ -119,8 +121,8 @@ public class AssignmentController {
      * @param newAssignment         New assignment object
      * @return Constructed assignment object
      * @throws IOException         If processing the instructions fails
-     * @throws BadExampleException If the example implementation or the tester do not compile
-     *                             or generate a runtime error (Determined by a non-zero exit code)
+     * @throws BadExampleException If the example implementation or the tester do not compile or
+     *                             generate a runtime error (Determined by a non-zero exit code)
      */
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
@@ -164,8 +166,10 @@ public class AssignmentController {
      * @return Instruction file of the assignment
      * @throws IOException If there is not such assignment
      */
-    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId, Authentication authentication) throws IOException {
-        Resource instructionsFile = assignmentService.getInstructions(assignmentService.getById(assignmentId));
+    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId,
+                                        Authentication authentication) throws IOException {
+        Resource instructionsFile = assignmentService
+                .getInstructions(assignmentService.getById(assignmentId));
 
         if (assignmentService.getById(assignmentId) == null) {
             throw new RuntimeException("An assignment with specified assignment ID does not exist");
@@ -183,7 +187,8 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions")
     @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT"})
-    public List<Submission> getSubmissions(Authentication authentication, @PathVariable ObjectId assignmentId) {
+    public List<Submission> getSubmissions(Authentication authentication,
+                                           @PathVariable ObjectId assignmentId) {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow();
@@ -191,14 +196,18 @@ public class AssignmentController {
         switch (user.getRoleType()) {
 
             case INSTRUCTOR:
-                return assignmentService.getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId);
+                return assignmentService
+                        .getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user),
+                                assignmentId);
 
             case TEACHING_ASSISTANT:
-                return assignmentService.getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
+                return assignmentService
+                        .getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
 
             case STUDENT:
                 return List.of(submissionService
-                        .getAssignmentSubmissionBySubmitter(assignmentId, userService.getStudentDocumentOf(user).getId()).orElseThrow());
+                        .getAssignmentSubmissionBySubmitter(assignmentId,
+                                userService.getStudentDocumentOf(user).getId()).orElseThrow());
 
             default:
                 throw new RuntimeException("Invalid role!");
@@ -228,7 +237,8 @@ public class AssignmentController {
 
         Student student = userService.getStudentDocumentOf(user);
 
-        return submissionService.addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
+        return submissionService
+                .addAttempt(assignmentId, student.getId(), attemptArchive.getResource().getFile().toPath());
 
     }
 
@@ -241,7 +251,8 @@ public class AssignmentController {
      * @return The list of attempts for the specified assignment and submission
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
-    public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
+    public List<Attempt> getAttempts(Authentication authentication,
+                                     @PathVariable ObjectId assignmentId,
                                      @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
@@ -257,7 +268,8 @@ public class AssignmentController {
      * @return Details of the specified submission attempt.
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
-    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId,
+                                     @PathVariable ObjectId submissionId,
                                      @PathVariable int attemptId) {
 
         return attemptService.getById(attemptId);
@@ -272,11 +284,13 @@ public class AssignmentController {
      * @param feedback     Feedback which is going to be added to the attempt
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
-    public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+    public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId,
+                                      @PathVariable ObjectId submissionId,
                                       @PathVariable int attemptId, @RequestBody Feedback feedback) {
         if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
             throw new RuntimeException(
-                    "The grade in the feedback is bigger than maximum allowed grade " + assignmentService.getById(assignmentId)
+                    "The grade in the feedback is bigger than maximum allowed grade " + assignmentService
+                            .getById(assignmentId)
                             .getMaxGrade());
         } else if (feedback.getGrade() < 0) {
             throw new RuntimeException("The grade in the feedback cannot be less than 0");
@@ -296,11 +310,13 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/download")
     @Secured({"ROLE_TEACHING_ASSISTANT"})
-    public Resource getAttemptArchive(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+    public Resource getAttemptArchive(@PathVariable ObjectId assignmentId,
+                                      @PathVariable ObjectId submissionId,
                                       @PathVariable int attemptId) throws IOException {
         Resource attemptArchive = attemptService.getAttemptArchive(attemptService.getById(attemptId));
 
-        if (assignmentService.getById(assignmentId).getSubmissions().stream().noneMatch(submissionId::equals)) {
+        if (assignmentService.getById(assignmentId).getSubmissions().stream()
+                .noneMatch(submissionId::equals)) {
             throw new RuntimeException("The submission and the assignment do not match");
         }
 
@@ -315,7 +331,8 @@ public class AssignmentController {
      * @throws IOException If retrieving the assignment fails
      */
     @GetMapping("/api/assignments({assignmentId}/download")
-    public Resource downloadAssignmentInstructions(@PathVariable ObjectId assignmentId) throws IOException {
+    public Resource downloadAssignmentInstructions(@PathVariable ObjectId assignmentId)
+            throws IOException {
         return assignmentService.getInstructions(assignmentService.getById(assignmentId));
     }
 
@@ -343,7 +360,8 @@ public class AssignmentController {
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public void addNote(Authentication authentication, @PathVariable int attemptId, @RequestBody NewNote note) {
+    public void addNote(Authentication authentication, @PathVariable int attemptId,
+                        @RequestBody NewNote note) {
 
         attemptService.setNoteOfAttempt(submissionService.getAttemptById(attemptId), note.getContent());
 

@@ -1,13 +1,12 @@
 package me.labconnect.webapp.models.users;
 
-import java.util.List;
-
+import me.labconnect.webapp.models.data.Course;
+import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.data.Course;
-import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
+import java.util.List;
 
 /**
  * A generic User of LabConnect
@@ -50,7 +49,8 @@ public class User {
      * @param email          The department of the user
      * @param password       The <b>encrypted</b> password of the user
      */
-    public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution, String institutionId, List<Course> courses,
+    public User(ObjectId roleDocumentId, LCUserRoleTypes roleType, String institution,
+                String institutionId, List<Course> courses,
                 String name, String email, String password) {
         this.roleDocumentId = roleDocumentId;
         this.roleType = roleType;
@@ -64,22 +64,47 @@ public class User {
 
     // Methods
 
+    /**
+     * Gets the object ID of the user
+     *
+     * @return Object ID of the user
+     */
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     * Gets the role type of the user
+     *
+     * @return Role type of the user
+     */
     public LCUserRoleTypes getRoleType() {
         return roleType;
     }
 
+    /**
+     * Gets the role document ID of the user
+     *
+     * @return Role document ID of the user
+     */
     public ObjectId getRoleDocumentId() {
         return roleDocumentId;
     }
 
+    /**
+     * Gets the e-mail of the user
+     *
+     * @return E-mail of the user
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Gets the password of the user (crypted)
+     *
+     * @return Password of the user (crypted)
+     */
     public String getPassword() {
         return password;
     }
@@ -119,8 +144,7 @@ public class User {
      * Check if the given user is this user
      *
      * @param other The object to check for equality
-     * @return {@code true} if the institution IDs are equal, otherwise
-     * {@code false}
+     * @return {@code true} if the institution IDs are equal, otherwise {@code false}
      */
     @Override
     public boolean equals(Object other) {

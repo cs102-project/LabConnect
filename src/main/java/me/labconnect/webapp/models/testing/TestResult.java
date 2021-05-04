@@ -1,14 +1,13 @@
 package me.labconnect.webapp.models.testing;
 
+import me.labconnect.webapp.models.testing.style.StyleChecker;
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import me.labconnect.webapp.models.testing.style.StyleChecker;
 
 /**
  * A model of a test result.
@@ -17,6 +16,7 @@ import me.labconnect.webapp.models.testing.style.StyleChecker;
  *
  * @author Vedat Eren Arıcan
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 30.04.2021
  * @see Tester
  */
@@ -36,7 +36,8 @@ public class TestResult {
      * @param submissionPath The filename of the submission tested
      */
     @PersistenceConstructor
-    public TestResult(Tester test, TestState state, ArrayList<String> testOutput, String submissionPath) {
+    public TestResult(Tester test, TestState state, ArrayList<String> testOutput,
+                      String submissionPath) {
         this.testOutput = testOutput;
         this.test = test;
         this.state = state;
@@ -51,10 +52,11 @@ public class TestResult {
      * @param output     The compiler or runtime output, depending on state
      * @param state      The test state
      * @throws IOException If an I/O error occurs while reading the output
-     * @apiNote If an error occurred during the compilation phase, use
-     * {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
+     * @apiNote If an error occurred during the compilation phase, use {@link
+     * TestResult#TestResult(UnitTest, Path, CompilationException)}
      */
-    public TestResult(UnitTest unitTest, Path submission, Path output, TestState state) throws IOException {
+    public TestResult(UnitTest unitTest, Path submission, Path output, TestState state)
+            throws IOException {
         this.test = unitTest;
         this.submissionPath = submission.toString();
         this.state = state;
@@ -73,15 +75,14 @@ public class TestResult {
      * Create a TestResult instance for a unit test
      *
      * @param unitTest       The unit test the instance is instantiated from
-     * @param submission     The submission used in the unit test, as an absolute
-     *                       path
-     * @param offendingLines The lines that are different from the example
-     *                       implementation
+     * @param submission     The submission used in the unit test, as an absolute path
+     * @param offendingLines The lines that are different from the example implementation
      * @param state          The test state
-     * @apiNote If an error occurred during the compilation phase, use
-     * {@link TestResult#TestResult(UnitTest, Path, CompilationException)}
+     * @apiNote If an error occurred during the compilation phase, use {@link
+     * TestResult#TestResult(UnitTest, Path, CompilationException)}
      */
-    public TestResult(UnitTest unitTest, Path submission, ArrayList<String> offendingLines, TestState state) {
+    public TestResult(UnitTest unitTest, Path submission, ArrayList<String> offendingLines,
+                      TestState state) {
         this.test = unitTest;
         this.submissionPath = submission.toString();
         this.state = state;
@@ -140,8 +141,7 @@ public class TestResult {
     /**
      * Return the compiler or runtime output, depending on the state
      *
-     * @return The compiler output in case of a compile-time error, otherwise the
-     * runtime output
+     * @return The compiler output in case of a compile-time error, otherwise the runtime output
      */
     public ArrayList<String> getOutput() {
         return testOutput;

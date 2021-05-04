@@ -1,13 +1,12 @@
 package me.labconnect.webapp.repository;
 
-import java.util.List;
-
+import me.labconnect.webapp.models.users.Student;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import me.labconnect.webapp.models.users.Student;
+import java.util.List;
 
 /**
  * Student repository interface

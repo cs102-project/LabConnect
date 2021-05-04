@@ -1,13 +1,13 @@
 package me.labconnect.webapp.models.livesession;
 
-import java.util.ArrayList;
-
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.users.Student;
 
+import java.util.ArrayList;
+
 /**
  * A live session with a singular queue of students
- * 
+ *
  * @author Alp Ertan
  * @author Berkan Şahin
  * @version 27.04.2021
@@ -23,7 +23,7 @@ public abstract class LiveSession {
 
     /**
      * Creates a new Live Session Manager with a determined assignment
-     * 
+     *
      * @param sessionID  The ID of the session
      * @param sessionLab The assignment of the lab
      */
@@ -39,10 +39,9 @@ public abstract class LiveSession {
      * Adds a new student to the live session queue
      * <p>
      * Any custom ordering of the queue must be implemented in this method
-     * 
+     *
      * @param newStudent The student being added to the session queue
      * @return {@code true} if the student can attend this session
-     * 
      * @implNote The default implementation always returns {@code true}
      */
     public boolean addStudent(Student newStudent) {
@@ -52,18 +51,18 @@ public abstract class LiveSession {
 
     /**
      * Retrieves, but <b>does not remove</b> the next student in the queue
-     * 
-     * @see LiveSession#proceedQueue()
+     *
      * @return next student in queue
+     * @see LiveSession#proceedQueue()
      */
     public Student getNextStudent() {
         return studentQueue.get(0);
     }
 
     /**
-     * Proceeds the student queue by removing the leftmost student, i.e, the student
-     * at the beginning of the underlying list
-     * 
+     * Proceeds the student queue by removing the leftmost student, i.e, the student at the beginning
+     * of the underlying list
+     *
      * @return The student that was removed
      */
     public Student proceedQueue() {
@@ -75,7 +74,7 @@ public abstract class LiveSession {
 
     /**
      * Returns the amount of the students waiting for a live session
-     * 
+     *
      * @return The number of students waiting in the queue
      */
     public int getWaitingStudentCount() {
@@ -93,7 +92,7 @@ public abstract class LiveSession {
      * Return the <b>ordered</b> list of the students currently in queue
      * <p>
      * The returned ArrayList is ordered from front to back
-     * 
+     *
      * @return The student queue as a list
      */
     public ArrayList<Student> getStudentQueue() {
@@ -102,7 +101,7 @@ public abstract class LiveSession {
 
     /**
      * Returns the assignment for this live session
-     * 
+     *
      * @return the assignment for this live session
      */
     public Assignment getSessionAssignment() {

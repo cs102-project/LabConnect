@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Representation of the feedback concept
- * 
+ *
  * @author Vedat Eren Arıcan
  * @author Borga Haktan Bilen
  */
@@ -16,7 +16,7 @@ public class Feedback {
 
     /**
      * Default constructor for the {@code Feedback} class
-     * 
+     *
      * @param grade   The grade of the attached (to feedback) work
      * @param content Content of the feedback
      * @param date    Date of the feedback
@@ -29,7 +29,7 @@ public class Feedback {
 
     /**
      * Gets the content of the feedback
-     * 
+     *
      * @return The feedback of the content
      */
     public String getContent() {
@@ -38,7 +38,7 @@ public class Feedback {
 
     /**
      * Gets the date of the feedback
-     * 
+     *
      * @return The date of the feedback
      */
     public Date getDate() {
@@ -47,7 +47,7 @@ public class Feedback {
 
     /**
      * Gets the grade of the feedback
-     * 
+     *
      * @return The grade of the feedback
      */
     public int getGrade() {

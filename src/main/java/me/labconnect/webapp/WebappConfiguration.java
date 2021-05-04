@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdDelegatingSerializer;
-
 import org.bson.types.ObjectId;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,27 +15,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Responsible of the configuration of web application
- * 
+ *
  * @author Berkan Şahin
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @Configuration
 public class WebappConfiguration implements WebMvcConfigurer {
-    
+
     @Bean
     @Primary
     public ObjectMapper jsonObjectIdMapper() {
-        
+
         SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addSerializer(ObjectId.class, new StdDelegatingSerializer(new ObjectIdConverter()));
-        
-        return new ObjectMapper().setSerializationInclusion(Include.NON_NULL).registerModule(simpleModule);
-        
+        simpleModule
+                .addSerializer(ObjectId.class, new StdDelegatingSerializer(new ObjectIdConverter()));
+
+        return new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+                .registerModule(simpleModule);
+
     }
-    
+
     /**
      * Adds resource handlers
-     * 
+     *
      * @param registry Serves static resources through Spring MVC
      */
     @Override
@@ -52,9 +54,8 @@ public class WebappConfiguration implements WebMvcConfigurer {
 
     /**
      * Adds view controllers to configurer (for set login condition)
-     * 
-     * @param registry Assists the registration of automated
-     *                               controllers
+     *
+     * @param registry Assists the registration of automated controllers
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -66,7 +67,8 @@ public class WebappConfiguration implements WebMvcConfigurer {
 
         // Catch all routes and forward them to React homepage. Prevent infinite loops
         // to index.html.
-        registry.addViewController("/**/{regex:^(?!index\\.html|.*\\.(?:" + excludedExtensions + ")).*$}")
+        registry
+                .addViewController("/**/{regex:^(?!index\\.html|.*\\.(?:" + excludedExtensions + ")).*$}")
                 .setViewName("forward:/index.html");
 
     }

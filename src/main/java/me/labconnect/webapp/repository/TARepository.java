@@ -1,11 +1,10 @@
 package me.labconnect.webapp.repository;
 
+import me.labconnect.webapp.models.users.TeachingAssistant;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import me.labconnect.webapp.models.users.TeachingAssistant;
 
 /**
  * Teaching assistant repository interface

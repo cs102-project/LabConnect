@@ -7,21 +7,22 @@ import java.util.Scanner;
 
 /**
  * An Exception thrown when compilation of user code fails
- * 
- * This exception contains a copy of the compiler output, which should be
- * provided as a {@link Path} object during instantiation.
- * 
+ * <p>
+ * This exception contains a copy of the compiler output, which should be provided as a {@link Path}
+ * object during instantiation.
+ *
  * @author Alp Ertan
  * @version 22.04.2021
  */
 public class CompilationException extends Exception {
+
     private static final long serialVersionUID = 1L;
 
     ArrayList<String> compilerOutput;
 
     /**
      * Create a new CompilerException from the given compiler output
-     * 
+     *
      * @param output The file containing the compiler's output
      * @throws IOException If reading the output file fails
      */
@@ -30,13 +31,13 @@ public class CompilationException extends Exception {
         while (scan.hasNextLine()) {
             compilerOutput.add(scan.nextLine());
         }
-        
+
         scan.close();
     }
 
     /**
      * Returns the compiler's output as an arraylist
-     * 
+     *
      * @return the compiler's output
      */
     public ArrayList<String> getCompilerOutput() {

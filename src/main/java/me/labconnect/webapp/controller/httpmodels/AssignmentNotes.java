@@ -1,14 +1,15 @@
 package me.labconnect.webapp.controller.httpmodels;
 
-import java.util.List;
-
 import org.bson.types.ObjectId;
+
+import java.util.List;
 
 /**
  * HTTP model class for {@code Note} objects
  *
  * @author Vedat Eren Arican
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 03.05.2021
  */
 public class AssignmentNotes {
@@ -22,7 +23,8 @@ public class AssignmentNotes {
      *
      * @param content String content of the {@code Note} object
      */
-    public AssignmentNotes(String assignmentTitle, ObjectId assignmentId, List<AttemptNote> attemptNotes) {
+    public AssignmentNotes(String assignmentTitle, ObjectId assignmentId,
+                           List<AttemptNote> attemptNotes) {
         this.assignmentTitle = assignmentTitle;
         this.assignmentId = assignmentId;
         this.attemptNotes = attemptNotes;
@@ -36,33 +38,33 @@ public class AssignmentNotes {
     public String getAssignmentTitle() {
         return assignmentTitle;
     }
-    
+
     public List<AttemptNote> getAttemptNotes() {
         return attemptNotes;
     }
-    
+
     public ObjectId getAssignmentId() {
         return assignmentId;
     }
-    
+
     public static class AttemptNote {
-        
+
         private String note;
         private int attempt;
-        
+
         public AttemptNote(String note, int attempt) {
             this.note = note;
             this.attempt = attempt;
         }
-        
+
         public String getNote() {
             return note;
         }
-        
+
         public int getAttempt() {
             return attempt;
         }
-        
+
     }
-    
+
 }

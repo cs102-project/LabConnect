@@ -2,17 +2,15 @@ package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.controller.httpmodels.AssignmentNotes;
 import me.labconnect.webapp.models.data.Announcement;
-import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.models.users.LCUserDetails;
+import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
-
+import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import me.labconnect.webapp.models.users.LCUserDetails;
-import me.labconnect.webapp.models.users.User;
-import me.labconnect.webapp.repository.UserRepository;
 
 import java.util.List;
 
@@ -21,6 +19,7 @@ import java.util.List;
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 02.05.2021
  */
 @RestController
@@ -57,6 +56,7 @@ public class SelfController {
 
     /**
      * Gets the detailed data of the user
+     *
      * @param authentication Token for authentication request
      * @return Data belonging to the user
      */

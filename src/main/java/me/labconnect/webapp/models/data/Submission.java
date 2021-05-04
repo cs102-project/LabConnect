@@ -1,14 +1,14 @@
 package me.labconnect.webapp.models.data;
 
-import java.util.List;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
  * An aggregation of attempts for a certain assignment
- * 
+ *
  * @author Berkan Şahin
  * @version 03.05.2021
  */
@@ -24,7 +24,7 @@ public class Submission {
 
     /**
      * Default constructor for the {@code Submission} class
-     * 
+     *
      * @param attempts    List of attempts of the submission
      * @param submitterId Id of the submitter
      */
@@ -35,7 +35,7 @@ public class Submission {
 
     /**
      * Gets the unique object id of the submission
-     * 
+     *
      * @return Object id of the submission
      */
     public ObjectId getId() {
@@ -44,7 +44,7 @@ public class Submission {
 
     /**
      * Gets the list of attempts of the submission
-     * 
+     *
      * @return List of attempts
      */
     public List<Attempt> getAttempts() {
@@ -53,7 +53,7 @@ public class Submission {
 
     /**
      * Gets the unique object id of the submitter
-     * 
+     *
      * @return The object id of the submitter
      */
     public ObjectId getSubmitterId() {
@@ -62,7 +62,7 @@ public class Submission {
 
     /**
      * Adds the attempt to the submission
-     * 
+     *
      * @param attempt The attempt which is going to be added
      */
     public void addAttempt(Attempt attempt) {
