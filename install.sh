@@ -7,7 +7,15 @@
 # Since this program relies on node.js and Docker, it is not recommended to run it on Windows
 # Please use a virtual machine or any other means of running GNU/Linux or macOS if that is the case
 
-which apt >/dev/null 2>&1 && PKGMAN=apt || which dnf >/dev/null 2>&1 && PKGMAN=dnf || which brew >/dev/null 2>&1 && PKGMAN=brew || echo "OS not supported" && exit 1
+if which apt >/dev/null 2>&1
+then PKGMAN=apt
+elif which dnf >/dev/null 2>&1
+then PKGMAN=dnf
+elif which brew >/dev/null 2>&1
+then PKGMAN=brew
+else echo "OS not supported" && exit 1
+fi
+
 echo "Updating the system, just in case"
 [ $PKGMAN = "apt" ] && sudo apt update && sudo apt -y upgrade
 [ $PKGMAN = "dnf" ] && sudo dnf -y update
