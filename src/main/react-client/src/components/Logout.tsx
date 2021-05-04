@@ -4,14 +4,7 @@ import "../scss/login.scss";
 function Logout(): JSX.Element {
     
     fetch('/logout', {
-        method: 'POST',
-        headers: {
-            'X-XSRF-TOKEN':
-                document.cookie
-                    .split('; ')
-                    .find((row) => row.startsWith('XSRF-TOKEN='))
-                    ?.split('=')[1] || ''
-        },
+        method: 'POST'
     });
     
     useEffect(() => { 

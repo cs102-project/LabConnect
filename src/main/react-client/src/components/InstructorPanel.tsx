@@ -25,13 +25,6 @@ function InstructorPanel(): JSX.Element {
         
         fetch("/api/instructor/announcements", {
             method: "POST",
-            headers: {
-                'X-XSRF-TOKEN':
-                    document.cookie
-                        .split('; ')
-                        .find((row) => row.startsWith('XSRF-TOKEN='))
-                        ?.split('=')[1] || ''
-            },
             body: formData
         });
         

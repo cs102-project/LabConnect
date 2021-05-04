@@ -17,13 +17,6 @@ function AttemptDetails(): JSX.Element {
         
         fetch(`/assignments/${params.assignmentid}/submissions/${params.submissionid}/attempts/${params.attemptid}`, {
             method: "POST",
-            headers: {
-                'X-XSRF-TOKEN':
-                    document.cookie
-                        .split('; ')
-                        .find((row) => row.startsWith('XSRF-TOKEN='))
-                        ?.split('=')[1] || ''
-            },
             body: JSON.stringify(notes)
         });
         

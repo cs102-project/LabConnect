@@ -19,13 +19,6 @@ function SubmissionDetails(): JSX.Element {
         
         fetch(`/assignments/${params.assignmentid}/submissions`, {
             method: "POST",
-            headers: {
-                'X-XSRF-TOKEN':
-                    document.cookie
-                        .split('; ')
-                        .find((row) => row.startsWith('XSRF-TOKEN='))
-                        ?.split('=')[1] || ''
-            },
             body: formData
         });
         
