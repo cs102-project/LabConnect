@@ -44,6 +44,12 @@ public class UserService {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
+    /**
+     * Get the corresponding TeachingAssistant document for this user
+     *
+     * @param user The user to retrieve its document from
+     * @return The TeachingAssistant document if the user has a Teaching Assistant role
+     */
     public TeachingAssistant getTADocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.TEACHING_ASSISTANT) {
             throw new NoSuchElementException("Mismatch in requested user role document.");
@@ -51,6 +57,12 @@ public class UserService {
         return taRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
 
+    /**
+     * Get the corresponding Tutor document for this user
+     *
+     * @param user The user to retrieve its document from
+     * @return The Tutor document if the user has a tutor role
+     */
     public Tutor getTutorDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.TUTOR) {
             throw new NoSuchElementException("Mismatch in requested user role document.");
@@ -58,6 +70,12 @@ public class UserService {
         return tutorRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
 
+    /**
+     * Get the corresponding Student document for this user
+     *
+     * @param user The user to retrieve its document from
+     * @return The student document if the user has a student role
+     */
     public Student getStudentDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.STUDENT) {
             throw new NoSuchElementException("Mismatch in requested user role document.");
@@ -65,6 +83,12 @@ public class UserService {
         return studentRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
 
+    /**
+     * Get the corresponding Instructor document for this user
+     *
+     * @param user The user to retrieve its document from
+     * @return The Instructor document if the user has an instructor role
+     */
     public Instructor getInstructorDocumentOf(User user) {
         if (user.getRoleType() != LCUserRoleTypes.INSTRUCTOR) {
             throw new NoSuchElementException("Mismatch in requested user role document.");
@@ -72,6 +96,13 @@ public class UserService {
         return instructorRepository.findById(user.getRoleDocumentId()).orElseThrow();
     }
 
+    /**
+     * Retrieves all the students from a particular institution taking a particular course
+     *
+     * @param institution The <b>case-sensitive</b> name of the institution
+     * @param course      The course object denoting the course name and the section
+     * @return The list of the students taking said course
+     */
     public List<Student> getStudentsOfCourseSection(String institution, Course course) {
 
         return userRepository.findByCourseSection(institution, course.getCourse(), course.getSection())
@@ -82,6 +113,13 @@ public class UserService {
 
     }
 
+    /**
+     * Retrieve the instructor of the given course in the given institution
+     *
+     * @param institution The <b>case-sensitive</b> name of the institution
+     * @param course      The course object denoting the course name and the section
+     * @return The instructor teaching said course
+     */
     public Instructor getInstructorOfCourseSection(String institution, Course course) {
 
         return userRepository.findByCourseSection(institution, course.getCourse(), course.getSection())
@@ -92,6 +130,12 @@ public class UserService {
 
     }
 
+    /**
+     * Retrieve the announcements that are relevant to the specified user
+     *
+     * @param user The user to retrieve announcements for
+     * @return The list of announcements for the courses this user attends/teaches
+     */
     public List<Announcement> getAnnouncementsOfUser(User user) {
 
         List<Announcement> announcements = new ArrayList<>();
@@ -104,6 +148,12 @@ public class UserService {
 
     }
 
+    /**
+     * Get the list of self-notes authored by the given student
+     *
+     * @param student The student to retrieve notes of
+     * @return The list of assignment notes authored by the given student
+     */
     public List<AssignmentNotes> getNotesForStudent(Student student) {
 
         List<AssignmentNotes> result = new ArrayList<>();
@@ -119,7 +169,7 @@ public class UserService {
                 attemptNotes.add(new AttemptNote(attempt.getNote(), attempt.getId()));
             }
 
-            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).get().getTitle(),
+            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).orElseThrow().getTitle(),
                     assignmentId, attemptNotes));
 
         }

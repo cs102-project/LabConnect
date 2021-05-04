@@ -27,7 +27,7 @@ public class IndentationChecker extends StyleChecker {
         boolean casePresent = false;
         boolean defaultPresent = false;
         boolean lineWrapped = false;
-        boolean sameLineAdded = false;
+        boolean sameLineAdded;
         for (int i = 0; i < codeFile.size(); i++) {
             sameLineAdded = false;
             String line = codeFile.get(i);
@@ -65,7 +65,7 @@ public class IndentationChecker extends StyleChecker {
                 if (!lineWrapped) {
                     for (int j = 0; j < INDENTATION_SPACE * braces; j++) {
                         if (line.charAt(j) != ' ') {
-                            errorList.add(codeFile.get(i));
+                            errorList.add(codeFile.get(i) + " [at line: " + i + 1 + "]" );
                             sameLineAdded = true;
                             break;
                         }
@@ -77,7 +77,7 @@ public class IndentationChecker extends StyleChecker {
                         // if ( errorList.indexOf( codeFile.get(i) ) == -1 ) {
                         if (i > 0) {
                             //if ( !(codeFile.get( i - 1 ).length() > 80) && !(codeFile.get(i).trim().endsWith(";"))) {
-                            errorList.add(codeFile.get(i));
+                            errorList.add(codeFile.get(i) + " [at line: " + i + 1 + "]" );
                             //}
                         }
                         // }

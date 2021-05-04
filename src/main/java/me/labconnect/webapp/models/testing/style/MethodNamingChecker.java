@@ -33,7 +33,7 @@ public class MethodNamingChecker extends StyleChecker {
             if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
                     && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
                 if (!checkCasing(extractMethodName(codeFile.get(lineIndex)))) {
-                    errorList.add(codeFile.get(lineIndex));
+                    errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                 }
             }
         }

@@ -21,7 +21,7 @@ public class InstructorService {
     /**
      * Adds an announcement from the given instructor
      *
-     * @param instructor   The instructor who gives the announcemet
+     * @param instructor   The instructor who gives the announcement
      * @param announcement The announcement which is going to be declared
      */
     public void addAnnouncementFrom(Instructor instructor, Announcement announcement) {

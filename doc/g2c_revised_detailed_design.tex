@@ -17,13 +17,16 @@
 % Setting margins
 \usepackage[a4paper, left=2cm, right=2cm, top=1.75cm, bottom=1.75cm, includefoot]{geometry}
 
+% lscape.sty Produce landscape pages in a (mainly) portrait document.
+\usepackage{pdflscape}
+
 % Table helper packages
 \usepackage{multirow, multicol}
 \usepackage{makecell}
 \usepackage{array}
 \usepackage{nicematrix}
 \usepackage{adjustbox}
-\usepackage{caption}
+\usepackage[justification=centering]{caption}
 %\usepackage{tabularx} % Not needed currently, but has a few nice options
 %\usepackage{wrapfig} % Floating figures/tables
 
@@ -177,18 +180,72 @@
     perform the necessary queries and subsequent actions to the data as necessary,
     essentially grouping database queries logically. Additionally, model classes are also responsible for serving
     functionallity (service layer) to the controller layer which then controller layer handles HTTP requests (GET, POST, DELETE, PUT) in order
-    to create a REST API. In the class diagram below [\ref{fig:class-diagram}], all the Java classes,
-    interfaces and enums are showed with their relations. However, because of the magnitude of the project
-    the diagram below might not be clear enough to examine. Thus, we uploaded the UML diagram
+    to create a REST API. In the first class diagram [\ref{fig:straight-class-diagram}] below, all model Java classes can be seen with their
+    methods and fields with inheritance relations (excluding any other hierarchical relation). Below the class diagram, hierarchical grouping of model
+    classes can be seen (figures from 3 to 10). At the very end, compresed UML diagram can be seen [\ref{fig:class-diagram}] with all the Java classes,
+    interfaces, enums and their relations. However, because of the magnitude of the project
+    the diagrams below might not be clear enough to examine. Thus, we uploaded the UML diagrams (compresed and uncompresed versions)
     (with magnification script) and Javadocs to the \href{http://www.labconnect.me}{LabConnect} website under a new distinct subdomain for convience.
-    Links for these are respectively: \href{http://docs.labconnect.me/uml/}{http://docs.labconnect.me/uml/}
-    and \href{http://docs.labconnect.me/}{http://docs.labconnect.me/}.
+    Links for these are respectively: \href{http://docs.labconnect.me/uml/}{http://docs.labconnect.me/uml/},
+    \href{http://docs.labconnect.me/umlwc/}{http://docs.labconnect.me/umlwc/} and \href{http://docs.labconnect.me/}{http://docs.labconnect.me/}.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{UML.jpg}
-        \caption{UML Class Diagram for LabConnect}~\label{fig:class-diagram}
+        \includegraphics[width=\textwidth]{uml-straight.png}
+        \caption{UML Class Diagram without Relations for LabConnect}~\label{fig:straight-class-diagram}
     \end{figure}
+
+    \pagebreak
+
+        \begin{figure}[H]
+            \resizebox{0.18\textwidth}{!}{\minipage{0.20\textwidth}
+        \includegraphics[width=\linewidth]{small-groups/app-config.jpg}
+        \caption{Configurator Classes}
+        \endminipage}\hfill
+        \resizebox{0.17\textwidth}{!}{\minipage{0.20\textwidth}
+        \includegraphics[width=\linewidth]{small-groups/assignment.jpg}
+        \caption{Course Classes}
+        \endminipage}\hfill
+        \resizebox{0.18\textwidth}{!}{\minipage{0.20\textwidth}
+        \includegraphics[width=\linewidth]{small-groups/controllers.jpg}
+        \caption{Controller Layer Classes}
+        \endminipage}\hfill
+        \resizebox{0.17\textwidth}{!}{\minipage{0.20\textwidth}%
+        \includegraphics[width=\linewidth]{small-groups/live-session.jpg}
+        \caption{Assignment Function Classes}
+        \endminipage}
+        \end{figure}
+
+        \begin{figure}[H]
+            \resizebox{0.19\textwidth}{!}{\minipage{0.24\textwidth}
+        \includegraphics[width=\linewidth]{small-groups/repositories.jpg}
+        \caption{Repository Classes}
+        \endminipage}\hfill
+        \resizebox{0.20\textwidth}{!}{\minipage{0.24\textwidth}
+        \includegraphics[width=\linewidth]{small-groups/service-layer.jpg}
+        \caption{Service Layer Classes}
+        \endminipage}\hfill
+        \resizebox{0.23\textwidth}{!}{\minipage{0.24\textwidth}%
+        \includegraphics[width=\linewidth]{small-groups/users.jpg}
+        \caption{User Classes}
+        \endminipage}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{small-groups/testing.jpg}
+                \caption{Testing Classes}
+        \end{figure}
+
+    \pagebreak
+
+    \begin{landscape}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\dimexpr\paperheight-6cm\relax]{UML.jpg}
+            \caption{UML Class Diagram with Relations for LabConnect}~\label{fig:class-diagram}
+        \end{figure}
+    \end{landscape}
 
     \pagebreak
 

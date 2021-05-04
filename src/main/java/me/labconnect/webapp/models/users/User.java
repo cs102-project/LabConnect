@@ -101,9 +101,9 @@ public class User {
     }
 
     /**
-     * Gets the password of the user (crypted)
+     * Gets the encrypted password of the user
      *
-     * @return Password of the user (crypted)
+     * @return Encrypted password of the user
      */
     public String getPassword() {
         return password;

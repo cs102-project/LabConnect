@@ -10,6 +10,7 @@ import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.testing.BadExampleException;
+import me.labconnect.webapp.models.testing.Tests;
 import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,6 +114,17 @@ public class AssignmentController {
     }
 
     /**
+     * Returns the list of tests currently available for new assignments
+     *
+     * @return A list of all {@link Tests} enums
+     */
+    @GetMapping("/api/assignments/tests")
+    @Secured({"ROLE_INSTRUCTOR"})
+    public List<Tests> getAvailableTests() {
+        return Arrays.asList(Tests.values());
+    }
+
+    /**
      * Creates/{@code POST} an assignment with given parameters
      *
      * @param authentication        Token for authentication request
@@ -125,7 +138,7 @@ public class AssignmentController {
      *                             generate a runtime error (Determined by a non-zero exit code)
      */
     @PostMapping("/api/assignments")
-    @Secured("ROLE_INSTRUCTOR")
+    @Secured({"ROLE_INSTRUCTOR"})
     public Assignment createAssignment(Authentication authentication,
                                        @ModelAttribute NewAssignment newAssignment) throws IOException, BadExampleException {
 
@@ -159,12 +172,11 @@ public class AssignmentController {
      * Gets the instructions file of the given assignment
      *
      * @param assignmentId   Id of the assignment
-     * @param authentication Token for authentication request
      * @return Instruction file of the assignment
      * @throws IOException If there is not such assignment
      */
-    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId,
-                                        Authentication authentication) throws IOException {
+    @GetMapping("/api/assignments/{assignmentId}/download")
+    public Resource getInstructionsFile(@PathVariable ObjectId assignmentId) throws IOException {
         Resource instructionsFile = assignmentService
                 .getInstructions(assignmentService.getById(assignmentId));
 
@@ -320,18 +332,6 @@ public class AssignmentController {
         return attemptArchive;
     }
 
-    /**
-     * Retrieves instructions for the assignment with the given ID as a downloadable file
-     *
-     * @param assignmentId The unique ID of the assignment
-     * @return The instructions as a ready to download resource
-     * @throws IOException If retrieving the assignment fails
-     */
-    @GetMapping("/api/assignments({assignmentId}/download")
-    public Resource downloadAssignmentInstructions(@PathVariable ObjectId assignmentId)
-            throws IOException {
-        return assignmentService.getInstructions(assignmentService.getById(assignmentId));
-    }
 
     /**
      * Gets the note written for specific attempt

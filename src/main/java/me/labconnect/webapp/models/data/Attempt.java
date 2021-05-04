@@ -57,15 +57,14 @@ public class Attempt {
     }
 
     /**
-     * Give feedback for this attempt
+     * Give feedback and a grade to this attempt
      *
-     * @param feedback The feedback as a list of lines
+     * @param feedback The feedback as a Feedback object
      */
     public void giveFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
 
-    // TODO fix the javadocs for feedback methods
 
     /**
      * Gets the feedback for this attempt
@@ -115,8 +114,8 @@ public class Attempt {
     /**
      * Checks whether two attempt objects are the same or not
      *
-     * @param o The attempt object to compare with
-     * @return {code true} if two attempt objects are the same, {@code false} otherwise
+     * @param obj The attempt object to compare with
+     * @return {@code true} if two attempt objects are the same, {@code false} otherwise
      */
     @Override
     public boolean equals(Object obj) {

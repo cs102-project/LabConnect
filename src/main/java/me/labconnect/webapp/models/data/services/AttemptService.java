@@ -14,12 +14,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * A service that provides operations for creation, modification and retrieval of Attempts
@@ -114,6 +114,33 @@ public class AttemptService {
     }
 
     /**
+     * Return the contents of each java file in a given attempt mapped to the file name
+     *
+     * @param attempt The attempt to retrieve contents from
+     * @return A mapping of file names to source code
+     * @throws IOException If extracting the attempt archive fails
+     */
+    public Map<String, List<String>> getAttemptContents(Attempt attempt) throws IOException {
+        Path extractedAttempt = extractAttempt(getAttemptArchive(attempt).getFile().toPath());
+        Map<String, List<String>> sourceCodeMap = new HashMap<>();
+
+        Files.walk(extractedAttempt).filter(f -> f.toString().endsWith(".java")).forEach(javaFile -> {
+            List<String> fileContents = new ArrayList<>();
+            String fileName = extractedAttempt.relativize(javaFile).toString();
+            try (Scanner scan = new Scanner(javaFile.toFile())) {
+                while (scan.hasNextLine()) {
+                    fileContents.add(scan.nextLine());
+                }
+                sourceCodeMap.put(fileName, fileContents);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return sourceCodeMap;
+    }
+
+    /**
      * Get the source code archive for this attempt and return it as a serveable Resource
      *
      * @param attempt The attempt
@@ -134,13 +161,12 @@ public class AttemptService {
         );
 
     }
-    // TODO fix javadoc for feedbacks
 
     /**
      * Give an attempt feedback and update its database entry accordingly
      *
      * @param attempt  The attempt to give feedback to
-     * @param feedback The feedback as a string
+     * @param feedback The feedback to give
      * @return The attempt with the feedback added
      */
     public Attempt giveFeedback(Attempt attempt, Feedback feedback) {
@@ -149,6 +175,12 @@ public class AttemptService {
         return attempt;
     }
 
+    /**
+     * Set the note for the attempt
+     *
+     * @param attempt The attempt to add a note to
+     * @param note The note to add
+     */
     public void setNoteOfAttempt(Attempt attempt, String note) {
         attempt.setNote(note);
         updateSubmissionOf(attempt);

@@ -24,7 +24,7 @@ public class ConstantNamingChecker extends StyleChecker {
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
             if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
                 if (!isAllCaps(extractConstant(codeFile.get(lineIndex)))) {
-                    errorList.add(codeFile.get(lineIndex));
+                    errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
                 }
             }
         }
