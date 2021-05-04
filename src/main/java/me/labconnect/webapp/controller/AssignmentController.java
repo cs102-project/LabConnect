@@ -127,10 +127,7 @@ public class AssignmentController {
     @PostMapping("/api/assignments")
     @Secured("ROLE_INSTRUCTOR")
     public Assignment createAssignment(Authentication authentication,
-                                       @RequestParam("instructions-file") MultipartFile instructions,
-                                       @RequestParam("example-implementation") MultipartFile exampleImplementation,
-                                       @RequestParam("tester-class") MultipartFile testerClass,
-                                       @RequestBody NewAssignment newAssignment) throws IOException, BadExampleException {
+                                       @ModelAttribute NewAssignment newAssignment) throws IOException, BadExampleException {
 
         LCUserDetails userDetails = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getId()).orElseThrow();
@@ -141,7 +138,7 @@ public class AssignmentController {
                 newAssignment.getAssignmentTitle(),
                 newAssignment.getShortDescription(),
                 user.getInstitution(),
-                instructions.getResource().getFile().toPath(),
+                newAssignment.getInstructionsFile().getResource().getFile().toPath(),
                 newAssignment.getDueDate(),
                 newAssignment.getSections(),
                 newAssignment.getCourseName(),
@@ -151,8 +148,8 @@ public class AssignmentController {
                 newAssignment.getStyleTests(),
                 newAssignment.getUnitTestName(),
                 newAssignment.getUnitTestTimeLimit(),
-                exampleImplementation.getResource().getFile().toPath(),
-                testerClass.getResource().getFile().toPath(),
+                newAssignment.getExampleImplementation().getResource().getFile().toPath(),
+                newAssignment.getTesterClass().getResource().getFile().toPath(),
                 newAssignment.getForbiddenStatements()
         );
 

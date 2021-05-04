@@ -53,6 +53,59 @@ const userData = {
         name: "CS 102",
         section: "2"
     },
+    tests: [
+        "TEST_A",
+        "TEST_B",
+        "TEST_C"
+    ],
+    submission: {
+        attempts: [
+            {
+                id: 1,
+                attemptFilename: "Some_file.zip",
+                note: "The note of this attempt",
+                testResults: [
+                    {
+                        test: "Some Test Name",
+                        state: "SUCCESS",
+                        testOutput: ["Some lines here", "and here"]
+                    },
+                    {
+                        test: "Some Test Name",
+                        state: "FAIL_REASON",
+                        testOutput: ["Some lines here", "and here"]
+                    }
+                ],
+                feedback: {
+                    grade: 80,
+                    content: "Could be improved",
+                    date: "A past time"
+                }
+            },
+            {
+                id: 2,
+                attemptFilename: "Some_file_v2.zip",
+                note: "The note of this attempt",
+                testResults: [
+                    {
+                        test: "Some Test Name",
+                        state: "SUCCESS",
+                        testOutput: ["Some lines here", "and here"]
+                    },
+                    {
+                        test: "Some Test Name",
+                        state: "FAIL_REASON",
+                        testOutput: ["Some lines here", "and here"]
+                    }
+                ],
+                feedback: {
+                    grade: 100,
+                    content: "improved",
+                    date: "A past time"
+                }
+            }
+        ]
+    },
     assignments: [
         {
             title: "Lab03 | Introduction to GUI in Java",

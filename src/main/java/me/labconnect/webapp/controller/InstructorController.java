@@ -8,10 +8,17 @@ import me.labconnect.webapp.models.users.services.InstructorService;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.UserRepository;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * REST controller for handling {@code HTTP} requests for instructor specific functions
@@ -37,8 +44,10 @@ public class InstructorController {
      * @param announcement   The announcement which is going to be added
      */
     @PostMapping("/api/instructor/announcements")
+    @Secured({ "ROLE_INSTRUCTOR" })
+    @ResponseStatus(value=HttpStatus.OK)
     public void addAnnouncement(Authentication authentication,
-                                @RequestBody Announcement announcement) {
+                                @RequestParam(value = "announcementContent") String content) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             return;
@@ -53,7 +62,7 @@ public class InstructorController {
 
         Instructor instructor = userService.getInstructorDocumentOf(user);
 
-        instructorService.addAnnouncementFrom(instructor, announcement);
+        instructorService.addAnnouncementFrom(instructor, new Announcement(content, new Date(), user.getName()));
 
     }
 

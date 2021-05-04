@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * HTTP model class for {@code NewAssignment} objects
  *
@@ -27,7 +29,10 @@ public class NewAssignment {
     private String unitTestName;
     private Long unitTestTimeLimit;
     private ArrayList<String> forbiddenStatements;
-
+    private MultipartFile instructionsFile;
+    private MultipartFile exampleImplementation;
+    private MultipartFile testerClass;
+    
     /**
      * Default constructor for {@code NewAssignment} takes the required information for an assignment
      *
@@ -47,7 +52,8 @@ public class NewAssignment {
     public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType,
                          Date dueDate, String courseName,
                          int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
-                         Long unitTestTimeLimit, ArrayList<String> forbiddenStatements) {
+                         Long unitTestTimeLimit, ArrayList<String> forbiddenStatements, 
+                         MultipartFile instructionsFile, MultipartFile exampleImplementation, MultipartFile testerClass) {
         this.assignmentTitle = assignmentTitle;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
@@ -60,6 +66,9 @@ public class NewAssignment {
         this.unitTestName = unitTestName;
         this.unitTestTimeLimit = unitTestTimeLimit;
         this.forbiddenStatements = forbiddenStatements;
+        this.instructionsFile = instructionsFile;
+        this.exampleImplementation = exampleImplementation;
+        this.testerClass = testerClass;
     }
 
     /**
@@ -169,4 +178,17 @@ public class NewAssignment {
     public ArrayList<String> getForbiddenStatements() {
         return forbiddenStatements;
     }
+    
+    public MultipartFile getExampleImplementation() {
+        return exampleImplementation;
+    }
+    
+    public MultipartFile getInstructionsFile() {
+        return instructionsFile;
+    }
+    
+    public MultipartFile getTesterClass() {
+        return testerClass;
+    }
+    
 }

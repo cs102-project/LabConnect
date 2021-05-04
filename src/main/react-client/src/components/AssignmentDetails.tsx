@@ -34,6 +34,7 @@ function AssignmentDetails(): JSX.Element {
             
             {/* If the user is TA/instructor, add a list of appropiate submission links here */}
             
+            
         </div>
     );
     
