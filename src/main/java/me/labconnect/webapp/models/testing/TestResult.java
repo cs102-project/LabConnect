@@ -161,7 +161,7 @@ public class TestResult {
      *
      * @return the test for this result
      */
-    public Tests getTest() {
-        return test.getTestType();
+    public Tester getTest() {
+        return test;
     }
 }

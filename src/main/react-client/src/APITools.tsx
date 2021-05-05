@@ -15,7 +15,7 @@ export interface INewAssignment {
     sections: string[];
     maxGrade: string;
     maxAttempts: string;
-    styleTests: string[];
+    styleTests: ITests;
     unitTestName: string;
     unitTestTimeLimit: string;
     forbiddenStatements: string[];
@@ -32,12 +32,12 @@ export interface IAssignment {
     homeworkType: string;
     maxAttempts: number;
     maxGrade: number;
-    testTypes: ITests;
+    tests: ITester[];
     grade: number;
 }
 
 export interface ITestResult {
-    test: string;
+    test: ITester;
     state: string;
     testOutput: string[];
 }
@@ -83,6 +83,11 @@ export interface IUserSelf {
         course: string;
         section: string;
     }[];
+}
+
+export interface ITester {
+    name: string;
+    testType: string;
 }
 
 export type ITests = string[];
