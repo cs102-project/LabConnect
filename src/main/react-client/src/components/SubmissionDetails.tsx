@@ -44,7 +44,7 @@ function SubmissionDetails(): JSX.Element {
                 {submission?.attempts.slice().sort((a, b) => b.id - a.id).map((attempt, i) => {
                     return (<article key={i}>
                         <section>#{attempt.id}: {attempt.attemptFilename}</section>
-                        <section>{attempt.feedback.grade}</section>
+                        <section>{attempt.feedback?.grade}</section>
                         <section>{attempt.testResults.filter(testResult => testResult.state === "SUCCESS").length} / {attempt.testResults.length}</section>
                         <section><Link to={`/assignments/${params.assignmentid}/submissions/${params.submissionid}/attempts/${attempt.id}`}><span className="material-icons">find_in_page</span></Link></section>
                     </article>)
