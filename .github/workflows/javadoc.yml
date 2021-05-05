@@ -30,13 +30,22 @@ jobs:
     - name: Log javadoc-cleanup output
       run: |
         echo "modified-count = ${{ steps.tidy.outputs.modified-count }}"
-    
-    - name: Upload ftp
-      uses: sebastianpopp/ftp-action@releases/v2
+        
+    - name: SFTP Deploy
+      # You may pin to the exact commit or the version.
+      # uses: wlixcc/SFTP-Deploy-Action@28d6168ebf0707d5c118b3bbdfb831b56046127c
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        localDir: "doc/javadoc"
-        remoteDir: "/opt/LabConnect/doc/javadoc"
-        options: "--delete --asci"
+        # username
+        username: ${{ secrets.FTP_USERNAME }}
+        # your sftp server
+        server: ${{ secrets.FTP_SERVER }}
+        # your sftp server port, default to 22
+        port: ${{ secrets.FTP_PORT }}
+        # you can copy private_key from your *.pem file, keep format
+        ssh_private_key:  ${{ secrets.PRIV_KEY }}
+        # will put all file under this path
+        local_path: "doc/javadoc"
+        # files will copy to under remote_path
+        remote_path: "/opt/LabConnect/doc/javadoc"
+    
