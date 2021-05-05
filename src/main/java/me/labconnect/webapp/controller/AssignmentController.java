@@ -378,7 +378,7 @@ public class AssignmentController {
      *
      * @param authentication Token for authentication request
      * @param attemptId      Id of the attempt
-     * @param note           Note which is going to be added to the attempt
+     * @param note           Notes to be added to this attempt
      */
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
