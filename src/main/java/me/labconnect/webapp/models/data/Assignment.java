@@ -1,10 +1,12 @@
 package me.labconnect.webapp.models.data;
 
 import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.testing.Tests;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -158,6 +160,21 @@ public class Assignment {
      */
     public List<Tester> getTests() {
         return tests;
+    }
+
+    /**
+     * Return all test types used in this assignment
+     *
+     * @return A list of {@link Tests} enums for each test in this assignment
+     */
+    public List<Tests> getTestTypes() {
+        List<Tests> result = new ArrayList<>();
+
+        for (Tester tester : tests) {
+            result.add(tester.getTestType());
+        }
+
+        return result;
     }
 
     /**

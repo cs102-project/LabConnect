@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.PROGRAM_HEADER_JAVADOC;
 
 /**
  * Check if the header javadoc comment is written correctly.
@@ -73,5 +77,10 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Program header javadoc checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return PROGRAM_HEADER_JAVADOC;
     }
 }

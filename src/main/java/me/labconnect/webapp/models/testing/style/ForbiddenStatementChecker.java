@@ -1,8 +1,12 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static me.labconnect.webapp.models.testing.Tests.FORBIDDEN_STATEMENTS;
 
 /**
  * Checks the file for forbidden statements that are determined by the course guidelines.
@@ -92,5 +96,10 @@ public class ForbiddenStatementChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Forbidden statement checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return FORBIDDEN_STATEMENTS;
     }
 }

@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.PARENTHESIS_SPACE;
 
 /**
  * This class is for checking whether different kinds of decision and loop statements in a file have
@@ -61,5 +65,10 @@ public class ParenthesisSpaceChecker extends StyleChecker {
         }
 
         return errorList;
+    }
+
+    @Override
+    public Tests getTestType() {
+        return PARENTHESIS_SPACE;
     }
 }

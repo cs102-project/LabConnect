@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.DECISION_CURLY_BRACKETS;
 
 /**
  * This class is to check whether different kinds of decision statements in a file have the required
@@ -79,4 +83,8 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         return "Decision curly bracket checker";
     }
 
+    @Override
+    public Tests getTestType() {
+        return DECISION_CURLY_BRACKETS;
+    }
 }

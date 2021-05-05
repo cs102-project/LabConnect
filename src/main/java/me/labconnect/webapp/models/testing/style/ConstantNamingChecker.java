@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.CONSTANT_NAMING;
 
 /**
  * Check if the constants in the source code are named correctly
@@ -86,5 +90,10 @@ public class ConstantNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Constant naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return CONSTANT_NAMING;
     }
 }

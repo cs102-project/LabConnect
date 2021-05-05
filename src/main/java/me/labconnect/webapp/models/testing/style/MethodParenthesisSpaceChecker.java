@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.METHOD_PARENTHESIS_SPACE;
 
 /**
  * This class is for checking whether different kinds of method or constructor calls in a file have
@@ -48,5 +52,10 @@ public class MethodParenthesisSpaceChecker extends StyleChecker {
         }
 
         return errorList;
+    }
+
+    @Override
+    public Tests getTestType() {
+        return METHOD_PARENTHESIS_SPACE;
     }
 }

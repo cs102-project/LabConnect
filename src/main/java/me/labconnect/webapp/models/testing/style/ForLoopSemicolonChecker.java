@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.FOR_LOOP_SEMICOLON;
 
 /**
  * This class is for checking if there is a space after the semicolons in for loops.
@@ -45,4 +49,8 @@ public class ForLoopSemicolonChecker extends StyleChecker {
         return errorList;
     }
 
+    @Override
+    public Tests getTestType() {
+        return FOR_LOOP_SEMICOLON;
+    }
 }

@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.OPERATORS_SPACE;
 
 /**
  * This class is for checking whether every operator character have space right before and after
@@ -82,4 +86,8 @@ public class OperatorsSpaceChecker extends StyleChecker {
         return errorList;
     }
 
+    @Override
+    public Tests getTestType() {
+        return OPERATORS_SPACE;
+    }
 }

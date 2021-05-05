@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static me.labconnect.webapp.models.testing.Tests.*;
+
 /**
  * A model of a single unit test, with one tester class and a correct output.
  * <p>
@@ -390,5 +392,10 @@ public class UnitTest implements Tester {
     @Override
     public int hashCode() {
         return Objects.hash(name, correctOutput, timeLimitInMS, testerClassPath);
+    }
+
+    @Override
+    public Tests getTestType() {
+        return UNIT_TEST;
     }
 }

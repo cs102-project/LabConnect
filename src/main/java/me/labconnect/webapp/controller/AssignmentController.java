@@ -157,9 +157,6 @@ public class AssignmentController {
         Path testerClass = Files.createFile(Paths.get(tmp.toString(), newAssignment.getTesterClass().getOriginalFilename()));
         newAssignment.getTesterClass().transferTo(testerClass);
 
-
-        // TODO Handle BadExampleException
-
         return assignmentService.createAssignment(
                 newAssignment.getAssignmentTitle(),
                 newAssignment.getShortDescription(),

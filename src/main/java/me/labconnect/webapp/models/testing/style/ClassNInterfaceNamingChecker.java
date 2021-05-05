@@ -1,8 +1,12 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static me.labconnect.webapp.models.testing.Tests.CLASS_INTERFACE_NAMING;
 
 /**
  * Checks if the name of the class obeys the conventions
@@ -85,5 +89,10 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Class and Interface naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return CLASS_INTERFACE_NAMING;
     }
 }

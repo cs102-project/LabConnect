@@ -32,7 +32,7 @@ export interface IAssignment {
     homeworkType: string;
     maxAttempts: number;
     maxGrade: number;
-    tests: ITests;
+    testTypes: ITests;
     grade: number;
 }
 

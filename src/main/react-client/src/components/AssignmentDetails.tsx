@@ -37,7 +37,7 @@ function AssignmentDetails(): JSX.Element {
                 <h4>Tests:</h4>
                 <ul>
                     {
-                        assignment?.tests.map((test, i: number) => (<li key={i}>{test}</li>))
+                        assignment?.testTypes.map((test, i: number) => (<li key={i}>{test}</li>))
                     }
                 </ul>
             </main>
