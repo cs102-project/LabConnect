@@ -40,7 +40,7 @@ export interface ITestResult {
     testName: string;
     testType: string;
     state: string;
-    testOutput: string[];
+    output: string[];
 }
 
 export interface IFeedback {

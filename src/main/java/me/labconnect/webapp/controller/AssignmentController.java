@@ -272,7 +272,6 @@ public class AssignmentController {
      *
      * @param authentication Token for authentication request
      * @param assignmentId   Id of the assignment
-     * @param submissionId   Id of the submission
      * @return The list of attempts for the specified assignment and submission
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions")
@@ -293,7 +292,6 @@ public class AssignmentController {
     /**
      * Gets the details of the given submission attempt.
      *
-     * @param assignmentId Id of the assignment
      * @param submissionId Id of the submission
      * @param attemptId    Id of the attempt
      * @return Details of the specified submission attempt.
