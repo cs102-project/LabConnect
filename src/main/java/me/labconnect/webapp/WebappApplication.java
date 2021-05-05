@@ -3,13 +3,11 @@ package me.labconnect.webapp;
 import com.mongodb.client.MongoClient;
 import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.data.services.AssignmentService;
-import me.labconnect.webapp.models.users.Instructor;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.TeachingAssistantService;
 import me.labconnect.webapp.models.users.services.UserCreatorService;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
 import me.labconnect.webapp.models.users.services.UserService;
-import me.labconnect.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,8 +30,6 @@ public class WebappApplication implements CommandLineRunner {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private MongoClient mongoClient;
 
     public static void main(String[] args) {
@@ -53,7 +49,7 @@ public class WebappApplication implements CommandLineRunner {
                 .setInstitutionId("22002643")
                 .setCourses(new Course("CS102", 2))
                 .setEmail("dev@vedat.xyz")
-                .setPassword("myPasswd")
+                .setPassword("testtest")
                 .create();
 
         userCreatorService.setRoleType(LCUserRoleTypes.INSTRUCTOR).setName("Aynur Dayanık")
@@ -63,19 +59,31 @@ public class WebappApplication implements CommandLineRunner {
                         new Course("CS102", 1),
                         new Course("CS102", 3),
                         new Course("CS101", 3))
-                .setEmail("adayanik@cs.bilkent.edu.tr").setPassword("verystrongpasswd").create();
+                .setEmail("adayanik@cs.bilkent.edu.tr").setPassword("weakpw").create();
 
         teachingAssistant = userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Haya Shamim Khan Khattak")
                 .setInstitution("Bilkent University")
                 .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("haya.khattak@bilkent.edu.tr")
-                .setPassword("3venStr0ngerpasswd").create();
+                .setPassword("stopthis").create();
 
         teachingAssistantService.addStudent(userService.getTADocumentOf(teachingAssistant),
                 userService.getStudentDocumentOf(student));
 
-        assignmentService.createAssignment("Lab03", "Dummy Lab", "Bilkent University",
+        assignmentService.createAssignment("Lab03 | Working with big numbers", "Big numbers are sometimes dreaded by new programmers due to their initial lack of an understanding of how data types work in the world of digital computation. This lab will get you up to speed in no time though. At least, that's the story that has been conjured just now.", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
-                new GregorianCalendar(2021, Calendar.MAY, 4).getTime(),
+                new GregorianCalendar(2021, Calendar.MAY, 1).getTime(),
+                new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>(), null, null,
+                null, null, null);
+                
+        assignmentService.createAssignment("Lab04 | Learning how to make pretty GUI's", "Dummy Lab Dummy Dummy Dummy Lab", "Bilkent University",
+                Files.createTempFile("lab_", ".pdf"),
+                new GregorianCalendar(2021, Calendar.MAY, 7).getTime(),
+                new int[]{1, 2, 3}, "CS102", "Lab", 100, 5, new ArrayList<>(), null, null,
+                null, null, null);
+                
+        assignmentService.createAssignment("Lab05 | Create your first Spring project", "And regret what you have unleashed upon yourself once you realize that Spring is not nearly as pleasant as its name would suggest.", "Bilkent University",
+                Files.createTempFile("lab_", ".pdf"),
+                new GregorianCalendar(2021, Calendar.MAY, 15).getTime(),
                 new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>(), null, null,
                 null, null, null);
     }

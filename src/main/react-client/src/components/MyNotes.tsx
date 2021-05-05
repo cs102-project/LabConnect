@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { userData } from '../App';
 import PageHeader from './PageHeader';
 import "../scss/mynotes.scss";
-
-const blankSample = [{ assignmentTitle: '', assignmentId: '', attemptNotes: [{ attempt: 0, note: '' }] }];
+import APITools, { INotes } from '../APITools';
 
 function MyNotes(): JSX.Element {
-    const [assignmentNoteObj, setAssignmentNoteObj] = useState(blankSample[0]);
-    const [noteObj, setNoteObj] = useState(blankSample);
-    const [inputs, setInputs] = useState({});
+    const [assignmentNoteObj, setAssignmentNoteObj] = useState<INotes>();
+    const [noteObj, setNoteObj] = useState<INotes[]>();
+    const [inputs, setInputs] = useState<{ [key: string]: string }>({});
 
-    const clickHandler = (assignmentObj) => {
+    const clickHandler = (assignmentObj: INotes) => {
         setInputs({});
         setAssignmentNoteObj(assignmentObj);
     };
 
-    useEffect(() => setNoteObj(userData.notes));
-
+    useEffect(() => {
+        APITools.getAllNotes().then((response) => {
+            setNoteObj(response);
+        });
+    }, []);
+    
     return (
         <div id="my-notes-container">
             <PageHeader pageName="My Notes" />
@@ -26,7 +28,7 @@ function MyNotes(): JSX.Element {
                 <section id="my-notes-list">
                     <h3>Assignments</h3>
                     <div id="my-notes-list-assignments">
-                        {noteObj.map((assignmentObj, i) => (
+                        {noteObj?.map((assignmentObj, i) => (
                             <article
                                 key={i}
                                 onClick={() => clickHandler(assignmentObj)}
@@ -38,14 +40,14 @@ function MyNotes(): JSX.Element {
                     </div>
                 </section>
 
-                {assignmentNoteObj.assignmentId !== '' && (
+                {assignmentNoteObj?.assignmentId !== '' && (
                     <section id="my-notes-note">
                         <div id="my-notes-note-header">
-                            <h3>Notes for {assignmentNoteObj.assignmentTitle}</h3>
-                            <Link to={`/assignments/${assignmentNoteObj.assignmentId}`} className="button" >Go to Assignment</Link>
+                            <h3>Notes for {assignmentNoteObj?.assignmentTitle}</h3>
+                            <Link to={`/assignments/${assignmentNoteObj?.assignmentId}`} className="button" >Go to Assignment</Link>
                         </div>
                         <div id="my-notes-note-attempts">
-                            {assignmentNoteObj.attemptNotes.map((attemptObj, i) => (
+                            {assignmentNoteObj?.attemptNotes.map((attemptObj, i) => (
                                 <div key={i} className="my-notes-attempt">
                                     <h4>Attempt #{attemptObj.attempt}:</h4>
                                     <textarea

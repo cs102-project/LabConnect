@@ -15,16 +15,6 @@ function LoginForm(): JSX.Element {
             <label htmlFor="password">Password</label>
             <input className="hollow-input" type="password" name="password" id="password" placeholder="********" />
             <input name="submit" type="submit" value="Login" className="button" />
-            <input
-                type="hidden"
-                name="_csrf"
-                value={
-                    document.cookie
-                        .split('; ')
-                        .find((row) => row.startsWith('XSRF-TOKEN='))
-                        ?.split('=')[1]
-                }
-            />
         </form>
     );
 }

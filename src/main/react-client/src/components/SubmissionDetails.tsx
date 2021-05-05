@@ -1,28 +1,31 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { userData } from "../App";
+import APITools, { IAssignment, ISubmission } from "../APITools";
 import PageHeader from "./PageHeader";
 
 // This page shows a list of attempts made to this assignment (the attempts of this submission)
 
 function SubmissionDetails(): JSX.Element {
     
-    const params = useParams<{ assignmentid: string, submissionid: string }>();
-    
-    const submission = userData.submission;
-    const successfulTestCount = submission.attempts.map(attempt => attempt.testResults.filter(testResult => testResult.state === "SUCCESS").length)
+    const params = useParams<{ assignmentId: string, submissionId: string }>();
     
     const attemptSender = (e: ChangeEvent<HTMLInputElement>) => {
         
-        const formData = new FormData();
-        formData.append("attemptArchive", e.target.files[0]);
-        
-        fetch(`/api/assignments/${params.assignmentid}/submissions`, {
-            method: "POST",
-            body: formData
-        });
+        APITools.addAttempt(params.assignmentId, e.target.files?.[0]);
         
     }
+    
+    const [assignment, setAssignment] = useState<IAssignment>();
+    const [submission, setSubmission] = useState<ISubmission>();
+    
+    useEffect(() => {
+        APITools.getSubmissionsOf(params.assignmentId).then((response) => {
+            setSubmission(response[0]);
+        });
+        APITools.getAssignmentOf(params.assignmentId).then((response) => {
+            setAssignment(response);
+        });
+    }, []);
     
     return (
         <div id="submission-details-container">
@@ -30,9 +33,9 @@ function SubmissionDetails(): JSX.Element {
             
             <main id="submission-details-panel">
                 
-                <h3>{userData.assignments[0].title}</h3> {/* temporary */}
+                <h3>{assignment?.title}</h3> {/* temporary */}
                 
-                <button className="button" onClick={() => document.getElementById("add-attempt").click()}>Add Attempt</button>
+                <button className="button" onClick={() => document.getElementById("add-attempt")?.click()}>Add Attempt</button>
                 <input type="file" id="add-attempt" style={{ visibility: "hidden", height: 0 }} onChange={attemptSender} accept=".zip"/>
                 
                 <div id="submission-attempts-list-header">
@@ -42,12 +45,12 @@ function SubmissionDetails(): JSX.Element {
                     <span>Go to Attempt</span>
                 </div>
                 
-                {submission.attempts.map((attempt, i) => {
+                {submission?.slice().sort((a, b) => b.id - a.id).map((attempt, i) => {
                     return (<article key={i}>
                         <section>#{attempt.id}: {attempt.attemptFilename}</section>
                         <section>{attempt.feedback.grade}</section>
-                        <section>{successfulTestCount[i]} / {attempt.testResults.length}</section>
-                        <section><Link to={`/assignments/${params.assignmentid}/submissions/${params.submissionid}/attempts/${attempt.id}`}><span className="material-icons">find_in_page</span></Link></section>
+                        <section>{attempt.testResults.filter(testResult => testResult.state === "SUCCESS").length} / {attempt.testResults.length}</section>
+                        <section><Link to={`/assignments/${params.assignmentId}/submissions/${params.submissionId}/attempts/${attempt.id}`}><span className="material-icons">find_in_page</span></Link></section>
                     </article>)
                 })}
                 

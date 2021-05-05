@@ -280,9 +280,8 @@ public class AssignmentController {
      * @param submissionId   Id of the submission
      * @return The list of attempts for the specified assignment and submission
      */
-    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/")
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts")
     public List<Attempt> getAttempts(Authentication authentication,
-                                     @PathVariable ObjectId assignmentId,
                                      @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
@@ -298,8 +297,7 @@ public class AssignmentController {
      * @return Details of the specified submission attempt.
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
-    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId,
-                                     @PathVariable ObjectId submissionId,
+    public Attempt getAttemptDetails(@PathVariable ObjectId submissionId,
                                      @PathVariable int attemptId) {
 
         return attemptService.getById(submissionId, attemptId);
@@ -316,7 +314,7 @@ public class AssignmentController {
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId,
                                       @PathVariable ObjectId submissionId,
-                                      @PathVariable int attemptId, @RequestBody Feedback feedback) {
+                                      @PathVariable int attemptId, @ModelAttribute Feedback feedback) {
         if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
             throw new RuntimeException(
                     "The grade in the feedback is bigger than maximum allowed grade " + assignmentService
@@ -384,7 +382,7 @@ public class AssignmentController {
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
     public void addNote(Authentication authentication, @PathVariable ObjectId submissionId, @PathVariable int attemptId,
-                        @RequestBody NewNote note) {
+                        @ModelAttribute NewNote note) {
 
         attemptService.setNoteOfAttempt(attemptService.getById(submissionId, attemptId), note.getContent());
 

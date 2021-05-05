@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { userData } from "../App";
+import React, { useEffect, useState } from "react";
+import APITools, { INewAssignment, ITests } from "../APITools";
 import PageHeader from "./PageHeader";
 
 // New assignments and announcements are added from here.
@@ -20,13 +20,7 @@ function InstructorPanel(): JSX.Element {
     
     const announcementHandler = () => {
         
-        const formData = new FormData();
-        formData.append("announcementContent", announcement)
-        
-        fetch("/api/instructor/announcements", {
-            method: "POST",
-            body: formData
-        });
+        APITools.sendAnnouncement(announcement);
         
     };
     
@@ -34,33 +28,37 @@ function InstructorPanel(): JSX.Element {
         
         const styleTests: string[] = [];
         
-        document.querySelectorAll("input[type='checkbox']:checked").forEach(element => {
-            styleTests.push(element["name"]);
-        });
+        document.querySelectorAll<HTMLInputElement>("input[type='checkbox']:checked").forEach(test => styleTests.push(test.name))
         
-        const formData = new FormData();
-        formData.append("assignmentTitle", title);
-        formData.append("shortDescription", description);
-        formData.append("homeworkType", document.querySelector("input[name='homeworkType']:checked")["value"]);
-        formData.append("dueDate", document.querySelector("input[type='date']")["value"]);
-        formData.append("courseName", courseName);
-        sections.split(" ").forEach(section => formData.append("sections", section));
-        formData.append("maxGrade", JSON.stringify(parseInt(maxGrade)));
-        formData.append("maxAttempts", JSON.stringify(parseInt(maxAttempts)));
-        styleTests.forEach(test => formData.append("styleTests", test));
-        formData.append("unitTestName", unitTestName);
-        formData.append("unitTestTimeLimit", unitTestTimeLimit);
-        formData.append("forbiddenStatements", JSON.stringify(forbiddenStatements.split("|")));
-        formData.append("instructionsFile", document.getElementById("ip-instructions")["files"][0]);
-        formData.append("exampleImplementation", document.getElementById("ip-example")["files"][0]);
-        formData.append("testerClass", document.getElementById("ip-unittest")["files"][0]);
+        const assignment: INewAssignment = {
+            assignmentTitle: title,
+            shortDescription: description,
+            homeworkType: document.querySelector<HTMLInputElement>("input[name='homeworkType']:checked")?.value,
+            dueDate: document.querySelector<HTMLInputElement>("input[type='date']")?.value,
+            courseName: courseName,
+            sections: sections.split(" "),
+            maxGrade: maxGrade,
+            maxAttempts: maxAttempts,
+            styleTests: styleTests,
+            unitTestName: unitTestName,
+            unitTestTimeLimit: unitTestTimeLimit,
+            forbiddenStatements: forbiddenStatements.split("|"),
+            instructionsFile: (document.getElementById("ip-instructions") as HTMLInputElement).files?.[0],
+            exampleImplementation: (document.getElementById("ip-example") as HTMLInputElement).files?.[0],
+            testerClass: (document.getElementById("ip-unittest") as HTMLInputElement).files?.[0]
+        };
         
-        fetch("/api/assignments/", {
-            method: "POST",
-            body: formData
-        });
+        APITools.createAssignment(assignment);
         
     };
+    
+    const [tests, setTests] = useState<ITests>();
+    
+    useEffect(() => {
+        APITools.getAllTests().then((response) => {
+            setTests(response);
+        });
+    }, []);
     
     return (
         <div id="instructor-panel-container">
@@ -114,7 +112,7 @@ function InstructorPanel(): JSX.Element {
                     <h5>Style Tests</h5>
                     <div id="ip-style-tests">
                         {
-                            userData.tests.map((test, i) => (
+                            tests?.map((test, i) => (
                                 <div key={i}>
                                     <input key={i} id={"ip-cb-" + test} type="checkbox" name={test} />
                                     <label htmlFor={"ip-cb-" + test}>{test}</label>
