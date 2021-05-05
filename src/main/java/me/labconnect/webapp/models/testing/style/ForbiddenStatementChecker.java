@@ -71,7 +71,7 @@ public class ForbiddenStatementChecker extends StyleChecker {
             if (((RegexHelper.generalBitwiseAmpersandMatcher(line) || RegexHelper
                     .generalBitwiseOrMatcher(line)))
                     && bitwiseCheck) {
-                errorList.add(line);
+                errorList.add(line + " [at line: " + (fileInput.indexOf(line) + 1) + "]");
             }
             bitwiseCheck = true;
         }
