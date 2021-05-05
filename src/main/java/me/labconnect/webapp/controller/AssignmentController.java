@@ -281,7 +281,7 @@ public class AssignmentController {
      * @return The list of attempts for the specified assignment and submission
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts")
-    public List<Attempt> getAttempts(Authentication authentication,
+    public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
                                      @PathVariable ObjectId submissionId) {
 
         return attemptService.getAttemptsFor(submissionId);
@@ -297,7 +297,7 @@ public class AssignmentController {
      * @return Details of the specified submission attempt.
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
-    public Attempt getAttemptDetails(@PathVariable ObjectId submissionId,
+    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
                                      @PathVariable int attemptId) {
 
         return attemptService.getById(submissionId, attemptId);
