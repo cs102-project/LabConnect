@@ -9,29 +9,15 @@ import PageHeader from "./PageHeader";
 function SubmissionDetails(): JSX.Element {
     
     const params = useParams<{ assignmentid: string, submissionid: string }>();
-<<<<<<< HEAD
-=======
-    
-    const attemptSender = (e: ChangeEvent<HTMLInputElement>) => {
-        
-        APITools.addAttempt(params.assignmentid, e.target.files?.[0]);
-        
-    }
->>>>>>> 87680b1b2cba923bc66354f933c56f1dc5dac975
     
     const [assignment, setAssignment] = useState<IAssignment>();
     const [submission, setSubmission] = useState<ISubmission>();
     
     useEffect(() => {
-<<<<<<< HEAD
         APITools.getSubmissionOfStudentFor(params.assignmentid).then((response) => {
             if (APITools.helpers.isSubmissionValid(response)) {
                 setSubmission(response);
             }
-=======
-        APITools.getSubmissionsOf(params.assignmentid).then((response) => {
-            setSubmission(response[0]);
->>>>>>> 87680b1b2cba923bc66354f933c56f1dc5dac975
         });
         APITools.getAssignmentOf(params.assignmentid).then((response) => {
             setAssignment(response);
