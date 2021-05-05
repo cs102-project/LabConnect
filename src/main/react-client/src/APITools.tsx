@@ -56,7 +56,10 @@ export interface IAttempt {
     feedback: IFeedback;
 }
 
-export type ISubmission = IAttempt[];
+export interface ISubmission { 
+    id: string;
+    attempts: IAttempt[]
+};
 
 export interface INotes {
     assignmentTitle: string;
@@ -203,9 +206,15 @@ const getAllTests = async (): Promise<ITests> => {
     return response.json() as Promise<ITests>;
 };
 
-const getInstructionsFileOf = async (assignmentId: string): Promise<Blob> => {
+const getInstructionsFileOf = async (assignmentId: string, download: boolean): Promise<Blob> => {
     const response = await fetch(`/api/assignments/${assignmentId}/download`);
-    return response.blob();
+    const blob = response.blob();
+    
+    if (download) {
+        helpers.sendDownload(blob, response.headers.get("Content-Disposition")?.match(/filename="(.+)"/)?.[1]);
+    }
+    
+    return blob;
 };
 
 const getArchiveOfAttempt = async (assignmentId: string, submissionId: string, attemptId: string): Promise<Blob> => {
@@ -213,9 +222,22 @@ const getArchiveOfAttempt = async (assignmentId: string, submissionId: string, a
     return response.blob();
 };
 
-const getSubmissionsOf = async (assignmentId: string): Promise<ISubmission[]> => {
-    const response = await fetch(`/api/assignments/${assignmentId}/submissions`);
+const getSubmissionsOfAssignment = async (assignmentId: string): Promise<ISubmission[]> => {
+    const response = await fetch(`/api/assignments/${assignmentId}/submissions/all`);
+    
     return response.json() as Promise<ISubmission[]>;
+    
+};
+
+const getSubmissionOfStudentFor = async (assignmentId: string): Promise<ISubmission | boolean> => {
+    const response = await fetch(`/api/assignments/${assignmentId}/submissions`);
+    
+    if (response.ok) {
+        return response.json() as Promise<ISubmission>;
+    } else {
+        return new Promise((resolve) => resolve(false));
+    }
+    
 };
 
 const getAttemptsOf = async (submissionId: string): Promise<IAttempt[]> => {
@@ -247,22 +269,28 @@ const helpers = {
     isAssignmentComplete: (assignment: IAssignment): boolean => {
         return moment(Date.now()).isAfter(assignment.dueDate);
     },
-    sendDownload: (promise: Promise<Blob>): void => {
+    sendDownload: (promise: Promise<Blob>, filename: string | undefined): void => {
         promise.then((blob) => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
 
             a.style.display = 'none';
-            a.href = url;
-
+            
+            a.setAttribute("href", url);
+            a.setAttribute("download", filename || "unnamed-file");
+            
             document.body.appendChild(a);
             a.click();
-
+            
+            document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         });
     },
     stringFromDate: (timestamp: string): string => {
         return new Date(parseInt(timestamp)).toLocaleString();
+    },
+    isSubmissionValid: (response: boolean | ISubmission): response is ISubmission => {
+        return response !== false && response !== true;
     }
 };
 
@@ -282,7 +310,8 @@ const APITools = {
     giveFeedbackTo,
     getAllAssignments,
     getAttemptDetailsOf,
-    getSubmissionsOf,
+    getSubmissionsOfAssignment,
+    getSubmissionOfStudentFor,
     helpers,
 };
 

@@ -20,12 +20,14 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -210,8 +212,8 @@ public class AssignmentController {
      * @param assignmentId   Id of the assignment
      * @return List of submissions of the specified assignment
      */
-    @GetMapping("/api/assignments/{assignmentId}/submissions")
-    @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT", "ROLE_STUDENT"})
+    @GetMapping("/api/assignments/{assignmentId}/submissions/all")
+    @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT"})
     public List<Submission> getSubmissions(Authentication authentication,
                                            @PathVariable ObjectId assignmentId) {
 
@@ -228,11 +230,6 @@ public class AssignmentController {
             case TEACHING_ASSISTANT:
                 return assignmentService
                         .getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
-
-            case STUDENT:
-                return List.of(submissionService
-                        .getAssignmentSubmissionBySubmitter(assignmentId,
-                                userService.getStudentDocumentOf(user).getId()).orElseThrow());
 
             default:
                 throw new RuntimeException("Invalid role!");
@@ -281,11 +278,18 @@ public class AssignmentController {
      * @param submissionId   Id of the submission
      * @return The list of attempts for the specified assignment and submission
      */
-    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts")
-    public List<Attempt> getAttempts(Authentication authentication, @PathVariable ObjectId assignmentId,
-                                     @PathVariable ObjectId submissionId) {
-
-        return attemptService.getAttemptsFor(submissionId);
+    @GetMapping("/api/assignments/{assignmentId}/submissions")
+    @Secured({ "ROLE_STUDENT" })
+    public Submission getSubmissionForStudent(Authentication authentication, @PathVariable ObjectId assignmentId) {
+        
+        LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
+        User user = userRepository.findById(userDetail.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        
+        return submissionService
+            .getAssignmentSubmissionBySubmitter(
+                assignmentId,
+                userService.getStudentDocumentOf(user).getId()
+            ).orElseThrow();
 
     }
 

@@ -40,7 +40,7 @@ function MyNotes(): JSX.Element {
                     </div>
                 </section>
 
-                {assignmentNoteObj?.assignmentId !== '' && (
+                {assignmentNoteObj !== undefined && (
                     <section id="my-notes-note">
                         <div id="my-notes-note-header">
                             <h3>Notes for {assignmentNoteObj?.assignmentTitle}</h3>

@@ -18,9 +18,11 @@ import NotFoundPage from './components/NotFoundPage';
 
 function App(): JSX.Element {
     
+    const location = useLocation();
+    
     return (
         <>
-            { useLocation().pathname !== "/login" && useLocation().pathname !== "/logout" && <Sidebar /> }
+            { location.pathname !== "/login" && location.pathname !== "/logout" && <Sidebar /> }
             <Switch>
                 <Route exact path="/index.html">
                     <Redirect to="/" />
