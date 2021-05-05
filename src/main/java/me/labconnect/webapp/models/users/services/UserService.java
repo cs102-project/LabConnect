@@ -5,6 +5,7 @@ import me.labconnect.webapp.controller.httpmodels.AssignmentNotes.AttemptNote;
 import me.labconnect.webapp.models.data.Announcement;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Course;
+import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.SubmissionService;
 import me.labconnect.webapp.models.users.*;
 import me.labconnect.webapp.models.users.services.UserCreatorService.LCUserRoleTypes;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -158,19 +160,22 @@ public class UserService {
 
         List<AssignmentNotes> result = new ArrayList<>();
         List<ObjectId> assignmentIds = student.getAssignments();
+        Optional<Submission> submission;
 
         for (ObjectId assignmentId : assignmentIds) {
 
             List<AttemptNote> attemptNotes = new ArrayList<>();
 
-            for (Attempt attempt : submissionService
-                    .getAssignmentSubmissionBySubmitter(assignmentId, student.getId()).orElseThrow()
-                    .getAttempts()) {
-                attemptNotes.add(new AttemptNote(attempt.getNote(), attempt.getId()));
-            }
+            submission = submissionService.getAssignmentSubmissionBySubmitter(assignmentId, student.getId());
 
-            result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).orElseThrow().getTitle(),
-                    assignmentId, attemptNotes));
+            if (submission.isPresent()) {
+                for (Attempt attempt : submission.get().getAttempts()) {
+                    attemptNotes.add(new AttemptNote(attempt.getNote(), attempt.getId()));
+                }
+
+                result.add(new AssignmentNotes(assignmentRepository.findById(assignmentId).orElseThrow().getTitle(),
+                        assignmentId, attemptNotes));
+            }
 
         }
 
