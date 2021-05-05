@@ -7,11 +7,11 @@ import PageHeader from "./PageHeader";
 
 function SubmissionDetails(): JSX.Element {
     
-    const params = useParams<{ assignmentId: string, submissionId: string }>();
+    const params = useParams<{ assignmentid: string, submissionid: string }>();
     
     const attemptSender = (e: ChangeEvent<HTMLInputElement>) => {
         
-        APITools.addAttempt(params.assignmentId, e.target.files?.[0]);
+        APITools.addAttempt(params.assignmentid, e.target.files?.[0]);
         
     }
     
@@ -19,10 +19,10 @@ function SubmissionDetails(): JSX.Element {
     const [submission, setSubmission] = useState<ISubmission>();
     
     useEffect(() => {
-        APITools.getSubmissionsOf(params.assignmentId).then((response) => {
+        APITools.getSubmissionsOf(params.assignmentid).then((response) => {
             setSubmission(response[0]);
         });
-        APITools.getAssignmentOf(params.assignmentId).then((response) => {
+        APITools.getAssignmentOf(params.assignmentid).then((response) => {
             setAssignment(response);
         });
     }, []);
@@ -50,7 +50,7 @@ function SubmissionDetails(): JSX.Element {
                         <section>#{attempt.id}: {attempt.attemptFilename}</section>
                         <section>{attempt.feedback.grade}</section>
                         <section>{attempt.testResults.filter(testResult => testResult.state === "SUCCESS").length} / {attempt.testResults.length}</section>
-                        <section><Link to={`/assignments/${params.assignmentId}/submissions/${params.submissionId}/attempts/${attempt.id}`}><span className="material-icons">find_in_page</span></Link></section>
+                        <section><Link to={`/assignments/${params.assignmentid}/submissions/${params.submissionid}/attempts/${attempt.id}`}><span className="material-icons">find_in_page</span></Link></section>
                     </article>)
                 })}
                 
