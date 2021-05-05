@@ -44,12 +44,12 @@ public class WebappApplication implements CommandLineRunner {
         mongoClient.getDatabase("labconnect").drop();
 
         student = userCreatorService.setRoleType(LCUserRoleTypes.STUDENT)
-                .setName("Vedat Eren Arican")
+                .setName("Vedat Eren Arıcan")
                 .setInstitution("Bilkent University")
                 .setInstitutionId("22002643")
                 .setCourses(new Course("CS102", 2))
-                .setEmail("dev@vedat.xyz")
-                .setPassword("testtest")
+                .setEmail("student@bilkent.edu.tr")
+                .setPassword("Aa123456")
                 .create();
 
         userCreatorService.setRoleType(LCUserRoleTypes.INSTRUCTOR).setName("Aynur Dayanık")
@@ -59,12 +59,12 @@ public class WebappApplication implements CommandLineRunner {
                         new Course("CS102", 1),
                         new Course("CS102", 3),
                         new Course("CS101", 3))
-                .setEmail("adayanik@cs.bilkent.edu.tr").setPassword("weakpw").create();
+                .setEmail("instructor@bilkent.edu.tr").setPassword("Aa123456").create();
 
         teachingAssistant = userCreatorService.setRoleType(LCUserRoleTypes.TEACHING_ASSISTANT).setName("Haya Shamim Khan Khattak")
                 .setInstitution("Bilkent University")
-                .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("haya.khattak@bilkent.edu.tr")
-                .setPassword("stopthis").create();
+                .setInstitutionId("321").setCourses(new Course("CS102", 2)).setEmail("ta@bilkent.edu.tr")
+                .setPassword("Aa123456").create();
 
         teachingAssistantService.addStudent(userService.getTADocumentOf(teachingAssistant),
                 userService.getStudentDocumentOf(student));
