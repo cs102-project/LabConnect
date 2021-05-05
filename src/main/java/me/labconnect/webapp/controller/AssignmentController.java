@@ -33,6 +33,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -386,6 +387,21 @@ public class AssignmentController {
 
         attemptService.setNoteOfAttempt(attemptService.getById(submissionId, attemptId), note.getContent());
 
+    }
+
+    /**
+     * Get the "file map", i.e, a mapping of filenames to file contents for all the java files in a particular attempt.
+     * Useful for live review scenarios.
+     *
+     * @param submissionId The unique identifier for the submission this attempt is a part of
+     * @param attemptId    The (unique for the submission) ID of the attempt
+     * @return A mapping of filenames to file contents for all java files in the attempt
+     * @throws IOException If processing the attempt content fails
+     */
+    @GetMapping("/api/assignments/{assignmnetId}/submissions/{submissionId}/attempts/{attemptId}/filemap")
+    @Secured({"ROLE_TEACHING_ASSISTANT"})
+    public Map<String, List<String>> getFileMap(@PathVariable ObjectId submissionId, @PathVariable int attemptId) throws IOException {
+        return attemptService.getAttemptContents(attemptService.getById(submissionId, attemptId));
     }
 
 }
