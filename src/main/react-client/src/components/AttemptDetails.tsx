@@ -33,7 +33,7 @@ function AttemptDetails(): JSX.Element {
             
             <main id="attempt-details-panel">
                 <h3>#{attempt?.id}: {attempt?.attemptFilename}</h3>
-                { attempt?.feedback.date && <div id="attempt-feedback">
+                { attempt?.feedback?.date && <div id="attempt-feedback">
                     <h4>Feedback given at {APITools.helpers.stringFromDate(attempt.feedback.date)}:</h4>
                     <p>Grade: {attempt.feedback.grade}</p>
                     <p>Comment: {attempt.feedback.content}</p>
