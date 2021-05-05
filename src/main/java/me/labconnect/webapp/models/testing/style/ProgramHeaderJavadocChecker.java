@@ -70,7 +70,7 @@ public class ProgramHeaderJavadocChecker extends StyleChecker {
     }
 
     /**
-     * Gets the name of the checker
+     * Gets the name of the style checker
      *
      * @return Name of the style checker
      */
