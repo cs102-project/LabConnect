@@ -299,7 +299,7 @@ public class AssignmentController {
      * @return Details of the specified submission attempt.
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
-    public Attempt getAttemptDetails(@PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+    public Attempt getAttemptDetails(@PathVariable ObjectId submissionId,
                                      @PathVariable int attemptId) {
 
         return attemptService.getById(submissionId, attemptId);
@@ -367,7 +367,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}/notes")
     @Secured("ROLE_STUDENT")
-    public String getNote(Authentication authentication, @PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId,
+    public String getNote(Authentication authentication, @PathVariable ObjectId submissionId,
                           @PathVariable int attemptId) {
 
         return attemptService.getById(submissionId, attemptId).getNote();
