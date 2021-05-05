@@ -47,5 +47,5 @@ jobs:
         # will put all file under this path
         local_path: "doc/javadoc"
         # files will copy to under remote_path
-        remote_path: "/var/www/docs.labconnect.me/public_html"
+        remote_path: ${{ secrets.WEBSITE_PATH }}
     

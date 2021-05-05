@@ -8,7 +8,7 @@ import java.nio.file.Path;
  *
  * @author Borga Haktan Bilen
  * @author Alp Ertan
- * @version 21.04.2021
+ * @version 04.05.2021
  */
 public interface Tester {
 
@@ -27,4 +27,12 @@ public interface Tester {
      * @return the name of the test
      */
     String getName();
+
+    /**
+     * Return the type of this test as a {@link Tests} enum
+     *
+     * @see Tests
+     * @return The type of this test
+     */
+    Tests getTestType();
 }

@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.INDENTATION;
 
 /**
  * Check if the source code is indented correctly
@@ -115,5 +119,10 @@ public class IndentationChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Indentation checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return INDENTATION;
     }
 }

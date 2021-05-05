@@ -1,8 +1,12 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static me.labconnect.webapp.models.testing.Tests.METHOD_NAMING;
 
 /**
  * Checks if method names in a given file obey the conventions
@@ -125,5 +129,10 @@ public class MethodNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Method naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return METHOD_NAMING;
     }
 }

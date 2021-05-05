@@ -22,7 +22,8 @@ import java.util.Scanner;
  */
 public class TestResult {
 
-    private Tester test;
+    private Tests testType;
+    private String testName;
     private TestState state;
     private ArrayList<String> testOutput;
     private String submissionPath;
@@ -30,16 +31,18 @@ public class TestResult {
     /**
      * A constructor used for retrieving existing TestResult entries from a database
      *
-     * @param test           The test this is a result of
+     * @param testType       The type of the test this is a result of
+     * @param testName       The name of the test this is a result of
      * @param state          The state of the test
      * @param testOutput     The compiler/runtime/diff output obtained from the test
      * @param submissionPath The filename of the submission tested
      */
     @PersistenceConstructor
-    public TestResult(Tester test, TestState state, ArrayList<String> testOutput,
+    public TestResult(Tests testType, String testName, TestState state, ArrayList<String> testOutput,
                       String submissionPath) {
         this.testOutput = testOutput;
-        this.test = test;
+        this.testName = testName;
+        this.testType = testType;
         this.state = state;
         this.submissionPath = submissionPath;
     }
@@ -57,7 +60,8 @@ public class TestResult {
      */
     public TestResult(UnitTest unitTest, Path submission, Path output, TestState state)
             throws IOException {
-        this.test = unitTest;
+        this.testName = unitTest.getName();
+        this.testType = unitTest.getTestType();
         this.submissionPath = submission.toString();
         this.state = state;
 
@@ -83,7 +87,8 @@ public class TestResult {
      */
     public TestResult(UnitTest unitTest, Path submission, ArrayList<String> offendingLines,
                       TestState state) {
-        this.test = unitTest;
+        this.testName = unitTest.getName();
+        this.testType = unitTest.getTestType();
         this.submissionPath = submission.toString();
         this.state = state;
         this.testOutput = offendingLines;
@@ -97,7 +102,8 @@ public class TestResult {
      * @param offendingLines The lines that fail the style check
      */
     public TestResult(StyleChecker styleCheck, Path submission, ArrayList<String> offendingLines) {
-        this.test = styleCheck;
+        this.testName = styleCheck.getName();
+        this.testType = styleCheck.getTestType();
         this.submissionPath = submission.toString();
         this.testOutput = offendingLines;
 
@@ -113,7 +119,8 @@ public class TestResult {
      * @param exception  The CompilationException instance
      */
     public TestResult(UnitTest unitTest, Path submission, CompilationException exception) {
-        this.test = unitTest;
+        this.testType = unitTest.getTestType();
+        this.testName = unitTest.getName();
         this.submissionPath = submission.toString();
         state = TestState.COMPILER_ERROR;
 
@@ -161,7 +168,16 @@ public class TestResult {
      *
      * @return the test for this result
      */
-    public Tester getTest() {
-        return test;
+    public Tests getTestType() {
+        return testType;
+    }
+
+    /**
+     * Return the name of the test this is the result of
+     *
+     * @return The name of the test this is the result of
+     */
+    public String getTestName() {
+        return testName;
     }
 }

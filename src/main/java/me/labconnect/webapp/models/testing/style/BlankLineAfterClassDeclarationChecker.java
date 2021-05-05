@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.BLANK_LINE_AFTER_CLASS_DECLARATION;
 
 /**
  * This class is for checking if there is a blank line after the class or interface declaration.
@@ -45,5 +49,10 @@ public class BlankLineAfterClassDeclarationChecker extends StyleChecker {
         }
 
         return errorList;
+    }
+
+    @Override
+    public Tests getTestType() {
+        return BLANK_LINE_AFTER_CLASS_DECLARATION;
     }
 }
