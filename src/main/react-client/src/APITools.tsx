@@ -37,7 +37,8 @@ export interface IAssignment {
 }
 
 export interface ITestResult {
-    test: ITester;
+    testName: string;
+    testType: string;
     state: string;
     testOutput: string[];
 }
