@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An instructor, which is the user that creates assignments, starts live sessions and uploads
@@ -66,4 +67,27 @@ public class Instructor {
         return assignments;
     }
 
+    /**
+     * Check if the given object refers to the same instructor as this object
+     *
+     * @param o The object to compare
+     * @return {@code true} if the given object refers to the same instructor, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Instructor that = (Instructor) o;
+        return Objects.equals(id, that.id);
+    }
+
+    /**
+     * Generate a unique hash code for this instructor
+     *
+     * @return The generated hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

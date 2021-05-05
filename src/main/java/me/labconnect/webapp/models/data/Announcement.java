@@ -1,6 +1,7 @@
 package me.labconnect.webapp.models.data;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Model class for {@code Announcement} objects
@@ -51,4 +52,28 @@ public class Announcement {
         return author;
     }
 
+    /**
+     * Checks if the given object is an equivalent Announcement
+     *
+     * @param o The object to compare
+     * @return {@code true} if the objects are equal, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Announcement that = (Announcement) o;
+        return Objects.equals(content, that.content) && Objects.equals(date, that.date) && Objects
+                .equals(author, that.author);
+    }
+
+    /**
+     * Generate a unique hash code for each equivalent Announcement
+     *
+     * @return The generated hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(content, date, author);
+    }
 }
