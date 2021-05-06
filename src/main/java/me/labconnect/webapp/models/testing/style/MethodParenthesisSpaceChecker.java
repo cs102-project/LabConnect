@@ -37,13 +37,15 @@ public class MethodParenthesisSpaceChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.methodCallRegexMatcher(codeFile.get(lineIndex))) {
-                for (int charIndex = 0; charIndex < codeFile.get(lineIndex).length(); charIndex++) {
-                    if (charIndex != codeFile.get(lineIndex).length() - 1) {
-                        if (codeFile.get(lineIndex).charAt(charIndex) == '('
-                                && !(codeFile.get(lineIndex).charAt(charIndex + 1) == ')')) {
-                            if (codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
-                                errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.methodCallRegexMatcher(codeFile.get(lineIndex))) {
+                    for (int charIndex = 0; charIndex < codeFile.get(lineIndex).length(); charIndex++) {
+                        if (charIndex != codeFile.get(lineIndex).length() - 1) {
+                            if (codeFile.get(lineIndex).charAt(charIndex) == '('
+                                    && !(codeFile.get(lineIndex).charAt(charIndex + 1) == ')')) {
+                                if (codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
+                                    errorList.add(codeFile.get(lineIndex));
+                                }
                             }
                         }
                     }

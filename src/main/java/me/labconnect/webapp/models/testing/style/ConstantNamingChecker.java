@@ -26,9 +26,11 @@ public class ConstantNamingChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
-                if (!isAllCaps(extractConstant(codeFile.get(lineIndex)))) {
-                    errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
+                    if (!isAllCaps(extractConstant(codeFile.get(lineIndex)))) {
+                        errorList.add(codeFile.get(lineIndex));
+                    }
                 }
             }
         }

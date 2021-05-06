@@ -37,27 +37,29 @@ public class ParenthesisSpaceChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))
-                    || RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))
-                    || RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))
-                    || RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
-                for (int charIndex = 0; charIndex < codeFile.get(lineIndex).length(); charIndex++) {
-                    if (charIndex != codeFile.get(lineIndex).length() - 1) {
-                        if (codeFile.get(lineIndex).charAt(charIndex) == '('
-                                && codeFile.get(lineIndex).charAt(charIndex - 1) != ' '
-                                && codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                        } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
-                                && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                        }
-                    } else {
-                        if (codeFile.get(lineIndex).charAt(charIndex) == '('
-                                && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                        } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
-                                && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            {
+                if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))
+                        || RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))
+                        || RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))
+                        || RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
+                    for (int charIndex = 0; charIndex < codeFile.get(lineIndex).length(); charIndex++) {
+                        if (charIndex != codeFile.get(lineIndex).length() - 1) {
+                            if (codeFile.get(lineIndex).charAt(charIndex) == '('
+                                    && codeFile.get(lineIndex).charAt(charIndex - 1) != ' '
+                                    && codeFile.get(lineIndex).charAt(charIndex + 1) != ' ') {
+                                errorList.add(codeFile.get(lineIndex));
+                            } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
+                                    && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
+                                errorList.add(codeFile.get(lineIndex));
+                            }
+                        } else {
+                            if (codeFile.get(lineIndex).charAt(charIndex) == '('
+                                    && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
+                                errorList.add(codeFile.get(lineIndex));
+                            } else if (codeFile.get(lineIndex).charAt(charIndex) == ')'
+                                    && codeFile.get(lineIndex).charAt(charIndex - 1) != ' ') {
+                                errorList.add(codeFile.get(lineIndex));
+                            }
                         }
                     }
                 }

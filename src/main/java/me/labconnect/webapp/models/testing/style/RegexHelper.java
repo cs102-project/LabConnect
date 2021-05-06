@@ -220,7 +220,7 @@ public class RegexHelper {
         String regex;
         Pattern pattern;
         Matcher patternMatcher;
-        regex = "(final)\\s+(String|int|boolean|char|long|byte|float|double|\\w)\\s+(\\w*)\\s*(=)\\s+(\\w*|\\d*|.)";
+        regex = "(final)\\s+(\\w+)\\s+(\\w+)\\s*;\\s*$";
         pattern = Pattern.compile(regex);
         patternMatcher = pattern.matcher(str);
 

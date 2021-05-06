@@ -34,10 +34,12 @@ public class MethodNamingChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
-                    && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
-                if (!checkCasing(extractMethodName(codeFile.get(lineIndex)))) {
-                    errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
+                        && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
+                    if (!checkCasing(extractMethodName(codeFile.get(lineIndex)))) {
+                        errorList.add(codeFile.get(lineIndex));
+                    }
                 }
             }
         }

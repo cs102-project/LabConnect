@@ -43,40 +43,40 @@ public class OperatorsSpaceChecker extends StyleChecker {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '+'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
                                 || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         }
                     } else {
                         if (codeFile.get(lineIndex).charAt(charIndex) == '+'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
                                 && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                            errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                            errorList.add(codeFile.get(lineIndex));
                         }
                     }
                 }

@@ -89,6 +89,10 @@ public abstract class StyleChecker implements Tester {
         return index >= 0 && index < list.size();
     }
 
+    public boolean isNotAComment(String line) {
+        return !line.trim().startsWith("//") && !line.trim().startsWith("/*") && !line.trim().startsWith("*");
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(getName());

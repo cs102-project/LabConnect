@@ -27,44 +27,46 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (indexExists(codeFile, lineIndex + 1)) {
-                if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
-                            .contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (indexExists(codeFile, lineIndex + 1)) {
+                    if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
-                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
-                            .contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
-                            .contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
-                            .contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                }
-            } else {
-                if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
-                    }
-                } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+                } else {
+                    if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }
