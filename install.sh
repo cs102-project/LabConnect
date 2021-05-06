@@ -49,9 +49,9 @@ echo "You're all set!"
 echo "Now visit localhost:8080 from your browser of choice"
 echo
 echo "Default credentials"
-printf "Student:\tdev@vedat.xyz\t\t\tmyPasswd\n"
-printf "Instructor:\tadayanik@cs.bilkent.edu.tr\tverystrongpasswd\n"
-printf "TA:\t\thaya.khattak@bilkent.edu.tr\t3venStr0ngerpasswd\n"
+printf "Student:\tstudent@bilkent.edu.tr\t\t\tAa123456\n"
+printf "Instructor:\tadayanik@cs.bilkent.edu.tr\tAa123456\n"
+printf "TA:\t\thaya.khattak@bilkent.edu.tr\t\Aa123456n"
 echo "***************************************"
 echo
 echo "Once you are done with the demo, run:"

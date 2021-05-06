@@ -34,7 +34,7 @@ public class NewAssignment {
     private MultipartFile instructionsFile;
     private MultipartFile exampleImplementation;
     private MultipartFile testerClass;
-    
+
     /**
      * Default constructor for {@code NewAssignment} takes the required information for an assignment
      *
@@ -42,7 +42,7 @@ public class NewAssignment {
      * @param shortDescription    A short description for the assignment
      * @param homeworkType        Type of the homework
      * @param dueDate             Due date of the assignment
-     * @param courseName          The course name which the assignment belongs to
+     * @param courseNames         The course names which the assignment belongs to
      * @param sections            Section number which the assignment belongs to
      * @param maxGrade            Maximum possible grade for the assignment
      * @param maxAttempts         Maximum possible attempt count for the assignment
@@ -52,8 +52,9 @@ public class NewAssignment {
      * @param forbiddenStatements Statements not allowed for use in the assignment
      */
     public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType,
-                         Date dueDate, String[] courseNames, int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
-                         Long unitTestTimeLimit, ArrayList<String> forbiddenStatements, 
+                         Date dueDate, String[] courseNames, int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests,
+                         String unitTestName,
+                         Long unitTestTimeLimit, ArrayList<String> forbiddenStatements,
                          MultipartFile instructionsFile, MultipartFile exampleImplementation, MultipartFile testerClass) {
         this.assignmentTitle = assignmentTitle;
         this.shortDescription = shortDescription;
@@ -172,17 +173,17 @@ public class NewAssignment {
     public ArrayList<String> getForbiddenStatements() {
         return forbiddenStatements;
     }
-    
+
     public MultipartFile getExampleImplementation() {
         return exampleImplementation;
     }
-    
+
     public MultipartFile getInstructionsFile() {
         return instructionsFile;
     }
-    
+
     public MultipartFile getTesterClass() {
         return testerClass;
     }
-    
+
 }

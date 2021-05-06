@@ -112,8 +112,7 @@ public class AssignmentService {
      * @param institution           The institution offering the course this assignment is a part of
      * @param instructionFile       The instruction file
      * @param dueDate               The due date for the assignment
-     * @param sections              The sections this assignment is for
-     * @param courseName            The name of the course this assignment is a part of
+     * @param courses               The course this assignment is a part of
      * @param homeworkType          The type of the assignment
      * @param maxGrade              The maximum grade for this assignment
      * @param maxAttempts           The maximum attempts allowed for this assignment
