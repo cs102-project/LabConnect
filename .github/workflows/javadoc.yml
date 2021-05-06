@@ -1,0 +1,51 @@
+name: docs
+
+on:
+  push:
+    paths: [ '**.java' ]
+
+jobs:
+  api-website:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v2
+
+    - name: Set up the Java JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Build docs with Maven
+      run: |
+        rm -rf doc/javadoc
+        mvn javadoc:javadoc
+    - name: Tidy up the javadocs
+      id: tidy
+      uses: cicirello/javadoc-cleanup@v1.2.0
+      with:
+        path-to-root: doc/javadoc
+
+    - name: Log javadoc-cleanup output
+      run: |
+        echo "modified-count = ${{ steps.tidy.outputs.modified-count }}"
+        
+    - name: SFTP Deploy
+      # You may pin to the exact commit or the version.
+      # uses: wlixcc/SFTP-Deploy-Action@28d6168ebf0707d5c118b3bbdfb831b56046127c
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+      with:
+        # username
+        username: ${{ secrets.FTP_USERNAME }}
+        # your sftp server
+        server: ${{ secrets.FTP_SERVER }}
+        # your sftp server port, default to 22
+        port: ${{ secrets.FTP_PORT }}
+        # you can copy private_key from your *.pem file, keep format
+        ssh_private_key:  ${{ secrets.PRIV_KEY }}
+        # will put all file under this path
+        local_path: "doc/javadoc"
+        # files will copy to under remote_path
+        remote_path: ${{ secrets.WEBSITE_PATH }}
+    

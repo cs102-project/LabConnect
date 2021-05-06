@@ -1,16 +1,27 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static me.labconnect.webapp.models.testing.Tests.METHOD_NAMING;
 
 /**
+ * Checks if method names in a given file obey the conventions
+ *
  * @author Berk Çakar
+ * @author Borga Haktan Bilen
  * @author Vedat Eren Arıcan
- * @version 22/04/2021
+ * @author Alp Ertan
+ * @version 22.04.2021
  */
 public class MethodNamingChecker extends StyleChecker {
 
-    String[] identifiers = { "void", "int", "Integer", "double", "Double", "float", "Float", "long", "Long", "short",
-            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte" };
+    String[] identifiers = {"void", "int", "Integer", "double", "Double", "float", "Float", "long",
+            "Long", "short",
+            "Short", "boolean", "Boolean", "char", "Character", "byte", "Byte", "String"};
 
     /**
      * Checks whether method names are conventional or not.
@@ -23,9 +34,12 @@ public class MethodNamingChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))) {
-                if (checkCasing(extractMethodName(codeFile.get(lineIndex))) == false) {
-                    errorList.add(codeFile.get(lineIndex));
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.methodRegexMatcher(codeFile.get(lineIndex))
+                        && !RegexHelper.constructorRegexMatcher(codeFile.get(lineIndex))) {
+                    if (!checkCasing(extractMethodName(codeFile.get(lineIndex)))) {
+                        errorList.add(codeFile.get(lineIndex));
+                    }
                 }
             }
         }
@@ -35,7 +49,7 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method extracts the method name from the given line.
-     * 
+     *
      * @param line is the line to be processed.
      * @return Name of the method.
      */
@@ -49,9 +63,7 @@ public class MethodNamingChecker extends StyleChecker {
         for (int charIndex = 0; charIndex < line.length(); charIndex++) {
             if (line.indexOf(identifiers[charIndex]) == 0) {
                 continue;
-            }
-
-            else if (line.indexOf(identifiers[charIndex]) > 0) {
+            } else if (line.indexOf(identifiers[charIndex]) > 0) {
                 returnTypeStartIndex = line.indexOf(identifiers[charIndex]);
                 break;
             }
@@ -61,9 +73,7 @@ public class MethodNamingChecker extends StyleChecker {
             currentChar = line.charAt(charIndex);
             if (!currentChar.equals(' ')) {
                 continue;
-            }
-
-            else {
+            } else {
                 returnTypeEndIndex = charIndex;
                 break;
             }
@@ -74,9 +84,7 @@ public class MethodNamingChecker extends StyleChecker {
 
             if (currentChar == ' ') {
                 continue;
-            }
-
-            else {
+            } else {
                 methodNameStartIndex = charIndex;
                 break;
             }
@@ -87,9 +95,7 @@ public class MethodNamingChecker extends StyleChecker {
 
             if (currentChar.equals(' ') || currentChar.equals('(')) {
                 break;
-            }
-
-            else {
+            } else {
                 sB += currentChar;
             }
         }
@@ -99,21 +105,22 @@ public class MethodNamingChecker extends StyleChecker {
 
     /**
      * This method checks whether the method name has a valid casing style or not.
-     * 
+     *
      * @param methodName is the methodName to be checked.
      * @return {@code true} if the naming is valid, otherwise {@code false}
      */
     private boolean checkCasing(String methodName) {
-        if (Character.isUpperCase(methodName.charAt(0))) {
+        Pattern methodNamingPattern;
+        Matcher methodNamingMatcher;
+        methodNamingPattern = Pattern.compile("^[a-z][a-zA-Z0-9].*");
+        methodNamingMatcher = methodNamingPattern.matcher(methodName);
+        if (methodName.contains("|") || methodName.contains("&") || methodName.contains("+")
+                || methodName.contains("-")
+                || methodName.contains("*") || methodName.charAt(0) == '_' || methodName.charAt(0) == '$') {
             return false;
+        } else {
+            return methodNamingMatcher.find();
         }
-
-        for (int charIndex = 1; charIndex < methodName.length(); charIndex++) {
-            if (!Character.isLowerCase(methodName.charAt(charIndex))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -124,5 +131,10 @@ public class MethodNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Method naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return METHOD_NAMING;
     }
 }

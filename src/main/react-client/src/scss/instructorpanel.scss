@@ -1,0 +1,32 @@
+@import "common";
+
+#instructor-panel-announcement {
+    
+    border-bottom: 2px solid rgba(255, 255, 255, 0.466);
+    padding-bottom: 40px;
+    
+}
+
+#instructor-panel-main {
+    
+    
+    padding: 30px 20px;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    background-color: $fg-color;
+    box-sizing: border-box;
+    margin-top: 50px;
+    
+    .button {
+        margin-top: 15px;
+    }
+    
+}
+
+input[type="checkbox"] + label, input[type="radio"] + label {
+    
+    margin-left: 10px;
+    margin-bottom: 7px;
+    
+}

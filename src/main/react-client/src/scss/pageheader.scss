@@ -1,0 +1,45 @@
+@import "common";
+
+#page-header {
+    
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+    align-items: center;
+    
+    h1 {
+        margin: 0;
+        font-size: 1.8em;
+    }
+    
+    div {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        
+        #avatar {
+            margin-left: 10px;
+            font-size: 2.4em;
+            border-radius: 100px;
+            border: 1px solid $dim-text-color;
+        }
+        
+        #page-header-divider {
+            height: 2.4em;
+            margin-right: 13px;
+            display: inline-block;
+            width: 1px;
+            background-color: $dim-text-color;
+        }
+        
+        #notifications {
+            margin-right: 10px;
+        }
+        
+    }
+    
+    span {
+        vertical-align: middle;
+    }
+    
+}

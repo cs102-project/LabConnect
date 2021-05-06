@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 import LoginForm from './LoginForm';
 import "../scss/login.scss";
+import labconnectLogo from "../img/labconnect-logo.png";
 
 function LoginPage(): JSX.Element {
     
-    useEffect(() => { window.document.title = "LabConnect | Login" });
+    useEffect(() => { 
+        window.document.title = "LabConnect | Login";
+    });
     
     return (
-        <div id="login-page-container">
+        <div id="login-page-container-x">
             <div id="login-primary">
+                <img id="login-logo" src={labconnectLogo} />
                 <div id="login-primary-content">
                     <h1>LabConnect</h1>
                     <h4>Connect to your lab the right way.</h4>

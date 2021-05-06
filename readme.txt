@@ -1,4 +1,5 @@
 LabConnect
+Group: G2C
 
 Group Members:
 Borga Haktan Bilen 22002733
@@ -27,16 +28,48 @@ allowing TA's to allocate time for more hands-on help towards students.
 The student experience can be improved further by adding helpful
 features such as personal notes for students and so on.
 
-Current Status:
-Back-end is mostly done. Now, we can create, test assignment files from command-line. In front-end side,
-we implemented the user login interface and background process for gaining session for user client.
+Deployment of the Project:
+Because LabConnect designed and implemented as a web application, its deployment cycle might be hard.
+Also it might be benefical to being cognizant about the fact that LabConnect's deployment process is designed
+for the maintainer of the project rather than end-user. For the deployment from the operating systems
+Fedora 33 or later, Ubuntu 20.04 or later and MacOS (as these OS's are tested), the script called "install.sh" 
+in the root folder of the project, should be used. For manuel (Windows) deployment:
 
-Further Development:
-Real API implementation and front-end development need to be completed.
+Following dependencies should be installed:
+- NodeJS and npm = https://nodejs.org/en/download/
+- Maven (optionally the maven wrapper scripts can be used: "mvnw.cmd" and "mvnw"): https://maven.apache.org/download.cgi (installation guide: https://maven.apache.org/install.html)
+- Docker = https://docs.docker.com/get-docker/
+
+Commands for deployment: 
+- (select the directory /src/main/react-client using cd in the terminal) "npm install" => for installing react dependencies
+- (select the directory /src/main/react-client using cd in the terminal) "sudo npm run build" => for building react components
+- (if maven is installed and enviromental variables are configured) "mvn package -Dmaven.test.skip=true" => for compiling and packaging the project
+- (while all dependencies installed and docker back-end is working) "mvn package -Dmaven.test.skip=true && docker-compose up --build --force-recreate" => for deploying the project
+- "sudo docker-compose down -v" => for removing the docker components (in case of full redeployment)
+
+After the deployment project can be accessed from the browser on localhost, port: 8080
+
+Current Status:
+Back-end works, REST API is 90% done, but controllers are in need of testing and debugging (due to time limitation). 
+Thus, some of the functions on the front-end are not implemented. However, previously promised core features can 
+be experienced as expected.
+
+Main Tools Used:
+Visual Studio Code, IntelliJ Idea, Drawio, Git and GitHub, MongoDB, Redis, Docker and docker-compose (v3.7), NodeJs (v14.16.1), npm (v6.14.12), 
+Spring Boot Framework (v2.4.4 [starter parent's version]), React (v17.0.4). All other packages, libraries and different 
+dependencies can be found in pom.xml and /src/main/react-client/package.json.
+
+Code organization:
+Project code is organized based on main parts of the project: Back End(Data Layer, Service Layer, Controller Layer) -> REST API -> Front End (React).
+Briefly, in the root all the configuration files (that are configuring project or a tool we used), in the "/doc" folder all the required and assessed documentation can be found
+in the "src/main" folder all the code can be seen (front-end and back-end), further down the "src/main" folder specific part of the project can be seen. 
+In "src/main/resource" folder all the static sources can be found. In the "src/main/react-native" folder all the dynamically on demand front-end 
+sources can be found. Finally, in the "src/main/java/me/labconnect" folder all the back-end can be found. Back-end files are organized in a 
+layer pattern (as they are all indicated by folder names).
 
 Contributions:
-Berkan Şahin -> Further developed API, Database, Model classes & Unit tests
-Berk Çakar -> Added new style checker classes & their maintaince + Further Regex improvements
-Borga Haktan Bilen -> Added new style checker classes & their maintaince + Further Regex improvements + General Testing
-Alp Ertan -> General Testing + Documentation
-Vedat Eren Arıcan -> Worked on Spring Security and Spring Session integrations, structured the react-client and wrote the login page
+Berkan Şahin -> Back-end development + REST API development + Testing + Documentation + Scripting for deployment of project
+Berk Çakar -> Back-end development + REST API development + Testing + Documentation
+Borga Haktan Bilen -> Back-end development + REST API development + Testing + Documentation
+Alp Ertan -> Back-end development + Documentation
+Vedat Eren Arıcan -> Back-end development + REST API development + Front-end development + Testing

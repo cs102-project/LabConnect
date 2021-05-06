@@ -1,6 +1,10 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
+
+import static me.labconnect.webapp.models.testing.Tests.CONSTANT_NAMING;
 
 /**
  * Check if the constants in the source code are named correctly
@@ -22,9 +26,11 @@ public class ConstantNamingChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
-                if (isAllCaps(extractConstant(codeFile.get(lineIndex))) == false) {
-                    errorList.add(codeFile.get(lineIndex));
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.constantRegexMatcher(codeFile.get(lineIndex))) {
+                    if (!isAllCaps(extractConstant(codeFile.get(lineIndex)))) {
+                        errorList.add(codeFile.get(lineIndex));
+                    }
                 }
             }
         }
@@ -34,14 +40,15 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method gets the end position of the constant expression.
-     * 
+     *
      * @param line is the line which includes the constant expression.
      * @return End position of the constant expression.
      */
     private int getEndPosition(String line) {
         int endPos = 0;
-        String[] identifiers = { "int", "double", "float", "long", "String", "Character", "char", "Integer", "Double",
-                "Float", "Long", "Boolean", "boolean", "Byte", "byte", "Short", "short" };
+        String[] identifiers = {"int", "double", "float", "long", "String", "Character", "char",
+                "Integer", "Double",
+                "Float", "Long", "Boolean", "boolean", "Byte", "byte", "Short", "short"};
 
         for (int typeIndex = 0; typeIndex < identifiers.length; typeIndex++) {
             if (line.contains(identifiers[typeIndex])) {
@@ -54,7 +61,7 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method extracts the constant name from the given line.
-     * 
+     *
      * @param line is the line to be processed.
      * @return Name of the constant.
      */
@@ -69,17 +76,12 @@ public class ConstantNamingChecker extends StyleChecker {
 
     /**
      * This method checks whether the constant name is all caps or not.
-     * 
+     *
      * @param constant is the constant to be checked.
-     * @return {@code true} if the constant name is all caps, otherwise
-     *         {@code false}.
+     * @return {@code true} if the constant name is all caps, otherwise {@code false}.
      */
     private boolean isAllCaps(String constant) {
-        if (!constant.equals(constant.toUpperCase())) {
-            return false;
-        } else {
-            return true;
-        }
+        return constant.equals(constant.toUpperCase());
     }
 
     /**
@@ -90,5 +92,10 @@ public class ConstantNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Constant naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return CONSTANT_NAMING;
     }
 }

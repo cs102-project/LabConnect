@@ -2,25 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<groupId>me.labconnect</groupId>
 	<artifactId>webapp</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<name>webapp</name>
 	<description>LabConnect Webapp</description>
-	
+
 	<properties>
 		<java.version>11</java.version>
 		<frontend.app.dir>${project.basedir}/src/main/react-client</frontend.app.dir>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,12 +42,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> 
-		
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -123,7 +123,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+				    <reportOutputDirectory>${project.basedir}/doc</reportOutputDirectory>
+					<tags>
+						<tag>
+							<name>apiNote</name>
+							<placement>a</placement>
+							<head>API Note:</head>
+						</tag>
+						<tag>
+							<name>implNote</name>
+							<placement>a</placement>
+							<head>Implementation Note:</head>
+						</tag>
+					</tags>
+          			<destDir>javadoc</destDir>
+				</configuration>
+      		</plugin>
+
+
 			<!-- <plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.2.0</version>
@@ -146,7 +168,7 @@
                     </execution>
 				</executions>
 			</plugin> -->
-			
+
 		</plugins>
 	</build>
 

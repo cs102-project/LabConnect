@@ -1,10 +1,14 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 
+import static me.labconnect.webapp.models.testing.Tests.LOOP_CURLY_BRACKETS;
+
 /**
- * This class is to check whether different kinds of loops in a file have the
- * required brackets or not.
+ * This class is to check whether different kinds of loops in a file have the required brackets or
+ * not.
  *
  * @author Berk Çakar
  * @author Alp Ertan
@@ -23,34 +27,37 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (lineIndex != codeFile.size() - 1) {
-                if (RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (indexExists(codeFile, lineIndex + 1)) {
+                    if (RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex) );
+                        }
+                    } else if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.doRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
-                } else if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.doRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                }
-            }
-
-            else {
-                if (RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.doRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
+                } else {
+                    if (RegexHelper.whileRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.doRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }
@@ -67,5 +74,10 @@ public class LoopCurlyBracketsChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Loop curly bracket checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return LOOP_CURLY_BRACKETS;
     }
 }

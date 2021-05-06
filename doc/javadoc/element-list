@@ -1,0 +1,11 @@
+me.labconnect.webapp
+me.labconnect.webapp.controller
+me.labconnect.webapp.controller.httpmodels
+me.labconnect.webapp.models.data
+me.labconnect.webapp.models.data.services
+me.labconnect.webapp.models.livesession
+me.labconnect.webapp.models.testing
+me.labconnect.webapp.models.testing.style
+me.labconnect.webapp.models.users
+me.labconnect.webapp.models.users.services
+me.labconnect.webapp.repository

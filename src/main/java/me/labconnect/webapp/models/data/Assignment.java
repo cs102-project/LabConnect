@@ -1,299 +1,234 @@
 package me.labconnect.webapp.models.data;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import me.labconnect.webapp.models.testing.Tester;
+import me.labconnect.webapp.models.testing.Tests;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import me.labconnect.webapp.models.testing.Tester;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A generic assignment model class
- * 
+ *
  * @author Berkan Şahin
  * @author Borga Haktan Bilen
- * @version 30.04.2021
+ * @version 03.05.2021
  */
 @Document(collection = "assignments")
 public class Assignment {
 
-    // Constants
-    @Transient
-    final int MAX_GRADE = 100;
-    @Transient
-    final int MAX_ATTEMPTS = 5;
-    @Transient
-    final String ASSIGNMENT_ROOT = "/var/labconnect/assignments";
-
     // Variables
     @Id
-    private String id; // handled by the Mongo backend, do not modify by hand!
-
-    private String assignmentID;
-    private boolean isCompleted;
-    private boolean isVisible;
-    private int[] sections;
-    private String instructionFileName;
+    private ObjectId id;
     private String title;
+    private String shortDescription;
+    private String homeworkType;
+    private List<Course> courses;
     private Date dueDate;
-    private ArrayList<Tester> tests;
+
+    private int maxGrade;
+    private int maxAttempts;
+    private String instructionFilename;
+    private List<Tester> tests;
+    private List<ObjectId> submissions;
 
     // Constructor
 
-    @PersistenceConstructor
-    public Assignment(String id, String assignmentID, boolean isCompleted, boolean isVisible, int[] sections,
-            String instructionFileName, String title, ArrayList<Tester> tests) {
-
-        this.id = id;
-        this.assignmentID = assignmentID;
-        this.isCompleted = isCompleted;
-        this.isVisible = isVisible;
-        this.sections = sections;
-        this.instructionFileName = instructionFileName;
-        this.title = title;
-        this.tests = tests;
-    }
-
     /**
-     * Creates an assignment object which contains every property of an assignment
-     * 
-     * @param title           Title of the assignment
-     * @param dueDate         Due date of the assignment in Date type
-     * @param visible         Visibility of the assginment
-     * @param instructionFile Absolute path of the instruction prompt
-     * @param tests           Determined unit or style tests
-     * @param sections        Sections that are going to recieve the assignment
-     * @throws IOException If copying the instructions fails
-     * @implNote The instructions are copied to the assignment directory, therefore
-     *           it is safe to delete them afterwards
+     * Default constructor for the {@code Assignment} class
+     *
+     * @param title               The title of the assignment
+     * @param shortDescription    Description of the assignment
+     * @param courses             Assigned courses for the assignment
+     * @param homeworkType        Type of the assignment
+     * @param dueDate             Due date of the assignment
+     * @param maxGrade            Maximum grade possible for the assignment
+     * @param maxAttempts         Maximum attempt number for the assignment
+     * @param instructionFilename Name of the instruction file for the assignment
+     * @param tests               List of test which is going to be applied to the assignment
+     * @param submissions         List of submission to the assignment
      */
-    public Assignment(String title, Date dueDate, boolean visible, Path instructionFile, ArrayList<Tester> tests,
-            int[] sections) throws IOException {
-
-        Path assignmentDir;
-
-        assignmentDir = Files.createTempDirectory(Paths.get(ASSIGNMENT_ROOT), "");
-        instructionFileName = instructionFile.getFileName().toString();
-        Files.copy(instructionFile, assignmentDir.resolve(instructionFileName));
-
-        assignmentID = assignmentDir.getFileName().toString();
-
-        this.tests = tests;
+    public Assignment(String title, String shortDescription, List<Course> courses,
+                      String homeworkType, Date dueDate,
+                      int maxGrade, int maxAttempts, String instructionFilename, List<Tester> tests,
+                      List<ObjectId> submissions) {
         this.title = title;
-        this.dueDate = dueDate; // Getting the date as int pairs might be a good idea. However, we need a
-                                // Calendar implementation.
-        this.sections = sections;
-        isVisible = visible;
-        isCompleted = false;
+        this.shortDescription = shortDescription;
+        this.homeworkType = homeworkType;
+        this.courses = courses;
+        this.maxGrade = maxGrade;
+        this.maxAttempts = maxAttempts;
+        this.instructionFilename = instructionFilename;
+        this.tests = tests;
+        this.submissions = submissions;
+        this.dueDate = dueDate;
     }
 
     // Methods
+
     /**
-     * Gets the completion status of assignment
-     * 
-     * @return {@code true} if assigment is completed, {@code false} otherwise
+     * Gets the unique id of the assignment
+     *
+     * @return Unique object id of the assignment
      */
-    public boolean isCompleted() {
-        return isCompleted;
+    public ObjectId getId() {
+        return id;
     }
 
     /**
-     * Sets the completion status of assignment
-     * 
-     * @param isCompleted The completion status of assignment
-     */
-    public void setCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
-    }
-
-    /**
-     * Gets the visibility of the assinment
-     * 
-     * @return {@code true} if assigment is visible, {@code false} otherwise
-     */
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    /**
-     * Sets the visibility of the assignment
-     * 
-     * @param isVisible Visibility of the assignment
-     */
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
-
-    /**
-     * Gets the int array, representing the section numbers that are assigned to the
-     * assignment
-     * 
-     * @return Assigned sections' number
-     */
-    public int[] getSections() {
-        return sections;
-    }
-
-    /**
-     * Sets the array of section numbers (as integers) that are assigned to the
-     * assignment
-     * 
-     * @param sections {@code int} array of assigned sections' number
-     */
-    public void setSections(int[] sections) {
-        this.sections = sections;
-    }
-
-    /**
-     * Gets the instructions file in File type
-     * 
-     * @return The assignment prompt file
-     */
-    public Path getInstructions() {
-        return Paths.get(ASSIGNMENT_ROOT, assignmentID, instructionFileName);
-    }
-
-    /**
-     * Sets the assignment instructions file
-     * 
-     * @param instructions The instructions file
-     * @throws IOException if copying the instruction file fails
-     * @implNote The instruction file is copied to the assignment directory,
-     *           therefore it is safe to delete the file afterwards
-     */
-    public void setInstructions(Path instructions) throws IOException {
-        Files.copy(instructions, getAssignmentDir().resolve(instructions.getFileName()));
-        instructionFileName = instructions.getFileName().toString();
-    }
-
-    /**
-     * Gets the name of the assignment
-     * 
-     * @return Name of the assignment
+     * Gets the title of the assignment
+     *
+     * @return Title of the assignment
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Sets the name of the assignment
-     * 
-     * @param title Name of the assignment
+     * Gets the short description of the assignment
+     *
+     * @return Short description of the assignment
      */
-    public void setTitle(String title) {
-        this.title = title;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
     /**
-     * Gets the due date
-     * 
-     * @return The due date of the assignment
+     * Gets the type of the homework
+     *
+     * @return Type of the homework
+     */
+    public String getHomeworkType() {
+        return homeworkType;
+    }
+
+    /**
+     * Gets the list of assigned courses
+     *
+     * @return List of assigned courses
+     */
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    /**
+     * Gets the due date of the assignment
+     *
+     * @return Due date of the assignment
      */
     public Date getDueDate() {
         return dueDate;
     }
 
     /**
-     * Sets the due date
-     * 
-     * @param dueDate Due date of the assignment
+     * Gets the maximum possible grade
+     *
+     * @return Maximum possible grade
      */
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public int getMaxGrade() {
+        return maxGrade;
     }
 
     /**
-     * Overload of the setDueDate method. Sets the due date with given components
-     * 
-     * @param day    The day of the due date
-     * @param month  The month of the due date
-     * @param year   The year of the due date
-     * @param hour   Hour of the day (due date)
-     * @param minute Minute of the due date
-     * @apiNote Must be careful while handling because of the GMT setoff.
+     * Gets the maximum attempt number
+     *
+     * @return Number of maximum attempts
      */
-    public void setDueDate(int day, int month, int year, int hour, int minute) {
-        this.dueDate = new GregorianCalendar(year, month, day, hour, minute).getTime();
+    public int getMaxAttempts() {
+        return maxAttempts;
     }
 
     /**
-     * Gets the ArrayList of Tester objects
-     * 
-     * @return The ArrayList of Tester objects
+     * Gets the name of the instructions file
+     *
+     * @return Name of the instructions file
      */
-    public ArrayList<Tester> getTests() {
+    public String getInstructionFilename() {
+        return instructionFilename;
+    }
+
+    /**
+     * Gets the list of tests which is going to be applied to the assignment
+     *
+     * @return List of tests which is going to be applied to the assignment
+     */
+    public List<Tester> getTests() {
         return tests;
     }
 
     /**
-     * Add a unit or style test to the tester list
-     * 
-     * @param test The test to add
+     * Return all test types used in this assignment
+     *
+     * @return A list of {@link Tests} enums for each test in this assignment
      */
-    public void addTest(Tester test) {
-        tests.add(test);
+    public List<Tests> getTestTypes() {
+        List<Tests> result = new ArrayList<>();
+
+        for (Tester tester : tests) {
+            result.add(tester.getTestType());
+        }
+
+        return result;
     }
 
     /**
-     * Sets the ArrayList of Tester objects
-     * 
-     * @param tests the ArrayList of Tester objects
+     * Gets the list of unique ids of submissions for this assignment
+     *
+     * @return List of unique ids of submissions for this assignment
      */
-    public void setUnitTests(ArrayList<Tester> tests) {
-        this.tests = tests;
+    public List<ObjectId> getSubmissions() {
+        return submissions;
     }
 
     /**
-     * Returns the directory assignment-related files are stored
-     * 
-     * @return the directory assignment-related files are stored
+     * Add a submission to the list <b>if it doesn't exist</b>
+     *
+     * @param submission The submission to add
      */
-    public Path getAssignmentDir() {
-        return Paths.get(ASSIGNMENT_ROOT, assignmentID);
+    public void addSubmission(Submission submission) {
+        addSubmission(submission.getId());
     }
 
     /**
-     * Returns the identifier String for this assignment
-     * <p>
-     * The identifier is derived from the randomly-created and unique assignment
-     * directory name
-     * 
-     * @return the identifier for this assignment
+     * Adds a submission with id to the list <b>if it doesn't exist</b>
+     *
+     * @param submissionId The id of the submission
      */
-    public String getAssignmentID() {
-        return assignmentID;
+    private void addSubmission(ObjectId submissionId) {
+        if (!submissions.contains(submissionId)) {
+            submissions.add(submissionId);
+        }
     }
 
     /**
-     * Return the hash code of the unique assignment ID, for usage in hashmaps
-     * 
-     * @return the hash code of the unique assignment ID
+     * Checks whether two assignment objects are the same or not
+     *
+     * @param o The assignment object to compare with
+     * @return {code true} if two assignment objects are the same, {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Assignment that = (Assignment) o;
+        return Objects.equals(id, that.id);
+    }
+
+    /**
+     * Gets the hash code of the assignment
+     *
+     * @return Hash code of the assignment
      */
     @Override
     public int hashCode() {
-        return assignmentID.hashCode();
-    }
-
-    /**
-     * Check if two assignments have the same ID
-     * 
-     * @return {@code true} if the assignment IDs match, otherwise {@code false}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        Assignment tmp;
-        if (obj instanceof Assignment) {
-            tmp = (Assignment) obj;
-            return tmp.assignmentID.equals(assignmentID);
-        }
-        return false;
+        return Objects.hash(id);
     }
 }

@@ -1,12 +1,17 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 
+import static me.labconnect.webapp.models.testing.Tests.DECISION_CURLY_BRACKETS;
+
 /**
- * This class is to check whether different kinds of decision statements in a
- * file have the required brackets or not.
+ * This class is to check whether different kinds of decision statements in a file have the required
+ * brackets or not.
  *
  * @author Berk Çakar
+ * @author Alp Ertan
  * @version 28.04.2021
  */
 public class DecisionCurlyBracketsChecker extends StyleChecker {
@@ -22,42 +27,46 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (lineIndex != codeFile.size() - 1) {
-                if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (indexExists(codeFile, lineIndex + 1)) {
+                    if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1)
+                                .contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
-                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{") && !codeFile.get(lineIndex + 1).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                }
-            }
-
-            else {
-                if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
-                    if (!codeFile.get(lineIndex).contains("{")) {
-                        errorList.add(codeFile.get(lineIndex));
+                } else {
+                    if (RegexHelper.ifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseifRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.elseRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else if (RegexHelper.switchRegexMatcher(codeFile.get(lineIndex))) {
+                        if (!codeFile.get(lineIndex).contains("{")) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }
@@ -76,4 +85,8 @@ public class DecisionCurlyBracketsChecker extends StyleChecker {
         return "Decision curly bracket checker";
     }
 
+    @Override
+    public Tests getTestType() {
+        return DECISION_CURLY_BRACKETS;
+    }
 }

@@ -1,8 +1,12 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static me.labconnect.webapp.models.testing.Tests.CLASS_INTERFACE_NAMING;
 
 /**
  * Checks if the name of the class obeys the conventions
@@ -33,7 +37,8 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         for (int index = 0; index < codeFile.size(); index++) {
             String currentLine = codeFile.get(index);
 
-            if ((RegexHelper.classRegexMatcher(currentLine) || RegexHelper.interfaceRegexMatcher(currentLine))) {
+            if ((RegexHelper.classRegexMatcher(currentLine) || RegexHelper
+                    .interfaceRegexMatcher(currentLine))) {
                 topLevelName = nameExtractor(currentLine);
                 matcher = compiledPattern.matcher(topLevelName);
 
@@ -58,7 +63,6 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
         int endIndex;
 
         startingPosition = 0;
-        endIndex = 0;
         if (line.contains("class")) {
             startingPosition = line.indexOf("class") + 6;
         } else if (line.contains("interface")) {
@@ -85,5 +89,10 @@ public class ClassNInterfaceNamingChecker extends StyleChecker {
     @Override
     public String getName() {
         return "Class and Interface naming checker";
+    }
+
+    @Override
+    public Tests getTestType() {
+        return CLASS_INTERFACE_NAMING;
     }
 }

@@ -1,22 +1,18 @@
 package me.labconnect.webapp.repository;
 
-import java.util.Optional;
-
 import me.labconnect.webapp.models.users.Instructor;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * A repository interface for the Instructor objects stored in the database
- * 
- * @author Berkan Şahin
- * @version 27.04.2021
+ * Instructor repository interface
+ *
+ * @author Borga Haktan Bilen
+ * @author Vedat Eren Arican
+ * @version 22.04.2021
  */
-public interface InstructorRepository extends UserRepository<Instructor> {
+@Repository
+public interface InstructorRepository extends MongoRepository<Instructor, ObjectId> {
 
-    /**
-     * Find the instructor teaching a particular section
-     * @param section The section to query
-     * @return The instructor teaching the given section
-     */
-    public Optional<Instructor> findBySectionsContaining(int section);
-    
 }

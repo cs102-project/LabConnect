@@ -1,0 +1,80 @@
+@import "common";
+
+#my-notes-panel {
+    
+    padding: 30px 20px;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    background-color: $fg-color;
+    box-sizing: border-box;
+    margin-top: 50px;
+    
+}
+
+#my-notes-list h3 {
+    margin-top: 0;
+}
+
+#my-notes-list-assignments {
+    
+    display: flex;
+    
+}
+
+.my-notes-list-assignment-item {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+#my-notes-note {
+    
+    h3 {
+        margin: 20px 0 5px 0;
+    }
+    
+}
+
+#my-notes-note-header {
+    
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    
+    a.button {
+        margin-left: auto;
+        flex: 0;
+        min-width: 150px;
+        text-align: center;
+    }
+    
+}
+
+.my-notes-attempt {
+    background-color: $bg-color;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    
+    h4 {
+        margin: 2px 0 10px 0;
+    }
+    
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: darken($bg-color, 50);
+        border: 1px solid lighten($bg-color, 25);
+        padding: 10px;
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 500px;
+        min-height: 50px;
+        color: $def-text-color;
+        font-family: "Open Sans", 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+    }
+    
+}
+

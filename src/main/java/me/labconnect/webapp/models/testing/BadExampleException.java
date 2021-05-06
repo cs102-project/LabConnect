@@ -1,9 +1,9 @@
 package me.labconnect.webapp.models.testing;
 
 /**
- * An exception thrown when the example implementation supplied by the
- * instructor fails the unit test.
- * 
+ * An exception thrown when the example implementation supplied by the instructor fails the unit
+ * test.
+ *
  * @author Alp Ertan
  * @version 21.04.2021
  */
@@ -16,7 +16,7 @@ public class BadExampleException extends Exception {
 
     /**
      * Create a new BadExampleException instance
-     * 
+     *
      * @param result The result of the failed test
      */
     public BadExampleException(TestResult result) {
@@ -27,7 +27,7 @@ public class BadExampleException extends Exception {
 
     /**
      * Return the result of the failed test
-     * 
+     *
      * @return the result of the failed test
      */
     public TestResult getResult() {

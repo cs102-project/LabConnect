@@ -1,62 +1,91 @@
 package me.labconnect.webapp.models.users;
 
-import org.springframework.data.annotation.PersistenceConstructor;
+import me.labconnect.webapp.models.data.Announcement;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
- * An instructor, which is the user that creates assignments, starts live
- * sessions and uploads tests
- * 
+ * An instructor, which is the user that creates assignments, starts live sessions and uploads
+ * tests
+ *
  * @author Berkan Şahin
+ * @author Berk Çakar
  * @version 27.04.2021
  */
 @Document(collection = "instructors")
-public class Instructor extends User {
+public class Instructor {
 
     // Variables
-    private int[] sections;
+    @Id
+    private ObjectId id;
+    private List<Announcement> announcements;
+    private List<ObjectId> assignments;
 
     /**
-     * Create a new Instructor instance
-     * 
-     * @param name          The name of the instructor
-     * @param institutionId The unique institution ID of the instructor
-     * @param department    The department of the instructor
-     * @param sections      The sections taught by this instructor
+     * Default constructor for Instructor takes lists of announcements and assignments as parameters
+     *
+     * @param announcements Announcements of the instructor
+     * @param assignments   Assignments given by the instructor
      */
-    public Instructor(String name, long institutionId, String department, int[] sections) {
-        super(name, institutionId, department);
-        this.sections = sections;
-    }
-
-    /**
-     * Create a new Instructor instance with all properties (including Object ID)
-     * initialized. Intended for retrieving instructors from the database.
-     * 
-     * @param name          The name of the instructor
-     * @param institutionId The unique institution ID of the instructor
-     * @param department    The department of the instructor
-     * @param sections      The sections taught by this instructor
-     * @param isOnline      The online status of the instructor
-     * @param objectID      The unique object ID of the instructor assigned by the
-     *                      database
-     */
-    @PersistenceConstructor
-    public Instructor(String name, long institutionId, String department, int[] sections, boolean isOnline,
-            String objectID) {
-        super(objectID, institutionId, name, department, isOnline);
-        this.sections = sections;
+    public Instructor(List<Announcement> announcements, List<ObjectId> assignments) {
+        this.announcements = announcements;
+        this.assignments = assignments;
     }
 
     // Methods
 
     /**
-     * Returns the sections taught by this instructor
-     * 
-     * @return the sections taught by this instructor
+     * Gets the object ID of the instructor
+     *
+     * @return Object ID of the instructor
      */
-    public int[] getSections() {
-        return sections;
+    public ObjectId getId() {
+        return id;
     }
 
+    /**
+     * Gets the announcements of the instructor
+     *
+     * @return Announcements of the instructor
+     */
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    /**
+     * Gets the assignments given by the instructor
+     *
+     * @return Assignments given by the instructor
+     */
+    public List<ObjectId> getAssignments() {
+        return assignments;
+    }
+
+    /**
+     * Check if the given object refers to the same instructor as this object
+     *
+     * @param o The object to compare
+     * @return {@code true} if the given object refers to the same instructor, otherwise {@code false}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Instructor that = (Instructor) o;
+        return Objects.equals(id, that.id);
+    }
+
+    /**
+     * Generate a unique hash code for this instructor
+     *
+     * @return The generated hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

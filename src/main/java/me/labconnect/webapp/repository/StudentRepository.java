@@ -1,24 +1,24 @@
 package me.labconnect.webapp.repository;
 
+import me.labconnect.webapp.models.users.Student;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-import me.labconnect.webapp.models.users.Student;
-
 /**
- * A repository interface for querying Student objects in the database
- * 
- * @author Berkan Şahin
- * @version 28.04.2021
+ * Student repository interface
+ *
+ * @author Borga Haktan Bilen
+ * @author Vedat Eren Arican
+ * @version 22.04.2021
  */
-public interface StudentRepository extends UserRepository<Student> {
-    
-    /**
-     * Retrieve all students in a given section
-     * 
-     * @param section The section to query
-     * @return The list of all students in the given section
-     */
-    public List<Student> findBySection(int section);
+@Repository
+public interface StudentRepository extends MongoRepository<Student, ObjectId> {
 
-    // TODO the rest
+    @Query("{ assignments: ?0 }")
+    List<Student> findAllByAssignmentId(ObjectId assignmentId);
+
 }

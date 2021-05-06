@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.7"
 services:
     webapp:
         depends_on: 
@@ -8,16 +8,14 @@ services:
         ports:
             - "80:8080"
         volumes: 
-            - labconnect-submissions:/var/labconnect/submissions
-            - labconnect-assignments:/var/labconnect/assignments
+            - assignments:/var/labconnect/assignments
     mongo-db:
         image: mongo
         volumes:
-            - labconnect-mongo:/data/db
+            - mongodb:/data/db
     redis:
         image: redis
 
 volumes: 
-    labconnect-submissions:
-    labconnect-assignments:
-    labconnect-mongo:
+    assignments:
+    mongodb:

@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
-import "../scss/login.scss";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../scss/login.scss';
 
 function Logout(): JSX.Element {
     fetch('/logout', {
         method: 'POST',
-        headers: {
-            'X-XSRF-TOKEN':
-                document.cookie
-                    .split('; ')
-                    .find((row) => row.startsWith('XSRF-TOKEN='))
-                    ?.split('=')[1] || '',
-        },
     });
-    
-    useEffect(() => { window.document.title = "LabConnect | Logged out" });
+
+    useEffect(() => {
+        window.document.title = 'LabConnect | Logged out';
+    });
 
     return (
-        <p id="logout-message">You have successfully logged out.</p>
+        <div id="logout-container-x">
+            <p id="logout-message">
+                You have successfully logged out.
+                <Link className="button" to="/login">Go back to homepage</Link>
+            </p>
+        </div>
     );
 }
 

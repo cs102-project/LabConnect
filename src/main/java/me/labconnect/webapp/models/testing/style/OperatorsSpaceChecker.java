@@ -1,12 +1,17 @@
 package me.labconnect.webapp.models.testing.style;
 
+import me.labconnect.webapp.models.testing.Tests;
+
 import java.util.ArrayList;
 
+import static me.labconnect.webapp.models.testing.Tests.OPERATORS_SPACE;
+
 /**
- * This class is for checking whether every operator character have space right
- * before and after them or not.
+ * This class is for checking whether every operator character have space right before and after
+ * them or not.
  *
  * @author Berk Çakar
+ * @author Borga Haktan Bilen
  * @version 28.04.2021
  */
 public class OperatorsSpaceChecker extends StyleChecker {
@@ -22,8 +27,7 @@ public class OperatorsSpaceChecker extends StyleChecker {
     }
 
     /**
-     * Checks whether every operator character have space right before and after
-     * them or not.
+     * Checks whether every operator character have space right before and after them or not.
      *
      * @param codeFile is the file. List of every line.
      * @return The lines that are failed the check.
@@ -33,47 +37,47 @@ public class OperatorsSpaceChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            for (int charIndex = 1; charIndex < codeFile.get(lineIndex).length() - 1; charIndex++) {
-                if (charIndex != codeFile.get(lineIndex).length() - 1) {
-                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
-                            || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    }
-                }
-
-                else {
-                    if (codeFile.get(lineIndex).charAt(charIndex) == '+'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
-                    } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
-                            && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
-                        errorList.add(codeFile.get(lineIndex));
+            if (RegexHelper.operatorsSpaceRegexMatcher(codeFile.get(lineIndex))) {
+                for (int charIndex = 1; charIndex < codeFile.get(lineIndex).length() - 1; charIndex++) {
+                    if (charIndex != codeFile.get(lineIndex).length() - 1) {
+                        if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')
+                                || !(codeFile.get(lineIndex).charAt(charIndex + 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
+                    } else {
+                        if (codeFile.get(lineIndex).charAt(charIndex) == '+'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '-'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '*'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '/'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        } else if (codeFile.get(lineIndex).charAt(charIndex) == '%'
+                                && !(codeFile.get(lineIndex).charAt(charIndex - 1) == ' ')) {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }
@@ -82,4 +86,8 @@ public class OperatorsSpaceChecker extends StyleChecker {
         return errorList;
     }
 
+    @Override
+    public Tests getTestType() {
+        return OPERATORS_SPACE;
+    }
 }
