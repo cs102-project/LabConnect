@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import APITools, { IAttempt } from "../APITools";
+import APITools, { IAttempt, IUserSelf } from "../APITools";
 import PageHeader from "./PageHeader";
 
 // This page shows the details (such as grade/feedback/testresults) of a single attempt
@@ -8,6 +8,10 @@ import PageHeader from "./PageHeader";
 function AttemptDetails(): JSX.Element {
     
     const [notes, setNotes] = useState<string>();
+    const [grade, setGrade] = useState<string>();
+    const [feedbackContent, setFeedbackContent] = useState<string>();
+    
+    const [userSelf, setUserSelf] = useState<IUserSelf>();
     
     const params = useParams<{ assignmentid: string, submissionid: string, attemptid: string }>();
     
@@ -17,6 +21,9 @@ function AttemptDetails(): JSX.Element {
         APITools.getAttemptDetailsOf(params.submissionid, params.attemptid).then((response) => {
             setAttempt(response);
         });
+        APITools.getUserSelf().then(response => {
+            setUserSelf(response);
+        });
     }, []);
     
     const notesSaver = () => {
@@ -25,6 +32,16 @@ function AttemptDetails(): JSX.Element {
             APITools.addNoteTo(params.submissionid, params.attemptid, notes);
         }
         
+    };
+    
+    const feedbackHandler = () => {
+        
+        if (grade === undefined) return;
+        
+        APITools.giveFeedbackTo(params.assignmentid, params.submissionid, params.attemptid, {
+            content: feedbackContent || "",
+            grade: parseInt(grade)
+        });
     };
     
     return (
@@ -38,6 +55,15 @@ function AttemptDetails(): JSX.Element {
                     <p>Grade: {attempt.feedback.grade}</p>
                     <p>Comment: {attempt.feedback.content}</p>
                 </div> }
+                {
+                    (userSelf?.roleType === "TEACHING_ASSISTANT" || userSelf?.roleType === "INSTRUCTOR") &&
+                    <div id="feedback-box">
+                        <h4>Give Feedback</h4>
+                        <input type="text" id="feedback-grade" value={grade} onChange={(e) => setGrade(e.target.value)} />
+                        <textarea id="feedback-content" value={feedbackContent} onChange={(e) => setFeedbackContent(e.target.value)}></textarea>
+                        <button className="button" onClick={feedbackHandler}>Save Feedback</button>
+                    </div>
+                }
                 <section id="attempt-test-results">
                     {attempt?.testResults.map((result, i) => {
                         return (<article key={i}>

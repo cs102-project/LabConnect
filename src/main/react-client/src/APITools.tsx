@@ -11,10 +11,8 @@ export interface INewAssignment {
     shortDescription: string;
     homeworkType: string | undefined;
     dueDate: string | undefined;
-    courses: {
-        course: string;
-        section: number;
-    }[];
+    courseNames: string[];
+    sections: number[];
     maxGrade: string;
     maxAttempts: string;
     styleTests: ITests;
@@ -43,6 +41,11 @@ export interface ITestResult {
     testType: string;
     state: string;
     output: string[];
+}
+
+export interface INewFeedback {
+    grade: number;
+    content: string;
 }
 
 export interface IFeedback {
@@ -115,12 +118,13 @@ const sendAnnouncement = (announcement: string): void => {
     });
 };
 
-const createAssignment = ({
+const createAssignment = async ({
     assignmentTitle,
     shortDescription,
     homeworkType,
     dueDate,
-    courses,
+    courseNames,
+    sections,
     maxGrade,
     maxAttempts,
     styleTests,
@@ -130,32 +134,34 @@ const createAssignment = ({
     instructionsFile,
     exampleImplementation,
     testerClass,
-}: INewAssignment): void => {
-    if (instructionsFile === undefined || exampleImplementation === undefined || testerClass === undefined) {
-        return;
-    }
-
+}: INewAssignment): Promise<IAssignment> => {
+    
+    // let response: Promise<IAssignment>;
     const formData = new FormData();
 
     formData.append('assignmentTitle', assignmentTitle);
     formData.append('shortDescription', shortDescription);
     formData.append('homeworkType', homeworkType || '');
     formData.append('dueDate', dueDate || '');
-    courses.forEach((course) => formData.append('courses', JSON.stringify(course)));
+    courseNames.forEach((name) => formData.append('courseNames', name));
+    sections.forEach((section) => formData.append('sections', JSON.stringify(section)));
     formData.append('maxGrade', maxGrade);
     formData.append('maxAttempts', maxAttempts);
     styleTests.forEach((test) => formData.append('styleTests', test));
     formData.append('unitTestName', unitTestName);
     formData.append('unitTestTimeLimit', unitTestTimeLimit);
     formData.append('forbiddenStatements', JSON.stringify(forbiddenStatements));
-    formData.append('instructionsFile', instructionsFile);
-    formData.append('exampleImplementation', exampleImplementation);
-    formData.append('testerClass', testerClass);
+    formData.append('instructionsFile', instructionsFile || "");
+    formData.append('exampleImplementation', exampleImplementation || "");
+    formData.append('testerClass', testerClass || "");
 
-    fetch('/api/assignments', {
+    const response = await fetch('/api/assignments', {
         method: 'POST',
         body: formData,
-    });
+    })
+    
+    return await response.json() as Promise<IAssignment>;
+    
 };
 
 const addAttempt = (assignmentId: string, file: Blob | undefined): void => {
@@ -170,13 +176,12 @@ const addAttempt = (assignmentId: string, file: Blob | undefined): void => {
     });
 };
 
-const giveFeedbackTo = (assignmentId: string, submissionId: string, attemptId: string, feedback: IFeedback): void => {
+const giveFeedbackTo = (assignmentId: string, submissionId: string, attemptId: string, feedback: INewFeedback): void => {
 
     const formData = new FormData();
     
     formData.append("grade", JSON.stringify(feedback.grade));
     formData.append("content", feedback.content);
-    formData.append("date", feedback.date);
     
     fetch(`/api/assignments/${assignmentId}/submissions/${submissionId}/attempts/${attemptId}`, {
         method: 'POST',

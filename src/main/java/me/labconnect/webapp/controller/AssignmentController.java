@@ -1,6 +1,7 @@
 package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.controller.httpmodels.NewAssignment;
+import me.labconnect.webapp.controller.httpmodels.NewFeedback;
 import me.labconnect.webapp.controller.httpmodels.NewNote;
 import me.labconnect.webapp.controller.httpmodels.SubmissionResponse;
 import me.labconnect.webapp.models.data.Assignment;
@@ -36,6 +37,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -320,7 +322,7 @@ public class AssignmentController {
     @PostMapping("/api/assignments/{assignmentId}/submissions/{submissionId}/attempts/{attemptId}")
     public void giveFeedbackToAttempt(@PathVariable ObjectId assignmentId,
                                       @PathVariable ObjectId submissionId,
-                                      @PathVariable int attemptId, @ModelAttribute Feedback feedback) {
+                                      @PathVariable int attemptId, @ModelAttribute NewFeedback feedback) {
         if (feedback.getGrade() > assignmentService.getById(assignmentId).getMaxGrade()) {
             throw new RuntimeException(
                     "The grade in the feedback is bigger than maximum allowed grade " + assignmentService
@@ -330,7 +332,7 @@ public class AssignmentController {
             throw new RuntimeException("The grade in the feedback cannot be less than 0");
         }
 
-        attemptService.getById(submissionId, attemptId).giveFeedback(feedback);
+        attemptService.giveFeedback(attemptService.getById(submissionId, attemptId), new Feedback(feedback.getGrade(), feedback.getContent(), new Date()));
     }
 
     /**

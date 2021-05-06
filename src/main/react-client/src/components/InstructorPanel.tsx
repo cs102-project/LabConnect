@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import APITools, { INewAssignment, ITests, IUserSelf } from '../APITools';
 import PageHeader from './PageHeader';
 
@@ -14,6 +15,8 @@ function InstructorPanel(): JSX.Element {
     const [unitTestName, setUnitTestName] = useState('');
     const [unitTestTimeLimit, setUnitTestTimeLimit] = useState('10');
     const [forbiddenStatements, setForbiddenStatements] = useState('');
+    
+    const history = useHistory();
 
     const announcementHandler = () => {
         APITools.sendAnnouncement(announcement);
@@ -21,21 +24,26 @@ function InstructorPanel(): JSX.Element {
 
     const assignmentHandler = () => {
         const styleTests: string[] = [];
-        const courses: { course: string; section: number }[] = [];
+        const cNames: string[] = [];
+        const secs: number[] = [];
 
         document
             .querySelectorAll<HTMLInputElement>("#ip-style-tests input[type='checkbox']:checked")
             .forEach((test) => styleTests.push(test.name));
         document
             .querySelectorAll<HTMLInputElement>("#ip-courses input[type='checkbox']:checked")
-            .forEach((cbox) => courses.push({ course: cbox.name.split('-')[0], section: parseInt(cbox.name.split('-')[1]) }));
+            .forEach((cbox) => {
+                cNames.push(cbox.name.split('-')[0]);
+                secs.push(parseInt(cbox.name.split('-')[1]));
+            });
 
         const assignment: INewAssignment = {
             assignmentTitle: title,
             shortDescription: description,
             homeworkType: document.querySelector<HTMLInputElement>("input[name='homeworkType']:checked")?.value,
             dueDate: document.querySelector<HTMLInputElement>("input[type='date']")?.value,
-            courses: courses,
+            courseNames: cNames,
+            sections: secs,
             maxGrade: maxGrade,
             maxAttempts: maxAttempts,
             styleTests: styleTests,
@@ -46,8 +54,15 @@ function InstructorPanel(): JSX.Element {
             exampleImplementation: (document.getElementById('ip-example') as HTMLInputElement).files?.[0],
             testerClass: (document.getElementById('ip-unittest') as HTMLInputElement).files?.[0],
         };
-
-        APITools.createAssignment(assignment);
+        
+        if (assignment.instructionsFile === undefined || assignment.exampleImplementation === undefined || assignment.testerClass === undefined) {
+            return;
+        }
+        
+        APITools.createAssignment(assignment).then(response => {
+            history.push(`/assignments/${response.id}`);
+        });
+        
     };
 
     const [tests, setTests] = useState<ITests>();
