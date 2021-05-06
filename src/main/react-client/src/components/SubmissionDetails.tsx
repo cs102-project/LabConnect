@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import APITools, { IAssignment, ISubmission } from '../APITools';
 import AddAttemptButton from './AddAttemptButton';
 import PageHeader from './PageHeader';
+import "../scss/submissiondetails.scss";
 
 // This page shows a list of attempts made to this assignment (the attempts of this submission)
 

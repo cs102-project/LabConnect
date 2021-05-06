@@ -6,65 +6,48 @@ import APITools, { IUserSelf } from '../APITools';
 
 function Sidebar(): JSX.Element {
     const [userSelf, setUserSelf] = useState<IUserSelf>();
-
-    // let metadata;
+    const [metadata, setMetadata] = useState<JSX.Element>();
 
     useEffect(() => {
-        APITools.getUserSelf().then((response) => {
-            setUserSelf(response);
+        APITools.getUserSelf().then((userSelf) => {
+            setUserSelf(userSelf);
+            
+            const courseInfo: { [key: string]: string } = {};
+
+            userSelf?.courses
+                .slice()
+                .sort((a, b) => a.section - b.section)
+                .forEach(
+                    (course) =>
+                        (courseInfo[course.course] = courseInfo[course.course] ? courseInfo[course.course] + ', ' + course.section : course.section.toString()),
+                );
+            
+            if (userSelf?.roleType === 'STUDENT') {
+                setMetadata(
+                    <div id="nav-metadata">
+                        Instructor: <span>{userSelf.instructor}</span>
+                        <br />
+                        TA: <span>{userSelf.assistant}</span>
+                    </div>
+                );
+            } else {
+                setMetadata(
+                    <div id="nav-metadata">
+                        {
+                            Object.entries(courseInfo)
+                                .sort((a, b) => b[1].length - a[1].length)
+                                .map((course) => (
+                                    <>{course[0]} <span>|</span> Sections {course[1]}<br /></>
+                                ))
+                        }
+                    </div>
+                );
+            }
+            
         });
 
-        // if (userSelf?.roleType === 'STUDENT') {
-        //     metadata = (
-        //         <div id="nav-metadata">
-        //             Instructor: <span>{userSelf.instructor}</span>
-        //             <br />
-        //             TA: <span>{userSelf.assistant}</span>
-        //         </div>
-        //     );
-        // } else if (userSelf?.roleType === 'INSTRUCTOR') {
-        //     metadata = (
-        //         <div id="nav-metadata">
-        //             Course:{' '}
-        //             <span>
-        //                 {userSelf.courses[0].course} | Section {userSelf.courses[0].section}
-        //             </span>
-        //         </div>
-        //     );
-        // } else {
-        //     metadata = (
-        //         <div id="nav-metadata">
-        //             Course:{' '}
-        //             <span>
-        //                 {userSelf?.courses[0].course} | Section {userSelf?.courses[0].section}
-        //             </span>
-        //             <br />
-        //             Instructor: <span>{userSelf?.instructor}</span>
-        //         </div>
-        //     );
-        // }
+        
     }, []);
-
-    const getCourseDataElement = (): JSX.Element => {
-        const courseInfo: { [key: string]: string } = {};
-
-        userSelf?.courses
-            .slice()
-            .sort((a, b) => a.section - b.section)
-            .forEach(
-                (course) =>
-                    (courseInfo[course.course] = courseInfo[course.course] + ', ' + course.section || course.section.toString()),
-            );
-
-        return (
-            <>
-                {Object.entries(courseInfo)
-                    .sort((a, b) => b[1].length - a[1].length)
-                    .map((course) => `${course[0]} ${(<span>|</span>)} Sections ${course[1]}}`)
-                    .join('<br />')}
-            </>
-        );
-    };
 
     return (
         <nav id="nav-sidebar">
@@ -73,13 +56,7 @@ function Sidebar(): JSX.Element {
                 <p>LabConnect</p>
             </div>
 
-            {(userSelf?.roleType === 'STUDENT' && (
-                <div id="nav-metadata">
-                    Instructor: <span>{userSelf.instructor}</span>
-                    <br />
-                    TA: <span>{userSelf.assistant}</span>
-                </div>
-            )) || <div id="nav-metadata">{getCourseDataElement()}</div>}
+            {metadata}
 
             <ul id="nav-links">
                 <li>

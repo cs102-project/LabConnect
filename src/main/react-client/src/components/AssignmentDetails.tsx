@@ -86,14 +86,14 @@ function AssignmentDetails(): JSX.Element {
                             <section>{submission.submitterName}</section>
                             <section>{submission.attempts.length}</section>
                             <section>
-                                {submission.attempts[submission.attempts.length - 1].testResults.reduce(
+                                {submission.attempts[submission.attempts.length - 1]?.testResults.reduce(
                                     (acc, curr) => acc + (curr.state === 'SUCCESS' ? 1 : 0),
                                     0,
                                 )}{' '}
-                                / {submission.attempts[submission.attempts.length - 1].testResults.length}
+                                / {submission.attempts[submission.attempts.length - 1]?.testResults.length}
                             </section>
                             <section>
-                                {submission.attempts[submission.attempts.length - 1].feedback?.grade || 'N/A'}
+                                {submission.attempts[submission.attempts.length - 1]?.feedback?.grade || 'N/A'}
                             </section>
                             <section>
                                 <Link to={`/assignments/${assignmentid}/submissions/${submission.id}`}>
