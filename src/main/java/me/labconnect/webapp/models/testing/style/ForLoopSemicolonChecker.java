@@ -36,11 +36,13 @@ public class ForLoopSemicolonChecker extends StyleChecker {
         ArrayList<String> errorList = new ArrayList<>();
 
         for (int lineIndex = 0; lineIndex < codeFile.size(); lineIndex++) {
-            if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
-                for (int j = 0; j < codeFile.get(lineIndex).length() - 1; j++) {
-                    if (codeFile.get(lineIndex).charAt(j) == ';'
-                            && codeFile.get(lineIndex).charAt(j + 1) != ' ') {
-                        errorList.add(codeFile.get(lineIndex) + " [at line: " + lineIndex + 1 + "]");
+            if (isNotAComment(codeFile.get(lineIndex))) {
+                if (RegexHelper.forRegexMatcher(codeFile.get(lineIndex))) {
+                    for (int j = 0; j < codeFile.get(lineIndex).length() - 1; j++) {
+                        if (codeFile.get(lineIndex).charAt(j) == ';'
+                                && codeFile.get(lineIndex).charAt(j + 1) != ' ') {
+                            errorList.add(codeFile.get(lineIndex));
+                        }
                     }
                 }
             }
