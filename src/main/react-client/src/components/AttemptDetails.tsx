@@ -69,7 +69,7 @@ function AttemptDetails(): JSX.Element {
                         return (<article key={i}>
                             <h4>Test: {result.testName}</h4>
                             <p>State: {result.state}</p>
-                            <p>Output: {result.output.map((line, i) => <p key={i}>{line}</p>)}</p>
+                            <p>Output: {result.output?.map((line, i) => <p key={i}>{line}</p>)}</p>
                         </article>)
                     })}
                 </section>
