@@ -1,5 +1,6 @@
 package me.labconnect.webapp.controller.httpmodels;
 
+import me.labconnect.webapp.models.data.Course;
 import me.labconnect.webapp.models.testing.Tests;
 
 import java.util.ArrayList;
@@ -23,8 +24,7 @@ public class NewAssignment {
     private String homeworkType;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
-    private String courseName;
-    private int[] sections;
+    private List<Course> courses;
     private int maxGrade;
     private int maxAttempts;
     private List<Tests> styleTests;
@@ -52,16 +52,14 @@ public class NewAssignment {
      * @param forbiddenStatements Statements not allowed for use in the assignment
      */
     public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType,
-                         Date dueDate, String courseName,
-                         int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
+                         Date dueDate, List<Course> courses, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
                          Long unitTestTimeLimit, ArrayList<String> forbiddenStatements, 
                          MultipartFile instructionsFile, MultipartFile exampleImplementation, MultipartFile testerClass) {
         this.assignmentTitle = assignmentTitle;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
         this.dueDate = dueDate;
-        this.courseName = courseName;
-        this.sections = sections;
+        this.courses = courses;
         this.maxGrade = maxGrade;
         this.maxAttempts = maxAttempts;
         this.styleTests = styleTests;
@@ -87,8 +85,8 @@ public class NewAssignment {
      *
      * @return Course name which {@code NewAssignment} object belongs to
      */
-    public String getCourseName() {
-        return courseName;
+    public List<Course> getCourses() {
+        return courses;
     }
 
     /**
@@ -116,15 +114,6 @@ public class NewAssignment {
      */
     public int getMaxGrade() {
         return maxGrade;
-    }
-
-    /**
-     * Gets the section number which {@code NewAssignment} object belongs to
-     *
-     * @return Section number which {@code NewAssignment} object belongs to
-     */
-    public int[] getSections() {
-        return sections;
     }
 
     /**

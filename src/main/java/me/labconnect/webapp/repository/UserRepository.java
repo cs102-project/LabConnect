@@ -21,6 +21,8 @@ public interface UserRepository extends MongoRepository<User, ObjectId> {
     User findByEmail(String email);
 
     List<User> findByInstitution(String institution);
+    
+    User findByRoleDocumentId(ObjectId roleDocumentId);
 
     @Query("{ institution: ?0, courses: { $elemMatch: { course: ?1 } } }")
     List<User> findByCourse(String institution, String course);

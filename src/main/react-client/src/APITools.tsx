@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 /**
  *
@@ -11,8 +11,10 @@ export interface INewAssignment {
     shortDescription: string;
     homeworkType: string | undefined;
     dueDate: string | undefined;
-    courseName: string;
-    sections: string[];
+    courses: {
+        course: string;
+        section: number;
+    }[];
     maxGrade: string;
     maxAttempts: string;
     styleTests: ITests;
@@ -59,6 +61,7 @@ export interface IAttempt {
 
 export interface ISubmission { 
     id: string;
+    submitterName: string;
     attempts: IAttempt[]
 };
 
@@ -85,7 +88,7 @@ export interface IUserSelf {
     assistant: string;
     courses: {
         course: string;
-        section: string;
+        section: number;
     }[];
 }
 
@@ -117,8 +120,7 @@ const createAssignment = ({
     shortDescription,
     homeworkType,
     dueDate,
-    courseName,
-    sections,
+    courses,
     maxGrade,
     maxAttempts,
     styleTests,
@@ -139,8 +141,7 @@ const createAssignment = ({
     formData.append('shortDescription', shortDescription);
     formData.append('homeworkType', homeworkType || '');
     formData.append('dueDate', dueDate || '');
-    formData.append('courseName', courseName);
-    sections.forEach((section) => formData.append('sections', section));
+    courses.forEach((course) => formData.append('courses', JSON.stringify(course)));
     formData.append('maxGrade', maxGrade);
     formData.append('maxAttempts', maxAttempts);
     styleTests.forEach((test) => formData.append('styleTests', test));
@@ -273,7 +274,7 @@ const getAllAnnouncements = async (): Promise<IAnnouncement[]> => {
 
 const helpers = {
     isAssignmentComplete: (assignment: IAssignment): boolean => {
-        return moment(Date.now()).isAfter(assignment.dueDate);
+        return DateTime.now() > DateTime.fromMillis(parseInt(assignment.dueDate));
     },
     sendDownload: (promise: Promise<Blob>, filename: string | undefined): void => {
         promise.then((blob) => {
@@ -297,6 +298,10 @@ const helpers = {
     },
     isSubmissionValid: (response: boolean | ISubmission): response is ISubmission => {
         return response !== false && response !== true;
+    },
+    capitalizeNicely: (input: string | undefined): string => {
+        if (input === undefined || input.length === 0) return "";
+        return input[0].toUpperCase() + input.substring(1).toLowerCase();
     }
 };
 

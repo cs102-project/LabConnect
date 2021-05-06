@@ -15,8 +15,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @SpringBootApplication
 public class WebappApplication implements CommandLineRunner {
@@ -69,22 +71,28 @@ public class WebappApplication implements CommandLineRunner {
         teachingAssistantService.addStudent(userService.getTADocumentOf(teachingAssistant),
                 userService.getStudentDocumentOf(student));
 
+        List<Course> courses = Arrays.asList(new Course[] {
+                new Course("CS102", 1),
+                new Course("CS102", 2),
+                new Course("CS102", 3)
+        });
+        
         assignmentService.createAssignment("Lab03 | Working with big numbers", "Big numbers are sometimes dreaded by new programmers due to their initial lack of an understanding of how data types work in the world of digital computation. This lab will get you up to speed in no time though. At least, that's the story that has been conjured just now.", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
                 new GregorianCalendar(2021, Calendar.MAY, 1).getTime(),
-                new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>(), null, null,
+                courses, "Lab", 80, 3, new ArrayList<>(), null, null,
                 null, null, null);
                 
         assignmentService.createAssignment("Lab04 | Learning how to make pretty GUI's", "Dummy Lab Dummy Dummy Dummy Lab", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
                 new GregorianCalendar(2021, Calendar.MAY, 7).getTime(),
-                new int[]{1, 2, 3}, "CS102", "Lab", 100, 5, new ArrayList<>(), null, null,
+                courses, "Lab", 100, 5, new ArrayList<>(), null, null,
                 null, null, null);
                 
         assignmentService.createAssignment("Lab05 | Create your first Spring project", "And regret what you have unleashed upon yourself once you realize that Spring is not nearly as pleasant as its name would suggest.", "Bilkent University",
                 Files.createTempFile("lab_", ".pdf"),
                 new GregorianCalendar(2021, Calendar.MAY, 15).getTime(),
-                new int[]{1, 2, 3}, "CS102", "Lab", 80, 3, new ArrayList<>(), null, null,
+                courses, "Lab", 80, 3, new ArrayList<>(), null, null,
                 null, null, null);
     }
 

@@ -47,7 +47,7 @@ function MyNotes(): JSX.Element {
                             <Link to={`/assignments/${assignmentNoteObj?.assignmentId}`} className="button" >Go to Assignment</Link>
                         </div>
                         <div id="my-notes-note-attempts">
-                            {assignmentNoteObj?.attemptNotes.map((attemptObj, i) => (
+                            {assignmentNoteObj?.attemptNotes.filter(attemptObj => attemptObj.note?.length > 0).map((attemptObj, i) => (
                                 <div key={i} className="my-notes-attempt">
                                     <h4>Attempt #{attemptObj.attempt}:</h4>
                                     <textarea

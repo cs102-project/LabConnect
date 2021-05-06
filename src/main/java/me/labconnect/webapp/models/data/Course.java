@@ -2,6 +2,9 @@ package me.labconnect.webapp.models.data;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class for {@code Course} objects
  *
@@ -21,7 +24,8 @@ public class Course {
      * @param course  The name of the course
      * @param section The section number of the course
      */
-    public Course(String course, int section) {
+    @JsonCreator
+    public Course(@JsonProperty(value = "course") String course, @JsonProperty(value = "section") int section) {
         this.course = course;
         this.section = section;
     }

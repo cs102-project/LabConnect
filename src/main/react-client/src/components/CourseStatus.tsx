@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import '../scss/dashboard.scss';
 import bilkentLogo from '../img/bilkent.png';
-import APITools, { IAssignment, IUserSelf } from '../APITools';
+import APITools, { IUserSelf } from '../APITools';
+import { DateTime } from 'luxon';
 
 function CourseStatus(): JSX.Element {
-    
     const [userSelf, setUserSelf] = useState<IUserSelf>();
-    const [assignments, setAssignments] = useState<IAssignment[]>();
-    const [stats, setStats] = useState({ complete: 0, total: 1 });
-    
+    const [stats, setStats] = useState({ complete: 0, total: 1, nextDeadline: '' });
+
     useEffect(() => {
         APITools.getUserSelf().then((response) => {
             setUserSelf(response);
         });
-        APITools.getAllAssignments().then((response) => {
-            setAssignments(response);
+        APITools.getAllAssignments().then((assignments) => {
             setStats({
                 complete: assignments?.filter((el) => APITools.helpers.isAssignmentComplete(el))?.length || 0,
-                total: assignments?.length || 1
+                total: assignments?.length || 1,
+                nextDeadline: (() => {
+                    const closestUnixDate = assignments
+                        ?.slice()
+                        .filter((assignment) => !APITools.helpers.isAssignmentComplete(assignment))
+                        ?.sort((a, b) => parseInt(a.dueDate) - parseInt(b.dueDate))[0].dueDate;
+                    const date = DateTime.fromMillis(parseInt(closestUnixDate));
+                    const dateDiff = date.diffNow(['days', 'hours']);
+
+                    return dateDiff.days >= 1
+                        ? `${Math.floor(dateDiff.days)} days left!`
+                        : `${Math.floor(dateDiff.hours)} hours left!`;
+                })(),
             });
         });
     }, []);
-    
+
     return (
         <div id="dashboard-course-status">
             <div id="dashboard-course-info">
@@ -39,11 +49,11 @@ function CourseStatus(): JSX.Element {
                         Course Progress: {stats.complete} <span>/ {stats.total} assignments</span>
                     </p>
                     <p>
-                        Next Deadline: <span>4 days left!</span>
+                        Next Deadline: <span>{stats.nextDeadline}</span>
                     </p>
                 </div>
                 <div id="course-progress-bar">
-                    <div style={{ width: (stats.complete / stats.total).toFixed(3) + "%" || "50%" }}></div>
+                    <div style={{ width: ((stats.complete / stats.total) * 100).toFixed(3) + '%' || '50%' }}></div>
                 </div>
             </div>
         </div>

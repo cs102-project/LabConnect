@@ -134,14 +134,13 @@ public class AssignmentService {
     public Assignment createAssignment(String assignmentName, String shortDescription,
                                        String institution, Path instructionFile,
                                        Date dueDate,
-                                       int[] sections, String courseName, String homeworkType, int maxGrade, int maxAttempts,
+                                       List<Course> courses, String homeworkType, int maxGrade, int maxAttempts,
                                        List<Tests> testNames, String unitTestName, Long unitTestTimeLimit,
                                        Path exampleImplementation,
                                        Path testerClass, ArrayList<String> forbiddenStatements)
             throws IOException, BadExampleException {
 
         Assignment assignment;
-        ArrayList<Course> courses;
         Set<Tester> testers = new HashSet<>();
 
         if (testNames != null) {
@@ -191,11 +190,6 @@ public class AssignmentService {
                         testers.add(new BlankLineAfterClassDeclarationChecker());
                 }
             }
-        }
-
-        courses = new ArrayList<>();
-        for (int section : sections) {
-            courses.add(new Course(courseName, section));
         }
 
         assignment = assignmentRepository.save(

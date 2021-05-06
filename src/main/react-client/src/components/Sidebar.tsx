@@ -1,51 +1,86 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import '../scss/sidebar.scss';
-import labconnectLogo from "../img/labconnect-logo.png";
+import labconnectLogo from '../img/labconnect-logo.png';
 import APITools, { IUserSelf } from '../APITools';
 
-function Sidebar(): JSX.Element | null {
-    
+function Sidebar(): JSX.Element {
     const [userSelf, setUserSelf] = useState<IUserSelf>();
-    
-    let metadata;
-    
+
+    // let metadata;
+
     useEffect(() => {
         APITools.getUserSelf().then((response) => {
             setUserSelf(response);
         });
-        
-        if (userSelf?.roleType === "STUDENT") {
-            metadata = (
-                <div id="nav-metadata">
-                    Instructor: <span>{userSelf.instructor}</span><br />
-                    TA: <span>{userSelf.assistant}</span>
-                </div>
-            );
-        } else if (userSelf?.roleType === "INSTRUCTOR") {
-            metadata = (
-                <div id="nav-metadata">
-                    Course: <span>{userSelf.courses[0].course} | Section {userSelf.courses[0].section}</span>
-                </div>
-            );
-        } else {
-            metadata = (
-                <div id="nav-metadata">
-                    Course: <span>{userSelf?.courses[0].course} | Section {userSelf?.courses[0].section}</span><br />
-                    Instructor: <span>{userSelf?.instructor}</span>
-                </div>
-            );
-        }
-        
+
+        // if (userSelf?.roleType === 'STUDENT') {
+        //     metadata = (
+        //         <div id="nav-metadata">
+        //             Instructor: <span>{userSelf.instructor}</span>
+        //             <br />
+        //             TA: <span>{userSelf.assistant}</span>
+        //         </div>
+        //     );
+        // } else if (userSelf?.roleType === 'INSTRUCTOR') {
+        //     metadata = (
+        //         <div id="nav-metadata">
+        //             Course:{' '}
+        //             <span>
+        //                 {userSelf.courses[0].course} | Section {userSelf.courses[0].section}
+        //             </span>
+        //         </div>
+        //     );
+        // } else {
+        //     metadata = (
+        //         <div id="nav-metadata">
+        //             Course:{' '}
+        //             <span>
+        //                 {userSelf?.courses[0].course} | Section {userSelf?.courses[0].section}
+        //             </span>
+        //             <br />
+        //             Instructor: <span>{userSelf?.instructor}</span>
+        //         </div>
+        //     );
+        // }
     }, []);
-    
+
+    const getCourseDataElement = (): JSX.Element => {
+        const courseInfo: { [key: string]: string } = {};
+
+        userSelf?.courses
+            .slice()
+            .sort((a, b) => a.section - b.section)
+            .forEach(
+                (course) =>
+                    (courseInfo[course.course] = courseInfo[course.course] + ', ' + course.section || course.section.toString()),
+            );
+
+        return (
+            <>
+                {Object.entries(courseInfo)
+                    .sort((a, b) => b[1].length - a[1].length)
+                    .map((course) => `${course[0]} ${(<span>|</span>)} Sections ${course[1]}}`)
+                    .join('<br />')}
+            </>
+        );
+    };
+
     return (
         <nav id="nav-sidebar">
             <div id="nav-header">
                 <img src={labconnectLogo} />
                 <p>LabConnect</p>
             </div>
-            { metadata }
+
+            {(userSelf?.roleType === 'STUDENT' && (
+                <div id="nav-metadata">
+                    Instructor: <span>{userSelf.instructor}</span>
+                    <br />
+                    TA: <span>{userSelf.assistant}</span>
+                </div>
+            )) || <div id="nav-metadata">{getCourseDataElement()}</div>}
+
             <ul id="nav-links">
                 <li>
                     <NavLink exact to="/" className="nav-link" activeClassName="nav-active">
@@ -59,12 +94,14 @@ function Sidebar(): JSX.Element | null {
                         <span className="nav-link-text">Analysis</span>
                     </NavLink>
                 </li>
-                {userSelf?.roleType === "STUDENT" && <li>
-                    <NavLink to="/my-notes" className="nav-link" activeClassName="nav-active">
-                        <span className="material-icons">note</span>
-                        <span className="nav-link-text">My Notes</span>
-                    </NavLink>
-                </li>}
+                {userSelf?.roleType === 'STUDENT' && (
+                    <li>
+                        <NavLink to="/my-notes" className="nav-link" activeClassName="nav-active">
+                            <span className="material-icons">note</span>
+                            <span className="nav-link-text">My Notes</span>
+                        </NavLink>
+                    </li>
+                )}
                 <li>
                     <NavLink to="/messages" className="nav-link" activeClassName="nav-active">
                         <span className="material-icons">message</span>
@@ -77,12 +114,14 @@ function Sidebar(): JSX.Element | null {
                         <span className="nav-link-text">Announcements</span>
                     </NavLink>
                 </li>
-                {userSelf?.roleType === "INSTRUCTOR" && <li>
-                    <NavLink to="/instructor-panel" className="nav-link" activeClassName="nav-active">
-                        <span className="material-icons">vpn_key</span>
-                        <span className="nav-link-text">Instructor Panel</span>
-                    </NavLink>
-                </li>}
+                {userSelf?.roleType === 'INSTRUCTOR' && (
+                    <li>
+                        <NavLink to="/instructor-panel" className="nav-link" activeClassName="nav-active">
+                            <span className="material-icons">vpn_key</span>
+                            <span className="nav-link-text">Instructor Panel</span>
+                        </NavLink>
+                    </li>
+                )}
             </ul>
             <div style={{ display: 'none' }} id="nav-livesession"></div>
             <ul id="nav-options">

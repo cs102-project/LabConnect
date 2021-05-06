@@ -83,7 +83,7 @@ public class SubmissionService {
 
         Attempt attempt;
 
-        attempt = new Attempt(submission.getAttempts().size(), submission.getId(), attemptArchive.getFileName().toString(),
+        attempt = new Attempt(submission.getAttempts().size() + 1, submission.getId(), attemptArchive.getFileName().toString(),
                 "", null, new ArrayList<>());
 
         submission.addAttempt(attempt);

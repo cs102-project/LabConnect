@@ -21,10 +21,8 @@ public class Instructor {
 
     // Variables
     @Id
-    //@JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
     private List<Announcement> announcements;
-    //@JsonSerialize(using = ToStringSerializer.class)
     private List<ObjectId> assignments;
 
     /**

@@ -2,10 +2,10 @@ package me.labconnect.webapp.controller;
 
 import me.labconnect.webapp.controller.httpmodels.NewAssignment;
 import me.labconnect.webapp.controller.httpmodels.NewNote;
+import me.labconnect.webapp.controller.httpmodels.SubmissionResponse;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Feedback;
-import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
@@ -16,7 +16,9 @@ import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserService;
 import me.labconnect.webapp.repository.UserRepository;
+
 import org.bson.types.ObjectId;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -165,8 +167,7 @@ public class AssignmentController {
                 user.getInstitution(),
                 instructions,
                 newAssignment.getDueDate(),
-                newAssignment.getSections(),
-                newAssignment.getCourseName(),
+                newAssignment.getCourses(),
                 newAssignment.getHomeworkType(),
                 newAssignment.getMaxGrade(),
                 newAssignment.getMaxAttempts(),
@@ -211,7 +212,7 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions/all")
     @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT"})
-    public List<Submission> getSubmissions(Authentication authentication,
+    public List<SubmissionResponse> getSubmissions(Authentication authentication,
                                            @PathVariable ObjectId assignmentId) {
 
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
@@ -221,12 +222,17 @@ public class AssignmentController {
 
             case INSTRUCTOR:
                 return assignmentService
-                        .getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user),
-                                assignmentId);
+                        .getAssignmentSubmissionsForInstructor(userService.getInstructorDocumentOf(user), assignmentId)
+                        .stream()
+                        .map(submission -> new SubmissionResponse(submission, userRepository.findByRoleDocumentId(submission.getSubmitterId()).getName()))
+                        .collect(Collectors.toList());
 
             case TEACHING_ASSISTANT:
                 return assignmentService
-                        .getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId);
+                        .getAssignmentSubmissionsForTA(userService.getTADocumentOf(user), assignmentId)
+                        .stream()
+                        .map(submission -> new SubmissionResponse(submission, userRepository.findByRoleDocumentId(submission.getSubmitterId()).getName()))
+                        .collect(Collectors.toList());
 
             default:
                 throw new RuntimeException("Invalid role!");
@@ -276,16 +282,16 @@ public class AssignmentController {
      */
     @GetMapping("/api/assignments/{assignmentId}/submissions")
     @Secured({ "ROLE_STUDENT" })
-    public Submission getSubmissionForStudent(Authentication authentication, @PathVariable ObjectId assignmentId) {
+    public SubmissionResponse getSubmissionForStudent(Authentication authentication, @PathVariable ObjectId assignmentId) {
         
         LCUserDetails userDetail = (LCUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetail.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         
-        return submissionService
+        return new SubmissionResponse(submissionService
             .getAssignmentSubmissionBySubmitter(
                 assignmentId,
                 userService.getStudentDocumentOf(user).getId()
-            ).orElseThrow();
+            ).orElseThrow(), user.getName());
 
     }
 

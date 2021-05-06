@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * A generic User of LabConnect
  *
@@ -21,7 +23,6 @@ public class User {
 
     // Properties
     @Id
-    //@JsonSerialize(using = ToStringSerializer.class)
     protected ObjectId id;
     protected ObjectId roleDocumentId;
     protected LCUserRoleTypes roleType;
@@ -33,6 +34,7 @@ public class User {
     protected String name;
 
     protected String email;
+    @JsonIgnore
     protected String password;
 
     // Constructor

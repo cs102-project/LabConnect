@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
-import "../scss/login.scss";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../scss/login.scss';
 
 function Logout(): JSX.Element {
-    
     fetch('/logout', {
-        method: 'POST'
+        method: 'POST',
     });
-    
-    useEffect(() => { 
-        window.document.title = "LabConnect | Logged out";
+
+    useEffect(() => {
+        window.document.title = 'LabConnect | Logged out';
     });
 
     return (
         <div id="logout-container-x">
-            <p id="logout-message">You have successfully logged out.</p>
+            <p id="logout-message">
+                You have successfully logged out.
+                <Link to="/login">Go back to homepage</Link>
+            </p>
         </div>
     );
 }
