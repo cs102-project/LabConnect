@@ -67,42 +67,45 @@ function AssignmentDetails(): JSX.Element {
                         <li key={i}>{test.name}</li>
                     ))}
                 </ul>
+                
+                <div id="assignment-submission-list-box">
+                
+                {(userSelf?.roleType === 'TEACHING_ASSISTANT' || userSelf?.roleType === 'INSTRUCTOR') && (
+                    <div id="assignment-submissions-header">
+                        <span>Submitter</span>
+                        <span>Attempts</span>
+                        <span>Test Success</span>
+                        <span>Grade</span>
+                        <span>Go to Submission</span>
+                    </div>
+                )}
+                
+                {(userSelf?.roleType === 'TEACHING_ASSISTANT' || userSelf?.roleType === 'INSTRUCTOR') &&
+                    submissions?.map((submission, i) => {
+                        return (
+                            <article key={i}>
+                                <section>{submission.submitterName}</section>
+                                <section>{submission.attempts.length}</section>
+                                <section>
+                                    {submission.attempts[submission.attempts.length - 1]?.testResults.reduce(
+                                        (acc, curr) => acc + (curr.state === 'SUCCESS' ? 1 : 0),
+                                        0,
+                                    )}{' '}
+                                    / {submission.attempts[submission.attempts.length - 1]?.testResults.length}
+                                </section>
+                                <section>
+                                    {submission.attempts[submission.attempts.length - 1]?.feedback?.grade || 'N/A'}
+                                </section>
+                                <section>
+                                    <Link to={`/assignments/${assignmentid}/submissions/${submission.id}`}>
+                                        <span className="material-icons">find_in_page</span>
+                                    </Link>
+                                </section>
+                            </article>
+                        );
+                    })}
+                    </div>
             </main>
-
-            {(userSelf?.roleType === 'TEACHING_ASSISTANT' || userSelf?.roleType === 'INSTRUCTOR') && (
-                <div id="assignment-submissions-header">
-                    <span>Submitter</span>
-                    <span>Attempts</span>
-                    <span>Test Success</span>
-                    <span>Grade</span>
-                    <span>Go to Submission</span>
-                </div>
-            )}
-
-            {(userSelf?.roleType === 'TEACHING_ASSISTANT' || userSelf?.roleType === 'INSTRUCTOR') &&
-                submissions?.map((submission, i) => {
-                    return (
-                        <article key={i}>
-                            <section>{submission.submitterName}</section>
-                            <section>{submission.attempts.length}</section>
-                            <section>
-                                {submission.attempts[submission.attempts.length - 1]?.testResults.reduce(
-                                    (acc, curr) => acc + (curr.state === 'SUCCESS' ? 1 : 0),
-                                    0,
-                                )}{' '}
-                                / {submission.attempts[submission.attempts.length - 1]?.testResults.length}
-                            </section>
-                            <section>
-                                {submission.attempts[submission.attempts.length - 1]?.feedback?.grade || 'N/A'}
-                            </section>
-                            <section>
-                                <Link to={`/assignments/${assignmentid}/submissions/${submission.id}`}>
-                                    <span className="material-icons">find_in_page</span>
-                                </Link>
-                            </section>
-                        </article>
-                    );
-                })}
         </div>
     );
 }

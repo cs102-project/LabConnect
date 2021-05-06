@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import APITools, { IAttempt, IUserSelf } from "../APITools";
 import PageHeader from "./PageHeader";
+import "../scss/attemptdetails.scss";
 
 // This page shows the details (such as grade/feedback/testresults) of a single attempt
 
@@ -60,7 +61,7 @@ function AttemptDetails(): JSX.Element {
                     <div id="feedback-box">
                         <h4>Give Feedback</h4>
                         <input type="text" id="feedback-grade" value={grade} onChange={(e) => setGrade(e.target.value)} />
-                        <textarea id="feedback-content" value={feedbackContent} onChange={(e) => setFeedbackContent(e.target.value)}></textarea>
+                        <textarea className="lc-textarea" id="feedback-content" value={feedbackContent} onChange={(e) => setFeedbackContent(e.target.value)}></textarea>
                         <button className="button" onClick={feedbackHandler}>Save Feedback</button>
                     </div>
                 }
@@ -75,7 +76,7 @@ function AttemptDetails(): JSX.Element {
                 </section>
                 <section id="attempt-notes">
                     <h4>Notes:</h4>
-                    <textarea onChange={(e) => setNotes(e.target.value)} value={notes}></textarea>
+                    <textarea className="lc-textarea" onChange={(e) => setNotes(e.target.value)} value={notes}></textarea>
                     <button className="button" onClick={notesSaver}>Save Notes</button>
                 </section>
             </main>

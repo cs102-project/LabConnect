@@ -97,6 +97,10 @@
         margin: 5px 0 15px 0;
     }
     
+    .button {
+        width: 100%;
+    }
+    
 }
 
 #login-logo {
@@ -106,9 +110,7 @@
     height: 60px;
 }
 
-.button {
-    width: 100%;
-}
+
 
 #logout-container-x {
     min-height: 100vh;
@@ -124,5 +126,10 @@
     padding: 20px;
     background-color: $fg-color;
     border-radius: 5px;
+    
+    .button {
+        display: block;
+        margin-top: 10px;
+    }
     
 }

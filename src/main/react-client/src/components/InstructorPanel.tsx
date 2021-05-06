@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import APITools, { INewAssignment, ITests, IUserSelf } from '../APITools';
 import PageHeader from './PageHeader';
+import "../scss/instructorpanel.scss";
 
 // New assignments and announcements are added from here.
 
@@ -13,7 +14,7 @@ function InstructorPanel(): JSX.Element {
     const [maxGrade, setMaxGrade] = useState('100');
     const [maxAttempts, setMaxAttempts] = useState('7');
     const [unitTestName, setUnitTestName] = useState('');
-    const [unitTestTimeLimit, setUnitTestTimeLimit] = useState('10');
+    const [unitTestTimeLimit, setUnitTestTimeLimit] = useState('10000');
     const [forbiddenStatements, setForbiddenStatements] = useState('');
     
     const history = useHistory();
@@ -84,7 +85,7 @@ function InstructorPanel(): JSX.Element {
             <main id="instructor-panel-main">
                 <section id="instructor-panel-announcement">
                     <h4>Make announcement</h4>
-                    <textarea value={announcement} onChange={(e) => setAnnouncement(e.target.value)}></textarea>
+                    <textarea className="lc-textarea" value={announcement} onChange={(e) => setAnnouncement(e.target.value)}></textarea>
                     <button className="button" onClick={announcementHandler}>
                         Send
                     </button>
@@ -110,13 +111,13 @@ function InstructorPanel(): JSX.Element {
                     <input type="file" id="ip-instructions" />
 
                     <h5>Assignment Title</h5>
-                    <input type="text" id="ip-title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <input className="lc-textin" type="text" id="ip-title" value={title} onChange={(e) => setTitle(e.target.value)} />
 
                     <h5>Short Description</h5>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <textarea className="lc-textarea" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
                     <h5>Due Date</h5>
-                    <input type="date" id="ip-date" />
+                    <input className="lc-textin" type="date" id="ip-date" />
 
                     <h5>Courses</h5>
                     <div id="ip-courses">
@@ -137,6 +138,7 @@ function InstructorPanel(): JSX.Element {
 
                     <h5>Max Grade</h5>
                     <input
+                    className="lc-textin"
                         type="text"
                         id="ip-maxgrade"
                         value={maxGrade}
@@ -145,6 +147,7 @@ function InstructorPanel(): JSX.Element {
 
                     <h5>Max Attempts</h5>
                     <input
+                    className="lc-textin"
                         type="text"
                         id="ip-maxattempts"
                         value={maxAttempts}
@@ -169,6 +172,7 @@ function InstructorPanel(): JSX.Element {
 
                     <h5>Unit Test Name</h5>
                     <input
+                    className="lc-textin"
                         type="text"
                         id="ip-unittestname"
                         value={unitTestName}
@@ -177,6 +181,7 @@ function InstructorPanel(): JSX.Element {
 
                     <h5>Unit Test Timeout</h5>
                     <input
+                    className="lc-textin"
                         type="text"
                         id="ip-unittesttimeout"
                         value={unitTestTimeLimit}
@@ -186,6 +191,7 @@ function InstructorPanel(): JSX.Element {
                     <h5>Forbidden Statements</h5>
                     <p>Split statements using &apos;|&apos;</p>
                     <textarea
+                        className="lc-textarea"
                         value={forbiddenStatements}
                         onChange={(e) => setForbiddenStatements(e.target.value)}
                     ></textarea>

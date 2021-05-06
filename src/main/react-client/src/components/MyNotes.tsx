@@ -51,6 +51,7 @@ function MyNotes(): JSX.Element {
                                 <div key={i} className="my-notes-attempt">
                                     <h4>Attempt #{attemptObj.attempt}:</h4>
                                     <textarea
+                                        className="lc-textarea"
                                         value={inputs[`attemptField${attemptObj.attempt}`] || attemptObj.note}
                                         name={`attemptField${attemptObj.attempt}`}
                                         onChange={(e) =>

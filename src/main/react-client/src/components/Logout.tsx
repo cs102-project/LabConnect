@@ -15,7 +15,7 @@ function Logout(): JSX.Element {
         <div id="logout-container-x">
             <p id="logout-message">
                 You have successfully logged out.
-                <Link to="/login">Go back to homepage</Link>
+                <Link className="button" to="/login">Go back to homepage</Link>
             </p>
         </div>
     );

@@ -1,5 +1,150 @@
 @import "common";
 
+#submission-details-panel {
+    
+    padding: 30px 20px;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    background-color: $fg-color;
+    box-sizing: border-box;
+    margin-top: 50px;
+    position: relative;
+    
+    .button {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        float: right;
+        margin-bottom: 30px;
+    }
+    
+}
 
+#submission-attempts-list-header {
+    
+    border-bottom: 1px solid $dim-text-color;
+        padding: 0 10px 3px 10px;
+        margin: 15px 0;
+        display: flex;
+        clear: both;
+        justify-content: space-between;
+        
+        span {
+            
+            color: $dim-text-color;
+            font-size: 0.9em;
+            text-align: center;
+            display: inline-block;
+            width: 12%;
+            
+            &:first-child {
+                text-align: left;
+                width: 64%;
+            }
+            
+            
+        }
+        
+}
 
+#submission-attempts-list {
+    
+    article {
+        
+        border-radius: 10px;
+        background-color: lighten($bg-color, 10);
+        padding: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        &.inactive-assignment {
+            background-color: darken($bg-color, 2);
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            
+            section:first-child span {
+                background-color: red;
+                box-shadow: none;
+            }
+            
+            &:hover {
+                opacity: 0.9;
+            }
+            
+        }
+        
+    }
+    
+    section {
+        
+        text-align: center;
+        width: 12%;
+        
+        &:last-child {
+            
+            a {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                opacity: 0.8;
+                transition: all 0.3s;
+                color: $dim-text-color;
+                
+                span {
+                    height: 100%;
+                    display: block;
+                    font-size: 5em;
+                }
+                
+                &:hover {
+                    
+                    opacity: 1;
+                    color: $def-text-color;
+                    
+                }
+                
+            }
+            
+        }
+        
+        &:first-child {
+            
+            text-align: left;
+            word-wrap: break-word;
+            width: 64%;
+            
+            div {
+                display: flex;
+                align-items: center;
+            }
+            
+            span {
+                display: block;
+                height: 10px;
+                width: 10px;
+                margin: 0 10px;
+                border-radius: 100px;
+                float: left;
+                background-color: greenyellow;
+                box-shadow: 0px 0px 5px 1px greenyellow;
+            }
+            
+            h3 {
+                
+                margin: 0 0 5px 0;
+                
+            }
+            
+            p {
+                margin: 0;
+            }
+            
+        }
+        
+    }
+    
+}
 

@@ -24,6 +24,7 @@ $test-failed: #F24E1E;
     transition: all 0.5s;
     text-decoration: none;
     text-align: center;
+    display: inline-block;
     
     &:hover {
         
@@ -70,4 +71,36 @@ $test-failed: #F24E1E;
     
     font-weight: bold;
     
+}
+
+.lc-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: darken($bg-color, 50);
+    border: 1px solid lighten($bg-color, 25);
+    padding: 10px;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 500px;
+    min-height: 50px;
+    color: $def-text-color;
+    font-family: "Open Sans", 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+.lc-textin {
+    box-sizing: border-box;
+    background-color: darken($bg-color, 50);
+    border: 1px solid lighten($bg-color, 25);
+    padding: 10px;
+    min-height: 50px;
+    color: $def-text-color;
+    font-family: "Open Sans", 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+#instructor-panel-main {
+    margin-bottom: 200px;
 }

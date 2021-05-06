@@ -16,10 +16,10 @@ function AddAttemptButton({ assignmentid }: { assignmentid: string }): JSX.Eleme
     }
     
     return (
-        <div>
+        <>
             <button className="button" onClick={() => document.getElementById("add-attempt")?.click()}>Add Attempt</button>
             <input type="file" id="add-attempt" style={{ visibility: "hidden", height: 0 }} onChange={attemptSender} accept=".zip"/>
-        </div>
+        </>
     );
     
 }

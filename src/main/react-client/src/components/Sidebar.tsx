@@ -22,27 +22,18 @@ function Sidebar(): JSX.Element {
                         (courseInfo[course.course] = courseInfo[course.course] ? courseInfo[course.course] + ', ' + course.section : course.section.toString()),
                 );
             
-            if (userSelf?.roleType === 'STUDENT') {
-                setMetadata(
-                    <div id="nav-metadata">
-                        Instructor: <span>{userSelf.instructor}</span>
-                        <br />
-                        TA: <span>{userSelf.assistant}</span>
-                    </div>
-                );
-            } else {
-                setMetadata(
-                    <div id="nav-metadata">
-                        {
-                            Object.entries(courseInfo)
-                                .sort((a, b) => b[1].length - a[1].length)
-                                .map((course) => (
-                                    <>{course[0]} <span>|</span> Sections {course[1]}<br /></>
-                                ))
-                        }
-                    </div>
-                );
-            }
+            
+            setMetadata(
+                <div id="nav-metadata">
+                    {
+                        Object.entries(courseInfo)
+                            .sort((a, b) => b[1].length - a[1].length)
+                            .map((course) => (
+                                <>{course[0]} <span>|</span> Sections {course[1]}<br /></>
+                            ))
+                    }
+                </div>
+            );
             
         });
 
