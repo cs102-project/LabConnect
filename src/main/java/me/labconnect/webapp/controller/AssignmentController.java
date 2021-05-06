@@ -17,7 +17,6 @@ import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserService;
-import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.UserRepository;
 
 import org.bson.types.ObjectId;
@@ -299,8 +298,8 @@ public class AssignmentController {
     }
 
     @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}")
-    @Secured({"ROLE_INSTURCTOR", "ROLE_TEACHING_ASSISTANT"})
-    public SubmissionResponse getSubmissionById(Authentication authentication, @PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId) {
+    @Secured({"ROLE_INSTRUCTOR", "ROLE_TEACHING_ASSISTANT"})
+    public SubmissionResponse getSubmissionById(Authentication authentication, @PathVariable ObjectId submissionId) {
         Submission submission = submissionService.getById(submissionId);
         return new SubmissionResponse(submission, userRepository.findByRoleDocumentId(submission.getSubmitterId()).getName());
     }
