@@ -1,5 +1,8 @@
 # LabConnect <img align="right" width="145" height="85" src="src/main/react-client/src/img/labconnect-logo.png">
 
+[![version](https://img.shields.io/badge/version-0.1.1-yellow?style=flat-square)](https://github.com/cs102-project/LabConnect/releases) [![license](https://img.shields.io/github/license/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/blob/master/LICENSE)
+[![issues](https://img.shields.io/github/issues/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/issues) [![docs](https://img.shields.io/badge/Documentation-0.1.1-brightgreen?style=flat-square)](http://docs.labconnect.me/)
+
 ### Spring 2020-2021 Semester
 
 ## Group Name: G2C
@@ -13,11 +16,6 @@
 - 22003021 - **Berk Çakar**
 
 ## Project Details
-
-Project Name: **LabConnect**
-
-[![version](https://img.shields.io/badge/version-0.1.1-yellow?style=flat-square)](https://github.com/cs102-project/LabConnect/releases) [![license](https://img.shields.io/github/license/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/blob/master/LICENSE)
-[![issues](https://img.shields.io/github/issues/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/issues) [![docs](https://img.shields.io/badge/Documentation-0.1.1-brightgreen?style=flat-square)](http://docs.labconnect.me/)
 
 ### List of features:
 
