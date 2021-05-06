@@ -142,6 +142,7 @@
 						</tag>
 					</tags>
           			<destDir>javadoc</destDir>
+					<additionalJOption>--no-module-directories</additionalJOption>
 				</configuration>
       		</plugin>
 
