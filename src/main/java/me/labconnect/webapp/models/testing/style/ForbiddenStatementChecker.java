@@ -3,6 +3,7 @@ package me.labconnect.webapp.models.testing.style;
 import me.labconnect.webapp.models.testing.Tests;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,14 +22,14 @@ import static me.labconnect.webapp.models.testing.Tests.FORBIDDEN_STATEMENTS;
  */
 public class ForbiddenStatementChecker extends StyleChecker {
 
-    ArrayList<String> forbiddenStatements;
+    List<String> forbiddenStatements;
 
     /**
      * Initializes the error line array and passes the forbidden statements
      *
      * @param forbiddenStatements ArrayList containing forbidden statements
      */
-    public ForbiddenStatementChecker(ArrayList<String> forbiddenStatements) {
+    public ForbiddenStatementChecker(List<String> forbiddenStatements) {
         this.forbiddenStatements = forbiddenStatements;
     }
 

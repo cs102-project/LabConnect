@@ -137,7 +137,7 @@ public class AssignmentService {
                                        List<Course> courses, String homeworkType, int maxGrade, int maxAttempts,
                                        List<Tests> testNames, String unitTestName, Long unitTestTimeLimit,
                                        Path exampleImplementation,
-                                       Path testerClass, ArrayList<String> forbiddenStatements)
+                                       Path testerClass, List<String> forbiddenStatements)
             throws IOException, BadExampleException {
 
         Assignment assignment;
@@ -172,6 +172,7 @@ public class AssignmentService {
                         testers.add(new LoopCurlyBracketsChecker());
                         break;
                     case FORBIDDEN_STATEMENTS:
+                        forbiddenStatements = Arrays.asList(forbiddenStatements.get(0).split("|"));
                         testers.add(new ForbiddenStatementChecker(forbiddenStatements));
                         break;
                     case CLASS_INTERFACE_NAMING:
