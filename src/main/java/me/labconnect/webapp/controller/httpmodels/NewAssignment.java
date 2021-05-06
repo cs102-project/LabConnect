@@ -52,14 +52,13 @@ public class NewAssignment {
      * @param forbiddenStatements Statements not allowed for use in the assignment
      */
     public NewAssignment(String assignmentTitle, String shortDescription, String homeworkType,
-                         Date dueDate, List<Course> courses, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
+                         Date dueDate, String[] courseNames, int[] sections, int maxGrade, int maxAttempts, List<Tests> styleTests, String unitTestName,
                          Long unitTestTimeLimit, ArrayList<String> forbiddenStatements, 
                          MultipartFile instructionsFile, MultipartFile exampleImplementation, MultipartFile testerClass) {
         this.assignmentTitle = assignmentTitle;
         this.shortDescription = shortDescription;
         this.homeworkType = homeworkType;
         this.dueDate = dueDate;
-        this.courses = courses;
         this.maxGrade = maxGrade;
         this.maxAttempts = maxAttempts;
         this.styleTests = styleTests;
@@ -69,6 +68,10 @@ public class NewAssignment {
         this.instructionsFile = instructionsFile;
         this.exampleImplementation = exampleImplementation;
         this.testerClass = testerClass;
+        this.courses = new ArrayList<>();
+        for (int i = 0; i < courseNames.length; i++) {
+            courses.add(new Course(courseNames[i], sections[i]));
+        }
     }
 
     /**
