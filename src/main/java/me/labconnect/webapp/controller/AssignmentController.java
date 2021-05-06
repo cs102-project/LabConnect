@@ -7,6 +7,7 @@ import me.labconnect.webapp.controller.httpmodels.SubmissionResponse;
 import me.labconnect.webapp.models.data.Assignment;
 import me.labconnect.webapp.models.data.Attempt;
 import me.labconnect.webapp.models.data.Feedback;
+import me.labconnect.webapp.models.data.Submission;
 import me.labconnect.webapp.models.data.services.AssignmentService;
 import me.labconnect.webapp.models.data.services.AttemptService;
 import me.labconnect.webapp.models.data.services.SubmissionService;
@@ -16,6 +17,7 @@ import me.labconnect.webapp.models.users.LCUserDetails;
 import me.labconnect.webapp.models.users.Student;
 import me.labconnect.webapp.models.users.User;
 import me.labconnect.webapp.models.users.services.UserService;
+import me.labconnect.webapp.repository.StudentRepository;
 import me.labconnect.webapp.repository.UserRepository;
 
 import org.bson.types.ObjectId;
@@ -65,7 +67,6 @@ public class AssignmentController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-
     /*
      *
      * assignment api:
@@ -295,6 +296,13 @@ public class AssignmentController {
                 userService.getStudentDocumentOf(user).getId()
             ).orElseThrow(), user.getName());
 
+    }
+
+    @GetMapping("/api/assignments/{assignmentId}/submissions/{submissionId}")
+    @Secured({"ROLE_INSTURCTOR", "ROLE_TEACHING_ASSISTANT"})
+    public SubmissionResponse getSubmissionById(Authentication authentication, @PathVariable ObjectId assignmentId, @PathVariable ObjectId submissionId) {
+        Submission submission = submissionService.getById(submissionId);
+        return new SubmissionResponse(submission, userRepository.findByRoleDocumentId(submission.getSubmitterId()).getName());
     }
 
     /**
