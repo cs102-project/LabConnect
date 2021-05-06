@@ -3,19 +3,15 @@
 [![version](https://img.shields.io/badge/version-0.1.1-yellow?style=flat-square)](https://github.com/cs102-project/LabConnect/releases) [![license](https://img.shields.io/github/license/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/blob/master/LICENSE)
 [![issues](https://img.shields.io/github/issues/cs102-project/LabConnect?style=flat-square)](https://github.com/cs102-project/LabConnect/issues) [![docs](https://img.shields.io/badge/Documentation-0.1.1-brightgreen?style=flat-square)](http://docs.labconnect.me/)
 
-### Spring 2020-2021 Semester
+|Group Members|
+|---|
+|**Vedat Eren Arıcan**|
+|**Borga Haktan Bilen**|
+|**Berkan Şahin**|
+|**Alp Ertan**|
+|**Berk Çakar**|
 
-## Group Name: G2C
-
-### Group Members
-
-- 22002643 - **Vedat Eren Arıcan**
-- 22002733 - **Borga Haktan Bilen**
-- 22003211 - **Berkan Şahin**
-- 22003912 - **Alp Ertan**
-- 22003021 - **Berk Çakar**
-
-## Project Details
+## Application Details
 
 ### List of features:
 
@@ -39,4 +35,3 @@ Field|`#000000`|`(0, 0, 0)`|![2021-05-06 12_00_32-#272727 - Google'da Ara — Mo
 
 ## Dashboard
 ![2021-05-06 12_09_04-Microsoft Store](https://user-images.githubusercontent.com/74186713/117272463-e0b6be00-ae63-11eb-814a-8bbd54f9fd25.jpg)
-
