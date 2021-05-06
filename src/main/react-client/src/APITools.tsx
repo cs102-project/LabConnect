@@ -56,6 +56,7 @@ export interface IFeedback {
 
 export interface IAttempt {
     id: number;
+    parentId: string;
     attemptFilename: string;
     note: string;
     testResults: ITestResult[];
@@ -164,16 +165,18 @@ const createAssignment = async ({
     
 };
 
-const addAttempt = (assignmentId: string, file: Blob | undefined): void => {
-    if (file === undefined) return;
-
+const addAttempt = async (assignmentId: string, file: Blob | undefined): Promise<IAttempt> => {
+    
     const formData = new FormData();
-    formData.append('attemptArchive', file);
+    formData.append('attemptArchive', file || "");
 
-    fetch(`/api/assignments/${assignmentId}/submissions`, {
+    const response = await fetch(`/api/assignments/${assignmentId}/submissions`, {
         method: 'POST',
         body: formData,
     });
+    
+    return await response.json() as Promise<IAttempt>;
+    
 };
 
 const giveFeedbackTo = (assignmentId: string, submissionId: string, attemptId: string, feedback: INewFeedback): void => {
@@ -239,6 +242,12 @@ const getSubmissionsOfAssignment = async (assignmentId: string): Promise<ISubmis
     
     return response.json() as Promise<ISubmission[]>;
     
+};
+
+const getSubmissionOfId = async (submissionid: string): Promise<ISubmission> => {
+    
+    const response = await fetch(`/api/assignments/123456/submissions/${submissionid}`);
+    return response.json() as Promise<ISubmission>;
 };
 
 const getSubmissionOfStudentFor = async (assignmentId: string): Promise<ISubmission | boolean> => {
@@ -328,6 +337,7 @@ const APITools = {
     getAttemptDetailsOf,
     getSubmissionsOfAssignment,
     getSubmissionOfStudentFor,
+    getSubmissionOfId,
     helpers,
 };
 
